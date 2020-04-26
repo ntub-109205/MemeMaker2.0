@@ -1,14 +1,14 @@
 <resources>
-    <string name="label_brush"></string>
-    <string name="label_emoji"></string>
-    <string name="label_sticker"></string>
-    <string name="label_eraser"></string>
-    <string name="label_eraser_mode"></string>
-    <string name="label_text"></string>
-    <string name="label_filter"></string>
-    <string name="label_adjust"></string>
-    <string name="msg_save_image"></string>
-    <string name="app_name">Meme</string>
+    <string name="label_brush">畫筆</string>
+    <string name="label_emoji">表情</string>
+    <string name="label_sticker">素材</string>
+    <string name="label_eraser">橡皮擦</string>
+    <string name="label_eraser_mode">橡皮擦</string>
+    <string name="label_text">文字</string>
+    <string name="label_filter">Filter</string>
+    <string name="label_adjust">調整</string>
+    <string name="msg_save_image">尚未儲存，確定要離開嗎 ?</string>
+    <string name="app_name">Meme Maker</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
