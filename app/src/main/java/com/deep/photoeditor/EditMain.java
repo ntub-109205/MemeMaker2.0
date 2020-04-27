@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 
 
 import android.net.Uri;
-public class MainActivity extends AppCompatActivity {
+public class EditMain extends AppCompatActivity {
     public Button btnAddMeme;
 
     private TabLayout tabLayout;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             //寫log
             Intent edit = new Intent();
             edit.setData(uri);
-            edit.setClass(MainActivity.this, editSetname.class);
+            edit.setClass(EditMain.this, editSetname.class);
             startActivity(edit);
         }
         super.onActivityResult(requestCode, resultCode, data);
