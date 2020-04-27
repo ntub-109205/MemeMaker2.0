@@ -15,10 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".editSetname" />
-        <activity android:name=".editPublicsetting" />
-        <activity android:name=".editTools" />
-        <activity android:name=".EditMain" />
+        <activity android:name=".editSetname"
+            android:parentActivityName=".editSetname"/>
+        <activity android:name=".editPublicsetting"
+            android:parentActivityName=".editPublicsetting"/>
+        <activity android:name=".editTools"
+            android:parentActivityName=".editTools"/>
+        <activity android:name=".EditMain"
+            android:parentActivityName=".EditMain"/>
         <activity android:name=".MainActivity" />
 
         <activity android:name=".WelcomeActivity">

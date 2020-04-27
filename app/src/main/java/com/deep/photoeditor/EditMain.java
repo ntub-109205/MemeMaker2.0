@@ -42,6 +42,11 @@ public class EditMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_main);
+
+        //新增回到前一頁的箭頭
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         tabLayout = (TabLayout)findViewById(R.id.editTablayout);
         viewPager = (ViewPager)findViewById(R.id.editViewPager);
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
