@@ -1,18 +1,12 @@
-package com.deep.photoeditor.tools;
+package com.deep.photoeditor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.deep.photoeditor.EditImageActivity;
-import com.deep.photoeditor.PageAdapter;
-import com.deep.photoeditor.R;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -53,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-//        pagerAdapter.AddFragment(new edittab1(),"熱門模板");
-//        pagerAdapter.AddFragment(new edittab2(),"我的模板");
+        pagerAdapter.AddFragment(new edittab1(),"熱門模板");
+        pagerAdapter.AddFragment(new edittab2(),"我的模板");
 
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -71,10 +65,8 @@ public class MainActivity extends AppCompatActivity {
             uri = data.getData();
             //寫log
             Intent edit = new Intent();
-
-            edit.putExtra("Uri", uri.toString());
             edit.setData(uri);
-            edit.setClass(MainActivity.this, EditImageActivity.class);
+            edit.setClass(MainActivity.this, editSetname.class);
             startActivity(edit);
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,7 +69,12 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private ConstraintLayout mRootView;
     private ConstraintSet mConstraintSet = new ConstraintSet();
     private boolean mIsFilterVisible;
+    public Button btnNext;
+    public TextView txt1;
+    public String name;
     Uri uri;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +82,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         //mPhotoEditorView = findViewById(R.id.photoEditorView);
 
         uri = getIntent().getData();
-//        try {
-//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//            mPhotoEditorView.getSource().setImageBitmap(bitmap);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         makeFullScreen();
         setContentView(R.layout.activity_edit_image);
@@ -119,6 +119,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         //Set Image Dynamically
         // mPhotoEditorView.getSource().setImageResource(R.drawable.color_palette);
+
     }
 
     private void initViews() {
@@ -128,7 +129,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         ImageView imgGallery;
         ImageView imgSave;
         ImageView imgClose;
-
+        btnNext = (Button)findViewById(R.id.btnNext);
         mPhotoEditorView = findViewById(R.id.photoEditorView);
 
         mTxtCurrentTool = findViewById(R.id.txtCurrentTool);
@@ -160,6 +161,21 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+//                File file = new File(System.currentTimeMillis() + ".png");
+//                Uri uri1 =Uri.fromFile(file);
+                Intent edit =new Intent();
+                edit.setClass(EditImageActivity.this, editPublicsetting.class);
+                edit.setData(uri);
+                edit.putExtra("name",name);
+                startActivity(edit);
+            }
+        });
     }
 
     @Override
@@ -239,28 +255,19 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
 
 
-            File sdFile = android.os.Environment.getExternalStorageDirectory();
             String path = "MeMe Maker";
 
             File dirFile = new File(Environment.getExternalStorageDirectory(),path);
-
             if(!dirFile.exists()){//如果資料夾不存在
-
                 dirFile.mkdir();//建立資料夾
             }
-
-
-
             File file = new File(dirFile,System.currentTimeMillis() + ".png");
             try {
-
                 file.createNewFile();
-
                 SaveSettings saveSettings = new SaveSettings.Builder()
                         .setClearViewsEnabled(true)
                         .setTransparencyEnabled(true)
                         .build();
-
                 mPhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
                     @Override
                     public void onSuccess(@NonNull String imagePath) {
