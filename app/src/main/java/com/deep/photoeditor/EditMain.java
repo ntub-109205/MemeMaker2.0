@@ -41,7 +41,7 @@ public class EditMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_edit_main);
         tabLayout = (TabLayout)findViewById(R.id.editTablayout);
         viewPager = (ViewPager)findViewById(R.id.editViewPager);
         pagerAdapter = new PageAdapter(getSupportFragmentManager());

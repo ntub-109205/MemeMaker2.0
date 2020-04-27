@@ -18,8 +18,10 @@
         <activity android:name=".editSetname" />
         <activity android:name=".editPublicsetting" />
         <activity android:name=".editTools" />
+        <activity android:name=".EditMain" />
+        <activity android:name=".MainActivity" />
 
-        <activity android:name=".EditMain">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
