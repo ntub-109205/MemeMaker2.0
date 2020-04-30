@@ -27,10 +27,12 @@ import android.widget.ImageView;
 public class editSetname extends AppCompatActivity {
     //button onClick to next page
     public Button btnNext;
+    public Button btnFinishtemplate;
     public EditText setName;
     Uri uri;
     public void init(){
         btnNext = (Button)findViewById(R.id.btnNext);
+        btnFinishtemplate = (Button)findViewById(R.id.btnFinishtemplate);
         setName = (EditText)findViewById(R.id.setName);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +43,21 @@ public class editSetname extends AppCompatActivity {
 
                 //new一個intent物件，並指定Activity切換的class
                 Intent edit = new Intent(editSetname.this,EditImageActivity.class);
+                //切換Activity
+                edit.setData(uri);
+                edit.putExtra("name",templateName);
+                startActivity(edit);
+            }
+        });
+
+        btnFinishtemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //用getText取得輸入在EditText裡的內容
+                String templateName = setName.getText().toString();
+
+                //new一個intent物件，並指定Activity切換的class
+                Intent edit = new Intent(editSetname.this,editOnlymaketemp.class);
                 //切換Activity
                 edit.setData(uri);
                 edit.putExtra("name",templateName);
