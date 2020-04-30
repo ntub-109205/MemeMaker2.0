@@ -74,8 +74,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     public String name;
     Uri uri;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
