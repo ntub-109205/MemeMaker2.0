@@ -7,17 +7,39 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.tabs.TabLayout;
 
 public class TemplateInfoActivity extends AppCompatActivity {
     private static final String TAG = "TemplateInfoActivity";
+//    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    public PageAdapter pagerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template_info);
         Log.d(TAG, "onCreate: started.");
+
+        //新增回到前一頁的箭頭
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        tabLayout = (TabLayout)findViewById(R.id.editTablayout);
+        viewPager = (ViewPager)findViewById(R.id.tempInfoViewPager);
+        pagerAdapter = new PageAdapter(getSupportFragmentManager());
+
+        //Add Fragment here
+        pagerAdapter.AddFragment(new TempInfoFragment(),"相關梗圖");
+//        pagerAdapter.AddFragment(new edittab2(),"我的模板");
+
+        viewPager.setAdapter(pagerAdapter);
+//        tabLayout.setupWithViewPager(viewPager);
+
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         getIncomingIntent();
     }

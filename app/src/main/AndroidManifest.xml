@@ -41,7 +41,8 @@
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".TemplateInfoActivity" />
+        <activity android:name=".TemplateInfoActivity"
+            android:parentActivityName=".TemplateInfoActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
