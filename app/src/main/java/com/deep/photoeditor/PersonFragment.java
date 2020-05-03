@@ -1,5 +1,6 @@
 package com.deep.photoeditor;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
         btnShowCollect.setOnClickListener(this);
         btnShowWorks.setOnClickListener(this);
+
         Fragment fragment = new PerCollectFragment();
         replaceFragment(fragment);
         return rootView;
