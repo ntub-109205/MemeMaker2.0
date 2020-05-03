@@ -15,9 +15,31 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<RecyclerViewAdapter__memeTemp.MyViewHolder> {
     Context mContext;
     List<memeTemplate> mData;
+
 
     public RecyclerViewAdapter__memeTemp(Context mContext, List<memeTemplate> mData) {
         this.mContext = mContext;
@@ -31,7 +53,15 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
 
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
-        MyViewHolder vHolder = new MyViewHolder(v);
+        final MyViewHolder vHolder = new MyViewHolder(v);
+
+//        vHolder.item_template.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, "test click"+String.valueOf(vHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         return vHolder;
     }
 
@@ -49,6 +79,24 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
                 .into(holder.tempImage);
         holder.tempName.setText(mData.get(position).getTempName());
 
+        holder.item_template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+
+                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
+//                Intent edit = new Intent();
+//
+//                edit.putExtra("temp_name", mData.get(position).getTempName());
+//                edit.setClass(mContext, TemplateInfoActivity.class);
+//                mContext.startActivity(edit);
+                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -60,10 +108,12 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
 
         private TextView tempName;
         private ImageView tempImage;
+        private RelativeLayout item_template;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            item_template = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
             tempName = (TextView) itemView.findViewById(R.id.cardName);
             tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
         }
