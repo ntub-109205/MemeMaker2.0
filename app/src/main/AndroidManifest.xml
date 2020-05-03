@@ -15,9 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".editOnlymaketemp"
-            android:parentActivityName=".editOnlymaketemp">
-        </activity>
+        <activity android:name=".signUp"
+            android:parentActivityName=".signUp" ></activity>
+        <activity android:name=".login" />
+        <activity
+            android:name=".editOnlymaketemp"
+            android:parentActivityName=".editOnlymaketemp" />
         <activity android:name=".editShare" />
         <activity
             android:name=".editSetname"
