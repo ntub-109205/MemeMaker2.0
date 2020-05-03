@@ -32,46 +32,42 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.45" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.17000002"
-        tools:ignore="MissingConstraints">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.08"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView"-->
+<!--        app:layout_constraintVertical_bias="0.050000012">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
 
-            <!-- Media -->
+<!--            <Button-->
+<!--                android:id="@+id/btn_colMemeTmp"-->
+<!--                android:layout_width="118dp"-->
+<!--                android:layout_height="115dp"-->
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/person_test_pic" />
+<!--                android:background="@drawable/person_test_pic" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="梗圖模板"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textSize="14dp" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+<!--            <TextView-->
+<!--                android:id="@+id/textView5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:text="梗圖模板" />-->
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
+<!--    <FrameLayout-->
+<!--        android:id="@+id/colMeTmpFrame"-->
+<!--        android:layout_width="46dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginTop="76dp"-->
+<!--        tools:ignore="MissingConstraints">-->
+<!--    </FrameLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
