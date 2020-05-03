@@ -14,7 +14,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class TemplateInfoActivity extends AppCompatActivity {
     private static final String TAG = "TemplateInfoActivity";
-//    private TabLayout tabLayout;
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
 
@@ -28,18 +27,13 @@ public class TemplateInfoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        tabLayout = (TabLayout)findViewById(R.id.editTablayout);
         viewPager = (ViewPager)findViewById(R.id.tempInfoViewPager);
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
         pagerAdapter.AddFragment(new TempInfoFragment(),"相關梗圖");
-//        pagerAdapter.AddFragment(new edittab2(),"我的模板");
-
         viewPager.setAdapter(pagerAdapter);
-//        tabLayout.setupWithViewPager(viewPager);
 
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         getIncomingIntent();
     }

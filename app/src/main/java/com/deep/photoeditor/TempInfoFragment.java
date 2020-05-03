@@ -47,12 +47,12 @@ public class TempInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         lstTempInfo = new ArrayList<>();
-        lstTempInfo.add(new TempInfo("Idot Dog",R.drawable.meme1));
-        lstTempInfo.add(new TempInfo("cute dog",R.drawable.meme2));
-        lstTempInfo.add(new TempInfo("cat",R.drawable.meme3));
-        lstTempInfo.add(new TempInfo("Idot star",R.drawable.meme4));
-        lstTempInfo.add(new TempInfo("morning flower",R.drawable.meme5));
-        lstTempInfo.add(new TempInfo("my idol",R.drawable.meme6));
+        lstTempInfo.add(new TempInfo("居家隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg"));
+        lstTempInfo.add(new TempInfo("牽手","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1584282936597.jpg"));
+        lstTempInfo.add(new TempInfo("期末考","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1578233253954.jpg"));
+        lstTempInfo.add(new TempInfo("快去睡","https://memeprod.s3.ap-northeast-1.amazonaws.com/user-wtf/1577726914062.jpg"));
+//        lstTempInfo.add(new TempInfo("morning flower",R.drawable.meme5));
+//        lstTempInfo.add(new TempInfo("my idol",R.drawable.meme6));
 
     }
 }
