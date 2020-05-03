@@ -1,7 +1,9 @@
 package com.deep.photoeditor;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,17 +13,23 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
+import com.wx.goodview.GoodView;
 
 public class TemplateInfoActivity extends AppCompatActivity {
     private static final String TAG = "TemplateInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    //goodview
+    GoodView mGoodView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template_info);
         Log.d(TAG, "onCreate: started.");
+
+        //goodview
+        mGoodView = new GoodView(this);
 
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
@@ -60,5 +68,12 @@ public class TemplateInfoActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(tempUrl)
                 .into(image);
+    }
+
+    //onclick判斷在xml
+    public void bookmark(View view) {
+        ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
+        mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
+        mGoodView.show(view);
     }
 }
