@@ -17,12 +17,27 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_per_collect, container, false);
+        Button btnColMemTmp = (Button) rootView.findViewById(R.id.btnColMemTmp);
+        btnColMemTmp.setOnClickListener(this);
         return rootView;
     }
 
 
     @Override
     public void onClick(View view) {
+        Fragment fragment = null;
 
+        switch (view.getId()) {
+            case R.id.btnColMemTmp:
+                fragment = new ColMemTmpFragment();
+                replaceFragment(fragment);
+                break;
+        }
+    }
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.personrelativeLayout, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
