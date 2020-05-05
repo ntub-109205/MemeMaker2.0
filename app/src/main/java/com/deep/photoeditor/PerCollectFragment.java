@@ -1,5 +1,6 @@
 package com.deep.photoeditor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +30,8 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
 
         switch (view.getId()) {
             case R.id.btnColMemTmp:
-                fragment = new ColMemTmpFragment();
-                replaceFragment(fragment);
+                Intent intent = new Intent(getActivity(), ColMemeTmpActivity.class);
+                startActivity(intent);
                 break;
         }
     }

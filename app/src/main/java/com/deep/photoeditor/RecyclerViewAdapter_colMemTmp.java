@@ -15,11 +15,11 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class RecyclerViewAdapter_colMemTmpCont extends RecyclerView.Adapter<RecyclerViewAdapter_colMemTmpCont.MyViewHolder> {
+public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<RecyclerViewAdapter_colMemTmp.MyViewHolder> {
     Context mContext;
     List<colMemTmp> mData;
 
-    public RecyclerViewAdapter_colMemTmpCont(Context mContext, List<colMemTmp> mData) {
+    public RecyclerViewAdapter_colMemTmp(Context mContext, List<colMemTmp> mData) {
         this.mContext = mContext;
         this.mData = mData;
 
