@@ -1,11 +1,15 @@
 package com.deep.photoeditor;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<RecyclerViewAdapter_colMemTmp.MyViewHolder> {
     Context mContext;
@@ -48,6 +54,23 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
                 .apply(requestOptions)
                 .into(holder.tempImage);
         holder.tempName.setText(mData.get(position).getTempName());
+        holder.item_template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+
+                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
+//                Intent edit = new Intent();
+//
+//                edit.putExtra("temp_name", mData.get(position).getTempName());
+//                edit.setClass(mContext, TemplateInfoActivity.class);
+//                mContext.startActivity(edit);
+                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
@@ -57,13 +80,13 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
+        private RelativeLayout item_template;
         private TextView tempName;
         private ImageView tempImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            item_template = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
             tempName = (TextView) itemView.findViewById(R.id.cardName);
             tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
         }
