@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,7 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_per_collect, container, false);
-        Button btnColMemTmp = (Button) rootView.findViewById(R.id.btnColMemTmp);
+        ImageButton btnColMemTmp = (ImageButton) rootView.findViewById(R.id.btnColMemTmp);
         btnColMemTmp.setOnClickListener(this);
         return rootView;
     }
