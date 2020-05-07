@@ -28,7 +28,7 @@
             app:layout_constraintHorizontal_bias="0.121"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.266" />
+            app:layout_constraintVertical_bias="0.266"/>
 
         <TextView
             android:id="@+id/tempName"
@@ -36,6 +36,7 @@
             android:layout_height="25dp"
             android:gravity="center"
             android:text="templateName"
+            android:textColor="#000000"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -117,6 +118,55 @@
             app:layout_constraintStart_toEndOf="@+id/tempImage"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             app:layout_constraintVertical_bias="0.75" />
+
+        <ImageView
+            android:id="@+id/fire"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/beforeMadeBy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tempImage"
+            app:layout_constraintVertical_bias="0.050000012"
+            app:srcCompat="@drawable/fire" />
+
+        <TextView
+            android:id="@+id/fireNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/beforeMadeBy"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/fire"
+            app:layout_constraintTop_toBottomOf="@+id/tempImage"
+            app:layout_constraintVertical_bias="0.060000002" />
+
+        <TextView
+            android:id="@+id/beforeMadeBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="made by"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/madeByUser"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tempImage"
+            app:layout_constraintVertical_bias="0.100000024" />
+
+        <TextView
+            android:id="@+id/madeByUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="userName"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tempImage"
+            app:layout_constraintVertical_bias="0.100000024" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
