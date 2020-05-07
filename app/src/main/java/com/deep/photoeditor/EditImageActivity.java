@@ -72,6 +72,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     public Button btnNext;
     public TextView txt1;
     public String name;
+    public ImageView imgCheck;
     Uri uri;
 
     @Override
@@ -85,6 +86,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         setContentView(R.layout.activity_edit_image);
 
         initViews();
+        imgCheck();
 
         mWonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
 
@@ -120,6 +122,16 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     }
 
+    public void imgCheck(){
+        imgCheck = findViewById(R.id.imgCheck);
+        imgCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                saveImage();
+            }
+        });
+    }
+
     private void initViews() {
         ImageView imgUndo;
         ImageView imgRedo;
@@ -131,7 +143,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         mTxtCurrentTool = findViewById(R.id.txtCurrentTool);
         mRvTools = findViewById(R.id.rvConstraintTools);
-       // mRvFilters = findViewById(R.id.rvFilterView);
         mRootView = findViewById(R.id.rootView);
 
         imgUndo = findViewById(R.id.imgUndo);
@@ -140,8 +151,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         imgRedo = findViewById(R.id.imgRedo);
         imgRedo.setOnClickListener(this);
 
-        imgSave = findViewById(R.id.imgSave);
-        imgSave.setOnClickListener(this);
+//        imgSave = findViewById(R.id.imgSave);
+//        imgSave.setOnClickListener(this);
 
         imgClose = findViewById(R.id.imgClose);
         imgClose.setOnClickListener(this);
@@ -217,10 +228,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 mPhotoEditor.redo();
                 break;
 
-            case R.id.imgSave:
-                saveImage();
-                break;
-
             case R.id.imgClose:
                 onBackPressed();
                 break;
@@ -251,6 +258,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     public void onSuccess(@NonNull String imagePath) {
                         hideLoading();
                         showSnackbar("儲存成功");
+                        uri=Uri.fromFile(new File(imagePath));
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
                     }
 
@@ -355,11 +363,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
     }
 
-//    @Override
-//    public void onFilterSelected(PhotoFilter photoFilter) {
-//        mPhotoEditor.setFilterEffect(photoFilter);
-//    }
-
     @Override
     public void onToolSelected(ToolType toolType) {
         switch (toolType) {
@@ -397,41 +400,4 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 break;
         }
     }
-
-
-//    void showFilter(boolean isVisible) {
-//        mIsFilterVisible = isVisible;
-//        mConstraintSet.clone(mRootView);
-//
-//        if (isVisible) {
-//            mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.START);
-//            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
-//                    ConstraintSet.PARENT_ID, ConstraintSet.START);
-//            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.END,
-//                    ConstraintSet.PARENT_ID, ConstraintSet.END);
-//        } else {
-//            mConstraintSet.connect(mRvFilters.getId(), ConstraintSet.START,
-//                    ConstraintSet.PARENT_ID, ConstraintSet.END);
-//            mConstraintSet.clear(mRvFilters.getId(), ConstraintSet.END);
-//        }
-//
-//        ChangeBounds changeBounds = new ChangeBounds();
-//        changeBounds.setDuration(350);
-//        changeBounds.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
-//        TransitionManager.beginDelayedTransition(mRootView, changeBounds);
-//
-//        mConstraintSet.applyTo(mRootView);
-//    }
-//
-//    @Override
-//    public void onBackPressed() {
-//        if (mIsFilterVisible) {
-//            showFilter(false);
-//            mTxtCurrentTool.setText(R.string.app_name);
-//        } else if (!mPhotoEditor.isCacheEmpty()) {
-//            showSaveDialog();
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
 }

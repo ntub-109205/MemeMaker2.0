@@ -63,15 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imgSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:src="@drawable/ic_save"
-        app:layout_constraintBottom_toTopOf="@+id/rvConstraintTools"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <ImageView
         android:id="@+id/imgClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
