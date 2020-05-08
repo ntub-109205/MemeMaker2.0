@@ -56,7 +56,7 @@
             android:src="@drawable/bookmark"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toStartOf="@+id/share"
-            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toEndOf="@+id/tempImage"
             app:layout_constraintTop_toBottomOf="@+id/tempName"
             app:layout_constraintVertical_bias="1.0" />
@@ -83,7 +83,7 @@
             android:src="@drawable/down"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toEndOf="@+id/share"
             app:layout_constraintTop_toBottomOf="@+id/tempName"
             app:layout_constraintVertical_bias="1.0" />

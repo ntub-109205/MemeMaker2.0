@@ -2,13 +2,13 @@ package com.deep.photoeditor;
 
 public class hotTemplate {
     private String tempName;
-    private int tempImage;
+    private String tempImage;
 
     public hotTemplate() {
 
     }
 
-    public hotTemplate(String tempName, int tempImage) {
+    public hotTemplate(String tempName, String tempImage) {
         this.tempName = tempName;
         this.tempImage = tempImage;
     }
@@ -18,7 +18,7 @@ public class hotTemplate {
         return tempName;
     }
 
-    public int getTempImage() {
+    public String getTempImage() {
         return tempImage;
     }
 
@@ -27,7 +27,7 @@ public class hotTemplate {
         this.tempName = tempName;
     }
 
-    public void setTempImage(int tempImage) {
+    public void setTempImage(String tempImage) {
         this.tempImage = tempImage;
     }
 }

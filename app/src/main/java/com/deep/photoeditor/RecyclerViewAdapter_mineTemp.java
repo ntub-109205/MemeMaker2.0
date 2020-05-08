@@ -1,11 +1,15 @@
 package com.deep.photoeditor;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerViewAdapter_mineTemp.MyViewHolder_mineTemp> {
     Context mContext;
@@ -34,7 +40,7 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder_mineTemp holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder_mineTemp holder, final int position) {
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
         //將image用glide的方式呈現
@@ -43,6 +49,20 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
                 .apply(requestOptions)
                 .into(holder.mineTempImage);
         holder.mineTempName.setText(mData.get(position).getMineTempName());
+
+        //新增圖片傳值到其他Activity
+        holder.mineTemp_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+
+                Toast.makeText(mContext, mData.get(position).getMineTempName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+                intent.putExtra("temp_url", mData.get(position).getMineTempImage());
+                intent.putExtra("temp_name", mData.get(position).getMineTempName());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,12 +74,14 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
 
         private TextView mineTempName;
         private ImageView mineTempImage;
+        private RelativeLayout mineTemp_item;
 
         public MyViewHolder_mineTemp(@NonNull View itemView) {
             super(itemView);
 
             mineTempName = (TextView) itemView.findViewById(R.id.mineCardName);
             mineTempImage = (ImageView) itemView.findViewById(R.id.mineCardImage);
+            mineTemp_item = (RelativeLayout) itemView.findViewById(R.id.mineTemp_item);
         }
     }
 }

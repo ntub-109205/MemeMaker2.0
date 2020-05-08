@@ -2,13 +2,13 @@ package com.deep.photoeditor;
 
 public class mineTemplate {
     private String mineTempName;
-    private int mineTempImage;
+    private String mineTempImage;
 
     public mineTemplate(){
 
     }
 
-    public mineTemplate(String mineTempName, int mineTempImage) {
+    public mineTemplate(String mineTempName, String mineTempImage) {
         this.mineTempName = mineTempName;
         this.mineTempImage = mineTempImage;
     }
@@ -18,7 +18,7 @@ public class mineTemplate {
         return mineTempName;
     }
 
-    public int getMineTempImage() {
+    public String getMineTempImage() {
         return mineTempImage;
     }
 
@@ -27,7 +27,7 @@ public class mineTemplate {
         this.mineTempName = mineTempName;
     }
 
-    public void setMineTempImage(int mineTempImage) {
+    public void setMineTempImage(String mineTempImage) {
         this.mineTempImage = mineTempImage;
     }
 }

@@ -50,12 +50,12 @@ public class edittab2 extends Fragment {
         super.onCreate(savedInstanceState);
 
         lstmineTemplate = new ArrayList<>();
-        lstmineTemplate.add(new mineTemplate("Idot",R.drawable.meme7));
-        lstmineTemplate.add(new mineTemplate("Winnie with Pooh",R.drawable.meme8));
-        lstmineTemplate.add(new mineTemplate("しばいぬ",R.drawable.meme9));
-        lstmineTemplate.add(new mineTemplate("蠟筆小新長大",R.drawable.meme10));
-        lstmineTemplate.add(new mineTemplate("ねずこ",R.drawable.meme11));
-        lstmineTemplate.add(new mineTemplate("我妻善逸",R.drawable.meme12));
+        lstmineTemplate.add(new mineTemplate("曾之喬","https://www.wepeople.club/new-wepeople-upload/bb3886dc4b408776b51b1ba18ad3fb1e.jpg"));
+        lstmineTemplate.add(new mineTemplate("Winnie with Pooh","https://www.trafalgar.com/real-word/wp-content/uploads/sites/3/2020/01/Screenshot-2020-01-16-at-15.15.54.png"));
+        lstmineTemplate.add(new mineTemplate("しばいぬ","https://assets.juksy.com/files/articles/90814/800x_100_w-5ce41f432bb5d.jpg"));
+        lstmineTemplate.add(new mineTemplate("蠟筆小新","https://cdn2.ettoday.net/images/4705/4705033.jpg"));
+        lstmineTemplate.add(new mineTemplate("ねずこ","https://i.ytimg.com/vi/wqGSbiLC3aA/maxresdefault.jpg"));
+        lstmineTemplate.add(new mineTemplate("我妻善逸","https://i.ytimg.com/vi/U72gIwh9jr0/maxresdefault.jpg"));
 
     }
 
