@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
     }
 
     //call onActivity Create method
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

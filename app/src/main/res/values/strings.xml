@@ -15,13 +15,18 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_edit_publicsettings"></string>
 
-    <!-- MainLayout -->
+    <!-- MainTabLayout -->
     <string name="MemeTemplate">梗圖模板</string>
     <string name="ElderTemplate">長輩圖模板</string>
 
     <!-- TabLayout -->
     <string name="tabTemplate">熱門模板</string>
     <string name="tabMineTemplate">我的模板</string>
+
+    <!-- PublicTabLayout -->
+    <string name="tabMeme">梗圖</string>
+    <string name="tabElder">長輩圖</string>
+    <string name="tabGif">動圖</string>
 
     <!-- Preference Titles -->
     <string name="messages_header"></string>

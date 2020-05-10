@@ -49,6 +49,8 @@
         </activity>
         <activity android:name=".TemplateInfoActivity"
             android:parentActivityName=".TemplateInfoActivity"/>
+        <activity android:name=".PublicMemeInfoActivity"
+            android:parentActivityName=".PublicMemeInfoActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

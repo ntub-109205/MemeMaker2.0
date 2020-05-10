@@ -22,7 +22,7 @@ public class TempInfoFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<TempInfo> lstTempInfo;
+    private List<PublicMeme> lstMemeInfo;
 
 
     public TempInfoFragment() {
@@ -35,7 +35,7 @@ public class TempInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_tempinfo, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.tempInfo_recyclerView);
-        RecyclerViewAdapter_tempInfo recyclerViewAdapter = new RecyclerViewAdapter_tempInfo(getContext(),lstTempInfo);
+        RecyclerViewAdapter__meme recyclerViewAdapter = new RecyclerViewAdapter__meme(getContext(),lstMemeInfo);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
@@ -46,11 +46,11 @@ public class TempInfoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        lstTempInfo = new ArrayList<>();
-        lstTempInfo.add(new TempInfo("居家隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg"));
-        lstTempInfo.add(new TempInfo("牽手","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1584282936597.jpg"));
-        lstTempInfo.add(new TempInfo("期末考","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1578233253954.jpg"));
-        lstTempInfo.add(new TempInfo("快去睡","https://memeprod.s3.ap-northeast-1.amazonaws.com/user-wtf/1577726914062.jpg"));
+        lstMemeInfo = new ArrayList<>();
+        lstMemeInfo.add(new PublicMeme("#居家隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg","oUO",30));
+        lstMemeInfo.add(new PublicMeme("#牽手","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1584282936597.jpg","天才",20));
+        lstMemeInfo.add(new PublicMeme("#期末考","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1578233253954.jpg","龍澳天本添",9));
+        lstMemeInfo.add(new PublicMeme("#快去睡","https://memeprod.s3.ap-northeast-1.amazonaws.com/user-wtf/1577726914062.jpg","七彩瑪莉蘇",6));
 //        lstTempInfo.add(new TempInfo("morning flower",R.drawable.meme5));
 //        lstTempInfo.add(new TempInfo("my idol",R.drawable.meme6));
 
