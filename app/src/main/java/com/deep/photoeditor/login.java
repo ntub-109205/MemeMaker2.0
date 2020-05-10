@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -37,8 +39,8 @@ public class login extends AppCompatActivity {
     //button onClick to next page
     public Button btnSignin;
     public Button btnToSignup;
-    public TextView txtloginEmail;
-    public TextView txtloginPassword;
+    public TextInputLayout txtloginEmail;
+    public TextInputLayout txtloginPassword;
     public String loginEmail;
     public String loginPassword;
     private static BufferedReader reader;
@@ -52,13 +54,13 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //new一個intent物件，並指定Activity切換的class
-                txtloginEmail = (TextView) findViewById(R.id.loginEmail);
-                txtloginPassword = (TextView) findViewById(R.id.loginPassword);
+                txtloginEmail = (TextInputLayout) findViewById(R.id.loginEmail);
+                txtloginPassword = (TextInputLayout) findViewById(R.id.loginPassword);
                 //txtloginEmail.setText("kevin0507a@gmail.com");
                 //txtloginPassword.setText("wedxzas12345");
 
-                loginEmail = txtloginEmail.getText().toString();
-                loginPassword = txtloginPassword.getText().toString();
+                loginEmail = txtloginEmail.getEditText().getText().toString();
+                loginPassword = txtloginPassword.getEditText().getText().toString();
 //                loginEmail = "kevin0507a@gmail.com";
 //                loginPassword = "wedxzas12345";
                 Log.d("Login","1");
