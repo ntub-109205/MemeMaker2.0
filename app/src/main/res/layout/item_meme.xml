@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="7dp"
-    android:id="@+id/template_item_id">
+    android:id="@+id/meme_item_id">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -26,8 +26,8 @@
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView
-                android:id="@+id/cardName"
-                android:layout_width="wrap_content"
+                android:id="@+id/hashTag"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardImage"
                 android:layout_alignParentStart="true"
@@ -35,15 +35,13 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="216dp"
-                android:layout_marginRight="216dp"
                 android:layout_marginBottom="10dp"
-                android:text="tempName"
+                android:text="hashTag"
                 android:textColor="#000"
                 android:textSize="15sp" />
 
             <ImageView
-                android:id="@+id/fire"
+                android:id="@+id/like"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_below="@+id/cardImage"
@@ -53,12 +51,12 @@
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toStartOf="@+id/itemFireNum"
-                android:layout_toLeftOf="@+id/itemFireNum"
-                app:srcCompat="@drawable/fire"/>
+                android:layout_toStartOf="@+id/likeNum"
+                android:layout_toLeftOf="@+id/likeNum"
+                android:src="@drawable/like"/>
 
             <TextView
-                android:id="@+id/itemFireNum"
+                android:id="@+id/likeNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cardImage"
