@@ -8,19 +8,6 @@
     android:onClick="hideKeyboard"
     tools:context=".login">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginBottom="360dp"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--    </LinearLayout>-->
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -37,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:text="kevin0507a@gmail.com"
         app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:passwordToggleEnabled="true"
+        android:text="wedxzas12345"
         app:layout_constraintBottom_toTopOf="@+id/Remember"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +80,7 @@
         android:layout_marginRight="30dp"
         android:textSize="13dp"
         android:text="忘記密碼?"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
