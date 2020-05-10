@@ -48,26 +48,38 @@ public class TemplateInfoActivity extends AppCompatActivity {
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
-        if(getIntent().hasExtra("temp_url") && getIntent().hasExtra("temp_name")){
+        if(getIntent().hasExtra("temp_url") && getIntent().hasExtra("temp_name") && getIntent().hasExtra("user_name") && getIntent().hasExtra("used_sum")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
             String tempUrl = getIntent().getStringExtra("temp_url");
             String tempName = getIntent().getStringExtra("temp_name");
+            String userName = getIntent().getStringExtra("user_name");
+            int usedSum = getIntent().getIntExtra("used_sum", 0);
 
-            setImage(tempUrl, tempName);
+            setInfo(tempUrl, tempName, userName, usedSum);
         }
     }
-    private void setImage(String tempUrl, String tempName){
-        Log.d(TAG, "setImage: setting te image and name to widgets.");
+    private void setInfo(String tempUrl, String tempName, String userName, int usedSum){
+        Log.d(TAG, "setInfo: set tempUrl tempName userName usedSum");
 
+        //設置模板名
         TextView name = findViewById(R.id.tempName);
         name.setText(tempName);
 
+        //設置模板圖片
         ImageView image = findViewById(R.id.tempImage);
         Glide.with(this)
                 .asBitmap()
                 .load(tempUrl)
                 .into(image);
+        //設置製作者名
+        TextView user = findViewById(R.id.madeByUser);
+        user.setText(userName);
+        //設置熱門程度(被使用次數)
+        TextView fireNum = findViewById(R.id.fireNum);
+        fireNum.setText(String.valueOf(usedSum));
+
+
     }
 
     //onclick判斷在xml
