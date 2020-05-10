@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class login extends AppCompatActivity {
     //button onClick to next page
@@ -47,6 +48,7 @@ public class login extends AppCompatActivity {
         init();
     }
 
+    //關閉鍵盤
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
