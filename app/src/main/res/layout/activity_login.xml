@@ -24,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="kevin0507a@gmail.com"
         app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:text="kevin0507a@gmail.com"
             android:textSize="16dp"
             android:hint="電子郵件"
             android:inputType="textEmailAddress"/>
@@ -45,7 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:passwordToggleEnabled="true"
-        android:text="wedxzas12345"
         app:layout_constraintBottom_toTopOf="@+id/Remember"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:text="wedxzas12345"
             android:textSize="16dp"
             android:hint="密碼"
             android:inputType="textPassword"/>
