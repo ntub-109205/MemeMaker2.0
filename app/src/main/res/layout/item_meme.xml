@@ -23,37 +23,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="center"
+                android:background="@color/white"
+                android:elevation="1dp"
                 android:src="@mipmap/ic_launcher"/>
 
             <TextView
                 android:id="@+id/hashTag"
-                android:layout_width="120dp"
+                android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cardImage"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="14dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="10dp"
                 android:text="hashTag"
-                android:textColor="#000"
-                android:textSize="15sp" />
+                android:textColor="@color/gray_text"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/like"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_below="@+id/cardImage"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="1dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_toStartOf="@+id/likeNum"
                 android:layout_toLeftOf="@+id/likeNum"
-                android:src="@drawable/like"/>
+                android:src="@drawable/like_gray" />
 
             <TextView
                 android:id="@+id/likeNum"
@@ -62,9 +64,9 @@
                 android:layout_below="@+id/cardImage"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="0dp"
                 android:text="12" />
 
         </RelativeLayout>
