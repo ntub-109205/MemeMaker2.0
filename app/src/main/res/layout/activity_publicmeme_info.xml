@@ -49,6 +49,8 @@
             android:layout_width="165dp"
             android:layout_height="140dp"
             android:src="@mipmap/ic_launcher"
+            android:elevation="4dp"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.121"
@@ -68,8 +70,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memeImage"
-            app:layout_constraintVertical_bias="0.736" />
+            app:layout_constraintTop_toBottomOf="@+id/memeImage" />
 
         <ImageView
             android:id="@+id/bookmark"
@@ -83,7 +84,7 @@
             app:layout_constraintEnd_toStartOf="@+id/download"
             app:layout_constraintStart_toEndOf="@+id/like"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55" />
+            app:layout_constraintVertical_bias="0.6" />
 
         <ImageView
             android:id="@+id/download"
@@ -96,7 +97,7 @@
             app:layout_constraintHorizontal_bias="0.63"
             app:layout_constraintStart_toEndOf="@+id/memeImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55" />
+            app:layout_constraintVertical_bias="0.6" />
 
         <ImageView
             android:id="@+id/share"
@@ -109,7 +110,7 @@
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toEndOf="@+id/download"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55" />
+            app:layout_constraintVertical_bias="0.6" />
 
         <View
             android:id="@+id/divider"
@@ -120,7 +121,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/memeImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.53" />
 
         <Button
             android:id="@+id/domeme"
@@ -143,15 +145,15 @@
             android:id="@+id/like"
             android:layout_width="28dp"
             android:layout_height="30dp"
-            android:onClick="like"
             android:layout_centerInParent="true"
+            android:onClick="like"
+            android:src="@drawable/like"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toStartOf="@+id/download"
             app:layout_constraintHorizontal_bias="0.22"
             app:layout_constraintStart_toEndOf="@+id/memeImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.55"
-            android:src="@drawable/like" />
+            app:layout_constraintVertical_bias="0.6" />
 
         <TextView
             android:id="@+id/likeNum"
@@ -168,14 +170,14 @@
             android:id="@+id/beforeMadeBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="made by"
+            android:text="製作者："
             android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/madeByUser"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memeImage"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="@+id/divider"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.24000001" />
 
         <TextView
             android:id="@+id/madeByUser"
@@ -183,12 +185,11 @@
             android:layout_height="wrap_content"
             android:text="userName"
             android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memeImage"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toBottomOf="@+id/beforeMadeBy"
+            app:layout_constraintEnd_toEndOf="@+id/divider"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/beforeMadeBy"
+            app:layout_constraintTop_toTopOf="@+id/beforeMadeBy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
