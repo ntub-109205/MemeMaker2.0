@@ -18,5 +18,7 @@
     <color name="yellow_green_color_picker">#C5E17A</color>
     <color name="tool_bg">#FFFFFF</color>
     <color name="gray_text">#737578</color>
+    <color name="content_text_color">#999da4</color>
+    <color name="card_bg_color">#f6f6f6</color>
 
 </resources>
