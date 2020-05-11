@@ -128,6 +128,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
             @Override
             public void onClick(View v){
                 saveImage();
+                btnNext.setEnabled(true);
+                btnNext.setVisibility(View.VISIBLE);
+
             }
         });
     }
@@ -139,6 +142,9 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         ImageView imgClose;
 
         btnNext = (Button)findViewById(R.id.btnNext);
+        btnNext.setEnabled(false);
+        btnNext.setVisibility(View.GONE);
+
         mPhotoEditorView = findViewById(R.id.photoEditorView);
 
         mTxtCurrentTool = findViewById(R.id.txtCurrentTool);
