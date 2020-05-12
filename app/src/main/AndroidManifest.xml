@@ -20,7 +20,8 @@
             android:parentActivityName=".signUp" ></activity>
         <activity android:name=".ColMemeTmpActivity"
             android:parentActivityName=".ColMemeTmpActivity" ></activity>
-        <activity android:name=".login" />
+        <activity android:name=".login"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".editOnlymaketemp"
             android:parentActivityName=".editOnlymaketemp" />
@@ -36,7 +37,8 @@
             android:parentActivityName=".EditMain" />
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

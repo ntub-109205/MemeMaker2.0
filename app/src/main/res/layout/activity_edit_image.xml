@@ -31,12 +31,13 @@
 
     <ImageView
         android:id="@+id/imgCheck"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="#ffffff"
-        android:padding="8dp"
+        android:elevation="1dp"
+        app:layout_constraintCircleRadius="10dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/ic_check"
         app:layout_constraintBottom_toTopOf="@+id/photoEditorView"
         app:layout_constraintEnd_toEndOf="parent"
