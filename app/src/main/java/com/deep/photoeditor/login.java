@@ -45,6 +45,8 @@ public class login extends AppCompatActivity {
     public String loginPassword;
     private static BufferedReader reader;
     private static StringBuffer response;
+    private static String str3;
+    private static api callApi = new api();
 
     public void init(){
         btnSignin = (Button)findViewById(R.id.btnSignin);
@@ -70,7 +72,7 @@ public class login extends AppCompatActivity {
                 map.put("email", loginEmail);
                 map.put("password", loginPassword);
                 try {//QQQ
-                    doWebPost("http://140.131.115.99/login","email=" + loginEmail +"&password=" + loginPassword);
+                    doWebPost("http://140.131.115.99/api/login","email=" + loginEmail +"&password=" + loginPassword);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -91,13 +93,22 @@ public class login extends AppCompatActivity {
                     Log.d("Login", Integer.toString((Integer)a.get(x)));
 
                 }
+                a.remove(a.size()-1);
                 Log.d("Login", "出迴圈");
+                Log.d("Login", String.valueOf(a.size()));
+                for(int i=0;i<a.size();i++){
+                    Log.d("Login","List的值：" + a.get(i).toString());
+                }
                 String str1 = returnResult().substring((Integer)a.get(0)+1,(Integer)a.get(1));
                 String str2 = returnResult().substring((Integer)a.get(2)+1,(Integer)a.get(3));
+                str3 = returnResult().substring((Integer)a.get(4)+1,(Integer)a.get(5));
+                callApi.setHeader(str3);
 
 
                 Log.d("Login", str1);
                 Log.d("Login", str2);
+                Log.d("Login", str3);
+
                 Log.d("Login", "切割完成");
                 if (str1.equals("success")){
                     Intent edit = new Intent(login.this, MainActivity.class);
