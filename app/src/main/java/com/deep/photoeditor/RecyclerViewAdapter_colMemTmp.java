@@ -25,6 +25,7 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
     Context mContext;
     List<colMemTmp> mData;
 
+
     public RecyclerViewAdapter_colMemTmp(Context mContext, List<colMemTmp> mData) {
         this.mContext = mContext;
         this.mData = mData;
@@ -54,6 +55,8 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
                 .apply(requestOptions)
                 .into(holder.tempImage);
         holder.tempName.setText(mData.get(position).getTempName());
+        holder.fireNum.setText(String.valueOf(mData.get(position).getUsedSum()));
+
         holder.item_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +71,8 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
                 Intent intent = new Intent(mContext, TemplateInfoActivity.class);
                 intent.putExtra("temp_url", mData.get(position).getTempImage());
                 intent.putExtra("temp_name", mData.get(position).getTempName());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 mContext.startActivity(intent);
             }
         });
@@ -80,15 +85,19 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout item_template;
+
         private TextView tempName;
         private ImageView tempImage;
+        private TextView fireNum;
+        private RelativeLayout item_template;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
             item_template = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
             tempName = (TextView) itemView.findViewById(R.id.cardName);
             tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
+            fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
     }
 }
