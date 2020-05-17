@@ -49,6 +49,7 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
                 .apply(requestOptions)
                 .into(holder.mineTempImage);
         holder.mineTempName.setText(mData.get(position).getMineTempName());
+        holder.fireNum.setText(String.valueOf(mData.get(position).getUsedSum()));
 
         //新增圖片傳值到其他Activity
         holder.mineTemp_item.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,8 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
                 Intent intent = new Intent(mContext, TemplateInfoActivity.class);
                 intent.putExtra("temp_url", mData.get(position).getMineTempImage());
                 intent.putExtra("temp_name", mData.get(position).getMineTempName());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 mContext.startActivity(intent);
             }
         });
@@ -75,6 +78,7 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
         private TextView mineTempName;
         private ImageView mineTempImage;
         private RelativeLayout mineTemp_item;
+        private TextView fireNum;
 
         public MyViewHolder_mineTemp(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +86,7 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
             mineTempName = (TextView) itemView.findViewById(R.id.mineCardName);
             mineTempImage = (ImageView) itemView.findViewById(R.id.mineCardImage);
             mineTemp_item = (RelativeLayout) itemView.findViewById(R.id.mineTemp_item);
+            fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
     }
 }
