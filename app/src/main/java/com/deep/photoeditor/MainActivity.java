@@ -47,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            callApi.post("http://140.131.115.99/api/details",":D");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Log.d("test",callApi.returnString());
-        for(int i=0;i<callApi.cutString().size();i++){
-            Log.d("test",callApi.cutString().get(i).toString());
-        }
+//        try {
+//            callApi.post("http://140.131.115.99/api/details",":D");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        Log.d("test",callApi.returnString());
+//        for(int i=0;i<callApi.cutString().size();i++){
+//            Log.d("test",callApi.cutString().get(i).toString());
+//        }
         // init();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);

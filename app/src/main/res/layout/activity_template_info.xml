@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/tempName"
             android:layout_width="120dp"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:gravity="left"
             android:text="templateName"
             android:textColor="#000000"
@@ -144,7 +144,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/fire"
             app:layout_constraintTop_toBottomOf="@+id/tempImage"
-            app:layout_constraintVertical_bias="0.19999999" />
+            app:layout_constraintVertical_bias="0.20999998" />
 
         <TextView
             android:id="@+id/beforeMadeBy"
@@ -204,10 +204,24 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/bgrectangle"
-        android:paddingTop="10dp"
+        android:paddingTop="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" >
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更多相關梗圖"
+        android:textSize="17sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.04" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
