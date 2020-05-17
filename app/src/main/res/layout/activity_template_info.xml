@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/tempName"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:gravity="left"
             android:text="templateName"
             android:textColor="#000000"

@@ -31,7 +31,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         mGoodView = new GoodView(this);
 
         //新增回到前一頁的箭頭
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("公開梗圖");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = (ViewPager)findViewById(R.id.tempInfoViewPager);
