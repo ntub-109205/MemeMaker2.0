@@ -18,6 +18,7 @@ public class ColMemeTmpActivity extends AppCompatActivity {
     private static final String TAG = "ColMemeTmpActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    public int cnt;
     //goodview
     GoodView mGoodView;
 
@@ -26,12 +27,12 @@ public class ColMemeTmpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_col_meme_tmp);
         Log.d(TAG, "onCreate: started.");
-
+        cnt = 3;
         //goodview
         mGoodView = new GoodView(this);
 
         //新增回到前一頁的箭頭
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("收藏梗圖模板"+"("+cnt+")");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = (ViewPager)findViewById(R.id.colMemTmpViewPager);
