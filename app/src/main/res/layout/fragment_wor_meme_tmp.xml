@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context=".WorMemeTmpFragment" >
+    tools:context=".fragment.WorMemeTmpFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wor_mem_tmp_recyclerView"

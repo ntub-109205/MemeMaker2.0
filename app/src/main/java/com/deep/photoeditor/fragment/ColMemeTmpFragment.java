@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_colMemTmp;
+import com.deep.photoeditor.colMemTmp;
 
 import java.util.ArrayList;
 import java.util.List;

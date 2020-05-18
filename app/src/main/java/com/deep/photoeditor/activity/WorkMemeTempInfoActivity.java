@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.deep.photoeditor.R;
 import com.wx.goodview.GoodView;
 
 import java.io.FileNotFoundException;
