@@ -1,25 +1,34 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.adpater;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.TemplateInfoActivity;
+import com.deep.photoeditor.hotTemplate;
 
 import java.util.List;
 
-public class RecyclerViewAdapter__elderTemp extends RecyclerView.Adapter<RecyclerViewAdapter__elderTemp.MyViewHolder> {
-    Context mContext;
-    List<elderTemplate> mData;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
-    public RecyclerViewAdapter__elderTemp(Context mContext, List<elderTemplate> mData) {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+    Context mContext;
+    List<hotTemplate> mData;
+
+    public RecyclerViewAdapter(Context mContext, List<hotTemplate> mData) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -30,7 +39,7 @@ public class RecyclerViewAdapter__elderTemp extends RecyclerView.Adapter<Recycle
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_hottemplate,parent,false);
         MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }
@@ -48,7 +57,23 @@ public class RecyclerViewAdapter__elderTemp extends RecyclerView.Adapter<Recycle
                 .apply(requestOptions)
                 .into(holder.tempImage);
         holder.tempName.setText(mData.get(position).getTempName());
+        holder.fireNum.setText(String.valueOf(mData.get(position).getUsedSum()));
 
+        //新增圖片傳值到其他Activity
+        holder.hotTemp_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+
+                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -60,12 +85,16 @@ public class RecyclerViewAdapter__elderTemp extends RecyclerView.Adapter<Recycle
 
         private TextView tempName;
         private ImageView tempImage;
+        private TextView fireNum;
+        private RelativeLayout hotTemp_item;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tempName = (TextView) itemView.findViewById(R.id.cardName);
             tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
+            hotTemp_item = (RelativeLayout) itemView.findViewById(R.id.hotTemp_item);
+            fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
     }
 }

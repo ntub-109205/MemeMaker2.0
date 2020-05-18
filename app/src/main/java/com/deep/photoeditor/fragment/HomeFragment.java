@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,33 +9,40 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class PublicFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     View myFragment;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
 
-    public PublicFragment(){
+    public HomeFragment(){
 
     }
 
-    public static PublicFragment getInstance() {return new PublicFragment(); };
+    public static HomeFragment getInstance() {return new HomeFragment(); };
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_public, container, false);
+        //return inflater.inflate(R.layout.fragment_home, container, false);
+
         myFragment = inflater.inflate(R.layout.fragment_home, container, false);
 
         //fragment cardview
         tabLayout = myFragment.findViewById(R.id.mainTablayout);
         viewPager = myFragment.findViewById(R.id.mainViewPager);
 
+//        tabLayout.setupWithViewPager(viewPager);
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         return myFragment;
     }
+
     //call onActivity Create method
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -49,9 +56,8 @@ public class PublicFragment extends Fragment {
         pagerAdapter = new PageAdapter(getActivity().getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new PublicMMFragment(),"梗圖");
-        pagerAdapter.AddFragment(new maintab2(),"長輩圖");
-        pagerAdapter.AddFragment(new maintab2(),"動圖");
+        pagerAdapter.AddFragment(new maintab1(),"梗圖模板");
+        pagerAdapter.AddFragment(new maintab2(),"長輩圖模板");
 
         viewPager.setAdapter(pagerAdapter);
 

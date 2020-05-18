@@ -1,11 +1,10 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -13,6 +12,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.adpater.RecyclerViewAdapter;
+import com.deep.photoeditor.hotTemplate;
 
 import java.util.ArrayList;
 import java.util.List;

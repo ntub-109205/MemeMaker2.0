@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.deep.photoeditor.adpater.PageAdapter;
 import com.wx.goodview.GoodView;
 
 public class ColMemeTmpActivity extends AppCompatActivity {

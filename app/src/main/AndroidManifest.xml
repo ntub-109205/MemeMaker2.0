@@ -53,10 +53,10 @@
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".TemplateInfoActivity"
-            android:parentActivityName=".TemplateInfoActivity"/>
-        <activity android:name=".PublicMemeInfoActivity"
-            android:parentActivityName=".PublicMemeInfoActivity"/>
+        <activity android:name=".activity.TemplateInfoActivity"
+            android:parentActivityName=".activity.TemplateInfoActivity"/>
+        <activity android:name=".activity.PublicMemeInfoActivity"
+            android:parentActivityName=".activity.PublicMemeInfoActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

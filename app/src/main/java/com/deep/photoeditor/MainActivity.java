@@ -6,17 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.fragment.HomeFragment;
+import com.deep.photoeditor.fragment.PersonFragment;
+import com.deep.photoeditor.fragment.PublicFragment;
+import com.deep.photoeditor.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 //
@@ -26,11 +28,6 @@ import com.google.android.material.tabs.TabLayout;
 //import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
 
 import com.github.clans.fab.FloatingActionButton;
-
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     //死按鈕宣告

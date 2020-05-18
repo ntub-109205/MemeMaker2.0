@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.adpater;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

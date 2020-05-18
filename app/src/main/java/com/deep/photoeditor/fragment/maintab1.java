@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 import android.os.Bundle;
 
@@ -12,6 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.adpater.RecyclerViewAdapter__memeTemp;
+import com.deep.photoeditor.api;
+import com.deep.photoeditor.memeTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;

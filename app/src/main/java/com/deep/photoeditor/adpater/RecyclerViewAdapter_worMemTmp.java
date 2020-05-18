@@ -1,19 +1,4 @@
-package com.deep.photoeditor;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
-import java.util.List;
+package com.deep.photoeditor.adpater;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,17 +16,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.WorkMemeTemp;
+import com.deep.photoeditor.worMemTmp;
 
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<RecyclerViewAdapter__memeTemp.MyViewHolder> {
+public class RecyclerViewAdapter_worMemTmp extends RecyclerView.Adapter<RecyclerViewAdapter_worMemTmp.MyViewHolder> {
     Context mContext;
-    List<memeTemplate> mData;
+    List<worMemTmp> mData;
 
 
-    public RecyclerViewAdapter__memeTemp(Context mContext, List<memeTemplate> mData) {
+    public RecyclerViewAdapter_worMemTmp(Context mContext, List<worMemTmp> mData) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -53,15 +41,7 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
 
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
-        final MyViewHolder vHolder = new MyViewHolder(v);
-
-//        vHolder.item_template.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mContext, "test click"+String.valueOf(vHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
+        MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }
 
@@ -91,11 +71,11 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
 //                edit.putExtra("temp_name", mData.get(position).getTempName());
 //                edit.setClass(mContext, TemplateInfoActivity.class);
 //                mContext.startActivity(edit);
-                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
-                intent.putExtra("temp_url", mData.get(position).getTempImage());
-                intent.putExtra("temp_name", mData.get(position).getTempName());
-                intent.putExtra("user_name", mData.get(position).getUserName());
-                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+                Intent intent = new Intent(mContext, WorkMemeTemp.class);
+//                intent.putExtra("temp_url", mData.get(position).getTempImage());
+//                intent.putExtra("temp_name", mData.get(position).getTempName());
+//                intent.putExtra("user_name", mData.get(position).getUserName());
+//                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 mContext.startActivity(intent);
             }
         });

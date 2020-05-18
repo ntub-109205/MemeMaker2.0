@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.deep.photoeditor.adpater.RecyclerViewAdapter_colMemTmp;
+
 import java.util.ArrayList;
 import java.util.List;
 
