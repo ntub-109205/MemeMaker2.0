@@ -96,7 +96,6 @@
             android:layout_height="1dp"
             android:layout_margin="10dp"
             android:background="#A9A9A9"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tempName"
             app:layout_constraintHorizontal_bias="0.51"

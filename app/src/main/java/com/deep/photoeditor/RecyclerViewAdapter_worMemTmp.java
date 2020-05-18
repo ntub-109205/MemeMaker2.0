@@ -68,11 +68,11 @@ public class RecyclerViewAdapter_worMemTmp extends RecyclerView.Adapter<Recycler
 //                edit.putExtra("temp_name", mData.get(position).getTempName());
 //                edit.setClass(mContext, TemplateInfoActivity.class);
 //                mContext.startActivity(edit);
-                Intent intent = new Intent(mContext, WorkMemeTemp.class);
-//                intent.putExtra("temp_url", mData.get(position).getTempImage());
-//                intent.putExtra("temp_name", mData.get(position).getTempName());
-//                intent.putExtra("user_name", mData.get(position).getUserName());
-//                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+                Intent intent = new Intent(mContext, WorkMemeTempInfoActivity.class);
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 mContext.startActivity(intent);
             }
         });

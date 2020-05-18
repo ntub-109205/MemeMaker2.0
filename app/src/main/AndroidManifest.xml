@@ -18,6 +18,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".signUp"
             android:parentActivityName=".signUp" ></activity>
+        <activity android:name=".WorkMemeTempInfoActivity"
+            android:parentActivityName=".WorkMemeTempInfoActivity" ></activity>
         <activity android:name=".ColMemeTmpActivity"
             android:parentActivityName=".ColMemeTmpActivity" ></activity>
         <activity android:name=".WorMemeTmpActivity"
@@ -28,7 +30,6 @@
             android:name=".editOnlymaketemp"
             android:parentActivityName=".editOnlymaketemp" />
         <activity android:name=".editShare" />
-        <activity android:name=".WorkMemeTemp" />
         <activity
             android:name=".editSetname"
             android:parentActivityName=".editSetname" />
