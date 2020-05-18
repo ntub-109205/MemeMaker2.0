@@ -24,7 +24,7 @@
         <!--  android:elevation="10dp"-->
 
         <ImageButton
-            android:id="@+id/btnColMem"
+            android:id="@+id/btnWorMem"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -75,7 +75,7 @@
         <!--  android:elevation="10dp"-->
 
         <ImageButton
-            android:id="@+id/btnColEld"
+            android:id="@+id/btnWorEld"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -123,7 +123,7 @@
         <!--  android:elevation="10dp"-->
 
         <ImageButton
-            android:id="@+id/btnColGif"
+            android:id="@+id/btnWorGif"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -185,7 +185,7 @@
         <!--  android:elevation="10dp"-->
 
         <ImageButton
-            android:id="@+id/btnColMemTmp"
+            android:id="@+id/btnWorMemTmp"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
@@ -235,7 +235,7 @@
         <!--  android:elevation="10dp"-->
 
         <ImageButton
-            android:id="@+id/btnColEldTmp"
+            android:id="@+id/btnWorEldTmp"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_gravity="center"
