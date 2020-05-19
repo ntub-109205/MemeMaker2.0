@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 //        try {
-//            callApi.post("http://140.131.115.99/api/details",":D");
+//            callApi.post("http://140.131.115.99/api/test","str=中文");
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }

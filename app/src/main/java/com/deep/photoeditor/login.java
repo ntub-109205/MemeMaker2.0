@@ -102,6 +102,8 @@ public class login extends AppCompatActivity {
                 String str1 = returnResult().substring((Integer)a.get(0)+1,(Integer)a.get(1));
                 String str2 = returnResult().substring((Integer)a.get(2)+1,(Integer)a.get(3));
                 str3 = returnResult().substring((Integer)a.get(4)+1,(Integer)a.get(5));
+
+
                 callApi.setHeader(str3);
 
 

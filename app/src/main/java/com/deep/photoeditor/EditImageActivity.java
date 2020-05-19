@@ -74,12 +74,14 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     public String name;
     public ImageView imgCheck;
     Uri uri;
+    public String templateName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //mPhotoEditorView = findViewById(R.id.photoEditorView);
-
+        Intent intent = getIntent();
+        templateName = intent.getStringExtra("name");
         uri = getIntent().getData();
 
         makeFullScreen();
