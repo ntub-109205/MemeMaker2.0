@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context=".maintab2" >
+    tools:context=".fragment.maintab2" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/elderTemplate_recyclerView"

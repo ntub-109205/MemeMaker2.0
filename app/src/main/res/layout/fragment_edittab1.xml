@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context=".edittab1" >
+    tools:context=".fragment.edittab1" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hotTemplate_recyclerView"

@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.adpater;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.WorkMemeTempInfoActivity;
+import com.deep.photoeditor.worMemTmp;
 
 import java.util.List;
 
@@ -68,11 +71,11 @@ public class RecyclerViewAdapter_worMemTmp extends RecyclerView.Adapter<Recycler
 //                edit.putExtra("temp_name", mData.get(position).getTempName());
 //                edit.setClass(mContext, TemplateInfoActivity.class);
 //                mContext.startActivity(edit);
-                Intent intent = new Intent(mContext, WorkMemeTemp.class);
-//                intent.putExtra("temp_url", mData.get(position).getTempImage());
-//                intent.putExtra("temp_name", mData.get(position).getTempName());
-//                intent.putExtra("user_name", mData.get(position).getUserName());
-//                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+                Intent intent = new Intent(mContext, WorkMemeTempInfoActivity.class);
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 mContext.startActivity(intent);
             }
         });

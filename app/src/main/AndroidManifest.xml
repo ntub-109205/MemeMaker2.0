@@ -18,17 +18,18 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".signUp"
             android:parentActivityName=".signUp" ></activity>
-        <activity android:name=".ColMemeTmpActivity"
-            android:parentActivityName=".ColMemeTmpActivity" ></activity>
-        <activity android:name=".WorMemeTmpActivity"
-            android:parentActivityName=".WorMemeTmpActivity" ></activity>
+        <activity android:name=".activity.WorkMemeTempInfoActivity"
+            android:parentActivityName=".activity.WorkMemeTempInfoActivity" ></activity>
+        <activity android:name=".activity.ColMemeTmpActivity"
+            android:parentActivityName=".activity.ColMemeTmpActivity" ></activity>
+        <activity android:name=".activity.WorMemeTmpActivity"
+            android:parentActivityName=".activity.WorMemeTmpActivity" ></activity>
         <activity android:name=".login"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".editOnlymaketemp"
             android:parentActivityName=".editOnlymaketemp" />
         <activity android:name=".editShare" />
-        <activity android:name=".WorkMemeTemp" />
         <activity
             android:name=".editSetname"
             android:parentActivityName=".editSetname" />
@@ -53,10 +54,10 @@
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".TemplateInfoActivity"
-            android:parentActivityName=".TemplateInfoActivity"/>
-        <activity android:name=".PublicMemeInfoActivity"
-            android:parentActivityName=".PublicMemeInfoActivity"/>
+        <activity android:name=".activity.TemplateInfoActivity"
+            android:parentActivityName=".activity.TemplateInfoActivity"/>
+        <activity android:name=".activity.PublicMemeInfoActivity"
+            android:parentActivityName=".activity.PublicMemeInfoActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

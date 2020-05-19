@@ -1,6 +1,5 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.deep.photoeditor.R;
 
 public class PersonFragment extends Fragment implements View.OnClickListener {
     View rootView;

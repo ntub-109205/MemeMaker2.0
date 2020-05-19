@@ -1,16 +1,18 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.ColMemeTmpActivity;
 
 public class PerCollectFragment extends Fragment implements View.OnClickListener {
     @Nullable

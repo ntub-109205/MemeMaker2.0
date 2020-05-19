@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.deep.photoeditor.fragment.ColMemeTmpFragment;
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.adpater.PageAdapter;
 import com.wx.goodview.GoodView;
 
 public class ColMemeTmpActivity extends AppCompatActivity {

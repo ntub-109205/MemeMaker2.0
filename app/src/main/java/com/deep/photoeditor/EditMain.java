@@ -7,17 +7,16 @@ import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.bumptech.glide.Glide;
+import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.fragment.edittab1;
+import com.deep.photoeditor.fragment.edittab2;
 import com.google.android.material.tabs.TabLayout;
 
 
 import android.net.Uri;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class EditMain extends AppCompatActivity {
     public Button btnAddMeme;

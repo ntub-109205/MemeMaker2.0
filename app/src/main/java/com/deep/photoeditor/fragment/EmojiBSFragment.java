@@ -1,8 +1,10 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import androidx.annotation.NonNull;
+
+import com.deep.photoeditor.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;

@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.WorMemeTmpActivity;
 
 public class PerWorksFragment extends Fragment implements View.OnClickListener {
     @Override
