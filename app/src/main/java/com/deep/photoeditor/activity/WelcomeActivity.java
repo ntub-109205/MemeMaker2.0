@@ -1,9 +1,12 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.deep.photoeditor.R;
+import com.deep.photoeditor.login;
 
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -20,7 +23,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 try{
                     Thread.sleep(2000);
-                    startActivity(new Intent().setClass(WelcomeActivity.this,login.class));
+                    startActivity(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK).setClass(WelcomeActivity.this, login.class));
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }

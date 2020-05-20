@@ -39,9 +39,9 @@
         <activity
             android:name=".EditMain"
             android:parentActivityName=".EditMain" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".WelcomeActivity"
+        <activity android:name=".activity.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

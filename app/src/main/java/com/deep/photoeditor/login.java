@@ -8,18 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 
+import com.deep.photoeditor.activity.MainActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.BufferedReader;
@@ -114,6 +108,7 @@ public class login extends AppCompatActivity {
                 Log.d("Login", "切割完成");
                 if (str1.equals("success")){
                     Intent edit = new Intent(login.this, MainActivity.class);
+                    edit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(edit);
                 }else{
                     Log.d("Login", "登入失敗");

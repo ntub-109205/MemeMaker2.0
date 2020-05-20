@@ -1,4 +1,4 @@
-package com.deep.photoeditor;
+package com.deep.photoeditor.activity;
 
 
 import androidx.annotation.NonNull;
@@ -14,7 +14,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.deep.photoeditor.EditMain;
+import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.api;
 import com.deep.photoeditor.fragment.HomeFragment;
 import com.deep.photoeditor.fragment.PersonFragment;
 import com.deep.photoeditor.fragment.PublicFragment;
@@ -32,12 +35,6 @@ import com.github.clans.fab.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
     //死按鈕宣告
     FloatingActionButton fabMeme, fabElder, fabgif;
-    //button onClick to next page
-    public Button btnAddMeme;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    public PageAdapter pagerAdapter;
-    int tabIndex;
     private static api callApi = new api();
 
     @Override
@@ -94,21 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "You Selected fabgif!!!!", Toast.LENGTH_LONG).show();
             }
         });
-
-//
-//        //fragment cardview
-//        tabLayout = (TabLayout)findViewById(R.id.mainTablayout);
-//        viewPager = (ViewPager)findViewById(R.id.mainViewPager);
-//        pagerAdapter = new PageAdapter(getSupportFragmentManager());
-//
-//        //Add Fragment here
-//        pagerAdapter.AddFragment(new maintab1(),"梗圖模板");
-//        pagerAdapter.AddFragment(new maintab2(),"長輩圖模板");
-//
-//        viewPager.setAdapter(pagerAdapter);
-//        tabLayout.setupWithViewPager(viewPager);
-//
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -138,4 +120,19 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    //退出確認提示
+    private long firstPressedTime;
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        // System.currentTimeMillis() 當前系統時間
+        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            firstPressedTime = System.currentTimeMillis();
+        }
+    }
+
 }
