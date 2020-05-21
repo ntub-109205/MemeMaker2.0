@@ -74,11 +74,11 @@ public class maintab1 extends Fragment {
             lstMemeMemeTemplate = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                String template_id = jsonObject.getString("template_id");
+                String id = jsonObject.getString("id");
                 String filelink = jsonObject.getString("filelink");
                 String name = jsonObject.getString("name");
                 int count = Integer.parseInt(jsonObject.getString("count"));
-                Log.d("runrun", "template_id:" + template_id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
+                Log.d("runrun", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
                 lstMemeMemeTemplate.add(new memeTemplate(name,filelink,"潔西卡",count));
             }
