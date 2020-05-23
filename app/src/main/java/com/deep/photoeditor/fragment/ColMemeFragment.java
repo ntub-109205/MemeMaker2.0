@@ -38,7 +38,7 @@ public class ColMemeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_col_meme, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.wor_mem_recyclerView);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.col_mem_recyclerView);
         RecyclerViewAdapter_colMem recyclerViewAdapter = new RecyclerViewAdapter_colMem(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
