@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.ColMemeActivity;
 import com.deep.photoeditor.activity.ColMemeTmpActivity;
 
 public class PerCollectFragment extends Fragment implements View.OnClickListener {
@@ -22,7 +23,9 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_per_collect, container, false);
         ImageButton btnColMemTmp = (ImageButton) rootView.findViewById(R.id.btnColMemTmp);
+        ImageButton btnColMem = (ImageButton) rootView.findViewById(R.id.btnColMem);
         btnColMemTmp.setOnClickListener(this);
+        btnColMem.setOnClickListener(this);
         return rootView;
     }
 
@@ -35,6 +38,10 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
             case R.id.btnColMemTmp:
                 Intent intent = new Intent(getActivity(), ColMemeTmpActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.btnColMem:
+                Intent intent1 = new Intent(getActivity(), ColMemeActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

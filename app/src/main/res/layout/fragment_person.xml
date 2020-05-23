@@ -91,11 +91,9 @@
         android:id="@+id/personFrame"
         android:layout_width="46dp"
         android:layout_height="45dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnWorks"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="@+id/btnWorks"
-        app:layout_constraintTop_toBottomOf="@+id/btnWorks">
-    </FrameLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="hideKeyboard"
-    tools:context=".activity.WorkMemeTempInfoActivity">
+    tools:context=".activity.WorkMemeInfoActivity">
 
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
@@ -48,7 +48,7 @@
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:srcCompat="@drawable/fire" />
+            app:srcCompat="@drawable/like_checked" />
 
         <TextView
             android:id="@+id/fireNum"
@@ -82,7 +82,7 @@
         android:id="@+id/tempSwitch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="模板公開"
+        android:text="梗圖公開"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnEditWorkMemTmpShare"
         app:layout_constraintHorizontal_bias="1.0"
@@ -132,7 +132,7 @@
         app:layout_constraintEnd_toStartOf="@+id/download"
         app:layout_constraintHorizontal_bias="0.739"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workMemTmpSelName"
+        app:layout_constraintTop_toBottomOf="@+id/workMemHashtag"
         app:layout_constraintVertical_bias="0.451" />
 
     <ImageView
@@ -149,8 +149,8 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/workMemTmpSelName"
-        android:layout_width="56dp"
+        android:id="@+id/workMemHashtag"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:layout_marginLeft="19dp"
