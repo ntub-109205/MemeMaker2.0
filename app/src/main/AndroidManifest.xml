@@ -26,10 +26,22 @@
             android:parentActivityName=".activity.ColMemeTmpActivity" ></activity>
         <activity android:name=".activity.WorMemeTmpActivity"
             android:parentActivityName=".activity.WorMemeTmpActivity" ></activity>
+        <activity android:name=".activity.WorEldTmpActivity"
+            android:parentActivityName=".activity.WorEldTmpActivity" ></activity>
         <activity android:name=".activity.ColMemeActivity"
             android:parentActivityName=".activity.ColMemeActivity" ></activity>
+        <activity android:name=".activity.ColEldActivity"
+        android:parentActivityName=".activity.ColEldActivity" ></activity>
+        <activity android:name=".activity.ColGifActivity"
+            android:parentActivityName=".activity.ColGifActivity" ></activity>
+        <activity android:name=".activity.ColEldTmpActivity"
+            android:parentActivityName=".activity.ColEldTmpActivity" ></activity>
         <activity android:name=".activity.WorMemeActivity"
             android:parentActivityName=".activity.WorMemeActivity" ></activity>
+        <activity android:name=".activity.WorEldActivity"
+            android:parentActivityName=".activity.WorEldActivity" ></activity>
+        <activity android:name=".activity.WorGifActivity"
+            android:parentActivityName=".activity.WorGifActivity" ></activity>
         <activity android:name=".login"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
