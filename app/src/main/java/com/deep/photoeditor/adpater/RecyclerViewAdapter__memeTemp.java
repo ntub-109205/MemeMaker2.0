@@ -82,6 +82,7 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
 //                edit.setClass(mContext, TemplateInfoActivity.class);
 //                mContext.startActivity(edit);
                 Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+                intent.putExtra("temp_id", mData.get(position).getTemp_id());
                 intent.putExtra("temp_url", mData.get(position).getTempImage());
                 intent.putExtra("temp_name", mData.get(position).getTempName());
                 intent.putExtra("user_name", mData.get(position).getUserName());

@@ -59,6 +59,7 @@ public class maintab1 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
             callApi.post("http://140.131.115.99/api/template/show","category_id=1");
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,10 +78,11 @@ public class maintab1 extends Fragment {
                 String id = jsonObject.getString("id");
                 String filelink = jsonObject.getString("filelink");
                 String name = jsonObject.getString("name");
+                String author = jsonObject.getString("author");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 Log.d("runrun", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lstMemeMemeTemplate.add(new memeTemplate(name,filelink,"潔西卡",count));
+                lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();

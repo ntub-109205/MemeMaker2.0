@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.fragment.TempInfoFragment;
+import com.deep.photoeditor.fragment.maintab2;
 import com.wx.goodview.GoodView;
 
 public class PublicMemeInfoActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new TempInfoFragment(),"相關梗圖");
+        pagerAdapter.AddFragment(new maintab2(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
 

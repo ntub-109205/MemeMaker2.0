@@ -17,12 +17,16 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.wx.goodview.GoodView;
 
+import java.security.cert.PKIXCertPathBuilderResult;
+
 public class TemplateInfoActivity extends AppCompatActivity {
     private static final String TAG = "TemplateInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
     //goodview
     GoodView mGoodView;
+    //給相關梗圖用的tempid
+    private static String tempId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,15 +54,19 @@ public class TemplateInfoActivity extends AppCompatActivity {
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
-        if(getIntent().hasExtra("temp_url") && getIntent().hasExtra("temp_name") && getIntent().hasExtra("user_name") && getIntent().hasExtra("used_sum")){
+        if(getIntent().hasExtra("temp_id") &&getIntent().hasExtra("temp_url") && getIntent().hasExtra("temp_name") && getIntent().hasExtra("user_name") && getIntent().hasExtra("used_sum")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
+            //模板id給相關梗圖fragment用
+            tempId = getIntent().getStringExtra("temp_id");
+            //下面這些放到cardView
             String tempUrl = getIntent().getStringExtra("temp_url");
             String tempName = getIntent().getStringExtra("temp_name");
             String userName = getIntent().getStringExtra("user_name");
             int usedSum = getIntent().getIntExtra("used_sum", 0);
 
             setInfo(tempUrl, tempName, userName, usedSum);
+            Log.d("temp", "tempid="+returnTempIdString());
         }
     }
     private void setInfo(String tempUrl, String tempName, String userName, int usedSum){
@@ -80,8 +88,10 @@ public class TemplateInfoActivity extends AppCompatActivity {
         //設置熱門程度(被使用次數)
         TextView fireNum = findViewById(R.id.fireNum);
         fireNum.setText(String.valueOf(usedSum));
+    }
 
-
+    public static String returnTempIdString(){
+        return tempId;
     }
 
     //onclick判斷在xml

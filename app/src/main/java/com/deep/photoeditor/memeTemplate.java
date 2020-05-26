@@ -1,6 +1,7 @@
 package com.deep.photoeditor;
 
 public class memeTemplate {
+    private String temp_id;
     private String tempName;
     private String tempImage;
     private String userName;
@@ -10,7 +11,8 @@ public class memeTemplate {
 
     }
 
-    public memeTemplate(String tempName, String tempImage, String userName, int usedSum) {
+    public memeTemplate(String temp_id, String tempName, String tempImage, String userName, int usedSum) {
+        this.temp_id = temp_id;
         this.tempName = tempName;
         this.tempImage = tempImage;
         this.userName = userName;
@@ -18,6 +20,8 @@ public class memeTemplate {
     }
 
     //getter
+    public String getTemp_id() { return temp_id; }
+
     public String getTempName() {
         return tempName;
     }
@@ -35,6 +39,8 @@ public class memeTemplate {
     }
 
     //setter
+    public void setTemp_id(String temp_id) { this.temp_id = temp_id; }
+
     public void setTempName(String tempName) {
         this.tempName = tempName;
     }
