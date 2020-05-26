@@ -34,7 +34,7 @@
         android:layout_gravity="center"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/person_test_pic" />
+        android:src="@drawable/meme2" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
             android:layout_gravity="center"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/person_test_pic" />
+            android:src="@drawable/elder1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
             android:layout_gravity="center"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/person_test_pic" />
+             />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -195,7 +195,7 @@
             android:layout_gravity="center"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/person_test_pic" />
+            android:src="@drawable/meme1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -245,7 +245,7 @@
             android:layout_gravity="center"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/person_test_pic" />
+            android:src="@drawable/elder" />
 
         <LinearLayout
             android:layout_width="wrap_content"
