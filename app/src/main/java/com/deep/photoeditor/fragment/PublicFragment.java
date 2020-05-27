@@ -52,8 +52,8 @@ public class PublicFragment extends Fragment {
 
         //Add Fragment here
         pagerAdapter.AddFragment(new PublicMMFragment(),"梗圖");
-        pagerAdapter.AddFragment(new maintab2(),"長輩圖");
-        pagerAdapter.AddFragment(new maintab2(),"動圖");
+        pagerAdapter.AddFragment(new PublicElderFragment(),"長輩圖");
+        pagerAdapter.AddFragment(new PublicGifFragment(),"動圖");
 
         viewPager.setAdapter(pagerAdapter);
 

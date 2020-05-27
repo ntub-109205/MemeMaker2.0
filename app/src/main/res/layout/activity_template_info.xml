@@ -149,7 +149,7 @@
             android:id="@+id/beforeMadeBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="製作者："
+            android:text="上傳者："
             android:textSize="10dp"
             app:layout_constraintBottom_toTopOf="@+id/download"
             app:layout_constraintEnd_toEndOf="@+id/tempName"
