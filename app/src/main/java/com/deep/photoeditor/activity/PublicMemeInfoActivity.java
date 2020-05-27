@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.fragment.MemeInfoFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.fragment.maintab2;
 import com.wx.goodview.GoodView;
@@ -24,6 +25,8 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
     public PageAdapter pagerAdapter;
     //goodview
     GoodView mGoodView;
+    //給相關梗圖用的tempid
+    private static String tempId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new maintab2(),"相關梗圖");
+        pagerAdapter.AddFragment(new MemeInfoFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
 
@@ -54,12 +57,16 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         if(getIntent().hasExtra("meme_url") && getIntent().hasExtra("hashTag") && getIntent().hasExtra("user_name") && getIntent().hasExtra("like_sum")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
+            //模板id給相關梗圖fragment用
+            tempId = getIntent().getStringExtra("temp_id");
+            //下面這些放到cardView
             String memeUrl = getIntent().getStringExtra("meme_url");
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
             int likeSum = getIntent().getIntExtra("like_sum", 0);
 
             setInfo(memeUrl, hashTag, userName, likeSum);
+            Log.d("pubmeme", "tempid="+returnTempIdString());
         }
     }
     private void setInfo(String memeUrl, String hashTag, String userName, int likeSum){
@@ -83,6 +90,10 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         fireNum.setText(String.valueOf(likeSum));
 
 
+    }
+
+    public static String returnTempIdString(){
+        return tempId;
     }
 
     //onclick判斷在xml

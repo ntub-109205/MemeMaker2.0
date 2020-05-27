@@ -79,6 +79,7 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
                 Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
+                intent.putExtra("temp_id", mData.get(position).getTempId());
                 intent.putExtra("meme_url", mData.get(position).getMemeImage());
                 intent.putExtra("hashTag", mData.get(position).getHashTag());
                 intent.putExtra("user_name", mData.get(position).getUserName());

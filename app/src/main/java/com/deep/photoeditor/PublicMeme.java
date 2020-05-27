@@ -1,6 +1,7 @@
 package com.deep.photoeditor;
 
 public class PublicMeme {
+    private String tempId;
     private String hashTag;
     private String memeImage;
     private String userName;
@@ -10,7 +11,8 @@ public class PublicMeme {
 
     }
 
-    public PublicMeme(String hashTag, String memeImage, String userName, int likeSum) {
+    public PublicMeme(String tempId, String hashTag, String memeImage, String userName, int likeSum) {
+        this.tempId = tempId;
         this.hashTag = hashTag;
         this.memeImage = memeImage;
         this.userName = userName;
@@ -18,6 +20,8 @@ public class PublicMeme {
     }
 
     //getter
+    public String getTempId() { return tempId; }
+
     public String getHashTag() {
         return hashTag;
     }
@@ -35,6 +39,8 @@ public class PublicMeme {
     }
 
     //setter
+    public void setTempId(String tempId) { this.hashTag = tempId; }
+
     public void setHashTag(String hashTag) {
         this.hashTag = hashTag;
     }

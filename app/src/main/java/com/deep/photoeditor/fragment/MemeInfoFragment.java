@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.activity.TemplateInfoActivity;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__meme;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.memeTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TempInfoFragment extends Fragment {
+public class MemeInfoFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
@@ -43,7 +43,7 @@ public class TempInfoFragment extends Fragment {
     private String tempId;
 
 
-    public TempInfoFragment() {
+    public MemeInfoFragment() {
         // Required empty public constructor
     }
 
@@ -63,8 +63,8 @@ public class TempInfoFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        //取得TemplateInfoActivity的tempId
-        tempId = ((TemplateInfoActivity) context).returnTempIdString();
+        //取得PublicMemeInfoActivity的tempId
+        tempId = ((PublicMemeInfoActivity) context).returnTempIdString();
 
     }
 
