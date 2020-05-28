@@ -94,7 +94,7 @@ public class TempInfoFragment extends Fragment {
 //                int count = Integer.parseInt(jsonObject.getString("count"));
                 Log.d("temp", "template_id:" + id + ", filelink:" + filelink );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,"#",filelink,"jessie",0));
+                lstMemeInfo.add(new PublicMeme(tempId,"#hashtag",filelink,"jessie",0));
             }
         } catch (JSONException e) {
             e.printStackTrace();

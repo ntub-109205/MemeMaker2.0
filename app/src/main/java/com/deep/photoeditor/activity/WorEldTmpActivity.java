@@ -31,7 +31,7 @@ public class WorEldTmpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wor_eld_tmp);
         Log.d(TAG, "onCreate: started.");
-        cnt = 3;
+        cnt = 4;
         //goodview
         mGoodView = new GoodView(this);
 

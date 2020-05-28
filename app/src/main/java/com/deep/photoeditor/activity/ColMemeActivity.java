@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.fragment.ColMemeFragment;
+import com.deep.photoeditor.fragment.PublicMMFragment;
+import com.deep.photoeditor.fragment.maintab1;
 import com.wx.goodview.GoodView;
 
 public class ColMemeActivity extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class ColMemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_col_meme);
         Log.d(TAG, "onCreate: started.");
-        cnt = 3;
+        cnt = 21;
         //goodview
         mGoodView = new GoodView(this);
 
@@ -42,7 +44,8 @@ public class ColMemeActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new ColMemeFragment(),"相關梗圖");
+//        pagerAdapter.AddFragment(new ColMemeFragment(),"相關梗圖");
+        pagerAdapter.AddFragment(new PublicMMFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
 

@@ -30,7 +30,7 @@ public class WorMemeTmpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wor_meme_tmp);
         Log.d(TAG, "onCreate: started.");
-        cnt = 3;
+        cnt = 4;
         //goodview
         mGoodView = new GoodView(this);
 

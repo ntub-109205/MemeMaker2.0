@@ -31,7 +31,7 @@ public class ColGifActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_col_gif);
         Log.d(TAG, "onCreate: started.");
-        cnt = 3;
+        cnt = 7;
         //goodview
         mGoodView = new GoodView(this);
 

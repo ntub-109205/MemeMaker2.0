@@ -61,12 +61,12 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
 
                 Toast.makeText(mContext, mData.get(position).getMineTempName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
-                intent.putExtra("temp_url", mData.get(position).getMineTempImage());
-                intent.putExtra("temp_name", mData.get(position).getMineTempName());
-                intent.putExtra("user_name", mData.get(position).getUserName());
-                intent.putExtra("used_sum", mData.get(position).getUsedSum());
-                mContext.startActivity(intent);
+//                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+//                intent.putExtra("temp_url", mData.get(position).getMineTempImage());
+//                intent.putExtra("temp_name", mData.get(position).getMineTempName());
+//                intent.putExtra("user_name", mData.get(position).getUserName());
+//                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+//                mContext.startActivity(intent);
             }
         });
     }

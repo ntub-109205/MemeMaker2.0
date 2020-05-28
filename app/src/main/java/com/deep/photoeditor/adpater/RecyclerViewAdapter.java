@@ -66,12 +66,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
 
                 Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
-                intent.putExtra("temp_url", mData.get(position).getTempImage());
-                intent.putExtra("temp_name", mData.get(position).getTempName());
-                intent.putExtra("user_name", mData.get(position).getUserName());
-                intent.putExtra("used_sum", mData.get(position).getUsedSum());
-                mContext.startActivity(intent);
+//                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+//                intent.putExtra("temp_url", mData.get(position).getTempImage());
+//                intent.putExtra("temp_name", mData.get(position).getTempName());
+//                intent.putExtra("user_name", mData.get(position).getUserName());
+//                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+//                mContext.startActivity(intent);
             }
         });
     }
