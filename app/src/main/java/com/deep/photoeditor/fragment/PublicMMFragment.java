@@ -81,7 +81,7 @@ public class PublicMMFragment extends Fragment {
                 String tempId = jsonObject.getString("template_id");
                 Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
                 //產生cardView
-                lstMemeMeme.add(new PublicMeme(tempId,"#",filelink,author,0));
+                lstMemeMeme.add(new PublicMeme(tempId,"#hashtag",filelink,author,0));
             }
         } catch (JSONException e) {
             e.printStackTrace();

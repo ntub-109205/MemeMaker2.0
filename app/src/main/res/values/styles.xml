@@ -25,4 +25,12 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#666666</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:radius">5dp</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
 </resources>

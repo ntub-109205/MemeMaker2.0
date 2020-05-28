@@ -237,8 +237,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @SuppressLint("MissingPermission")
     private void saveImage() {
         if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            showLoading("Saving...");
-
+            showLoading("儲存中...");
 
             String path = "MeMe Maker";
 
@@ -257,7 +256,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     @Override
                     public void onSuccess(@NonNull String imagePath) {
                         hideLoading();
-                        showSnackbar("儲存成功");
+                        //showSnackbar("儲存成功");
                         uri=Uri.fromFile(new File(imagePath));
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
                     }
@@ -265,7 +264,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         hideLoading();
-                        showSnackbar("儲存失敗");
+                       // showSnackbar("儲存失敗");
                     }
                 });
             } catch (IOException e) {

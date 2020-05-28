@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.util.Log;
 
 
 import com.deep.photoeditor.activity.MainActivity;
+import com.deep.photoeditor.base.BaseActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.BufferedReader;
@@ -29,7 +31,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-public class login extends AppCompatActivity {
+
+public class login extends BaseActivity {
     //button onClick to next page
     public Button btnSignin;
     public Button btnToSignup;
@@ -46,6 +49,7 @@ public class login extends AppCompatActivity {
         btnSignin = (Button)findViewById(R.id.btnSignin);
         btnToSignup = (Button)findViewById(R.id.btnToSignup);
 
+        //登入
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -107,16 +111,20 @@ public class login extends AppCompatActivity {
 
                 Log.d("Login", "切割完成");
                 if (str1.equals("success")){
+                    showLoading("載入中...");
+
                     Intent edit = new Intent(login.this, MainActivity.class);
                     edit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(edit);
                 }else{
+                    hideLoading();
                     Log.d("Login", "登入失敗");
 
                 }
             }
         });
 
+        //註冊
         btnToSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){

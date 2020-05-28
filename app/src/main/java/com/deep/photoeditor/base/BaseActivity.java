@@ -3,6 +3,8 @@ package com.deep.photoeditor.base;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
+
+import com.deep.photoeditor.R;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;

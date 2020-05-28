@@ -77,7 +77,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:textSize="11sp"
-                android:text="設定為公開才可在創作分享區看到" />
+                android:text="設定為公開才可在首頁看到" />
 
             <Switch
                 android:id="@+id/memeSwitch"
@@ -96,7 +96,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:textSize="11sp"
-                android:text="設定為公開才可在首頁看到" />
+                android:text="設定為公開才可在創作分享區看到" />
 
         </LinearLayout>
     </LinearLayout>
