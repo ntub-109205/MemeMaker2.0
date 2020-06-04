@@ -225,7 +225,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     @Override
                     public void onSuccess(@NonNull String imagePath) {
                         hideLoading();
-                        showSnackbar("儲存成功");
+//                        showSnackbar("儲存成功");
                         memeUri=Uri.fromFile(new File(imagePath));
                         variable.memeUriSetter(memeUri);
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
@@ -234,7 +234,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         hideLoading();
-                        showSnackbar("儲存失敗");
+//                        showSnackbar("儲存失敗");
                     }
                 });
             } catch (IOException e) {
