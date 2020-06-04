@@ -43,11 +43,11 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         PropertiesBSFragment.Properties,
         EmojiBSFragment.EmojiListener,
         StickerBSFragment.StickerListener, EditingToolsAdapter.OnItemSelected {
-
     private static final String TAG = EditImageActivity.class.getSimpleName();
     public static final String EXTRA_IMAGE_PATHS = "extra_image_paths";
     private static final int CAMERA_REQUEST = 52;
     private static final int PICK_REQUEST = 53;
+    private static variable variable = new variable();
     PhotoEditor mPhotoEditor;
     private PhotoEditorView mPhotoEditorView;
     private PropertiesBSFragment mPropertiesBSFragment;
@@ -57,33 +57,25 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private Typeface mWonderFont;
     private RecyclerView mRvTools, mRvFilters;
     private EditingToolsAdapter mEditingToolsAdapter = new EditingToolsAdapter(this);
-   // private FilterViewAdapter mFilterViewAdapter = new FilterViewAdapter(this);
     private ConstraintLayout mRootView;
     private ConstraintSet mConstraintSet = new ConstraintSet();
-   // private boolean mIsFilterVisible;
     public Button btnNext;
     public TextView txt1;
     public String name;
     public ImageView imgCheck;
-    Uri uri;
+    Uri templateUri;
+    Uri memeUri;
     public String templateName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //mPhotoEditorView = findViewById(R.id.photoEditorView);
-        Intent intent = getIntent();
-        templateName = intent.getStringExtra("name");
-        uri = getIntent().getData();
-
+        templateUri = variable.templateUriGetter();
         makeFullScreen();
         setContentView(R.layout.activity_edit_image);
-
         initViews();
         imgCheck();
-
         mWonderFont = Typeface.createFromAsset(getAssets(), "beyond_wonderland.ttf");
-
         mPropertiesBSFragment = new PropertiesBSFragment();
         mEmojiBSFragment = new EmojiBSFragment();
         mStickerBSFragment = new StickerBSFragment();
@@ -95,24 +87,13 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         mRvTools.setLayoutManager(llmTools);
         mRvTools.setAdapter(mEditingToolsAdapter);
 
-//        LinearLayoutManager llmFilters = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        mRvFilters.setLayoutManager(llmFilters);
-//        mRvFilters.setAdapter(mFilterViewAdapter);
-
-
-        //Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
-        //Typeface mEmojiTypeFace = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
 
         mPhotoEditor = new PhotoEditor.Builder(this, mPhotoEditorView)
                 .setPinchTextScalable(true) // set flag to make text scalable when pinch
-                //.setDefaultTextTypeface(mTextRobotoTf)
-                //.setDefaultEmojiTypeface(mEmojiTypeFace)
+
                 .build(); // build photo editor sdk
 
         mPhotoEditor.setOnPhotoEditorListener(this);
-
-        //Set Image Dynamically
-        // mPhotoEditorView.getSource().setImageResource(R.drawable.color_palette);
 
     }
 
@@ -132,7 +113,6 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     private void initViews() {
         ImageView imgUndo;
         ImageView imgRedo;
-        ImageView imgSave;
         ImageView imgClose;
 
         btnNext = (Button)findViewById(R.id.btnNext);
@@ -151,30 +131,21 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         imgRedo = findViewById(R.id.imgRedo);
         imgRedo.setOnClickListener(this);
 
-//        imgSave = findViewById(R.id.imgSave);
-//        imgSave.setOnClickListener(this);
-
         imgClose = findViewById(R.id.imgClose);
         imgClose.setOnClickListener(this);
 
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), templateUri);
             mPhotoEditorView.getSource().setImageBitmap(bitmap);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-//                File file = new File(System.currentTimeMillis() + ".png");
-//                Uri uri1 =Uri.fromFile(file);
                 Intent edit =new Intent();
                 edit.setClass(EditImageActivity.this, editPublicsetting.class);
-                edit.setData(uri);
-                edit.putExtra("name",name);
                 startActivity(edit);
             }
         });
@@ -237,10 +208,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @SuppressLint("MissingPermission")
     private void saveImage() {
         if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            showLoading("儲存中...");
-
+            showLoading("Saving...");
             String path = "MeMe Maker";
-
             File dirFile = new File(Environment.getExternalStorageDirectory(),path);
             if(!dirFile.exists()){//如果資料夾不存在
                 dirFile.mkdir();//建立資料夾
@@ -256,15 +225,16 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     @Override
                     public void onSuccess(@NonNull String imagePath) {
                         hideLoading();
-                        //showSnackbar("儲存成功");
-                        uri=Uri.fromFile(new File(imagePath));
+                        showSnackbar("儲存成功");
+                        memeUri=Uri.fromFile(new File(imagePath));
+                        variable.memeUriSetter(memeUri);
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
                     }
 
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         hideLoading();
-                       // showSnackbar("儲存失敗");
+                        showSnackbar("儲存失敗");
                     }
                 });
             } catch (IOException e) {
@@ -281,15 +251,13 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CAMERA_REQUEST:
-                   // mPhotoEditor.clearAllViews();
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
                     mPhotoEditorView.getSource().setImageBitmap(photo);
                     break;
                 case PICK_REQUEST:
                     try {
                         mPhotoEditor.clearAllViews();
-//                        Uri uri = data.getData();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), templateUri);
                         mPhotoEditorView.getSource().setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -387,10 +355,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 mPhotoEditor.brushEraser();
                 mTxtCurrentTool.setText(R.string.label_eraser_mode);
                 break;
-//            case FILTER:
-//                mTxtCurrentTool.setText(R.string.label_filter);
-//                showFilter(true);
-//                break;
+
             case EMOJI:
                 mEmojiBSFragment.show(getSupportFragmentManager(), mEmojiBSFragment.getTag());
                 break;

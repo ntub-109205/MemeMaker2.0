@@ -10,18 +10,13 @@ import android.widget.Button;
 import com.deep.photoeditor.activity.MainActivity;
 
 public class editShare extends AppCompatActivity {
-    //button onClick to next page
     public Button btnNext;
-
     public void init(){
         btnNext = (Button)findViewById(R.id.btnNext);
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //new一個intent物件，並指定Activity切換的class
                 Intent edit = new Intent(editShare.this, MainActivity.class);
-                //切換Activity
                 startActivity(edit);
             }
         });
