@@ -61,25 +61,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <Switch
-                android:id="@+id/tempSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:textSize="15sp"
-                android:text="模板公開" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:textSize="11sp"
-                android:text="設定為公開才可在首頁看到" />
-
-            <Switch
                 android:id="@+id/memeSwitch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -208,7 +208,7 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
     @SuppressLint("MissingPermission")
     private void saveImage() {
         if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            showLoading("Saving...");
+            showLoading("儲存中...");
             String path = "MeMe Maker";
             File dirFile = new File(Environment.getExternalStorageDirectory(),path);
             if(!dirFile.exists()){//如果資料夾不存在
