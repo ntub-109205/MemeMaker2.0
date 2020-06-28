@@ -45,7 +45,7 @@ public class ColMemeActivity extends AppCompatActivity {
 
         //Add Fragment here
 //        pagerAdapter.AddFragment(new ColMemeFragment(),"相關梗圖");
-        pagerAdapter.AddFragment(new PublicMMFragment(),"相關梗圖");
+        pagerAdapter.AddFragment(new ColMemeFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
 
@@ -54,11 +54,11 @@ public class ColMemeActivity extends AppCompatActivity {
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
 
-        if(getIntent().hasExtra("temp_url") && getIntent().hasExtra("temp_name")){
+        if(getIntent().hasExtra("memeImage") && getIntent().hasExtra("hashTag")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
-            String tempUrl = getIntent().getStringExtra("temp_url");
-            String tempName = getIntent().getStringExtra("temp_name");
+            String tempUrl = getIntent().getStringExtra("memeImage");
+            String tempName = getIntent().getStringExtra("hashTag");
 
             setImage(tempUrl, tempName);
         }

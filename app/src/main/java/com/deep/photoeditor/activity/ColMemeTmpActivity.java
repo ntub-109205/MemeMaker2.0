@@ -43,7 +43,7 @@ public class ColMemeTmpActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new maintab1(),"相關梗圖");
+        pagerAdapter.AddFragment(new ColMemeTmpFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
 

@@ -42,32 +42,29 @@ public class RecyclerViewAdapter_worEld extends RecyclerView.Adapter<RecyclerVie
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_meme,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_collect_template,parent,false);
         MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-
-//        holder.tempName.setText(mData.get(position).getTempName());
-//        holder.tempImage.setImageResource(mData.get(position).getTempImage());
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
         //將image用glide的方式呈現
         Glide.with(mContext)
                 .load(mData.get(position).getMemeImage())
                 .apply(requestOptions)
-                .into(holder.memeImage);
+                .into(holder.imgView);
         holder.hashTag.setText(mData.get(position).getHashTag());
-        holder.likeNum.setText(String.valueOf(mData.get(position).getLikeSum()));
-        holder.like.setOnClickListener(new View.OnClickListener() {
+//        holder.likeNum.setText(String.valueOf(mData.get(position).getLikeSum()));
+        holder.collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoodView mGoodView;
                 mGoodView = new GoodView(mContext);
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-                ((ImageView) view).setImageResource(R.drawable.like_checked);
+                ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
                 mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
                 mGoodView.show(view);
             }
@@ -99,19 +96,19 @@ public class RecyclerViewAdapter_worEld extends RecyclerView.Adapter<RecyclerVie
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView hashTag;
-        private ImageView memeImage;
-        private TextView likeNum;
+        private ImageView collect;
+        private TextView imgName;
         private RelativeLayout item_meme;
-        private ImageView like;
+        private ImageView imgView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            item_meme = (RelativeLayout) itemView.findViewById(R.id.meme_item_id);
-            hashTag = (TextView) itemView.findViewById(R.id.hashTag);
-            memeImage = (ImageView) itemView.findViewById(R.id.cardImage);
-            likeNum = (TextView) itemView.findViewById(R.id.likeNum);
-            like = (ImageView) itemView.findViewById(R.id.like);
+            item_meme = (RelativeLayout) itemView.findViewById(R.id.template_item_col);
+            //imgName = (TextView) itemView.findViewById(R.id.cardName);
+            imgView = (ImageView) itemView.findViewById(R.id.cardImage);
+            hashTag = (TextView) itemView.findViewById(R.id.cardName);
+            collect = (ImageView) itemView.findViewById(R.id.bookmarkCheck);
         }
     }
 }

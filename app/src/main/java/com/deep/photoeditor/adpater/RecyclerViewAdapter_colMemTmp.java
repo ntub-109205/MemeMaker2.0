@@ -40,13 +40,14 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_collect_template,parent,false);
         MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+
 
 //        holder.tempName.setText(mData.get(position).getTempName());
 //        holder.tempImage.setImageResource(mData.get(position).getTempImage());
@@ -56,11 +57,11 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
         Glide.with(mContext)
                 .load(mData.get(position).getTempImage())
                 .apply(requestOptions)
-                .into(holder.tempImage);
-        holder.tempName.setText(mData.get(position).getTempName());
-        holder.fireNum.setText(String.valueOf(mData.get(position).getUsedSum()));
+                .into(holder.imgView);
+        holder.imgName.setText(mData.get(position).getTempName());
+        //  holder.fireNum.setText(String.valueOf(mData.get(position).getUsedSum()));
 
-        holder.item_template.setOnClickListener(new View.OnClickListener() {
+        holder.item_meme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
@@ -89,18 +90,20 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tempName;
-        private ImageView tempImage;
-        private TextView fireNum;
-        private RelativeLayout item_template;
+        private TextView hashTag;
+        private ImageView collect;
+        private TextView imgName;
+        private RelativeLayout item_meme;
+        private ImageView imgView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            item_template = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
-            tempName = (TextView) itemView.findViewById(R.id.cardName);
-            tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
-            fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
+            item_meme = (RelativeLayout) itemView.findViewById(R.id.template_item_col);
+            //imgName = (TextView) itemView.findViewById(R.id.cardName);
+            imgView = (ImageView) itemView.findViewById(R.id.cardImage);
+            imgName = (TextView) itemView.findViewById(R.id.cardName);
+            collect = (ImageView) itemView.findViewById(R.id.bookmarkCheck);
         }
     }
 }
