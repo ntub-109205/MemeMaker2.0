@@ -90,11 +90,27 @@ public class TempInfoFragment extends Fragment {
                 String id = jsonObject.getString("id");
                 String filelink = jsonObject.getString("filelink");
 //                String name = jsonObject.getString("name");
-//                String author = jsonObject.getString("author");
-//                int count = Integer.parseInt(jsonObject.getString("count"));
-                Log.d("temp", "template_id:" + id + ", filelink:" + filelink );
+                String author = jsonObject.getString("author");
+                int count = Integer.parseInt(jsonObject.getString("count"));
+                String tags = jsonObject.getString("tags");
+                String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+                Log.d("tags", "tags:" + items);
+                // items.length 是所有項目的個數
+                String[] results = new String[items.length];
+                // 將結果放入 results
+                for (int j = 0; j < items.length; j++) {
+                    results[j] = items[j].trim();
+                }
+                String newtag = "";
+                for (String tag : results) {
+                    tag = tag.replaceAll("\"", "");
+                    Log.d("tags", "tags:" + tag + ", ");
+                    newtag = newtag + "#" + tag;
+                }
+
+                Log.d("temp", "template_id:" + id + ", filelink:" + filelink + "tags："+tags );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,"#hashtag",filelink,"jessie",0));
+                lstMemeInfo.add(new PublicMeme(tempId,newtag,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();
