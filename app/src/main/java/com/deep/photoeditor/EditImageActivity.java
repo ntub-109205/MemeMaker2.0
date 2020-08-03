@@ -227,6 +227,8 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         hideLoading();
 //                        showSnackbar("儲存成功");
                         memeUri=Uri.fromFile(new File(imagePath));
+                        String path = new File(imagePath).getPath();
+                        variable.memePathSetter(path);
                         variable.memeUriSetter(memeUri);
                         mPhotoEditorView.getSource().setImageURI(Uri.fromFile(new File(imagePath)));
                     }
