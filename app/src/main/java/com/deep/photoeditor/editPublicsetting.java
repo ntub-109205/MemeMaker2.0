@@ -20,14 +20,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-
-<<<<<<< HEAD
 import com.hootsuite.nachos.NachoTextView;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
-
-=======
 import java.io.File;
->>>>>>> 78d87be67031dea6e0219e30f5807d19206cc97f
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
