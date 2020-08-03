@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 
+import com.hootsuite.nachos.NachoTextView;
+import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
+
 import java.io.FileNotFoundException;
 
 public class editPublicsetting extends AppCompatActivity {
@@ -81,6 +84,9 @@ public class editPublicsetting extends AppCompatActivity {
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        NachoTextView nachoTextView = findViewById(R.id.memeTag);
+        nachoTextView.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
 
         init();
     }
