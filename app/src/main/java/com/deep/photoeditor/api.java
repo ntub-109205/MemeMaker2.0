@@ -75,24 +75,24 @@ public class api {
     public static List cutString() {
         int x = 0;
         ArrayList a=new ArrayList();
-        Log.d("Login", "New完了");
+        Log.d("Login3", "New完了");
 
         a.add(returnString().indexOf("\""));//*第一個出現的索引位置
-        Log.d("Login", Integer.toString((Integer)a.get(x)));
+        Log.d("Login3", Integer.toString((Integer)a.get(x)));
 
         while ((Integer)a.get(x)!= -1) {
-            Log.d("Login", "進入迴圈");
+            Log.d("Login3", "進入迴圈");
             x+=1;
 
             a.add(returnString().indexOf("\"", (Integer)a.get(x-1)+1));//*從這個索引往後開始第一個出現的位置
-            Log.d("Login", Integer.toString((Integer)a.get(x)));
+            Log.d("Login3", Integer.toString((Integer)a.get(x)));
 
         }
         a.remove(a.size()-1);
-        Log.d("Login", "出迴圈");
-        Log.d("Login", String.valueOf(a.size()));
+        Log.d("Login3", "出迴圈");
+        Log.d("Login3", String.valueOf(a.size()));
         for(int i=0;i<a.size();i++){
-            Log.d("Login","List的值：" + a.get(i).toString());
+            Log.d("Login3","List的值：" + a.get(i).toString());
         }
 
 

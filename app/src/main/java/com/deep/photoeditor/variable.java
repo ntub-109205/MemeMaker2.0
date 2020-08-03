@@ -10,7 +10,8 @@ public class variable {
     private static String templateName;
     private static String templateShare;
     private static String memeShare;
-
+    private static String template_id;
+    private static String memePath;
     //模板Uri
     public static Uri templateUriGetter(){
         return templateUri;
@@ -39,5 +40,17 @@ public class variable {
     public static String memeShareGetter(){
         return memeShare;
     }
-    public static void memeShareSetter(String memeShare1){memeShare = memeShare;}
+    public static void memeShareSetter(String memeShare1){memeShare = memeShare1;}
+
+    //模板ID
+    public static String templateIDGetter(){
+        return template_id;
+    }
+    public static void templateIDSetter(String template_id1){template_id = template_id1;}
+
+    //梗圖path
+    public static String memePathGetter(){
+        return memePath;
+    }
+    public static void memePathSetter(String memePath1){memePath = memePath1;}
 }
