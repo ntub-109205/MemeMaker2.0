@@ -4,26 +4,23 @@ package com.deep.photoeditor.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 
 import com.deep.photoeditor.EditMain;
+import com.deep.photoeditor.GifMain;
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.fragment.HomeFragment;
 import com.deep.photoeditor.fragment.PersonFragment;
 import com.deep.photoeditor.fragment.PublicFragment;
 import com.deep.photoeditor.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 //
 //import me.majiajie.pagerbottomtabstrip.NavigationController;
 //import me.majiajie.pagerbottomtabstrip.PageNavigationView;
@@ -88,7 +85,12 @@ public class MainActivity extends AppCompatActivity {
         fabgif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "You Selected fabgif!!!!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "You Selected FabExplore!!!!", Toast.LENGTH_LONG).show();
+                /**從MAIN 跳到 SECOND 頁面*/
+                Intent intent = new Intent(MainActivity.this, GifMain.class);
+                /** 啟動intent */
+                intent.setClass(MainActivity.this, GifMain.class);
+                startActivity(intent);
             }
         });
     }
