@@ -120,11 +120,14 @@ public class HoverImageView extends ImageView{
 	        rect.set(bitmapBounds);
 
 			int saveCount = canvas.saveLayer(rect, null,
-                    Canvas.MATRIX_SAVE_FLAG |
-                    Canvas.CLIP_SAVE_FLAG |
-                    Canvas.HAS_ALPHA_LAYER_SAVE_FLAG |
-                    Canvas.FULL_COLOR_LAYER_SAVE_FLAG |
-                    Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+					canvas.save());
+//			上面原本是
+//			int saveCount = canvas.saveLayer(rect, null,
+//					Canvas.MATRIX_SAVE_FLAG |
+//							Canvas.CLIP_SAVE_FLAG |
+//							Canvas.HAS_ALPHA_LAYER_SAVE_FLAG |
+//							Canvas.FULL_COLOR_LAYER_SAVE_FLAG |
+//							Canvas.CLIP_TO_LAYER_SAVE_FLAG);
 			getImageMatrix().mapRect(rect);
 
 	        paint.setAntiAlias(true);

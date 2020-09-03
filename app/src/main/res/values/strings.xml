@@ -38,5 +38,13 @@
     <!-- Sync Preferences -->
     <string name="templatePublic">模板公開</string>
     <string name="memePublic">梗圖公開</string>
+    <string name="folder_all">所有圖片</string>
+    <string name="photo_unit">Shot</string>
+    <string name="msg_no_camera">No system camera found</string>
+    <string name="preview">Preview</string>
+    <string name="msg_amount_limit">Select images amount is limit</string>
+    <string name="select_images">選擇圖片</string>
+    <string name="mis_action_done">確定</string>
+    <string name="mis_action_button_string">%1$s(%2$d/%3$d)</string>
 
 </resources>

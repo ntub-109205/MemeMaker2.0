@@ -97,6 +97,9 @@
         <activity
             android:name=".activity.PublicMemeInfoActivity"
             android:parentActivityName=".activity.PublicMemeInfoActivity" />
+        <activity android:name=".gifmake.GifMakeActivity"/>
+        <activity android:name=".image_selector.MultiImageSelectorActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"
