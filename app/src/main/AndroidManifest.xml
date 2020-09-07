@@ -26,6 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".editCombinePicture"></activity>
         <activity
             android:name=".GifMain"
             android:parentActivityName=".GifMain"></activity>
@@ -106,6 +108,7 @@
         <activity
             android:name=".activity.PublicMemeInfoActivity"
             android:parentActivityName=".activity.PublicMemeInfoActivity" />
+
         <activity android:name=".gifmake.GifMakeActivity"/>
         <activity android:name=".gifmake.VideoToGifActivity"/>
         <activity android:name=".gifmake.SaveImageActivity"/>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/combineImage"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/layoutImageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="3dp"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+
+</RelativeLayout>

@@ -61,9 +61,10 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "com.android.support:support-annotations:23.1.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
-    implementation project(path: ':baseframe')
+
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -92,9 +93,11 @@ dependencies {
 
     //gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
-//    implementation project(path: ':baseframe')
+
     implementation project(path: ':BaseLibrary')
     implementation project(path: ':gifcreator')
+    implementation project(path: ':baseframe')
+
     compile 'com.felipecsl:gifimageview:2.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
@@ -172,6 +175,7 @@ dependencies {
 //    compile 'io.reactivex:rxandroid:1.1.0'
 //
 //    implementation 'ru.alexbykov:nopermission:1.1.2'
+
 
 
 

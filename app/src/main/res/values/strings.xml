@@ -38,6 +38,16 @@
     <!-- Sync Preferences -->
     <string name="templatePublic">模板公開</string>
     <string name="memePublic">梗圖公開</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="editFragment1">fragment1</string>
+    <string name="editFragment2">fragment2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invalid_empty">尚未填寫</string>
+    <string name="invalid_email">請輸入正確的電子郵件格式</string>
+    <string name="invalid_confirm_password">密碼不相同!</string>
     <string name="folder_all">所有圖片</string>
     <string name="photo_unit">Shot</string>
     <string name="msg_no_camera">No system camera found</string>

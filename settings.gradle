@@ -1,3 +1,4 @@
+include ':app', ':photoeditor'
 include ':BaseLibrary'
 include ':gifcreator'
 include ':app', ':photoeditor', ':baseframe'

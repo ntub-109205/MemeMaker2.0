@@ -4,23 +4,27 @@ package com.deep.photoeditor.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
 
 import com.deep.photoeditor.EditMain;
 import com.deep.photoeditor.GifMain;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.api;
+import com.deep.photoeditor.editCombinePicture;
 import com.deep.photoeditor.fragment.HomeFragment;
 import com.deep.photoeditor.fragment.PersonFragment;
 import com.deep.photoeditor.fragment.PublicFragment;
 import com.deep.photoeditor.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 //
 //import me.majiajie.pagerbottomtabstrip.NavigationController;
 //import me.majiajie.pagerbottomtabstrip.PageNavigationView;
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 /**從MAIN 跳到 SECOND 頁面*/
                 Intent intent = new Intent(MainActivity.this, EditMain.class);
                 /** 啟動intent */
-                intent.setClass(MainActivity.this,EditMain.class);
+                intent.setClass(MainActivity.this, EditMain.class);
                 startActivity(intent);
             }
         });
@@ -77,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
         fabElder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "You Selected fabElder!!!!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "You Selected fabElder!!!!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, editCombinePicture.class);
+                /** 啟動intent */
+                intent.setClass(MainActivity.this, editCombinePicture.class);
+                startActivity(intent);
 
             }
         });
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     //退出確認提示
     private long firstPressedTime;
+
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
@@ -136,5 +145,4 @@ public class MainActivity extends AppCompatActivity {
             firstPressedTime = System.currentTimeMillis();
         }
     }
-
 }
