@@ -18,6 +18,7 @@ import com.deep.photoeditor.EditMain;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.api;
+import com.deep.photoeditor.editCombinePicture;
 import com.deep.photoeditor.fragment.HomeFragment;
 import com.deep.photoeditor.fragment.PersonFragment;
 import com.deep.photoeditor.fragment.PublicFragment;
@@ -80,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
         fabElder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "You Selected fabElder!!!!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "You Selected fabElder!!!!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, editCombinePicture.class);
+                /** 啟動intent */
+                intent.setClass(MainActivity.this,editCombinePicture.class);
+                startActivity(intent);
 
             }
         });
