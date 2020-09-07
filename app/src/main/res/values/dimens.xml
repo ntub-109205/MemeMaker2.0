@@ -3,4 +3,5 @@
     <dimen name="editor_size">35dp</dimen>
     <dimen name="normal_margin">8dp</dimen>
     <dimen name="large_margin">16dp</dimen>
+    <dimen name="folder_cover_size">72dp</dimen>
 </resources>
