@@ -42,7 +42,7 @@ public class editPublicsetting extends AppCompatActivity {
 
     public void init(){
         btnNext = (Button)findViewById(R.id.btnNext);
-        txtSetTag = (TextView)findViewById(R.id.setName);
+        txtSetTag = (TextView)findViewById(R.id.memeTag);
         ContentResolver cr = this.getContentResolver();
         try {
             Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(memeUri));
@@ -115,20 +115,31 @@ public class editPublicsetting extends AppCompatActivity {
                 list.add(tag.substring((Integer)a.get(a.size()-1)+1,len));
                 for(int i=0;i<a.size();i++) {
                     Log.d("tag1", "List的值：" + list.get(i).toString());
+                    tag +="#" + list.get(i).toString();
                 }
-                tag = "[";
-                for(int i=0;i<a.size();i++) {
-                    tag+="\""+i+"\" => \"" + list.get(i).toString()+"\"";
-                    if (i<a.size()-1){tag+=", ";}
-                }
-                tag += "]";
-                Log.d("tag1", "tag的值：" + tag);
-                Log.d("contextQQ","Share=" + variable.memeShareGetter());
+//                tag = "[";
+//                for(int i=0;i<a.size();i++) {
+//                    tag+="\""+i+"\" => \"" + list.get(i).toString()+"\"";
+//                    if (i<a.size()-1){tag+=", ";}
+//                }
+//                tag += "]";
+//                Log.d("tag1", "tag的值：" + tag);
+//                Log.d("contextQQ","Share=" + variable.memeShareGetter());
+//                try {
+//                    callApi.post("http://140.131.115.99/api/txt/memeStore",
+//                            "template_id="+variable.templateIDGetter()+
+//                                    "&meme_share="+variable.memeShareGetter()+
+//                            "&tags="+tag);
+//                    Log.d("contextQQ","傳字串=" + callApi.returnString());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
                 try {
                     callApi.post("http://140.131.115.99/api/txt/memeStore",
                             "template_id="+variable.templateIDGetter()+
                                     "&meme_share="+variable.memeShareGetter()+
-                            "&tags="+tag);
+                                    "&tags="+tag);
                     Log.d("contextQQ","傳字串=" + callApi.returnString());
                 } catch (Exception e) {
                     e.printStackTrace();
