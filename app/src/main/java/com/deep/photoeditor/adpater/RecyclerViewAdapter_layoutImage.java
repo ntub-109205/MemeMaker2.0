@@ -1,6 +1,7 @@
 package com.deep.photoeditor.adpater;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -45,6 +46,7 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
                 //產生ImageView object
                 ImageView imageView = new ImageView(mContext);
                 if(flag == 0){
+                    Log.d("flagXD", "flag = 0");
                     //讀取圖檔
                     imageView.setImageResource(R.drawable.circle);
                     RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
@@ -54,6 +56,8 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
                     relativeLayout.addView(imageView,params);
                     flag = 1;
                 }else{
+                    Log.d("flagXD", "flag = 1");
+
                     RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
                     relativeLayout.removeView(imageView);
                     flag = 0;
