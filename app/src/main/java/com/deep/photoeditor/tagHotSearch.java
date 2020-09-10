@@ -1,24 +1,38 @@
 package com.deep.photoeditor;
 
 public class tagHotSearch {
-    private int serialImage;
     private String tempName;
+    private String tempImage;
+    private int serialImage;
+    private String userName;
     private int usedSum;
 
     public tagHotSearch() {
     }
 
-    public tagHotSearch(int serialImage, String tempName, int usedSum) {
-        this.serialImage = serialImage;
+    public tagHotSearch(String tempName, String tempImage, int serialImage, String userName, int usedSum) {
         this.tempName = tempName;
+        this.tempImage = tempImage;
+        this.serialImage = serialImage;
+        this.userName = userName;
         this.usedSum = usedSum;
     }
 
     //Getter
-    public int getSerialImage() { return serialImage; }
-
     public String getTempName() {
         return tempName;
+    }
+
+    public String getTempImage() {
+        return tempImage;
+    }
+
+    public int getSerialImage() {
+        return serialImage;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public int getUsedSum() {
@@ -26,12 +40,20 @@ public class tagHotSearch {
     }
 
     //Setter
+    public void setTempName(String tempName) {
+        this.tempName = tempName;
+    }
+
+    public void setTempImage(String tempImage) {
+        this.tempImage = tempImage;
+    }
+
     public void setSerialImage(int serialImage) {
         this.serialImage = serialImage;
     }
 
-    public void setTempName(String tempName) {
-        this.tempName = tempName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setUsedSum(int usedSum) {

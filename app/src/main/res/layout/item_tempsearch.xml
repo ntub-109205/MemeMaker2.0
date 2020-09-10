@@ -1,60 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tempSearch_item"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:layout_margin="7dp">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/search_input_style"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:foreground="@drawable/ripple_foreground"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
 
-        <ImageView
-            android:id="@+id/serialNo"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:gravity="start"
-            app:srcCompat="@drawable/one" />
-
-        <TextView
-            android:id="@+id/tempName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:text="Cute Dog"
-            android:textSize="16sp" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tempImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tempName"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tempImage"
+                android:layout_margin="10dp"
+                android:text="tempName"
+                android:textSize="15sp"
+                android:textColor="#000" />
+
+            <ImageView
+                android:id="@+id/serNo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/one" />
 
             <ImageView
                 android:id="@+id/fire"
-                android:layout_width="21dp"
-                android:layout_height="21dp"
-                android:layout_gravity="center_vertical"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_below="@id/tempImage"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/usedSum"
+                android:layout_toLeftOf="@+id/usedSum"
                 app:srcCompat="@drawable/fire" />
 
             <TextView
                 android:id="@+id/usedSum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:gravity="end"
-                android:text="98"
-                android:textSize="16sp" />
+                android:layout_below="@id/tempImage"
+                android:layout_margin="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:text="12" />
 
-        </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
