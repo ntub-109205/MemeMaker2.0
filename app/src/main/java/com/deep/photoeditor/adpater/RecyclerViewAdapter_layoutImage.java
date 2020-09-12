@@ -40,26 +40,34 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
 
     public int flag = 0;
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         holder.layoutImageView.setImageResource(mData.get(position).getCombinePicture());
         holder.combinePic.setOnClickListener(new View.OnClickListener() {
+            ImageView imageView = new ImageView(mContext);
+
             public void onClick(View view) {
                 //產生ImageView object
-                ImageView imageView = new ImageView(mContext);
+                RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
+
                 if(flag == 0){
-                    Log.d("flagXD", "flag = 0");
+                    Log.d("flagXD", "flag = "+flag);
                     //讀取圖檔
                     imageView.setImageResource(R.drawable.circle);
-                    RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(90,90);
                     params.leftMargin = 280;
                     params.topMargin = 280;
                     relativeLayout.addView(imageView,params);
                     flag = 1;
                 }else{
-                    Log.d("flagXD", "flag = 1");
+                    Log.d("flagXD", "flag = "+flag);
+                    imageView.setImageResource(0);
+//                    imageView.setImageResource(android.R.color.transparent);
 
-                    RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
-                    relativeLayout.removeView(imageView);
+//                    relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
+//                    imageView.setVisibility(View.GONE);
+//                    relativeLayout.removeView(imageView);
+
+                    //relativeLayout.removeView(imageView);
                     flag = 0;
                 }
             }

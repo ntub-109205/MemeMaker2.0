@@ -37,6 +37,7 @@ public class EditMain extends AppCompatActivity {
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
     private static variable variable = new variable();
+    private static api callApi = new api();
 
 
     int PICK_IMAGE_MULTIPLE = 1;
@@ -80,6 +81,13 @@ public class EditMain extends AppCompatActivity {
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+
+            Log.d("getXD",callApi.get("http://140.131.115.99/api/profile"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         init();
     }
 

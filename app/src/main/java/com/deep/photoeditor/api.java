@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,6 +64,36 @@ public class api {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static String get(String path){
+        try {
+            URL url = new URL(path.trim());
+//開啟連線
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) urlConnection; //声明一个抽象类HttpURLConnection的引用connection
+            connection.setRequestMethod("GET");//设定请求方式为"POST"，默认为"GET"
+            connection.setRequestProperty("Authorization", "Bearer " + header);
+//設定連結超時時間
+            urlConnection.setConnectTimeout(15000);
+//設定讀取超時時間
+            urlConnection.setReadTimeout(15000);
+            if(200 == urlConnection.getResponseCode()){
+//得到輸入流
+                InputStream is =urlConnection.getInputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while(-1 != (len = is.read(buffer))){
+                    baos.write(buffer,0,len);
+                    baos.flush();
+                }
+                return baos.toString("utf-8");
+            }
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     //把接收到的東西變成字串
     public static String returnString(){
