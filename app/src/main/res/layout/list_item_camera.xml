@@ -4,14 +4,17 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
+        android:drawableTop="@drawable/asy"
+        android:drawablePadding="10dp"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:drawableTop="@drawable/asy"
-        android:drawablePadding="10dp"
         android:gravity="center_horizontal"
         android:text="Take photo"
         android:textColor="#CDCECE"
-        android:textSize="14sp" />
+        android:textSize="26sp" />
+
 
 </com.deep.photoeditor.image_selector.multi_image_selector.view.SquareFrameLayout>

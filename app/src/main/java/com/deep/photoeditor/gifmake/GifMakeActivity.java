@@ -60,6 +60,11 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gifmake);
+
+        //新增回到前一頁的箭頭
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ButterKnife.bind(this);
         initData();
         initEvent();

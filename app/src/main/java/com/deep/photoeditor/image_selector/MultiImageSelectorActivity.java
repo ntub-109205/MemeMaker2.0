@@ -127,7 +127,8 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         toolbar.setTitle(R.string.select_images);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_back);
+//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.btn_back);
+            getSupportActionBar().setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -146,8 +147,9 @@ public class MultiImageSelectorActivity extends AppCompatActivity
             size = resultList.size();
             commit.setEnabled(true);
         }
-        commit.setText(getString(R.string.mis_action_button_string,
-                getString(R.string.mis_action_done), size, mDefaultCount));
+//        commit.setText(getString(R.string.mis_action_button_string,
+//                getString(R.string.mis_action_done), size, mDefaultCount));
+        commit.setText(getString(R.string.mis_action_done));
     }
 
     @Override

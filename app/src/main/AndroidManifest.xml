@@ -108,8 +108,9 @@
         <activity
             android:name=".activity.PublicMemeInfoActivity"
             android:parentActivityName=".activity.PublicMemeInfoActivity" />
+        <activity android:name=".gifmake.GifMakeActivity"
+            android:parentActivityName=".gifmake.GifMakeActivity"/>
 
-        <activity android:name=".gifmake.GifMakeActivity"/>
         <activity android:name=".gifmake.VideoToGifActivity"/>
         <activity android:name=".gifmake.SaveImageActivity"/>
         <activity android:name=".image_selector.MultiImageSelectorActivity"
