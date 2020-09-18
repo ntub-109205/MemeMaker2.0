@@ -62,13 +62,13 @@ public class edittab1 extends Fragment {
 
         try {
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
-            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
+            callApi.get("http://140.131.115.99/api/template/show/1");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("runrun",callApi.returnString());
         //留下array[]，其他切掉
-        String temp = callApi.returnString().trim();
+        String temp = callApi.get("http://140.131.115.99/api/template/show/1").trim();
         temp = temp.substring(13,(temp.length()-1));
         Log.d("runrun","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList

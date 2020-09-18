@@ -60,13 +60,14 @@ public class PublicMMFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
+//            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
+            callApi.get("http://140.131.115.99/api/meme/show/1");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("memeinfo",callApi.returnString());
+//        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
         //留下array[]，其他切掉
-        String temp = callApi.returnString().trim();
+        String temp = callApi.get("http://140.131.115.99/api/meme/show/1").trim();
         temp = temp.substring(8,(temp.length()-1));
         Log.d("memeinfo","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
@@ -80,8 +81,28 @@ public class PublicMMFragment extends Fragment {
                 String author = jsonObject.getString("author");
                 String tempId = jsonObject.getString("template_id");
                 Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
+
+                //---把tag們分出來---//
+                String tags = jsonObject.getString("tags");
+                String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+                Log.d("tags", "tags:" + items);
+                // items.length 是所有項目的個數
+                String[] results = new String[items.length];
+                // 將結果放入 results
+                for (int j = 0; j < items.length; j++) {
+                    results[j] = items[j].trim();
+                }
+                String newtag = "";
+                for (String tag : results) {
+                    tag = tag.replaceAll("\"", "");
+                    Log.d("tags", "tags:" + tag + ", ");
+                    newtag = newtag + "#" + tag;
+                }
+                //---tag們分完了---//
+                int count = Integer.parseInt(jsonObject.getString("count"));
+
                 //產生cardView
-                lstMemeMeme.add(new PublicMeme(tempId,"#hashtag",filelink,author,0));
+                lstMemeMeme.add(new PublicMeme(tempId,newtag,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();

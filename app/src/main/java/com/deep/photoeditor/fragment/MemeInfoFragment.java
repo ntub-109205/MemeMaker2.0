@@ -72,13 +72,15 @@ public class MemeInfoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            callApi.post("http://140.131.115.99/api/template/meme","template_id="+tempId);
+//            callApi.post("http://140.131.115.99/api/template/meme","template_id="+tempId);
+            //少一個memeid
+            callApi.get("http://140.131.115.99/api/template/meme/" +tempId);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("temp",callApi.returnString());
+//        Log.d("temp",callApi.get("http://140.131.115.99/api/template/meme/" +tempId));
         //留下array[]，其他切掉
-        String temp = callApi.returnString().trim();
+        String temp = callApi.get("http://140.131.115.99/api/template/meme/" +tempId).trim();
         temp = temp.substring(8,(temp.length()-1));
         Log.d("temp","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
@@ -90,11 +92,27 @@ public class MemeInfoFragment extends Fragment {
                 String id = jsonObject.getString("id");
                 String filelink = jsonObject.getString("filelink");
 //                String name = jsonObject.getString("name");
-//                String author = jsonObject.getString("author");
-//                int count = Integer.parseInt(jsonObject.getString("count"));
+                String author = jsonObject.getString("author");
+                int count = Integer.parseInt(jsonObject.getString("count"));
+                //---把tag們分出來---//
+                String tags = jsonObject.getString("tags");
+                String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+                // items.length 是所有項目的個數
+                String[] results = new String[items.length];
+                // 將結果放入 results
+                for (int j = 0; j < items.length; j++) {
+                    results[j] = items[j].trim();
+                }
+                String newtag = "";
+                for (String tag : results) {
+                    tag = tag.replaceAll("\"", "");
+                    Log.d("tags", "tags:" + tag + ", ");
+                    newtag = newtag + "#" + tag;
+                }
+                //---tag們分完了---//
                 Log.d("temp", "template_id:" + id + ", filelink:" + filelink );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,"#hashtag",filelink,"jessie",0));
+                lstMemeInfo.add(new PublicMeme(tempId,newtag,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -72,13 +72,14 @@ public class TempInfoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            callApi.post("http://140.131.115.99/api/template/meme","template_id="+tempId);
+//            callApi.post("http://140.131.115.99/api/template/meme","template_id="+tempId);
+            callApi.get("http://140.131.115.99/api/template/meme/" +tempId);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("temp",callApi.returnString());
+        Log.d("temp",callApi.get("http://140.131.115.99/api/template/meme/" +tempId));
         //留下array[]，其他切掉
-        String temp = callApi.returnString().trim();
+        String temp = callApi.get("http://140.131.115.99/api/template/meme/" +tempId).trim();
         temp = temp.substring(8,(temp.length()-1));
         Log.d("temp","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
