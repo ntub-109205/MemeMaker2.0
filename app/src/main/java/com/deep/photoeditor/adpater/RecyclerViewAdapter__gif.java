@@ -30,11 +30,9 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
     Context mContext;
     List<PublicMeme> mData;
 
-
     public RecyclerViewAdapter__gif(Context mContext, List<PublicMeme> mData) {
         this.mContext = mContext;
         this.mData = mData;
-
     }
 
     @NonNull
@@ -49,7 +47,6 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
         //將image用glide的方式呈現

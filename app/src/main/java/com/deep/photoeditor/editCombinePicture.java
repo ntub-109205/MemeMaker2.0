@@ -24,6 +24,9 @@ public class editCombinePicture extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_combine_picture);
+        //新增回到前一頁的箭頭
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lstPicture = new ArrayList<>();
         lstPicture.add(new layoutImage(R.drawable.meme9));

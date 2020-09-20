@@ -27,7 +27,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".editCombinePicture"></activity>
+        <activity
+            android:name=".editCombinePicture"
+            android:parentActivityName=".editCombinePicture" />
         <activity
             android:name=".GifMain"
             android:parentActivityName=".GifMain"></activity>

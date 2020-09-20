@@ -22,7 +22,6 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:background="@drawable/picgif"
-            android:elevation="14dp"
             android:onClick="createVideoGif"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +37,6 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:background="@drawable/videogif"
-            android:elevation="14dp"
             android:onClick="createGif"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -57,12 +55,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
         android:text="我的Gif"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/myGifRecyclerview"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myGifRecyclerview"
