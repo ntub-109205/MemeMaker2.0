@@ -1,10 +1,12 @@
 package com.deep.photoeditor.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,10 +16,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.MainActivity;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__meme;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_tagSearch;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_tempHotSearch;
 import com.deep.photoeditor.api;
+import com.deep.photoeditor.editCombinePicture;
+import com.deep.photoeditor.searchMoreTag;
 import com.deep.photoeditor.tagHotSearch;
 import com.deep.photoeditor.tagSearch;
 import com.google.android.material.chip.Chip;
@@ -28,10 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
+    private static final String TAG = "searchFragment";
     View v;
     private RecyclerView myrecyclerview,temprecyclerview;
     private List<tagSearch> lstTagSearch;
     private List<tagHotSearch> lstTagHotSearch;
+    private TextView mTxtMoreTag;
 
     //api
     private static api callApi = new api();
@@ -46,6 +53,7 @@ public class SearchFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_search, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.tagRecyclerview);
         temprecyclerview = (RecyclerView) v.findViewById(R.id.tempRecyclerview);
+        mTxtMoreTag = (TextView) v.findViewById(R.id.txtMoreTag);
 
         RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
         RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
@@ -56,12 +64,22 @@ public class SearchFragment extends Fragment {
         temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
         temprecyclerview.setAdapter(tempRecyclerViewAdapter);
 
+        mTxtMoreTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: ");
+                Intent intent = new Intent(getActivity(), searchMoreTag.class);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //tagSearch
         lstTagSearch = new ArrayList<>();
         lstTagSearch.add(new tagSearch("#居家隔離"));
@@ -88,5 +106,4 @@ public class SearchFragment extends Fragment {
         lstTagHotSearch.add(new tagHotSearch("小琉球","https://yas.com.hk/blog/wp-content/uploads/2020/06/%E5%B0%8F%E7%90%89%E7%90%83_Blog.jpg",R.drawable.nine,"Jessie",65));
         lstTagHotSearch.add(new tagHotSearch("社畜","https://read.html5.qq.com/image?imgflag=7&q=100&imageUrl=http://s.cimg.163.com/i/by1.manhuayin.com/wp-content/uploads/2020/06/12/20200612_5ee31b077aab4.jpg_c.0x0.auto.jpg&src=share",R.drawable.ten,"Angela",50));
     }
-
 }
