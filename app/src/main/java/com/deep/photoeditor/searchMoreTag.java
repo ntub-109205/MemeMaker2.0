@@ -16,36 +16,46 @@ import java.util.List;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_tagSearch;
 import com.deep.photoeditor.gifmake.GifMakeActivity;
 import com.deep.photoeditor.tagSearch;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 public class searchMoreTag extends AppCompatActivity {
     private static final String TAG = "searchMoreTag";
 
-    private RecyclerView recyclerView;
-    private List<tagSearch> lstMoreTagSearch;
-    RecyclerViewAdapter_tagSearch recyclerViewAdapter;
+    private RecyclerView mRecyclerView;
+    private List<tagSearch> mLstMoreTagSearch;
+    RecyclerViewAdapter_tagSearch mRecyclerViewAdapter;
+    //private static final int MAX = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_moretag);
 
-        lstMoreTagSearch = new ArrayList<>();
-        lstMoreTagSearch.add(new tagSearch("#三倍券"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券可以怎麼用"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券好少.."));
-        lstMoreTagSearch.add(new tagSearch("#三倍券優惠"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券期限"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券優惠店家"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券的限制"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券 哀"));
-        lstMoreTagSearch.add(new tagSearch("#三倍券..."));
-        lstMoreTagSearch.add(new tagSearch("#三倍券花完了"));
+        mLstMoreTagSearch = new ArrayList<>();
+        mLstMoreTagSearch.add(new tagSearch("#三倍券"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券可以怎麼用"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券好少.."));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券優惠"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券期限"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券優惠店家哈哈哈哈哈"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券的限制"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券 哀"));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券..."));
+        mLstMoreTagSearch.add(new tagSearch("#三倍券花完了"));
 
         Log.d(TAG,"INTO Recyclerview");
-        recyclerView = findViewById(R.id.tagRecyclerview);
-        recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(this,lstMoreTagSearch);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        mRecyclerView = findViewById(R.id.tagRecyclerview);
+        mRecyclerViewAdapter = new RecyclerViewAdapter_tagSearch(this,mLstMoreTagSearch);
+
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+
+        mRecyclerView.setLayoutManager(flexboxLayoutManager);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
     }
 }
