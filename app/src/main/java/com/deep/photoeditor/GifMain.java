@@ -55,6 +55,6 @@ public class GifMain extends AppCompatActivity {
     }
     //由影片做Gif
     public void createVideoGif(View view) {
-        startActivity(new Intent(this, VideoToGifActivity.class));
+        startActivity(new Intent(this,VideoToGifActivity.class));
     }
 }

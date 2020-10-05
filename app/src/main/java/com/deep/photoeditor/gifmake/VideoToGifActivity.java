@@ -61,6 +61,9 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
                 outGifDir = Environment.getExternalStorageDirectory();
             }
         }
+        permissionHelper = new PermissionHelper(this);
+        permissionHelper.check(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .onSuccess(this::onSuccess).onDenied(this::onDenied).onNeverAskAgain(this::onNeverAskAgain).run();
     }
 
     @Override
