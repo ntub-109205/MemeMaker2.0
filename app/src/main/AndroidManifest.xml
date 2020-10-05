@@ -115,6 +115,9 @@
 
         <activity android:name=".gifmake.VideoToGifActivity"/>
         <activity android:name=".gifmake.SaveImageActivity"/>
+        <activity
+            android:name=".searchMoreTag"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".image_selector.MultiImageSelectorActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
