@@ -48,7 +48,6 @@ public class GifMain extends AppCompatActivity {
         recyclerView.setAdapter(recyclerViewAdapter_myGif);
     }
 
-
     //由圖片做Gif
     public void createGif(View view) {
         startActivity(new Intent(this, GifMakeActivity.class));

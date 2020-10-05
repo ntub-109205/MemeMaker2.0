@@ -91,6 +91,9 @@ dependencies {
     //editText
     implementation 'com.android.support:design:28.0.0'
 
+    //Flexboxlayout
+    implementation 'com.google.android:flexbox:2.0.1'
+
     //gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
 
