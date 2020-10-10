@@ -16,6 +16,7 @@ import java.util.List;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_tagSearch;
 import com.deep.photoeditor.gifmake.GifMakeActivity;
 import com.deep.photoeditor.tagSearch;
+import com.google.android.flexbox.AlignContent;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;

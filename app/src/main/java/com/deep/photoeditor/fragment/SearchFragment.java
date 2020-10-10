@@ -25,6 +25,11 @@ import com.deep.photoeditor.editCombinePicture;
 import com.deep.photoeditor.searchMoreTag;
 import com.deep.photoeditor.tagHotSearch;
 import com.deep.photoeditor.tagSearch;
+import com.google.android.flexbox.AlignContent;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -57,9 +62,14 @@ public class SearchFragment extends Fragment {
 
         RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
         RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
         StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
+
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+
+        myrecyclerview.setLayoutManager(flexboxLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
         temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
         temprecyclerview.setAdapter(tempRecyclerViewAdapter);
