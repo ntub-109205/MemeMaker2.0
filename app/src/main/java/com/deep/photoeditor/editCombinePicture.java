@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +22,8 @@ public class editCombinePicture extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerViewAdapter_layoutImage recyclerViewAdapter;
     List<layoutImage> lstPicture;
+    private static variable variable = new variable();
+    private static ArrayList<Bitmap> mArrayBitmap = new ArrayList<Bitmap>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +32,12 @@ public class editCombinePicture extends AppCompatActivity {
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mArrayBitmap = variable.templatesBitmapGetter();
+        int size = mArrayBitmap.size();
         lstPicture = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            lstPicture.add(new layoutImage(R.drawable.meme9));
+        }
         lstPicture.add(new layoutImage(R.drawable.meme9));
         lstPicture.add(new layoutImage(R.drawable.meme11));
         lstPicture.add(new layoutImage(R.drawable.meme6));
