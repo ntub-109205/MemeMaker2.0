@@ -23,6 +23,8 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
     private Context mContext;
     private List<Bitmap> mLayoutImageList;
     private HashMap<View, ImageView> mImageViewMap = new HashMap<View, ImageView>();
+    private static final int NUMBER1 = 1;
+    private final static String TAG = "Recycler_layoutImage";
 
     public RecyclerViewAdapter_layoutImage(Context context, List<Bitmap> layoutImageList) {
         this.mContext = context;
@@ -38,7 +40,7 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         return viewHolder;
     }
 
-    private final static String TAG = "Recycler_layoutImage";
+    private int mCounter = 1;
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         holder.layoutImageView.setImageBitmap(mLayoutImageList.get(position));
         holder.combinePic.setOnClickListener(new View.OnClickListener() {

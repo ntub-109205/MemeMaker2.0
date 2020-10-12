@@ -24,7 +24,7 @@ public class editCombinePicture extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerViewAdapter_layoutImage recyclerViewAdapter;
-    List<Bitmap> mLstPicture;
+    List<Bitmap> mListImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +34,16 @@ public class editCombinePicture extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mLstPicture = new ArrayList<Bitmap>();
-        mLstPicture.add(createBitmap(R.drawable.meme9));
-        mLstPicture.add(createBitmap(R.drawable.meme11));
-        mLstPicture.add(createBitmap(R.drawable.meme6));
-        mLstPicture.add(createBitmap(R.drawable.meme10));
-        mLstPicture.add(createBitmap(R.drawable.meme12));
-        mLstPicture.add(createBitmap(R.drawable.meme3));
+        mListImage = new ArrayList<Bitmap>();
+        mListImage.add(createBitmap(R.drawable.meme9));
+        mListImage.add(createBitmap(R.drawable.meme11));
+        mListImage.add(createBitmap(R.drawable.meme6));
+        mListImage.add(createBitmap(R.drawable.meme10));
+        mListImage.add(createBitmap(R.drawable.meme12));
+        mListImage.add(createBitmap(R.drawable.meme3));
 
         recyclerView = findViewById(R.id.layoutRecyclerview);
-        recyclerViewAdapter = new RecyclerViewAdapter_layoutImage(this, mLstPicture);
+        recyclerViewAdapter = new RecyclerViewAdapter_layoutImage(this, mListImage);
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
