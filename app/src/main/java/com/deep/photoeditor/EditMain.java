@@ -138,12 +138,13 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                         mArrayBitmap.add(getBitmap(cr,uri));
 
                     }
+                    variable.templatesBitmapSetter(mArrayBitmap);
                     Bitmap mybitmap = puzzleMerge_vertical_noblank(mArrayBitmap);
                     TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
                     variable.templateUriSetter(TemplateUri);
                     Intent edit = new Intent();
-                    edit.setClass(EditMain.this, editSetname.class);
+                    edit.setClass(EditMain.this, editCombinePicture.class);
                     startActivity(edit);
                     Log.v("LOG_TAG","Selected Images" + mArrayUri.size());
                 }

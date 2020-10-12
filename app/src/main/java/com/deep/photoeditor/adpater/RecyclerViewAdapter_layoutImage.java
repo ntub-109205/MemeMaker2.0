@@ -28,7 +28,6 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         this.mContext = context;
         this.mLayoutImageList = layoutImageList;
     }
-    private static final int NUMBER1 = 1;
 
     @NonNull
     @Override

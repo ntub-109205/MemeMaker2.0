@@ -25,6 +25,7 @@ public class editCombinePicture extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerViewAdapter_layoutImage recyclerViewAdapter;
     List<Bitmap> mLstPicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,6 @@ public class editCombinePicture extends AppCompatActivity {
         mLstPicture.add(createBitmap(R.drawable.meme10));
         mLstPicture.add(createBitmap(R.drawable.meme12));
         mLstPicture.add(createBitmap(R.drawable.meme3));
-
 
         recyclerView = findViewById(R.id.layoutRecyclerview);
         recyclerViewAdapter = new RecyclerViewAdapter_layoutImage(this, mLstPicture);

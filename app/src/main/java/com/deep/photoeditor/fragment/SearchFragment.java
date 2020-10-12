@@ -44,13 +44,28 @@ public class SearchFragment extends Fragment {
     private List<tagSearch> lstTagSearch;
     private List<tagHotSearch> lstTagHotSearch;
     private TextView mTxtMoreTag;
-
+    private List tag;
+    private int tagSize = 0;
     //api
     private static api callApi = new api();
 
     public SearchFragment() {
     }
-
+    public static List cutString(String b) {
+        int x = 0;
+        ArrayList a=new ArrayList();
+        a.add(b.indexOf("\""));//*第一個出現的索引位置
+        while ((Integer)a.get(x)!= -1) {
+            x+=1;
+            a.add(b.indexOf("\"", (Integer)a.get(x-1)+1));//*從這個索引往後開始第一個出現的位置
+        }
+        a.remove(a.size()-1);
+        ArrayList list=new ArrayList();
+        for(int i=0;i<a.size();i = i +2) {
+            list.add(b.substring((Integer)a.get(i)+1,(Integer)a.get(i+1)));
+        }
+        return list;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,23 +100,46 @@ public class SearchFragment extends Fragment {
 
         return v;
     }
-
+    public static String decode(String unicodeStr) {
+        if (unicodeStr == null) {
+            return null;
+        }
+        StringBuffer retBuf = new StringBuffer();
+        int maxLoop = unicodeStr.length();
+        for (int i = 0; i < maxLoop; i++) {
+            if (unicodeStr.charAt(i) == '\\') {
+                if ((i < maxLoop - 5) && ((unicodeStr.charAt(i + 1) == 'u') || (unicodeStr.charAt(i + 1) == 'U')))
+                    try {
+                        retBuf.append((char) Integer.parseInt(unicodeStr.substring(i + 2, i + 6), 16));
+                        i += 5;
+                    } catch (NumberFormatException localNumberFormatException) {
+                        retBuf.append(unicodeStr.charAt(i));
+                    }
+                else
+                    retBuf.append(unicodeStr.charAt(i));
+            } else {
+                retBuf.append(unicodeStr.charAt(i));
+            }
+        }
+        return retBuf.toString();
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //tagSearch
+        try {
+            Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag")));
+            //cutString(decode(callApi.get("http://140.131.115.99/api/tag"))).get(4);
+            tag = cutString(decode(callApi.get("http://140.131.115.99/api/tag")));
+            tagSize = tag.size();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         lstTagSearch = new ArrayList<>();
-        lstTagSearch.add(new tagSearch("#居家隔離"));
-        lstTagSearch.add(new tagSearch("#牽手"));
-        lstTagSearch.add(new tagSearch("#期末考"));
-        lstTagSearch.add(new tagSearch("#快去睡"));
-        lstTagSearch.add(new tagSearch("#美國隊長"));
-        lstTagSearch.add(new tagSearch("#曾之喬"));
-        lstTagSearch.add(new tagSearch("#實習"));
-        lstTagSearch.add(new tagSearch("#Travel"));
-        lstTagSearch.add(new tagSearch("#小琉球"));
-        lstTagSearch.add(new tagSearch("#自信"));
+        for (int i = 3; i < tagSize; i+=3){
+            lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
+            Log.d("getTag" , tag.get(i).toString());
+        }
+
 
         //tempHotSearch
         lstTagHotSearch = new ArrayList<>();

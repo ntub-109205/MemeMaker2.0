@@ -1,7 +1,10 @@
 package com.deep.photoeditor;
 
 
+import android.graphics.Bitmap;
 import android.net.Uri;
+
+import java.util.ArrayList;
 
 public class variable {
     private static Uri templateUri;
@@ -12,6 +15,7 @@ public class variable {
     private static String memeShare;
     private static String template_id;
     private static String memePath;
+    private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
     //模板Uri
     public static Uri templateUriGetter(){
         return templateUri;
@@ -53,4 +57,11 @@ public class variable {
         return memePath;
     }
     public static void memePathSetter(String memePath1){memePath = memePath1;}
+
+    //多圖模板bitmap
+    public static ArrayList<Bitmap> templatesBitmapGetter(){
+        return templatesBitmap;
+    }
+    public static void templatesBitmapSetter(ArrayList<Bitmap> templatesBitmap1){templatesBitmap = templatesBitmap1;}
+
 }
