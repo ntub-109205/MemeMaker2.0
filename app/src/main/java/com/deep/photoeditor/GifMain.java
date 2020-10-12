@@ -23,6 +23,8 @@ public class GifMain extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PublicMeme> lstMineGif;
     RecyclerViewAdapter__gif recyclerViewAdapter_myGif;
+    private View.OnClickListener mMyGifListener;
+    private View.OnClickListener mPublicGifListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class GifMain extends AppCompatActivity {
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initListener();
 
         lstMineGif = new ArrayList<>();
         lstMineGif.add(new PublicMeme("1","#彩虹貓","https://www.urad.com.tw/wp-content/uploads/2015/08/giphy.gif","jessie",30));
@@ -55,5 +59,21 @@ public class GifMain extends AppCompatActivity {
     //由影片做Gif
     public void createVideoGif(View view) {
         startActivity(new Intent(this,VideoToGifActivity.class));
+    }
+
+    private void initListener() {
+        mMyGifListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+            }
+        };
+
+        mPublicGifListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+            }
+        };
     }
 }

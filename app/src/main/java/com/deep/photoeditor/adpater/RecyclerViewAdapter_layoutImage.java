@@ -1,6 +1,8 @@
 package com.deep.photoeditor.adpater;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.deep.photoeditor.layoutImage;
 import com.deep.photoeditor.R;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<RecyclerViewAdapter_layoutImage.ImageViewHolder> {
     private Context mContext;
-    private List<layoutImage> mLayoutImageList;
+    private List<Bitmap> mLayoutImageList;
     private HashMap<View, ImageView> mImageViewMap = new HashMap<View, ImageView>();
 
-    public RecyclerViewAdapter_layoutImage(Context context, List<layoutImage> layoutImageList) {
+    public RecyclerViewAdapter_layoutImage(Context context, List<Bitmap> layoutImageList) {
         this.mContext = context;
         this.mLayoutImageList = layoutImageList;
     }
+    private static final int NUMBER1 = 1;
 
     @NonNull
     @Override
@@ -34,14 +40,13 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
     }
 
     private final static String TAG = "Recycler_layoutImage";
-
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        holder.layoutImageView.setImageResource(mLayoutImageList.get(position).getCombinePicture());
+        holder.layoutImageView.setImageBitmap(mLayoutImageList.get(position));
         holder.combinePic.setOnClickListener(new View.OnClickListener() {
             ImageView imageView = new ImageView(mContext);
             public void onClick(View view) {
                 Log.d(TAG, "[SelectorView] ImageView onClick, view = " + view.toString());
-                RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
+                RelativeLayout relativeLayout = holder.combinePic;
                 // for adding or removing the selector view.
                 if (mImageViewMap.get(view) == null) {
                     mImageViewMap.put(view, imageView);
@@ -75,7 +80,9 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
     }
 
     @Override
-    public int getItemCount() { return mLayoutImageList.size(); }
+    public int getItemCount() {
+        return mLayoutImageList.size();
+    }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder{
         private ImageView layoutImageView;

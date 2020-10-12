@@ -1,5 +1,7 @@
 package com.deep.photoeditor;
 
+import android.graphics.Bitmap;
+
 public class layoutImage {
     private int combinePicture;
 
