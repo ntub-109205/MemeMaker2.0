@@ -15,6 +15,9 @@ public class variable {
     private static String memeShare;
     private static String template_id;
     private static String memePath;
+    private static String tagName;
+    private static String searchName;
+
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
     //模板Uri
     public static Uri templateUriGetter(){
@@ -63,5 +66,17 @@ public class variable {
         return templatesBitmap;
     }
     public static void templatesBitmapSetter(ArrayList<Bitmap> templatesBitmap1){templatesBitmap = templatesBitmap1;}
+
+    //搜尋&熱門tag名稱
+    public static String tagNameGetter(){
+        return tagName;
+    }
+    public static void tagNameSetter(String tagName1){tagName = tagName1;}
+
+    //搜尋名稱
+    public static String searchNameGetter(){return searchName;}
+    public static void searchNameSetter(String searchName1){searchName = searchName1;}
+
+
 
 }

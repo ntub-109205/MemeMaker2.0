@@ -3,9 +3,11 @@ package com.deep.photoeditor.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -25,6 +27,7 @@ import com.deep.photoeditor.editCombinePicture;
 import com.deep.photoeditor.searchMoreTag;
 import com.deep.photoeditor.tagHotSearch;
 import com.deep.photoeditor.tagSearch;
+import com.deep.photoeditor.variable;
 import com.google.android.flexbox.AlignContent;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -44,7 +47,14 @@ public class SearchFragment extends Fragment {
     private List<tagSearch> lstTagSearch;
     private List<tagHotSearch> lstTagHotSearch;
     private TextView mTxtMoreTag;
+    private TextView hotTag;
+    private TextView hotTemplate;
+    private static variable variable = new variable();
+
+    private TextView searchTag;
+
     private List tag;
+    private String searchName = "";
     private int tagSize = 0;
     //api
     private static api callApi = new api();
@@ -74,6 +84,9 @@ public class SearchFragment extends Fragment {
         myrecyclerview = (RecyclerView) v.findViewById(R.id.tagRecyclerview);
         temprecyclerview = (RecyclerView) v.findViewById(R.id.tempRecyclerview);
         mTxtMoreTag = (TextView) v.findViewById(R.id.txtMoreTag);
+        searchTag = (TextView) v.findViewById(R.id.search_input);
+        hotTag = (TextView) v.findViewById(R.id.textView8);
+        hotTemplate = (TextView) v.findViewById(R.id.textView9);
 
         RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
         RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
@@ -89,10 +102,50 @@ public class SearchFragment extends Fragment {
         temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
         temprecyclerview.setAdapter(tempRecyclerViewAdapter);
 
+
+        searchTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        searchTag.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
+                if (KeyEvent.KEYCODE_ENTER == keyCode && KeyEvent.ACTION_DOWN == event.getAction()) {
+                    hotTag.setText("相關標籤搜尋結果");
+                    hotTemplate.setText("相關模板搜尋結果");
+                    searchName = searchTag.getText().toString();
+                    try {
+                        Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag?limit=10&name="+searchName)));
+                        //cutString(decode(callApi.get("http://140.131.115.99/api/tag"))).get(4);
+                        tag = cutString(decode(callApi.get("http://140.131.115.99/api/tag?limit=10&name="+searchName)));
+                        tagSize = tag.size();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    lstTagSearch = new ArrayList<>();
+                    if (tagSize<2){
+                        //搜尋無結果
+                    }else {
+
+                        for (int i = 3; i < tagSize; i += 3) {
+                            lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
+                            Log.d("getTag", tag.get(i).toString());
+                        }
+                    }
+                    RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
+                    myrecyclerview.setLayoutManager(flexboxLayoutManager);
+                    myrecyclerview.setAdapter(recyclerViewAdapter);
+                    temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
+                    temprecyclerview.setAdapter(tempRecyclerViewAdapter);
+
+                    return true;
+                }
+                return false;
+            }
+        });
         mTxtMoreTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: ");
+                variable.searchNameSetter(searchName);
                 Intent intent = new Intent(getActivity(), searchMoreTag.class);
                 startActivity(intent);
             }
@@ -100,7 +153,7 @@ public class SearchFragment extends Fragment {
 
         return v;
     }
-    public static String decode(String unicodeStr) {
+    public static String decode(String unicodeStr) {//轉換萬國碼
         if (unicodeStr == null) {
             return null;
         }
@@ -126,21 +179,24 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("tagName","測試");
         try {
-            Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag")));
+            Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag?limit=10")));
             //cutString(decode(callApi.get("http://140.131.115.99/api/tag"))).get(4);
-            tag = cutString(decode(callApi.get("http://140.131.115.99/api/tag")));
+            tag = cutString(decode(callApi.get("http://140.131.115.99/api/tag?limit=10")));
             tagSize = tag.size();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        lstTagSearch = new ArrayList<>();
-        for (int i = 3; i < tagSize; i+=3){
-            lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
-            Log.d("getTag" , tag.get(i).toString());
+        if (tagSize<2){
+            //搜尋無結果
+        }else {
+            lstTagSearch = new ArrayList<>();
+            for (int i = 3; i < tagSize; i += 3) {
+                lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
+                Log.d("getTag", tag.get(i).toString());
+            }
         }
-
-
         //tempHotSearch
         lstTagHotSearch = new ArrayList<>();
         lstTagHotSearch.add(new tagHotSearch("曾之喬","https://www.wepeople.club/new-wepeople-upload/bb3886dc4b408776b51b1ba18ad3fb1e.jpg",R.drawable.one,"Angela",99));

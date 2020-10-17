@@ -14,7 +14,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,6 +45,7 @@ public class editPublicsetting extends AppCompatActivity {
     public void init(){
         btnNext = (Button)findViewById(R.id.btnNext);
         txtSetTag = (TextView)findViewById(R.id.memeTag);
+       // txtSetTag.setText("#");
         ContentResolver cr = this.getContentResolver();
         try {
             Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(memeUri));
@@ -51,6 +54,34 @@ public class editPublicsetting extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             Log.e("Exception", e.getMessage(),e);
         }
+
+        //setTag
+
+
+
+//        txtSetTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
+//
+//
+//        txtSetTag.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
+//                if (KeyEvent.KEYCODE_ENTER == keyCode && KeyEvent.ACTION_DOWN == event.getAction()) {
+//                    //处理事件
+//                    String a;
+//
+//                    a = txtSetTag.getText().toString();
+//                    txtSetTag.setText(a+"#");
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
+
+
+
+
         //switch
         switchMeme = findViewById(R.id.memeSwitch);
         SharedPreferences sharedPreferences = getSharedPreferences("save",MODE_PRIVATE);
