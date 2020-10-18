@@ -1,5 +1,6 @@
 package com.deep.photoeditor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -22,8 +23,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.hootsuite.nachos.ChipConfiguration;
 import com.hootsuite.nachos.NachoTextView;
+import com.hootsuite.nachos.chip.ChipSpan;
+import com.hootsuite.nachos.chip.ChipSpanChipCreator;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
+import com.hootsuite.nachos.tokenizer.SpanChipTokenizer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -78,10 +85,6 @@ public class editPublicsetting extends AppCompatActivity {
 //            }
 //        });
 
-
-
-
-
         //switch
         switchMeme = findViewById(R.id.memeSwitch);
         SharedPreferences sharedPreferences = getSharedPreferences("save",MODE_PRIVATE);
@@ -116,8 +119,6 @@ public class editPublicsetting extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
-
                 tag = txtSetTag.getText().toString().trim();
                 Log.d("tag1", tag);
                 int len = tag.length();
@@ -169,11 +170,28 @@ public class editPublicsetting extends AppCompatActivity {
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        NachoTextView nachoTextView = findViewById(R.id.memeTag);
-        nachoTextView.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
+        //Tag樣式
+        createChipWithText();
 
         init();
+    }
+
+    private void createChipWithText() {
+        NachoTextView nachoTextView = findViewById(R.id.memeTag);
+        nachoTextView.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
+        nachoTextView.addChipTerminator(' ', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_TO_TERMINATOR);
+
+        nachoTextView.setChipTokenizer(new SpanChipTokenizer<>(this, new ChipSpanChipCreator() {
+            @Override
+            public ChipSpan createChip(@NonNull Context context, @NonNull CharSequence text, Object data) {
+                return new ChipSpan(context, '#' + text.toString(),null, data);
+            }
+
+            @Override
+            public void configureChip(@NonNull ChipSpan chip, @NonNull ChipConfiguration chipConfiguration) {
+                super.configureChip(chip, chipConfiguration);
+            }
+        }, ChipSpan.class));
     }
 
     public void hideKeyboard(View view) {
