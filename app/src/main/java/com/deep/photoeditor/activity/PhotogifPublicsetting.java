@@ -20,13 +20,18 @@ public class PhotogifPublicsetting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photogif_publicsetting);
+
         GifImageView gifView = (GifImageView) findViewById(R.id.imageView);
 
         Intent intent=getIntent();
         if(intent !=null){
             byte [] fileBytes=intent.getByteArrayExtra("GifBytes");
             Log.d(TAG, "fileBytes："+ Arrays.toString(fileBytes));
+            gifView.setBytes(fileBytes);
+            gifView.startAnimation();
         }
+//        byte [] fileBytes=intent.getByteArrayExtra("GifBytes");
+//        Log.d(TAG, "fileBytes："+ Arrays.toString(fileBytes));
 
 //        gifView.setBytes(fileBytes);
 //        gifView.startAnimation();

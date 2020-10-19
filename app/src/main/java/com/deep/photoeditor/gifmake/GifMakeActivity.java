@@ -72,6 +72,11 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
         ButterKnife.bind(this);
         initData();
         initEvent();
+        MultiImageSelector.create()
+                .showCamera(false) // show camera or not. true by default
+                .count(9) // max select image size, 9 by default. used width #.multi()
+                .multi() // multi mode, default mode;
+                .start(GifMakeActivity.this, Constant.REQUEST_CODE_SELECT_IMAGE);
     }
 
 
@@ -89,7 +94,7 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
             public void onItemClick(@NonNull ViewGroup parent, @NonNull View view, GifImageFrame gifImage, int position) {
                 if(gifImage.getType() == GifImageFrame.TYPE_ICON){
                     MultiImageSelector.create()
-                            .showCamera(true) // show camera or not. true by default
+                            .showCamera(false) // show camera or not. true by default
                             .count(9) // max select image size, 9 by default. used width #.multi()
                             .multi() // multi mode, default mode;
                             .start(GifMakeActivity.this, Constant.REQUEST_CODE_SELECT_IMAGE);
@@ -185,9 +190,10 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
         if(b){
             Toast.makeText(this, "生成成功", Toast.LENGTH_SHORT).show();
             byte[] fileBytes = FileUtil.getFileBytes(presenter.getPreViewFile());
-            Log.d(TAG, "finishCreate: "+presenter);
+
+            Log.d(TAG, "finishCreate: "+fileBytes);
             Intent intent = new Intent(GifMakeActivity.this, PhotogifPublicsetting.class);
-//            intent.putExtra("GifBytes",fileBytes);
+            intent.putExtra("GifBytes",fileBytes);
             intent.setClass(GifMakeActivity.this, PhotogifPublicsetting.class);
             startActivity(intent);
         } else {
