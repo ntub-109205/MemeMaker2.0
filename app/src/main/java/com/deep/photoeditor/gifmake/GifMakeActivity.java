@@ -2,6 +2,7 @@ package com.deep.photoeditor.gifmake;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.beiing.baseframe.adapter.for_recyclerview.support.OnItemClickListener;
 import com.beiing.baseframe.supports.OnClickListener;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.MainActivity;
+import com.deep.photoeditor.activity.PhotogifPublicsetting;
 import com.deep.photoeditor.bean.GifImageFrame;
 import com.deep.photoeditor.constant.Constant;
 import com.deep.photoeditor.image_selector.MultiImageSelector;
@@ -30,6 +33,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.drakeet.materialdialog.MaterialDialog;
+
 
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.GridLayoutManager;
@@ -68,6 +72,11 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
         ButterKnife.bind(this);
         initData();
         initEvent();
+        MultiImageSelector.create()
+                .showCamera(false) // show camera or not. true by default
+                .count(9) // max select image size, 9 by default. used width #.multi()
+                .multi() // multi mode, default mode;
+                .start(GifMakeActivity.this, Constant.REQUEST_CODE_SELECT_IMAGE);
     }
 
 
@@ -85,7 +94,7 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
             public void onItemClick(@NonNull ViewGroup parent, @NonNull View view, GifImageFrame gifImage, int position) {
                 if(gifImage.getType() == GifImageFrame.TYPE_ICON){
                     MultiImageSelector.create()
-                            .showCamera(true) // show camera or not. true by default
+                            .showCamera(false) // show camera or not. true by default
                             .count(9) // max select image size, 9 by default. used width #.multi()
                             .multi() // multi mode, default mode;
                             .start(GifMakeActivity.this, Constant.REQUEST_CODE_SELECT_IMAGE);
@@ -123,7 +132,8 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
                 int size = presenter.getGifImages().size();
                 if(size > 1){
                     Toast.makeText(GifMakeActivity.this, "开始生成Gif图", Toast.LENGTH_SHORT).show();
-                    presenter.createGif(1000, 2048, 1300);
+//                    presenter.createGif(1000, 2048, 1300);
+                    presenter.createGif(500, 1300, 1300);
                     DialogUtil.showLoading(this);
                 } else {
                     Toast.makeText(GifMakeActivity.this, "请添加图片", Toast.LENGTH_SHORT).show();
@@ -179,6 +189,13 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
         DialogUtil.dimiss();
         if(b){
             Toast.makeText(this, "生成成功", Toast.LENGTH_SHORT).show();
+            byte[] fileBytes = FileUtil.getFileBytes(presenter.getPreViewFile());
+
+            Log.d(TAG, "finishCreate: "+fileBytes);
+            Intent intent = new Intent(GifMakeActivity.this, PhotogifPublicsetting.class);
+            intent.putExtra("GifBytes",fileBytes);
+            intent.setClass(GifMakeActivity.this, PhotogifPublicsetting.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, "生成失败", Toast.LENGTH_SHORT).show();
         }

@@ -3,19 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.deep.photoeditor">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-    <uses-permission android:name="android.permission.INTERNET" />
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".PhotoApp"
         android:allowBackup="true"
@@ -26,13 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".activity.PhotogifPublicsetting"
+            android:parentActivityName=".activity.PhotogifPublicsetting"/>
         <activity
             android:name=".editCombinePicture"
             android:parentActivityName=".editCombinePicture" />
         <activity
             android:name=".GifMain"
-            android:parentActivityName=".GifMain"></activity>
+            android:parentActivityName=".GifMain" />
         <activity
             android:name=".signUp"
             android:parentActivityName=".signUp" />
@@ -103,24 +102,33 @@
         <activity
             android:name=".EditImageActivity"
             android:screenOrientation="fullSensor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.TemplateInfoActivity"
             android:parentActivityName=".activity.TemplateInfoActivity" />
         <activity
             android:name=".activity.PublicMemeInfoActivity"
             android:parentActivityName=".activity.PublicMemeInfoActivity" />
+<<<<<<< HEAD
         <activity android:name=".gifmake.GifMakeActivity"
             android:parentActivityName=".gifmake.GifMakeActivity"/>
 
         <activity android:name=".gifmake.VideoToGifActivity"/>
         <activity android:name=".gifmake.FilmToGifActivity"/>
         <activity android:name=".gifmake.SaveImageActivity"/>
+=======
+        <activity
+            android:name=".gifmake.GifMakeActivity"
+            android:parentActivityName=".gifmake.GifMakeActivity" />
+        <activity android:name=".gifmake.VideoToGifActivity" />
+        <activity android:name=".gifmake.SaveImageActivity" />
+>>>>>>> 51fd0c0f47982c506299e7f25137948ad821181a
         <activity
             android:name=".searchMoreTag"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".image_selector.MultiImageSelectorActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".image_selector.MultiImageSelectorActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
