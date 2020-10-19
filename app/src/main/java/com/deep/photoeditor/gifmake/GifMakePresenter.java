@@ -82,7 +82,7 @@ public class GifMakePresenter {
      * 生成gif图
      */
     public void createGif(final int fps, final int width, final int height) {
-        previewFile = "";
+        previewFile = ""; //path
         hasPreview = false;
         final String filename = String.valueOf(System.currentTimeMillis());
         Observable.create(new Observable.OnSubscribe<String>() {
