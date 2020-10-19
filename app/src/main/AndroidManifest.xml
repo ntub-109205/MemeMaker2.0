@@ -114,6 +114,7 @@
             android:parentActivityName=".gifmake.GifMakeActivity"/>
 
         <activity android:name=".gifmake.VideoToGifActivity"/>
+        <activity android:name=".gifmake.FilmToGifActivity"/>
         <activity android:name=".gifmake.SaveImageActivity"/>
         <activity
             android:name=".searchMoreTag"

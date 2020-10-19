@@ -29,13 +29,14 @@ import come.haolin_android.mvp.baselibrary.imagepicker.ImagePicker;
 import come.haolin_android.mvp.baselibrary.view.ToolAlertDialog;
 import ru.alexbykov.nopermission.PermissionHelper;
 
-public class VideoToGifActivity extends GifBaseActivity implements View.OnClickListener{
+public class FilmToGifActivity extends GifBaseActivity implements View.OnClickListener{
 
     private PermissionHelper permissionHelper;
     private ToolAlertDialog toolAlertDialog;
     private static final int NOT_NOTICE = 2;//如果勾选了不再询问
     private ImageView imageView;
-    private File outGifDir;//gif输出文件夹
+    private File outGifDirX;//gif输出文件夹
+    private File fileX;
     private TextView tv_dirGif;
    // private Button btn_chooseAudio;
     @Override
@@ -45,10 +46,6 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
 
     @Override
     protected void initViews() {
-        //新增回到前一頁的箭頭
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setTitleBarView();
         titleBar_title_tv.setText("video转gif");
         titleBar_more_tv.setText("保存");
@@ -57,12 +54,13 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
         //Button btn_chooseAudio = this.findViewById(R.id.btn_chooseAudio);
         //btn_chooseAudio.setOnClickListener(this);
         imageView = this.findViewById(R.id.image_gif);
-       // tv_dirGif = this.findViewById(R.id.tv_dirGif);
+        //tv_dirGif = this.findViewById(R.id.tv_dirGif);
         ImagePicker.getInstance().imageLoader(new GlideImageLoader());
-        outGifDir = new File(Environment.getExternalStorageDirectory() + "/video_gif");
-        if (!outGifDir.exists()) {
-            if (outGifDir.mkdir()) {
-                outGifDir = Environment.getExternalStorageDirectory();
+        String path = "MeMe Maker";
+        outGifDirX = new File(Environment.getExternalStorageDirectory() , path);
+        if (!outGifDirX.exists()) {
+            if (outGifDirX.mkdir()) {
+                outGifDirX = Environment.getExternalStorageDirectory();
             }
         }
         permissionHelper = new PermissionHelper(this);
@@ -113,16 +111,16 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
     private void execute(String imageUrl) {
         showLoadingDialog();
         GifCreateAsyncTask myAsyncTask = new GifCreateAsyncTask(this);
-        myAsyncTask.execute(imageUrl,outGifDir.getAbsolutePath());
+        myAsyncTask.execute(imageUrl,outGifDirX.getAbsolutePath());
     }
     /**
      * 异步调用jni生成GIF方法
      */
     private class GifCreateAsyncTask extends AsyncTask<String, Integer, String> {
 
-        private WeakReference<VideoToGifActivity> weakReference;
+        private WeakReference<FilmToGifActivity> weakReference;
 
-        GifCreateAsyncTask(VideoToGifActivity activity) {
+        GifCreateAsyncTask(FilmToGifActivity activity) {
             Glide.with(activity).clear(activity.imageView);
             this.weakReference = new WeakReference<>(activity);
         }
@@ -171,7 +169,9 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
                 Log.d("豎長寬", "寬: "+width+"長"+height);
             }
 
-            String gifFile = outGifDir + File.separator + "VideoToGif" + System.currentTimeMillis() + ".gif";
+            //String gifFile = outGifDir + File.separator + "VideoToGif" + System.currentTimeMillis() + ".gif";
+            String gifFile = outGifDir +  System.currentTimeMillis() + ".gif";
+             fileX = new File(outGifDirX,System.currentTimeMillis() + ".gif");
 
             String[] command = FFmpegUtils.extractVideoFramesToGIF(
                     inputFilePath,
@@ -189,12 +189,13 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String gifFile) {
             super.onPostExecute(gifFile);
-            final VideoToGifActivity mainActivity = weakReference.get();
+            final FilmToGifActivity mainActivity = weakReference.get();
             if (mainActivity != null) {
                 dismissLoadingDialog();
                 //tv_dirGif.setText("转换成功，gif图片路径为："+gifFile);
                 Toast.makeText(mainActivity, "转换成功", Toast.LENGTH_SHORT).show();
-                Glide.with(mainActivity).asGif().load(new File(gifFile)).into(mainActivity.imageView);
+
+                Glide.with(mainActivity).asGif().load(fileX).into(mainActivity.imageView);
             }
         }
     }
