@@ -1,6 +1,8 @@
 package com.deep.photoeditor.adpater;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +11,30 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.deep.photoeditor.image_selector.multi_image_selector.bean.Image;
 import com.deep.photoeditor.layoutImage;
 import com.deep.photoeditor.R;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<RecyclerViewAdapter_layoutImage.ImageViewHolder> {
     private Context mContext;
-    private List<layoutImage> mLayoutImageList;
+    private List<Bitmap> mLayoutImageList;
     private HashMap<View, ImageView> mImageViewMap = new HashMap<View, ImageView>();
+    private final static String TAG = "Recycler_layoutImage";
+    private List<ImageView> mImageViewList;
 
-    public RecyclerViewAdapter_layoutImage(Context context, List<layoutImage> layoutImageList) {
+    public RecyclerViewAdapter_layoutImage(Context context, List<Bitmap> layoutImageList) {
         this.mContext = context;
         this.mLayoutImageList = layoutImageList;
+        mImageViewList = new ArrayList<ImageView>();
     }
 
     @NonNull
@@ -33,32 +46,50 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         return viewHolder;
     }
 
-    private final static String TAG = "Recycler_layoutImage";
-
+    private int mCounter = 1;
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        holder.layoutImageView.setImageResource(mLayoutImageList.get(position).getCombinePicture());
+        holder.layoutImageView.setImageBitmap(mLayoutImageList.get(position));
+
         holder.combinePic.setOnClickListener(new View.OnClickListener() {
             ImageView imageView = new ImageView(mContext);
             public void onClick(View view) {
                 Log.d(TAG, "[SelectorView] ImageView onClick, view = " + view.toString());
-                RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.combineImage);
+                RelativeLayout relativeLayout = holder.combinePic;
                 // for adding or removing the selector view.
                 if (mImageViewMap.get(view) == null) {
                     mImageViewMap.put(view, imageView);
-                    addSelectorView(relativeLayout, imageView);
+                    mImageViewList.add(imageView);
+                    addSelectorView(relativeLayout, imageView, mCounter);
+                    mCounter++;
                 } else {
-                    removeSelectorView(relativeLayout, imageView);
                     mImageViewMap.remove(view);
+                    mImageViewList.remove(imageView);
+                    removeSelectorView(relativeLayout, imageView);
+                    updateSelectorView(relativeLayout, imageView);
+                    mCounter--;
                 }
             }
         });
+
     }
 
-    private void addSelectorView(RelativeLayout relativeLayout, ImageView imageView) {
-        Log.d(TAG, "[SelectorView] addSelectorView, imageView = " + imageView.toString());
+    private void updateSelectorView(RelativeLayout relativeLayout, ImageView imageView) {
+        for (ImageView view : mImageViewList) {
+            removeSelectorView(relativeLayout, view);
+        }
 
+        int size = mImageViewList.size();
+
+        for (int i = 0; i < size; ++i) {
+            ImageView view = mImageViewList.get(i);
+            addSelectorView(relativeLayout, view, i+1);
+        }
+    }
+
+    private void addSelectorView(RelativeLayout relativeLayout, ImageView imageView, int counter) {
+        Log.d(TAG, "[SelectorView] addSelectorView, imageView = " + imageView.toString());
         //load image resources
-        imageView.setImageResource(R.drawable.circle);
+        setSelectorImage(imageView, counter);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(90,90);
         params.leftMargin = 280;
         params.topMargin = 280;
@@ -74,8 +105,45 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         relativeLayout.removeView(imageView);
     }
 
+    private void setSelectorImage(ImageView view, int counter){
+        switch (counter) {
+            case 1:
+                view.setImageResource(R.drawable.selectone);
+                break;
+            case 2:
+                view.setImageResource(R.drawable.selecttwo);
+                break;
+            case 3:
+                view.setImageResource(R.drawable.selectthree);
+                break;
+            case 4:
+                view.setImageResource(R.drawable.selectfour);
+                break;
+            case 5:
+                view.setImageResource(R.drawable.selectfive);
+                break;
+            case 6:
+                view.setImageResource(R.drawable.selectsix);
+                break;
+            case 7:
+                view.setImageResource(R.drawable.selectseven);
+                break;
+            case 8:
+                view.setImageResource(R.drawable.selecteight);
+                break;
+            case 9:
+                view.setImageResource(R.drawable.selectnine);
+                break;
+            case 10:
+                view.setImageResource(R.drawable.selectten);
+                break;
+        }
+    }
+
     @Override
-    public int getItemCount() { return mLayoutImageList.size(); }
+    public int getItemCount() {
+        return mLayoutImageList.size();
+    }
 
     public class ImageViewHolder extends RecyclerView.ViewHolder{
         private ImageView layoutImageView;

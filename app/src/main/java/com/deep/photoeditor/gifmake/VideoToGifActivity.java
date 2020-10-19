@@ -55,12 +55,15 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
         imageView = this.findViewById(R.id.image_gif);
         tv_dirGif = this.findViewById(R.id.tv_dirGif);
         ImagePicker.getInstance().imageLoader(new GlideImageLoader());
-        outGifDir = new File(Environment.getExternalStorageDirectory() + "/video_gif");
-        if (!outGifDir.exists()) {
-            if (outGifDir.mkdir()) {
-                outGifDir = Environment.getExternalStorageDirectory();
-            }
+        //outGifDir = new File(Environment.getExternalStorageDirectory() + "/video_gif");
+        String path = "MeMe Maker";
+        File dirFile = new File(Environment.getExternalStorageDirectory(),path);
+        if(!dirFile.exists()){//如果資料夾不存在
+            dirFile.mkdir();//建立資料夾
         }
+        permissionHelper = new PermissionHelper(this);
+        permissionHelper.check(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .onSuccess(this::onSuccess).onDenied(this::onDenied).onNeverAskAgain(this::onNeverAskAgain).run();
     }
 
     @Override

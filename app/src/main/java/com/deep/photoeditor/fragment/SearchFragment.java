@@ -3,9 +3,11 @@ package com.deep.photoeditor.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -25,6 +27,12 @@ import com.deep.photoeditor.editCombinePicture;
 import com.deep.photoeditor.searchMoreTag;
 import com.deep.photoeditor.tagHotSearch;
 import com.deep.photoeditor.tagSearch;
+import com.deep.photoeditor.variable;
+import com.google.android.flexbox.AlignContent;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -39,13 +47,35 @@ public class SearchFragment extends Fragment {
     private List<tagSearch> lstTagSearch;
     private List<tagHotSearch> lstTagHotSearch;
     private TextView mTxtMoreTag;
+    private TextView hotTag;
+    private TextView hotTemplate;
+    private static variable variable = new variable();
 
+    private TextView searchTag;
+
+    private List tag;
+    private String searchName = "";
+    private int tagSize = 0;
     //api
     private static api callApi = new api();
 
     public SearchFragment() {
     }
-
+    public static List cutString(String b) {
+        int x = 0;
+        ArrayList a=new ArrayList();
+        a.add(b.indexOf("\""));//*第一個出現的索引位置
+        while ((Integer)a.get(x)!= -1) {
+            x+=1;
+            a.add(b.indexOf("\"", (Integer)a.get(x-1)+1));//*從這個索引往後開始第一個出現的位置
+        }
+        a.remove(a.size()-1);
+        ArrayList list=new ArrayList();
+        for(int i=0;i<a.size();i = i +2) {
+            list.add(b.substring((Integer)a.get(i)+1,(Integer)a.get(i+1)));
+        }
+        return list;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,20 +84,68 @@ public class SearchFragment extends Fragment {
         myrecyclerview = (RecyclerView) v.findViewById(R.id.tagRecyclerview);
         temprecyclerview = (RecyclerView) v.findViewById(R.id.tempRecyclerview);
         mTxtMoreTag = (TextView) v.findViewById(R.id.txtMoreTag);
+        searchTag = (TextView) v.findViewById(R.id.search_input);
+        hotTag = (TextView) v.findViewById(R.id.textView8);
+        hotTemplate = (TextView) v.findViewById(R.id.textView9);
 
         RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
         RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
         StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
+
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+
+        myrecyclerview.setLayoutManager(flexboxLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
         temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
         temprecyclerview.setAdapter(tempRecyclerViewAdapter);
 
+
+        searchTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        searchTag.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
+                if (KeyEvent.KEYCODE_ENTER == keyCode && KeyEvent.ACTION_DOWN == event.getAction()) {
+                    hotTag.setText("相關標籤搜尋結果");
+                    hotTemplate.setText("相關模板搜尋結果");
+                    searchName = searchTag.getText().toString();
+                    try {
+                        Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag?limit=10&name="+searchName)));
+                        //cutString(decode(callApi.get("http://140.131.115.99/api/tag"))).get(4);
+                        tag = cutString(decode(callApi.get("http://140.131.115.99/api/tag?limit=10&name="+searchName)));
+                        tagSize = tag.size();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    lstTagSearch = new ArrayList<>();
+                    if (tagSize<2){
+                        //搜尋無結果
+                    }else {
+
+                        for (int i = 3; i < tagSize; i += 3) {
+                            lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
+                            Log.d("getTag", tag.get(i).toString());
+                        }
+                    }
+                    RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
+                    myrecyclerview.setLayoutManager(flexboxLayoutManager);
+                    myrecyclerview.setAdapter(recyclerViewAdapter);
+                    temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
+                    temprecyclerview.setAdapter(tempRecyclerViewAdapter);
+
+                    return true;
+                }
+                return false;
+            }
+        });
         mTxtMoreTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: ");
+                variable.searchNameSetter(searchName);
                 Intent intent = new Intent(getActivity(), searchMoreTag.class);
                 startActivity(intent);
             }
@@ -75,24 +153,50 @@ public class SearchFragment extends Fragment {
 
         return v;
     }
-
+    public static String decode(String unicodeStr) {//轉換萬國碼
+        if (unicodeStr == null) {
+            return null;
+        }
+        StringBuffer retBuf = new StringBuffer();
+        int maxLoop = unicodeStr.length();
+        for (int i = 0; i < maxLoop; i++) {
+            if (unicodeStr.charAt(i) == '\\') {
+                if ((i < maxLoop - 5) && ((unicodeStr.charAt(i + 1) == 'u') || (unicodeStr.charAt(i + 1) == 'U')))
+                    try {
+                        retBuf.append((char) Integer.parseInt(unicodeStr.substring(i + 2, i + 6), 16));
+                        i += 5;
+                    } catch (NumberFormatException localNumberFormatException) {
+                        retBuf.append(unicodeStr.charAt(i));
+                    }
+                else
+                    retBuf.append(unicodeStr.charAt(i));
+            } else {
+                retBuf.append(unicodeStr.charAt(i));
+            }
+        }
+        return retBuf.toString();
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //tagSearch
-        lstTagSearch = new ArrayList<>();
-        lstTagSearch.add(new tagSearch("#居家隔離"));
-        lstTagSearch.add(new tagSearch("#牽手"));
-        lstTagSearch.add(new tagSearch("#期末考"));
-        lstTagSearch.add(new tagSearch("#快去睡"));
-        lstTagSearch.add(new tagSearch("#美國隊長"));
-        lstTagSearch.add(new tagSearch("#曾之喬"));
-        lstTagSearch.add(new tagSearch("#實習"));
-        lstTagSearch.add(new tagSearch("#Travel"));
-        lstTagSearch.add(new tagSearch("#小琉球"));
-        lstTagSearch.add(new tagSearch("#自信"));
-
+        Log.d("tagName","測試");
+        try {
+            Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag?limit=10")));
+            //cutString(decode(callApi.get("http://140.131.115.99/api/tag"))).get(4);
+            tag = cutString(decode(callApi.get("http://140.131.115.99/api/tag?limit=10")));
+            tagSize = tag.size();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (tagSize<2){
+            //搜尋無結果
+        }else {
+            lstTagSearch = new ArrayList<>();
+            for (int i = 3; i < tagSize; i += 3) {
+                lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
+                Log.d("getTag", tag.get(i).toString());
+            }
+        }
         //tempHotSearch
         lstTagHotSearch = new ArrayList<>();
         lstTagHotSearch.add(new tagHotSearch("曾之喬","https://www.wepeople.club/new-wepeople-upload/bb3886dc4b408776b51b1ba18ad3fb1e.jpg",R.drawable.one,"Angela",99));

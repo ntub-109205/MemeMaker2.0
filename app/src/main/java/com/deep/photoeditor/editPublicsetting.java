@@ -1,5 +1,6 @@
 package com.deep.photoeditor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -14,14 +15,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.hootsuite.nachos.ChipConfiguration;
 import com.hootsuite.nachos.NachoTextView;
+import com.hootsuite.nachos.chip.ChipSpan;
+import com.hootsuite.nachos.chip.ChipSpanChipCreator;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
+import com.hootsuite.nachos.tokenizer.SpanChipTokenizer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -43,6 +52,7 @@ public class editPublicsetting extends AppCompatActivity {
     public void init(){
         btnNext = (Button)findViewById(R.id.btnNext);
         txtSetTag = (TextView)findViewById(R.id.memeTag);
+       // txtSetTag.setText("#");
         ContentResolver cr = this.getContentResolver();
         try {
             Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(memeUri));
@@ -51,6 +61,30 @@ public class editPublicsetting extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             Log.e("Exception", e.getMessage(),e);
         }
+
+        //setTag
+
+
+
+//        txtSetTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
+//
+//
+//        txtSetTag.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
+//                if (KeyEvent.KEYCODE_ENTER == keyCode && KeyEvent.ACTION_DOWN == event.getAction()) {
+//                    //处理事件
+//                    String a;
+//
+//                    a = txtSetTag.getText().toString();
+//                    txtSetTag.setText(a+"#");
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
         //switch
         switchMeme = findViewById(R.id.memeSwitch);
         SharedPreferences sharedPreferences = getSharedPreferences("save",MODE_PRIVATE);
@@ -85,56 +119,28 @@ public class editPublicsetting extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                tag = txtSetTag.getText().toString();
+                tag = txtSetTag.getText().toString().trim();
+                Log.d("tag1", tag);
                 int len = tag.length();
                 int x = 0;
                 ArrayList a=new ArrayList();
-                Log.d("tag1", "New完了");
-
                 a.add(tag.indexOf("#"));//*第一個出現的索引位置
-                Log.d("tag1", Integer.toString((Integer)a.get(x)));
-
                 while ((Integer)a.get(x)!= -1) {
-                    Log.d("tag1", "進入迴圈");
                     x+=1;
-
                     a.add(tag.indexOf("#", (Integer)a.get(x-1)+1));//*從這個索引往後開始第一個出現的位置
-                    Log.d("tag1", Integer.toString((Integer)a.get(x)));
-
                 }
                 a.remove(a.size()-1);
-                Log.d("tag1", "出迴圈");
-                Log.d("tag1", String.valueOf(a.size()));
-                for(int i=0;i<a.size();i++){
-                    Log.d("tag1","List的值：" + a.get(i).toString());
-                }
                 ArrayList list=new ArrayList();
                 for(int i=0;i<a.size()-1;i++) {
-                    list.add(tag.substring((Integer)a.get(i)+1,(Integer)a.get(i+1)));
-                }
-                list.add(tag.substring((Integer)a.get(a.size()-1)+1,len));
-                for(int i=0;i<a.size();i++) {
-                    Log.d("tag1", "List的值：" + list.get(i).toString());
-                    tag +="#" + list.get(i).toString();
-                }
-//                tag = "[";
-//                for(int i=0;i<a.size();i++) {
-//                    tag+="\""+i+"\" => \"" + list.get(i).toString()+"\"";
-//                    if (i<a.size()-1){tag+=", ";}
-//                }
-//                tag += "]";
-//                Log.d("tag1", "tag的值：" + tag);
-//                Log.d("contextQQ","Share=" + variable.memeShareGetter());
-//                try {
-//                    callApi.post("http://140.131.115.99/api/txt/memeStore",
-//                            "template_id="+variable.templateIDGetter()+
-//                                    "&meme_share="+variable.memeShareGetter()+
-//                            "&tags="+tag);
-//                    Log.d("contextQQ","傳字串=" + callApi.returnString());
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                    list.add(tag.substring((Integer)a.get(i)+1,(Integer)a.get(i+1)).trim());
 
+                }
+                list.add(tag.substring((Integer)a.get(a.size()-1)+1,len).trim());
+                tag = "";
+                for(int i=0;i<a.size();i++) {
+                    tag +="#" + list.get(i).toString().trim();
+                }
+                Log.d("tag1", tag);
                 try {
                     callApi.post("http://140.131.115.99/api/txt/memeStore",
                             "template_id="+variable.templateIDGetter()+
@@ -164,11 +170,28 @@ public class editPublicsetting extends AppCompatActivity {
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        NachoTextView nachoTextView = findViewById(R.id.memeTag);
-        nachoTextView.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
+        //Tag樣式
+        createChipWithText();
 
         init();
+    }
+
+    private void createChipWithText() {
+        NachoTextView nachoTextView = findViewById(R.id.memeTag);
+        nachoTextView.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
+        nachoTextView.addChipTerminator(' ', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_TO_TERMINATOR);
+
+        nachoTextView.setChipTokenizer(new SpanChipTokenizer<>(this, new ChipSpanChipCreator() {
+            @Override
+            public ChipSpan createChip(@NonNull Context context, @NonNull CharSequence text, Object data) {
+                return new ChipSpan(context, '#' + text.toString(),null, data);
+            }
+
+            @Override
+            public void configureChip(@NonNull ChipSpan chip, @NonNull ChipConfiguration chipConfiguration) {
+                super.configureChip(chip, chipConfiguration);
+            }
+        }, ChipSpan.class));
     }
 
     public void hideKeyboard(View view) {

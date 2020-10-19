@@ -29,6 +29,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewAdapter__gif.MyViewHolder> {
     Context mContext;
     List<PublicMeme> mData;
+    private MyViewHolder mViewHolder;
 
     public RecyclerViewAdapter__gif(Context mContext, List<PublicMeme> mData) {
         this.mContext = mContext;
@@ -83,8 +84,12 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
 //                mContext.startActivity(intent);
             }
         });
+    }
 
-
+    public void setViewHolderListener(View.OnClickListener listener) {
+        if (listener != null) {
+            mViewHolder.item_meme.setOnClickListener(listener);
+        }
     }
 
     @Override

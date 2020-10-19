@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.deep.photoeditor.activity.MainActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
@@ -20,6 +22,9 @@ public class signUp extends AppCompatActivity {
     public Button btnSignup;
     public Button btnToLoginin;
     public TextInputLayout textInputUsername,textInputEmail,textInputPassword,textInputCheckpass;
+    public String email,name,password,c_password;
+    private static api callApi = new api();
+    private static variable variable = new variable();
 
     public void init(){
         btnSignup = (Button)findViewById(R.id.btnSignUp);
@@ -29,10 +34,19 @@ public class signUp extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 confirmInput();
-//                //new一個intent物件，並指定Activity切換的class
-//                Intent edit = new Intent(signUp.this,MainActivity.class);
-//                //切換Activity
-//                startActivity(edit);
+                try {
+                    callApi.post("http://140.131.115.99/api/register",
+                            "email=" + email + "&name=" + name +"&password=" +password+"&c_password=" +c_password );
+                    Log.d("postRegister", callApi.returnString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                callApi.setHeader(callApi.cutString().get(2).toString());
+                //new一個intent物件，並指定Activity切換的class
+                Intent edit = new Intent(signUp.this, MainActivity.class);
+                //切換Activity
+                startActivity(edit);
             }
         });
 
@@ -67,9 +81,9 @@ public class signUp extends AppCompatActivity {
 
     //驗證username
     private boolean validUsername(){
-        String usernameInput = textInputUsername.getEditText().getText().toString().trim();
+        name = textInputUsername.getEditText().getText().toString().trim();
 
-        if (usernameInput.isEmpty()) {
+        if (name.isEmpty()) {
             textInputUsername.setError("尚未填寫");
             return false;
         }else {
@@ -80,12 +94,12 @@ public class signUp extends AppCompatActivity {
 
     //驗證email
     private boolean validEmail(){
-        String emailInput = textInputEmail.getEditText().getText().toString().trim();
+        email = textInputEmail.getEditText().getText().toString().trim();
 
-        if (emailInput.isEmpty()) {
+        if (email.isEmpty()) {
             textInputEmail.setError("尚未填寫");
             return false;
-        }else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             textInputEmail.setError("不符合電子郵件的格式");
             return false;
         }else {
@@ -96,10 +110,13 @@ public class signUp extends AppCompatActivity {
 
     //驗證password
     private boolean validPassword(){
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+        password = textInputPassword.getEditText().getText().toString().trim();
 
-        if (passwordInput.isEmpty()) {
+        if (password.isEmpty()) {
             textInputPassword.setError("尚未填寫");
+            return false;
+        }else if(password.length()<6){
+            textInputPassword.setError("不到六位");
             return false;
         }else {
             textInputPassword.setError(null);
@@ -108,13 +125,13 @@ public class signUp extends AppCompatActivity {
     }
 
     private boolean checkPassword(){
-        String checkpasswordInput = textInputCheckpass.getEditText().getText().toString().trim();
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+        c_password = textInputCheckpass.getEditText().getText().toString().trim();
 
-        if (checkpasswordInput.isEmpty()) {
+        if (c_password.isEmpty()) {
             textInputCheckpass.setError("尚未填寫");
             return false;
-        }else if(passwordInput != checkpasswordInput){
+        }else if(!password.equals(c_password)){
+            Log.d("postRegister", "|"+password+"|"+c_password +"|");
             textInputCheckpass.setError("密碼不相同!");
             return false;
         }else{
