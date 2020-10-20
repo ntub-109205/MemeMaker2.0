@@ -109,20 +109,15 @@
         <activity
             android:name=".activity.PublicMemeInfoActivity"
             android:parentActivityName=".activity.PublicMemeInfoActivity" />
-<<<<<<< HEAD
+
         <activity android:name=".gifmake.GifMakeActivity"
             android:parentActivityName=".gifmake.GifMakeActivity"/>
 
-        <activity android:name=".gifmake.VideoToGifActivity"/>
+        <activity android:name=".gifmake.VideoToGifActivity"
+            android:parentActivityName=".gifmake.VideoToGifActivity"/>
         <activity android:name=".gifmake.FilmToGifActivity"/>
         <activity android:name=".gifmake.SaveImageActivity"/>
-=======
-        <activity
-            android:name=".gifmake.GifMakeActivity"
-            android:parentActivityName=".gifmake.GifMakeActivity" />
-        <activity android:name=".gifmake.VideoToGifActivity" />
-        <activity android:name=".gifmake.SaveImageActivity" />
->>>>>>> 51fd0c0f47982c506299e7f25137948ad821181a
+
         <activity
             android:name=".searchMoreTag"
             android:theme="@style/AppTheme.NoActionBar" />
