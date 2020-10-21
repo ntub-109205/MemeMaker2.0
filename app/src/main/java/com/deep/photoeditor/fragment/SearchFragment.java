@@ -37,6 +37,10 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +58,13 @@ public class SearchFragment extends Fragment {
     private TextView searchTag;
 
     private List tag;
+
+    private String temp;
+
     private String searchName = "";
     private int tagSize = 0;
+    private int tempSize = 0;
+
     //api
     private static api callApi = new api();
 
@@ -124,12 +133,12 @@ public class SearchFragment extends Fragment {
                     if (tagSize<2){
                         //搜尋無結果
                     }else {
-
                         for (int i = 3; i < tagSize; i += 3) {
                             lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
                             Log.d("getTag", tag.get(i).toString());
                         }
                     }
+
                     RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
                     myrecyclerview.setLayoutManager(flexboxLayoutManager);
                     myrecyclerview.setAdapter(recyclerViewAdapter);
@@ -179,7 +188,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("tagName","測試");
+        //--------------------------------------顯示top10 Tag----------------------------------------------
         try {
             Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag?limit=10")));
             //cutString(decode(callApi.get("http://140.131.115.99/api/tag"))).get(4);
@@ -197,17 +206,67 @@ public class SearchFragment extends Fragment {
                 Log.d("getTag", tag.get(i).toString());
             }
         }
-        //tempHotSearch
-        lstTagHotSearch = new ArrayList<>();
-        lstTagHotSearch.add(new tagHotSearch("曾之喬","https://www.wepeople.club/new-wepeople-upload/bb3886dc4b408776b51b1ba18ad3fb1e.jpg",R.drawable.one,"Angela",99));
-        lstTagHotSearch.add(new tagHotSearch("Winnie with Pooh","https://www.trafalgar.com/real-word/wp-content/uploads/sites/3/2020/01/Screenshot-2020-01-16-at-15.15.54.png",R.drawable.two,"ZARK",98));
-        lstTagHotSearch.add(new tagHotSearch("しばいぬ","https://assets.juksy.com/files/articles/90814/800x_100_w-5ce41f432bb5d.jpg",R.drawable.three,"Jessie",93));
-        lstTagHotSearch.add(new tagHotSearch("蠟筆小新","https://cdn2.ettoday.net/images/4705/4705033.jpg",R.drawable.four,"Angela",88));
-        lstTagHotSearch.add(new tagHotSearch("ねずこ","https://i.ytimg.com/vi/wqGSbiLC3aA/maxresdefault.jpg",R.drawable.five,"Vicky",85));
-        lstTagHotSearch.add(new tagHotSearch("我妻善逸","https://i.ytimg.com/vi/U72gIwh9jr0/maxresdefault.jpg",R.drawable.six,"Kevin",81));
-        lstTagHotSearch.add(new tagHotSearch("實習","https://specials-images.forbesimg.com/imageserve/1184595415/960x0.jpg?fit=scale",R.drawable.seven,"Lisa",76));
-        lstTagHotSearch.add(new tagHotSearch("出國","https://aiesecntputw.weebly.com/uploads/5/7/5/8/57583935/6576321.jpg?460",R.drawable.eight,"Ning",71));
-        lstTagHotSearch.add(new tagHotSearch("小琉球","https://yas.com.hk/blog/wp-content/uploads/2020/06/%E5%B0%8F%E7%90%89%E7%90%83_Blog.jpg",R.drawable.nine,"Jessie",65));
-        lstTagHotSearch.add(new tagHotSearch("社畜","https://read.html5.qq.com/image?imgflag=7&q=100&imageUrl=http://s.cimg.163.com/i/by1.manhuayin.com/wp-content/uploads/2020/06/12/20200612_5ee31b077aab4.jpg_c.0x0.auto.jpg&src=share",R.drawable.ten,"Angela",50));
+        //---------------------------------------------------------------------------
+        //----------------------------顯示top10 模板----------------------------------
+        try {
+            temp = decode(callApi.get("http://140.131.115.99/api/template/show/1?limit=10")).trim();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (temp.length()<13){
+            //搜尋無結果
+        }else {
+            temp = temp.substring(13, (temp.length() - 1));
+            try {
+                JSONArray array = new JSONArray(temp);
+                lstTagHotSearch = new ArrayList<>();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject jsonObject = array.getJSONObject(i);
+                    //String id = jsonObject.getString("id");
+                    String filelink = jsonObject.getString("filelink");
+                    String name = jsonObject.getString("name");
+                    String author = jsonObject.getString("author");
+                    int count = Integer.parseInt(jsonObject.getString("count"));
+                    int a = 0;
+                    switch (i){
+                        case 0:
+                            a =  R.drawable.one;
+                            break;
+                        case 1:
+                            a =  R.drawable.two;
+                            break;
+                        case 2:
+                            a =  R.drawable.three;
+                            break;
+                        case 3:
+                            a =  R.drawable.four;
+                            break;
+                        case 4:
+                            a =  R.drawable.five;
+                            break;
+                        case 5:
+                            a =  R.drawable.six;
+                            break;
+                        case 6:
+                            a =  R.drawable.seven;
+                            break;
+                        case 7:
+                            a =  R.drawable.eight;
+                            break;
+                        case 8:
+                            a =  R.drawable.nine;
+                            break;
+                        case 9:
+                            a =  R.drawable.ten;
+                            break;
+                        default:
+                    }
+                    lstTagHotSearch.add(new tagHotSearch(name, filelink, a, author, count));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+            //---------------------------------------------------------------------------------
     }
 }

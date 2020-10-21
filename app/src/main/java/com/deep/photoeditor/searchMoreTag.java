@@ -1,9 +1,13 @@
 package com.deep.photoeditor;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,6 +29,7 @@ import com.google.android.flexbox.JustifyContent;
 
 public class searchMoreTag extends AppCompatActivity {
     private static final String TAG = "searchMoreTag";
+    private TextView searchTag;
 
     private RecyclerView mRecyclerView;
     private List<tagSearch> mLstMoreTagSearch;
@@ -51,35 +56,7 @@ public class searchMoreTag extends AppCompatActivity {
         }
         return list;
     }
-
-    public static String decode(String unicodeStr) {
-        if (unicodeStr == null) {
-            return null;
-        }
-        StringBuffer retBuf = new StringBuffer();
-        int maxLoop = unicodeStr.length();
-        for (int i = 0; i < maxLoop; i++) {
-            if (unicodeStr.charAt(i) == '\\') {
-                if ((i < maxLoop - 5) && ((unicodeStr.charAt(i + 1) == 'u') || (unicodeStr.charAt(i + 1) == 'U')))
-                    try {
-                        retBuf.append((char) Integer.parseInt(unicodeStr.substring(i + 2, i + 6), 16));
-                        i += 5;
-                    } catch (NumberFormatException localNumberFormatException) {
-                        retBuf.append(unicodeStr.charAt(i));
-                    }
-                else
-                    retBuf.append(unicodeStr.charAt(i));
-            } else {
-                retBuf.append(unicodeStr.charAt(i));
-            }
-        }
-        return retBuf.toString();
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_moretag);
-        searchName = variable.searchNameGetter();
+    public void showTag(String searchName) {
         if (searchName.equals("")){
             try {
                 Log.d("getTag" ,  decode(callApi.get("http://140.131.115.99/api/tag")));
@@ -108,27 +85,61 @@ public class searchMoreTag extends AppCompatActivity {
                 Log.d("getTag" , tag.get(i).toString());
             }
         }
-//        mLstMoreTagSearch = new ArrayList<>();
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券可以怎麼用"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券好少.."));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券優惠"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券期限"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券優惠店家哈哈哈哈哈"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券的限制"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券 哀"));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券..."));
-//        mLstMoreTagSearch.add(new tagSearch("#三倍券花完了"));
 
         Log.d(TAG,"INTO Recyclerview");
         mRecyclerView = findViewById(R.id.tagRecyclerview);
         mRecyclerViewAdapter = new RecyclerViewAdapter_tagSearch(this,mLstMoreTagSearch);
-
         FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
         flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
 
         mRecyclerView.setLayoutManager(flexboxLayoutManager);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
+    }
+    public static String decode(String unicodeStr) {
+        if (unicodeStr == null) {
+            return null;
+        }
+        StringBuffer retBuf = new StringBuffer();
+        int maxLoop = unicodeStr.length();
+        for (int i = 0; i < maxLoop; i++) {
+            if (unicodeStr.charAt(i) == '\\') {
+                if ((i < maxLoop - 5) && ((unicodeStr.charAt(i + 1) == 'u') || (unicodeStr.charAt(i + 1) == 'U')))
+                    try {
+                        retBuf.append((char) Integer.parseInt(unicodeStr.substring(i + 2, i + 6), 16));
+                        i += 5;
+                    } catch (NumberFormatException localNumberFormatException) {
+                        retBuf.append(unicodeStr.charAt(i));
+                    }
+                else
+                    retBuf.append(unicodeStr.charAt(i));
+            } else {
+                retBuf.append(unicodeStr.charAt(i));
+            }
+        }
+        return retBuf.toString();
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.search_moretag);
+        searchTag =(TextView) findViewById(R.id.search_input);
+        searchName = variable.searchNameGetter();
+        searchTag.setText(searchName);
+        searchTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
+
+        showTag(searchName);
+        searchTag.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
+                if (KeyEvent.KEYCODE_ENTER == keyCode && KeyEvent.ACTION_DOWN == event.getAction()) {
+                    searchName = searchTag.getText().toString();
+                    showTag(searchName);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }
