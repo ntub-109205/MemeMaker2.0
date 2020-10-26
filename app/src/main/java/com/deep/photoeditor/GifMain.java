@@ -37,13 +37,13 @@ public class GifMain extends AppCompatActivity {
         initListener();
 
         lstMineGif = new ArrayList<>();
-        lstMineGif.add(new PublicMeme("1","#彩虹貓","https://www.urad.com.tw/wp-content/uploads/2015/08/giphy.gif","jessie",30));
-        lstMineGif.add(new PublicMeme("1","#地球","https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif","Geo",20));
-        lstMineGif.add(new PublicMeme("1","#早安","https://i.pinimg.com/originals/87/40/f7/8740f719676a6393b9acb80e1f99b97f.gif","跑跑跑的人",19));
-        lstMineGif.add(new PublicMeme("1","#孫儷","https://i1.kknews.cc/SIG=ko35sv/39o90003725ro568no98.jpg","好累",18));
-        lstMineGif.add(new PublicMeme("1","#0元特效","https://i3.read01.com/SIG=64obee/304c6a336773744e6265.jpg","Anc1233",17));
-        lstMineGif.add(new PublicMeme("1","#迪麗熱巴","https://i2.kknews.cc/SIG=2pfm603/39oq0001ps2s2ro7ns97.jpg","牙醫09",16));
-        lstMineGif.add(new PublicMeme("1","#剛穿新鞋的你","https://i3.read01.com/SIG=1crbr31/304c6a33677341366b4d.jpg","江戶川先生",14));
+        lstMineGif.add(new PublicMeme("1","1","#彩虹貓","https://www.urad.com.tw/wp-content/uploads/2015/08/giphy.gif","jessie",30,1));
+        lstMineGif.add(new PublicMeme("1","1","#地球","https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif","Geo",20,1));
+        lstMineGif.add(new PublicMeme("1","1","#早安","https://i.pinimg.com/originals/87/40/f7/8740f719676a6393b9acb80e1f99b97f.gif","跑跑跑的人",19,1));
+        lstMineGif.add(new PublicMeme("1","1","#孫儷","https://i1.kknews.cc/SIG=ko35sv/39o90003725ro568no98.jpg","好累",18,0));
+        lstMineGif.add(new PublicMeme("1","1","#0元特效","https://i3.read01.com/SIG=64obee/304c6a336773744e6265.jpg","Anc1233",17,1));
+        lstMineGif.add(new PublicMeme("1","1","#迪麗熱巴","https://i2.kknews.cc/SIG=2pfm603/39oq0001ps2s2ro7ns97.jpg","牙醫09",16,0));
+        lstMineGif.add(new PublicMeme("1","1","#剛穿新鞋的你","https://i3.read01.com/SIG=1crbr31/304c6a33677341366b4d.jpg","江戶川先生",14,1));
 
         recyclerView = findViewById(R.id.myGifRecyclerview);
         recyclerViewAdapter_myGif = new RecyclerViewAdapter__gif(this, lstMineGif);

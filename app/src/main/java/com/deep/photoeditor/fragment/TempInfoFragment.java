@@ -88,11 +88,11 @@ public class TempInfoFragment extends Fragment {
             lstMemeInfo = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                String id = jsonObject.getString("id");
+                String memeId = jsonObject.getString("id");
                 String filelink = jsonObject.getString("filelink");
-//                String name = jsonObject.getString("name");
                 String author = jsonObject.getString("author");
                 int count = Integer.parseInt(jsonObject.getString("count"));
+                int thumb = Integer.parseInt(jsonObject.getString("thumb"));
                 String tags = jsonObject.getString("tags");
                 String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
                 Log.d("tags", "tags:" + items);
@@ -109,9 +109,9 @@ public class TempInfoFragment extends Fragment {
                     newtag = newtag + "#" + tag;
                 }
 
-                Log.d("temp", "template_id:" + id + ", filelink:" + filelink + "tags："+tags );
+                Log.d("temp", "template_id:" + memeId + ", filelink:" + filelink + "tags："+tags );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,newtag,filelink,author,count));
+                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();
