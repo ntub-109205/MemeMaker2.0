@@ -37,10 +37,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         }
         Log.d("temp",callApi.get("http://140.131.115.99/api/profile"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/profile").trim();
-        temp = temp.substring(8,(temp.length()-1));
-        Log.d("temp","cut allready :"+ temp);
-        txtPerson.setText("Hello, " + temp.replaceAll("\"",""));
+        String userName = callApi.get("http://140.131.115.99/api/profile").trim();
+        userName = userName.substring(8,(userName.length()-1));
+        Log.d("temp","cut allready :"+ userName);
+        txtPerson.setText("Hello, " + userName.replaceAll("\"",""));
        // String person = callApi.get("http://140.131.115.99/api/profile");
         btnShowCollect.setOnClickListener(this);
         btnShowWorks.setOnClickListener(this);
