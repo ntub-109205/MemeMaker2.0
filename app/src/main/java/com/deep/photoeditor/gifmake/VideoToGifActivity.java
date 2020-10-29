@@ -193,7 +193,7 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
             if (mainActivity != null) {
                 dismissLoadingDialog();
                 //tv_dirGif.setText("转换成功，gif图片路径为："+gifFile);
-                Toast.makeText(mainActivity, "转换成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainActivity, "轉換成功", Toast.LENGTH_SHORT).show();
                 Glide.with(mainActivity).asGif().load(new File(gifFile)).into(mainActivity.imageView);
             }
         }
@@ -205,8 +205,8 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
         if (toolAlertDialog == null) {
             toolAlertDialog = new ToolAlertDialog(mContext);
         }
-        toolAlertDialog.showAlertDialog("权限申请", getResources().getString(R.string.ensureNormalOperation)
-                        + getResources().getString(R.string.app_name) + getResources().getString(R.string.pleaseAllowStoreAndCam), "去允许",
+        toolAlertDialog.showAlertDialog("權限申請", getResources().getString(R.string.ensureNormalOperation)
+                        + getResources().getString(R.string.app_name) + getResources().getString(R.string.pleaseAllowStoreAndCam), "去允許",
                 view -> {
                     toolAlertDialog.dismissAlertDialog();
                     permissionHelper.check(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
