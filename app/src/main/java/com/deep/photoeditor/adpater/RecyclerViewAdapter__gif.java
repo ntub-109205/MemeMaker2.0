@@ -20,9 +20,17 @@ import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
+import com.deep.photoeditor.gifmake.GifMakePresenter;
+import com.deep.photoeditor.utils.FileUtil;
+import com.felipecsl.gifimageview.library.GifImageView;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
+
+//import me.drakeet.materialdialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -30,6 +38,7 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
     Context mContext;
     List<PublicMeme> mData;
     private MyViewHolder mViewHolder;
+    private static final String TAG = "RecyclerViewAdapter__gif";
 
     public RecyclerViewAdapter__gif(Context mContext, List<PublicMeme> mData) {
         this.mContext = mContext;
@@ -73,8 +82,24 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-
                 Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
+
+//                View contentView = LayoutInflater.from(mContext).inflate(R.layout.layout_gif_preview, null);
+//                GifImageView gifView = (GifImageView) contentView.findViewById(R.id.gif_view);
+//
+//                byte[] fileBytes = FileUtil.getFileBytes(presenter.getPreViewFile());
+//                if (fileBytes != null) {
+//                    gifView.setBytes(fileBytes);
+//                    gifView.startAnimation();
+//                }
+
+//                mMaterialDialog.setPositiveButton("關閉", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                mMaterialDialog.dismiss();
+//                            }
+//                        }).setContentView(contentView).show();
+//                mMaterialDialog.setCanceledOnTouchOutside(true);
 
 //                Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
 //                intent.putExtra("meme_url", mData.get(position).getMemeImage());

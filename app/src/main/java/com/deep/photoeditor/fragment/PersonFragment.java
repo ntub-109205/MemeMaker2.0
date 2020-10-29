@@ -1,5 +1,6 @@
 package com.deep.photoeditor.fragment;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -45,14 +46,18 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 fragment = new PerCollectFragment();
                 replaceFragment(fragment);
                 btnShowCollect.setBackground(getResources().getDrawable(R.drawable.button_press));
-                btnShowWorks.setBackground(getResources().getDrawable(R.drawable.button_default));
+                btnShowCollect.setTextColor(Color.parseColor("#FFFFFF"));
+                btnShowWorks.setBackground(getResources().getDrawable(R.drawable.bgrectangle));
+                btnShowWorks.setTextColor(Color.parseColor("#000000"));
                 break;
 
             case R.id.btnWorks:
                 fragment = new PerWorksFragment();
                 replaceFragment(fragment);
-                btnShowCollect.setBackground(getResources().getDrawable(R.drawable.button_default));
+                btnShowCollect.setBackground(getResources().getDrawable(R.drawable.bgrectangle));
+                btnShowCollect.setTextColor(Color.parseColor("#000000"));
                 btnShowWorks.setBackground(getResources().getDrawable(R.drawable.button_press));
+                btnShowWorks.setTextColor(Color.parseColor("#FFFFFF"));
                 break;
         }
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.fragment.PersonFragment;
 import com.deep.photoeditor.login;
 
 
