@@ -23,6 +23,7 @@ import com.deep.photoeditor.fragment.HomeFragment;
 import com.deep.photoeditor.fragment.PersonFragment;
 import com.deep.photoeditor.fragment.PublicFragment;
 import com.deep.photoeditor.fragment.SearchFragment;
+import com.deep.photoeditor.variable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 //
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     //死按鈕宣告
     FloatingActionButton fabMeme, fabElder, fabgif;
     private static api callApi = new api();
+    private static com.deep.photoeditor.variable variable = new variable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "You Selected FabExplore!!!!", Toast.LENGTH_LONG).show();
                 /**從MAIN 跳到 SECOND 頁面*/
+                variable.category_idSetter("1");
                 Intent intent = new Intent(MainActivity.this, EditMain.class);
                 /** 啟動intent */
                 intent.setClass(MainActivity.this, EditMain.class);
@@ -82,9 +85,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "You Selected fabElder!!!!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, editCombinePicture.class);
+                variable.category_idSetter("2");
+
+                //Intent intent = new Intent(MainActivity.this, editCombinePicture.class);
+                Intent intent = new Intent(MainActivity.this, EditMain.class);
+
                 /** 啟動intent */
-                intent.setClass(MainActivity.this, editCombinePicture.class);
+                intent.setClass(MainActivity.this, EditMain.class);
                 startActivity(intent);
 
             }

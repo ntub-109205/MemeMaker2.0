@@ -86,7 +86,7 @@ public class editOnlymaketemp extends BaseActivity {
                 Log.d("contextQQ","path="+getFilePathForN(mContext,templateUri));
                 try {
                     callApi.post("http://140.131.115.99/api/txt/templateStore",
-                            "category_id=1&name=" + templateName +"&share=" +templateShare );
+                            "category_id="+variable.category_idGetter()+"&name=" + templateName +"&share=" +templateShare );
                     Log.d("contextQQ","傳字串=" + callApi.returnString());
                 } catch (Exception e) {
                     e.printStackTrace();
