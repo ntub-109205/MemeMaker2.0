@@ -140,13 +140,15 @@ public class editSetname extends AppCompatActivity {
         String templateName = setName.getText().toString();
         variable.templateNameSetter(templateName);
         try {
-            callApi.post("http://140.131.115.99/api/txt/templateStore",
-                    "category_id=1&name=" + templateName +"&share=" +templateShare );
+            callApi.post("http://140.131.115.99/api/txt/store",
+                    "category_id="+variable.category_idGetter()+"&name=" + templateName +"&share=" +templateShare );
             Log.d("contextQQ","傳字串=" + callApi.returnString());
         } catch (Exception e) {
             e.printStackTrace();
         }
         String callBack = "";
+
+        Log.d("contextTest","模板的filepath=" + getFilePathForN(mContext,templateUri));
         try {
             Log.d("contextQQ",callBack = callApi.multipartRequest("http://140.131.115.99/api/template/store","str="+
                     URLEncoder.encode(templateName, "UTF-8"),getFilePathForN(mContext,templateUri),"image" ));

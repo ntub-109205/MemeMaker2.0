@@ -43,6 +43,7 @@ public class editPublicsetting extends AppCompatActivity {
     Switch switchMeme;
     public Button btnNext;
     public TextView txtSetTag;
+
     private static variable variable = new variable();
     private static api callApi = new api();
     public String memeShare = "1";
@@ -52,7 +53,7 @@ public class editPublicsetting extends AppCompatActivity {
     public void init(){
         btnNext = (Button)findViewById(R.id.btnNext);
         txtSetTag = (TextView)findViewById(R.id.memeTag);
-       // txtSetTag.setText("#");
+        // txtSetTag.setText("#");
         ContentResolver cr = this.getContentResolver();
         try {
             Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(memeUri));
@@ -62,31 +63,12 @@ public class editPublicsetting extends AppCompatActivity {
             Log.e("Exception", e.getMessage(),e);
         }
 
-        //setTag
-
-
-
-//        txtSetTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
-//
-//
-//        txtSetTag.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                //这里注意要作判断处理，ActionDown、ActionUp都会回调到这里，不作处理的话就会调用两次
-//                if (KeyEvent.KEYCODE_ENTER == keyCode && KeyEvent.ACTION_DOWN == event.getAction()) {
-//                    //处理事件
-//                    String a;
-//
-//                    a = txtSetTag.getText().toString();
-//                    txtSetTag.setText(a+"#");
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
         //switch
         switchMeme = findViewById(R.id.memeSwitch);
+        if (variable.category_idGetter().equals("1")){switchMeme.setText("梗圖公開");}
+        else if(variable.category_idGetter().equals("2")){switchMeme.setText("長輩圖公開");}
+
+        
         SharedPreferences sharedPreferences = getSharedPreferences("save",MODE_PRIVATE);
 
         //---switchMeme---
@@ -142,17 +124,19 @@ public class editPublicsetting extends AppCompatActivity {
                 }
                 Log.d("tag1", tag);
                 try {
-                    callApi.post("http://140.131.115.99/api/txt/memeStore",
+                    callApi.post("http://140.131.115.99/api/txt/store",
                             "template_id="+variable.templateIDGetter()+
-                                    "&meme_share="+variable.memeShareGetter()+
+                                    "&share="+variable.memeShareGetter()+
                                     "&tags="+tag);
                     Log.d("contextQQ","傳字串=" + callApi.returnString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Log.d("contextTest","梗圖的filepath=" + variable.memePathGetter());
+
                 try {
                     Log.d("contextQQ",callApi.multipartRequest("http://140.131.115.99/api/meme/store","str="
-                           ,variable.memePathGetter(),"meme_image" ));
+                           ,variable.memePathGetter(),"image" ));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -17,6 +17,7 @@ public class variable {
     private static String memePath;
     private static String tagName;
     private static String searchName;
+    private static String category_id;
 
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
     //模板Uri
@@ -77,6 +78,13 @@ public class variable {
     public static String searchNameGetter(){return searchName;}
     public static void searchNameSetter(String searchName1){searchName = searchName1;}
 
+    //梗圖還是長輩圖
+    public static String category_idGetter(){
+        return category_id;
+    }
+    public static void category_idSetter(String category_id1){category_id = category_id1;}
+
+    //動圖陣列
 
 
 }

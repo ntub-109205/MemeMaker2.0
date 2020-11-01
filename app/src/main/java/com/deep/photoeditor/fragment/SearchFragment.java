@@ -209,7 +209,7 @@ public class SearchFragment extends Fragment {
         //---------------------------------------------------------------------------
         //----------------------------顯示top10 模板----------------------------------
         try {
-            temp = decode(callApi.get("http://140.131.115.99/api/template/show/1?limit=10")).trim();
+            temp = decode(callApi.get("http://140.131.115.99/api/template/show/0?limit=10")).trim();
         } catch (Exception e) {
             e.printStackTrace();
         }
