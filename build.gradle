@@ -11,11 +11,16 @@ buildscript {
         }
     }
     dependencies {
+<<<<<<< HEAD
 
         classpath 'com.android.tools.build:gradle:4.0.1'
 //        classpath 'com.android.tools.build:gradle:4.0.2'
         //classpath 'com.android.tools.build:gradle:3.5.3'
         classpath 'com.android.tools.build:gradle:3.5.3'
+=======
+        classpath 'com.android.tools.build:gradle:3.5.3'
+//        classpath 'com.android.tools.build:gradle:4.1.0'
+>>>>>>> f57de6100f8a1f0099860d3498766703fbcf5d69
 
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath "com.github.dcendents:android-maven-gradle-plugin:2.0"

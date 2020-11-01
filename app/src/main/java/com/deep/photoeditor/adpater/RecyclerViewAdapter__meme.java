@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.api;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
@@ -29,6 +30,8 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerViewAdapter__meme.MyViewHolder> {
     Context mContext;
     List<PublicMeme> mData;
+    //api
+    private static api callApi = new api();
 
 
     public RecyclerViewAdapter__meme(Context mContext, List<PublicMeme> mData) {
@@ -49,6 +52,13 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+//        try {
+////            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
+//            callApi.get("http://140.131.115.99/api/meme/show/1");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
@@ -59,15 +69,46 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
                 .into(holder.memeImage);
         holder.hashTag.setText(mData.get(position).getHashTag());
         holder.likeNum.setText(String.valueOf(mData.get(position).getLikeSum()));
+        //判斷愛心顏色
+        if(Integer.parseInt(String.valueOf(mData.get(position).getThumb())) == 0) {
+            holder.like.setImageResource(R.drawable.like_gray);
+        } else {
+            holder.like.setImageResource(R.drawable.like_checked);
+        }
+
         holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
+//            @Override
+            int thumb = Integer.parseInt(String.valueOf(mData.get(position).getThumb()));
+            int likeSum = Integer.parseInt(String.valueOf(mData.get(position).getLikeSum()));
             public void onClick(View view) {
                 GoodView mGoodView;
                 mGoodView = new GoodView(mContext);
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-                ((ImageView) view).setImageResource(R.drawable.like_checked);
-                mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
-                mGoodView.show(view);
+                if(thumb == 0){
+                    ((ImageView) view).setImageResource(R.drawable.like_checked);
+                    mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
+                    mGoodView.show(view);
+                    //改旁邊的顯示
+                    holder.likeNum.setText(String.valueOf(likeSum +1));
+                    likeSum += 1;
+                    thumb = 1;
+                } else {
+                    ((ImageView) view).setImageResource(R.drawable.like_gray);
+                    mGoodView. setTextInfo("-1", Color.parseColor("#999da4"), 12);
+                    mGoodView.show(view);
+                    //改旁邊的顯示
+                    holder.likeNum.setText(String.valueOf(likeSum- 1));
+                    likeSum -= 1;
+                    thumb = 0;
+                }
+
+                try {
+                    callApi.post("http://140.131.115.99/api/meme/thumb","meme_id=" + Integer.parseInt(String.valueOf(mData.get(position).getMemeId())));
+//                    callApi.get("http://140.131.115.99/api/meme/show/1");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Log.d("thumb", callApi.returnString());
             }
         });
 
