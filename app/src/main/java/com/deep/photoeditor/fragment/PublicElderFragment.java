@@ -52,13 +52,13 @@ public class PublicElderFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         lstMemeMeme = new ArrayList<>();
-        lstMemeMeme.add(new PublicMeme("1","#早安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ30pqBnXi_TeFAw6HRq5Fuj7Gn87UDy5HlMyaor_hbrJwU6c4W&usqp=CAU","jessie",30));
-        lstMemeMeme.add(new PublicMeme("1","#午安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdurKHXqRX6Sf7jZ5wA95BtGmF67r4RMrfcyHyyhwUTn9rdnSx&usqp=CAU","Geo",20));
-        lstMemeMeme.add(new PublicMeme("1","#沒錢 #努力","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR7pZhRXjwG6fRsLIMKOuvpCVTQ1lkG_ppoEgUTf5PEUCaUokVy&usqp=CAU","跑跑跑的人",19));
-        lstMemeMeme.add(new PublicMeme("1","#周末愉快","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9u3tpzS-PsSYdZ9qJdi_qsnvOCdfzKTy5YfgpgYpkqAT4vOLp&usqp=CAU","好累",18));
-        lstMemeMeme.add(new PublicMeme("1","#早安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ31J8IdHmgv-A5K7R1HS6DsRu8juT6uHdPcqLDbgn_NAd58Afa&usqp=CAU","Anc1233",17));
-        lstMemeMeme.add(new PublicMeme("1","#晚安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgTnBFHVPfe260CJsG7UQ6uTopSzsQ47qOmMsVESUmMwPy8Og2&usqp=CAU","牙醫09",16));
-        lstMemeMeme.add(new PublicMeme("1","#認同","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTqJWtzg9D-9omdBRjwYEXHifBGMjcraz7ZwW_AQa29H7eF8pfH&usqp=CAU","江戶川先生",14));
+        lstMemeMeme.add(new PublicMeme("1","#Dog #隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg","潔西卡",35));
+        lstMemeMeme.add(new PublicMeme("1","#反叛的魯路修","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589009676654.jpg","Geo",20));
+        lstMemeMeme.add(new PublicMeme("1","#三國殺","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589044855818.jpg","跑跑跑的人",19));
+        lstMemeMeme.add(new PublicMeme("1","#鼠定了你","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589086291871.jpg","好累",18));
+        lstMemeMeme.add(new PublicMeme("1","#某系列主機遊戲","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041392638.jpg","Anc1233",17));
+        lstMemeMeme.add(new PublicMeme("1","#PM日常","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041053097.jpg","牙醫09",16));
+        lstMemeMeme.add(new PublicMeme("1","#歷史","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589034990886.jpg","江戶川先生",14));
 
 
     }

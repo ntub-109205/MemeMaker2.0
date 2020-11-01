@@ -1,5 +1,7 @@
 package com.deep.photoeditor.adpater;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,12 +34,15 @@ import java.util.List;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
+import org.w3c.dom.Text;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewAdapter__gif.MyViewHolder> {
     Context mContext;
     List<PublicMeme> mData;
-    private MyViewHolder mViewHolder;
+    Dialog mDialog;
+    private MyViewHolder mViewHolder;;
     private static final String TAG = "RecyclerViewAdapter__gif";
 
     public RecyclerViewAdapter__gif(Context mContext, List<PublicMeme> mData) {
@@ -51,6 +56,10 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_meme,parent,false);
         final MyViewHolder vHolder = new MyViewHolder(v);
+
+        //init Dialog
+        mDialog = new Dialog(mContext);
+        mDialog.setContentView(R.layout.dialog_gif);
 
         return vHolder;
     }
@@ -78,28 +87,26 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
             }
         });
 
+
         holder.item_meme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
 
-//                View contentView = LayoutInflater.from(mContext).inflate(R.layout.layout_gif_preview, null);
-//                GifImageView gifView = (GifImageView) contentView.findViewById(R.id.gif_view);
-//
-//                byte[] fileBytes = FileUtil.getFileBytes(presenter.getPreViewFile());
-//                if (fileBytes != null) {
-//                    gifView.setBytes(fileBytes);
-//                    gifView.startAnimation();
-//                }
-
-//                mMaterialDialog.setPositiveButton("關閉", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                mMaterialDialog.dismiss();
-//                            }
-//                        }).setContentView(contentView).show();
-//                mMaterialDialog.setCanceledOnTouchOutside(true);
+                GifImageView dialogImage = (GifImageView) mDialog.findViewById(R.id.gif_view);
+                TextView dialogTag = (TextView) mDialog.findViewById(R.id.gif_tag);
+                ImageView diaglogClose = (ImageView) mDialog.findViewById(R.id.dialog_close);
+                //show GIF by using Glide
+                dialogTag.setText(mData.get(position).getHashTag());
+                diaglogClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mDialog.dismiss();
+                    }
+                });
+                Glide.with(mContext).load(mData.get(position).getMemeImage()).into(dialogImage);
+                mDialog.show();
 
 //                Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
 //                intent.putExtra("meme_url", mData.get(position).getMemeImage());
@@ -109,6 +116,8 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
 //                mContext.startActivity(intent);
             }
         });
+
+
     }
 
     public void setViewHolderListener(View.OnClickListener listener) {

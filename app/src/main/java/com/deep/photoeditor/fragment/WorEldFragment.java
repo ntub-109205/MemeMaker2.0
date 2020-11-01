@@ -60,6 +60,5 @@ public class WorEldFragment extends Fragment {
         lstMemeMeme.add(new PublicMeme("1","#PM日常","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041053097.jpg","牙醫09",16));
         lstMemeMeme.add(new PublicMeme("1","#歷史","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589034990886.jpg","江戶川先生",14));
 
-
     }
 }

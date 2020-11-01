@@ -150,11 +150,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 }
             }
         } else {
-            Toast.makeText(this,"You haven't picked Image",
+            Toast.makeText(this,"尚未選取照片",
                     Toast.LENGTH_LONG).show();
         }
     } catch (Exception e) {
-        Toast.makeText(this,"Something went wrong", Toast.LENGTH_LONG)
+        Toast.makeText(this,"發生錯誤", Toast.LENGTH_LONG)
                 .show();
     }
 
