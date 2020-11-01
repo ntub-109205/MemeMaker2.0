@@ -93,7 +93,7 @@ public class ImagePicker {
      */
     public static File createFile(File folder, String prefix, String suffix) {
         if (!folder.exists() || !folder.isDirectory()) folder.mkdirs();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.TAIWAN);
         String filename = prefix + dateFormat.format(new Date(System.currentTimeMillis())) + suffix;
         return new File(folder, filename);
     }

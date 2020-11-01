@@ -20,5 +20,6 @@
     <color name="gray_text">#737578</color>
     <color name="content_text_color">#65676b</color>
     <color name="card_bg_color">#f6f6f6</color>
+    <color name="tag_chip">#edebeb</color>
 
 </resources>

@@ -94,7 +94,13 @@ dependencies {
     //Flexboxlayout
     implementation 'com.google.android:flexbox:2.0.1'
 
+    // Material Dialog Library
+    implementation 'com.shreyaspatil:MaterialDialog:2.1'
+    // Material Design Library
+    implementation 'com.google.android.material:material:1.0.0'
+
     //gif
+    implementation 'com.shreyaspatil:MaterialDialog:2.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
 
     implementation project(path: ':BaseLibrary')

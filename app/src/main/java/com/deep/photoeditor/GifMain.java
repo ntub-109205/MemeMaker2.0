@@ -1,7 +1,9 @@
 package com.deep.photoeditor;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__gif;
 import com.deep.photoeditor.gifmake.GifMakeActivity;
 import com.deep.photoeditor.gifmake.VideoToGifActivity;
+import com.felipecsl.gifimageview.library.GifImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,4 +77,6 @@ public class GifMain extends AppCompatActivity {
             }
         };
     }
+
+
 }

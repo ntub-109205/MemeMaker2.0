@@ -26,6 +26,8 @@ import com.deep.photoeditor.image_selector.MultiImageSelector;
 import com.deep.photoeditor.utils.DialogUtil;
 import com.deep.photoeditor.utils.FileUtil;
 import com.felipecsl.gifimageview.library.GifImageView;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
+//import com.shreyaspatil.MaterialDialog.MaterialDialog;
 
 import java.util.List;
 
@@ -150,7 +152,6 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
                     GifImageView gifView = (GifImageView) contentView.findViewById(R.id.gif_view);
                     byte[] fileBytes = FileUtil.getFileBytes(presenter.getPreViewFile());
                     if (fileBytes != null) {
-
                         gifView.setBytes(fileBytes);
                         gifView.startAnimation();
                     }
