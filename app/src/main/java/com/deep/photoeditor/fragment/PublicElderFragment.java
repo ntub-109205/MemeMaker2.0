@@ -61,5 +61,6 @@ public class PublicElderFragment extends Fragment {
         lstMemeMeme.add(new PublicMeme("1","1","#認同","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTqJWtzg9D-9omdBRjwYEXHifBGMjcraz7ZwW_AQa29H7eF8pfH&usqp=CAU","江戶川先生",14,0));
 
 
+
     }
 }

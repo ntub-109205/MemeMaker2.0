@@ -60,6 +60,5 @@ public class ColMemeFragment extends Fragment {
         lstMemeMeme.add(new PublicMeme("1","1","#歷史","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589034990886.jpg","江戶川先生",14,0));
 
 
-
     }
 }
