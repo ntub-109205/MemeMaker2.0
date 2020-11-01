@@ -49,11 +49,11 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setTitleBarView();
-        titleBar_title_tv.setText("video转gif");
-        titleBar_more_tv.setText("保存");
-        titleBar_more_tv.setVisibility(View.VISIBLE);
-        titleBar_more_tv.setOnClickListener(v -> startActivity(new Intent(mContext,SaveImageActivity.class)));
+//        setTitleBarView();
+//        titleBar_title_tv.setText("video转gif");
+//        titleBar_more_tv.setText("保存");
+//        titleBar_more_tv.setVisibility(View.VISIBLE);
+//        titleBar_more_tv.setOnClickListener(v -> startActivity(new Intent(mContext,SaveImageActivity.class)));
         //Button btn_chooseAudio = this.findViewById(R.id.btn_chooseAudio);
         //btn_chooseAudio.setOnClickListener(this);
         imageView = this.findViewById(R.id.image_gif);
@@ -193,7 +193,7 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
             if (mainActivity != null) {
                 dismissLoadingDialog();
                 //tv_dirGif.setText("转换成功，gif图片路径为："+gifFile);
-                Toast.makeText(mainActivity, "转换成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mainActivity, "轉換成功", Toast.LENGTH_SHORT).show();
                 Glide.with(mainActivity).asGif().load(new File(gifFile)).into(mainActivity.imageView);
             }
         }
@@ -205,8 +205,8 @@ public class VideoToGifActivity extends GifBaseActivity implements View.OnClickL
         if (toolAlertDialog == null) {
             toolAlertDialog = new ToolAlertDialog(mContext);
         }
-        toolAlertDialog.showAlertDialog("权限申请", getResources().getString(R.string.ensureNormalOperation)
-                        + getResources().getString(R.string.app_name) + getResources().getString(R.string.pleaseAllowStoreAndCam), "去允许",
+        toolAlertDialog.showAlertDialog("權限申請", getResources().getString(R.string.ensureNormalOperation)
+                        + getResources().getString(R.string.app_name) + getResources().getString(R.string.pleaseAllowStoreAndCam), "去允許",
                 view -> {
                     toolAlertDialog.dismissAlertDialog();
                     permissionHelper.check(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
