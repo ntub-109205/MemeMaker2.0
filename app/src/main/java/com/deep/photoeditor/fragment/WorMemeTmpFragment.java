@@ -62,7 +62,7 @@ public class WorMemeTmpFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Log.d("runrun",callApi.returnString());
+//        Log.d("wormetemp",callApi.returnString());
         Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1?time=1&user=1"));
         //留下array[]，其他切掉
         String temp = callApi.get("http://140.131.115.99/api/template/show/1?time=1&user=1").trim();
@@ -79,7 +79,7 @@ public class WorMemeTmpFragment extends Fragment {
                 String name = jsonObject.getString("name");
                 String author = jsonObject.getString("author");
                 int count = Integer.parseInt(jsonObject.getString("count"));
-                Log.d("runrun", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
+                Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
                 lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
             }
