@@ -1,6 +1,7 @@
 package com.deep.photoeditor.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__gif;
+import com.deep.photoeditor.api;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +33,8 @@ public class PublicGifFragment extends Fragment {
     View v;
     private RecyclerView myrecyclerview;
     private List<PublicMeme> lstMemeMeme;
+    //api
+    private static api callApi = new api();
 
     public PublicGifFragment() {
         // Required empty public constructor
@@ -49,16 +57,54 @@ public class PublicGifFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String temp = "";
+        try {
+            temp = callApi.get("http://140.131.115.99/api/meme/show/3").trim();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/3"));
+        //留下array[]，其他切掉
+//        String temp = callApi.get("http://140.131.115.99/api/meme/show/3").trim();
+        temp = temp.substring(8,(temp.length()-1));
+        Log.d("memeinfo","cut allready :"+ temp);
+        //把jsonArray塞進cardView的arrayList
+        try {
+            JSONArray array = new JSONArray(temp);
+            lstMemeMeme = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String memeId = jsonObject.getString("meme_id");
+                String filelink = jsonObject.getString("filelink");
+                String author = jsonObject.getString("author");
+                String tempId = jsonObject.getString("template_id");
+                int count = Integer.parseInt(jsonObject.getString("count"));
+                int thumb = Integer.parseInt(jsonObject.getString("thumb"));
+                Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
 
-        lstMemeMeme = new ArrayList<>();
-        lstMemeMeme.add(new PublicMeme("1","1","#我真可愛","https://lh3.googleusercontent.com/proxy/_aOVP7bqrBMjyM8izkVPTgzgmueVtmxlD71EBLbFbHI_E6jISa_hl9rsUri0KemCClp3GjuUWeZulFDVyfz50B_s9PerMAX9TXBCpSm_WG0uQ8BSHCmdFd2C","jessie",30,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#誰怕誰","https://4.bp.blogspot.com/-cvLAyXhtB3c/XQrc0yQCQ2I/AAAAAAAMlPE/wNN_5eU1Xe0SYainh1NefU-sBIYj8ZksACLcBGAs/s1600/AS0005411_03.gif","Geo",20,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#太好了","https://media1.tenor.com/images/200bec2e1191d7e08ee5e7832fd0a1bf/tenor.gif?itemid=11841779","跑跑跑的人",19,0));
-        lstMemeMeme.add(new PublicMeme("1","1","#骷顱頭 #CUTE","https://helpx.adobe.com/content/dam/help/en/photoshop/how-to/create-animated-gif/jcr_content/main-pars/image_4389415/create-animated-gif_3a-v2.gif","好累",18,0));
-        lstMemeMeme.add(new PublicMeme("1","1","#鬼滅之刃","https://imgur.com/CV5zi8A.gif","Anc1233",17,0));
-        lstMemeMeme.add(new PublicMeme("1","1","#迪麗熱巴","https://lh3.googleusercontent.com/proxy/NaWfGS8M9D2omQntntF0HrGgdeUi7j_YHABKgxocY5Nx8mfhXsQC3yxt-36dTyGmD3UwONW0JvcE5Pr6t2Bys6V61u6FF-ZrwK4","牙醫09",16,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#Happy Birthday","https://i.pinimg.com/originals/11/2c/79/112c79099635f40073d579cd237a9ad8.gif","江戶川先生",14,0));
+                //---把tag們分出來---//
+                String tags = jsonObject.getString("tags");
+                String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+                Log.d("tags", "tags:" + items);
+                // items.length 是所有項目的個數
+                String[] results = new String[items.length];
+                // 將結果放入 results
+                for (int j = 0; j < items.length; j++) {
+                    results[j] = items[j].trim();
+                }
+                String newtag = "";
+                for (String tag : results) {
+                    tag = tag.replaceAll("\"", "");
+                    Log.d("tags", "tags:" + tag + ", ");
+                    newtag = newtag + "#" + tag;
+                }
+                //---tag們分完了---//
 
-
+                //產生cardView
+                lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

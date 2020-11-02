@@ -58,17 +58,19 @@ public class maintab1 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String temp = "";
         try {
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
-            callApi.get("http://140.131.115.99/api/template/show/1");
+//            callApi.get("http://140.131.115.99/api/template/show/1");
+            temp = callApi.get("http://140.131.115.99/api/template/show/1").trim();
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        Log.d("runrun",callApi.returnString());
         Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/1").trim();
+//        String temp = callApi.get("http://140.131.115.99/api/template/show/1").trim();
         temp = temp.substring(13,(temp.length()-1));
         Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList

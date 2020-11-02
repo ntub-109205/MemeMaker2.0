@@ -2,6 +2,7 @@ package com.deep.photoeditor.fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__elderTemp;
+import com.deep.photoeditor.adpater.RecyclerViewAdapter__memeTemp;
+import com.deep.photoeditor.api;
 import com.deep.photoeditor.elderTemplate;
+import com.deep.photoeditor.memeTemplate;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +35,9 @@ public class maintab2 extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<elderTemplate> lstelderTemplate;
+    private List<memeTemplate> lstelderTemplate;
+    //api
+    private static api callApi = new api();
 
 
     public maintab2() {
@@ -41,7 +51,7 @@ public class maintab2 extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_maintab2, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.elderTemplate_recyclerView);
-        RecyclerViewAdapter__elderTemp recyclerViewAdapter_elderTemp = new RecyclerViewAdapter__elderTemp(getContext(), lstelderTemplate);
+        RecyclerViewAdapter__memeTemp recyclerViewAdapter_elderTemp = new RecyclerViewAdapter__memeTemp(getContext(), lstelderTemplate);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter_elderTemp);
@@ -51,18 +61,47 @@ public class maintab2 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String temp="";
+        try {
+            temp = callApi.get("http://140.131.115.99/api/template/show/2").trim();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Log.d("runrun",callApi.returnString());
+//        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1"));
+        //留下array[]，其他切掉
+        temp = temp.substring(13,(temp.length()-1));
+        Log.d("posttoget","cut allready :"+ temp);
+        //把jsonArray塞進cardView的arrayList
+        try {
+            JSONArray array = new JSONArray(temp);
+            lstelderTemplate = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String id = jsonObject.getString("id");
+                String filelink = jsonObject.getString("filelink");
+                String name = jsonObject.getString("name");
+                String author = jsonObject.getString("author");
+                int count = Integer.parseInt(jsonObject.getString("count"));
+                Log.d("runrun", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
+                //產生cardView
+                lstelderTemplate.add(new memeTemplate(id,name,filelink,author,count));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        lstelderTemplate = new ArrayList<>();
-        lstelderTemplate.add(new elderTemplate("百合花",R.drawable.elder1));
-        lstelderTemplate.add(new elderTemplate("一支百合花",R.drawable.elder2));
-        lstelderTemplate.add(new elderTemplate("海浪與夕陽",R.drawable.elder9));
-        lstelderTemplate.add(new elderTemplate("海岸",R.drawable.elder10));
-        lstelderTemplate.add(new elderTemplate("盛開的百合花",R.drawable.elder3));
-        lstelderTemplate.add(new elderTemplate("白色百合花",R.drawable.elder4));
-        lstelderTemplate.add(new elderTemplate("書與玫瑰",R.drawable.elder5));
-        lstelderTemplate.add(new elderTemplate("綠樹遮天",R.drawable.elder6));
-        lstelderTemplate.add(new elderTemplate("秋天瓢蟲",R.drawable.elder7));
-        lstelderTemplate.add(new elderTemplate("露珠_湖面",R.drawable.elder8));
+//        lstelderTemplate = new ArrayList<>();
+//        lstelderTemplate.add(new elderTemplate("百合花",R.drawable.elder1));
+//        lstelderTemplate.add(new elderTemplate("一支百合花",R.drawable.elder2));
+//        lstelderTemplate.add(new elderTemplate("海浪與夕陽",R.drawable.elder9));
+//        lstelderTemplate.add(new elderTemplate("海岸",R.drawable.elder10));
+//        lstelderTemplate.add(new elderTemplate("盛開的百合花",R.drawable.elder3));
+//        lstelderTemplate.add(new elderTemplate("白色百合花",R.drawable.elder4));
+//        lstelderTemplate.add(new elderTemplate("書與玫瑰",R.drawable.elder5));
+//        lstelderTemplate.add(new elderTemplate("綠樹遮天",R.drawable.elder6));
+//        lstelderTemplate.add(new elderTemplate("秋天瓢蟲",R.drawable.elder7));
+//        lstelderTemplate.add(new elderTemplate("露珠_湖面",R.drawable.elder8));
 
     }
 
