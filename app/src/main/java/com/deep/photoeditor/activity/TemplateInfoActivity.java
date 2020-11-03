@@ -1,5 +1,6 @@
 package com.deep.photoeditor.activity;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.fragment.TempInfoFragment;
+import com.felipecsl.gifimageview.library.GifImageView;
 import com.wx.goodview.GoodView;
 
 import java.security.cert.PKIXCertPathBuilderResult;
@@ -23,6 +25,7 @@ public class TemplateInfoActivity extends AppCompatActivity {
     private static final String TAG = "TemplateInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    Dialog mDialog;
     //goodview
     GoodView mGoodView;
     //給相關梗圖用的tempid
@@ -48,6 +51,9 @@ public class TemplateInfoActivity extends AppCompatActivity {
         pagerAdapter.AddFragment(new TempInfoFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
+        //init Dialog
+        mDialog = new Dialog(this);
+        mDialog.setContentView(R.layout.dialog_gif);
 
         getIncomingIntent();
     }
@@ -66,6 +72,8 @@ public class TemplateInfoActivity extends AppCompatActivity {
             int usedSum = getIntent().getIntExtra("used_sum", 0);
 
             setInfo(tempUrl, tempName, userName, usedSum);
+            showImageDialog(tempUrl,tempName);
+
             Log.d("temp", "tempid="+returnTempIdString());
         }
     }
@@ -88,6 +96,28 @@ public class TemplateInfoActivity extends AppCompatActivity {
         //設置熱門程度(被使用次數)
         TextView fireNum = findViewById(R.id.fireNum);
         fireNum.setText(String.valueOf(usedSum));
+    }
+
+    private void showImageDialog(String tempUrl,String tempName) {
+        ImageView image = findViewById(R.id.tempImage);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GifImageView dialogImage = (GifImageView) mDialog.findViewById(R.id.gif_view);
+                TextView dialogTag = (TextView) mDialog.findViewById(R.id.gif_tag);
+                ImageView diaglogClose = (ImageView) mDialog.findViewById(R.id.dialog_close);
+                //show GIF by using Glide
+                Glide.with(view).load(tempUrl).into(dialogImage);
+                dialogTag.setText(tempName);
+                diaglogClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mDialog.dismiss();
+                    }
+                });
+                mDialog.show();
+            }
+        });
     }
 
     public static String returnTempIdString(){
