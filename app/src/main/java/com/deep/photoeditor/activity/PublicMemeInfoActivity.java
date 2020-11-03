@@ -1,5 +1,6 @@
 package com.deep.photoeditor.activity;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,12 +18,14 @@ import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.fragment.MemeInfoFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.fragment.maintab2;
+import com.felipecsl.gifimageview.library.GifImageView;
 import com.wx.goodview.GoodView;
 
 public class PublicMemeInfoActivity extends AppCompatActivity {
     private static final String TAG = "PublicMemeInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    Dialog mDialog;
     //goodview
     GoodView mGoodView;
     //給相關梗圖用的tempid
@@ -48,6 +51,9 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         pagerAdapter.AddFragment(new MemeInfoFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
+        //init Dialog
+        mDialog = new Dialog(this);
+        mDialog.setContentView(R.layout.dialog_gif);
 
         getIncomingIntent();
     }
@@ -66,6 +72,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             int likeSum = getIntent().getIntExtra("like_sum", 0);
 
             setInfo(memeUrl, hashTag, userName, likeSum);
+            showImageDialog(memeUrl,hashTag);
             Log.d("pubmeme", "tempid="+returnTempIdString());
         }
     }
@@ -90,6 +97,28 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         fireNum.setText(String.valueOf(likeSum));
 
 
+    }
+
+    private void showImageDialog(String memeUrl,String hashTag) {
+        ImageView image = findViewById(R.id.memeImage);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GifImageView dialogImage = (GifImageView) mDialog.findViewById(R.id.gif_view);
+                TextView dialogTag = (TextView) mDialog.findViewById(R.id.gif_tag);
+                ImageView diaglogClose = (ImageView) mDialog.findViewById(R.id.dialog_close);
+                //show GIF by using Glide
+                Glide.with(view).load(memeUrl).into(dialogImage);
+                dialogTag.setText(hashTag);
+                diaglogClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mDialog.dismiss();
+                    }
+                });
+                mDialog.show();
+            }
+        });
     }
 
     public static String returnTempIdString(){
