@@ -5,6 +5,7 @@ import android.content.Context;
 import com.deep.photoeditor.bean.GifImageFrame;
 import com.deep.photoeditor.bean.GifImageFrame;
 import com.deep.photoeditor.utils.GifMakeUtil;
+import com.deep.photoeditor.variable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class GifMakePresenter {
 
     private boolean hasPreview;
 
+    private static com.deep.photoeditor.variable variable = new variable();
+
+
     public GifMakePresenter(Context mContext) {
         mView = (IGifMakeView) mContext;
     }
@@ -51,6 +55,7 @@ public class GifMakePresenter {
         int count = MAX_COUNT - size;
         int sizeP = paths.size();
         GifImageFrame gif = null;
+
         if(count < sizeP){
             for (int i = 0; i < count; i++) {
                 gif = new GifImageFrame();
@@ -90,6 +95,7 @@ public class GifMakePresenter {
             public void call(Subscriber<? super String> subscriber) {
                 try {
                     previewFile =  GifMakeUtil.createGif(filename, getPaths(), fps, width, height);
+                    variable.setGifPath(previewFile);
                     subscriber.onCompleted();
                 } catch (IOException e) {
                     subscriber.onError(e.getCause());

@@ -18,6 +18,8 @@ public class variable {
     private static String tagName;
     private static String searchName;
     private static String category_id;
+    private static byte[] gifByteArray;
+    private static String gifPath;
 
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
     //模板Uri
@@ -85,6 +87,11 @@ public class variable {
     public static void category_idSetter(String category_id1){category_id = category_id1;}
 
     //動圖陣列
+    public byte[] getGifByteArray() { return this.gifByteArray; }
+    public void setGifByteArray(byte[] gif) { this.gifByteArray = gif; }
 
+    //gifpath
+    public static String getGifPath(){ return gifPath; }
+    public void setGifPath(String path){this.gifPath = path;}
 
 }

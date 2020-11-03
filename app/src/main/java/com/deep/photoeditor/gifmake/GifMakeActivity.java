@@ -25,10 +25,13 @@ import com.deep.photoeditor.constant.Constant;
 import com.deep.photoeditor.image_selector.MultiImageSelector;
 import com.deep.photoeditor.utils.DialogUtil;
 import com.deep.photoeditor.utils.FileUtil;
+import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 //import com.shreyaspatil.MaterialDialog.MaterialDialog;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -61,6 +64,8 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
     private ImageAdapter adapter;
 
     private GifMakePresenter presenter;
+
+    private static com.deep.photoeditor.variable variable = new variable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,12 +138,12 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
             case R.id.tv_generate://生成gif图
                 int size = presenter.getGifImages().size();
                 if(size > 1){
-                    Toast.makeText(GifMakeActivity.this, "开始生成Gif图", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GifMakeActivity.this, "開始生成gif圖", Toast.LENGTH_SHORT).show();
 //                    presenter.createGif(1000, 2048, 1300);
                     presenter.createGif(500, 1300, 1300);
                     DialogUtil.showLoading(this);
                 } else {
-                    Toast.makeText(GifMakeActivity.this, "请添加图片", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GifMakeActivity.this, "請添加圖片", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.clear:
@@ -161,7 +166,7 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
                             .setCanceledOnTouchOutside(true);
                     mMaterialDialog.show();
                 } else {
-                    Toast.makeText(GifMakeActivity.this, "没有预览图", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GifMakeActivity.this, "沒有預覽圖", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -191,11 +196,9 @@ public class GifMakeActivity extends AppCompatActivity implements IGifMakeView{
         if(b){
             Toast.makeText(this, "生成成功", Toast.LENGTH_SHORT).show();
             byte[] fileBytes = FileUtil.getFileBytes(presenter.getPreViewFile());
-
-            Log.d(TAG, "finishCreate: "+fileBytes);
+            variable.setGifByteArray(fileBytes);
+            Log.d(TAG, "finishCreate: "+ Arrays.toString(fileBytes));
             Intent intent = new Intent(GifMakeActivity.this, PhotogifPublicsetting.class);
-            intent.putExtra("GifBytes",fileBytes);
-            intent.setClass(GifMakeActivity.this, PhotogifPublicsetting.class);
             startActivity(intent);
         } else {
             Toast.makeText(this, "生成失败", Toast.LENGTH_SHORT).show();
