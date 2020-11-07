@@ -20,7 +20,8 @@ public class variable {
     private static String category_id;
     private static byte[] gifByteArray;
     private static String gifPath;
-
+    private static ArrayList<Bitmap> Bmp = new ArrayList<Bitmap>();
+    private static ArrayList<Integer> BmpCounter = new ArrayList<Integer>();
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
     //模板Uri
     public static Uri templateUriGetter(){
@@ -70,6 +71,18 @@ public class variable {
     }
     public static void templatesBitmapSetter(ArrayList<Bitmap> templatesBitmap1){templatesBitmap = templatesBitmap1;}
 
+    //多圖模板bitmap順序-1
+    public static ArrayList<Bitmap> BmpGetter(){
+        return Bmp;
+    }
+    public static void BmpSetter(ArrayList<Bitmap> Bmp1){Bmp = Bmp1;}
+
+    //多圖模板bitmap順序-2
+    public static ArrayList<Integer> BmpCounterGetter(){
+        return BmpCounter;
+    }
+    public static void BmpCounterSetter(ArrayList<Integer> BmpCounter1){BmpCounter = BmpCounter1;}
+
     //搜尋&熱門tag名稱
     public static String tagNameGetter(){
         return tagName;
@@ -81,9 +94,7 @@ public class variable {
     public static void searchNameSetter(String searchName1){searchName = searchName1;}
 
     //梗圖還是長輩圖
-    public static String category_idGetter(){
-        return category_id;
-    }
+    public static String category_idGetter(){return category_id;}
     public static void category_idSetter(String category_id1){category_id = category_id1;}
 
     //動圖陣列

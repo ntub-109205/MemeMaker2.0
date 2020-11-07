@@ -2,7 +2,10 @@ package com.deep.photoeditor.adpater;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.deep.photoeditor.image_selector.multi_image_selector.bean.Image;
 import com.deep.photoeditor.layoutImage;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.variable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,6 +34,9 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
     private HashMap<View, ImageView> mImageViewMap = new HashMap<View, ImageView>();
     private final static String TAG = "Recycler_layoutImage";
     private List<ImageView> mImageViewList;
+    ArrayList<Bitmap> Bmp = new ArrayList<Bitmap>();
+    ArrayList<Integer> BmpCounter = new ArrayList<Integer>();
+    private static variable variable = new variable();
 
     public RecyclerViewAdapter_layoutImage(Context context, List<Bitmap> layoutImageList) {
         this.mContext = context;
@@ -46,6 +53,18 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         return viewHolder;
     }
 
+    private Bitmap getBitmap(Drawable drawable) {
+        Bitmap bitmap = Bitmap.createBitmap(
+                drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(),
+                drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                        : Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        //canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
     private int mCounter = 1;
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         holder.layoutImageView.setImageBitmap(mLayoutImageList.get(position));
@@ -57,6 +76,21 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
                 RelativeLayout relativeLayout = holder.combinePic;
                 // for adding or removing the selector view.
                 if (mImageViewMap.get(view) == null) {
+                    imageView.setDrawingCacheEnabled(true);
+
+                    if (Bmp.contains(imageView.getDrawingCache())){
+                        int idx = Bmp.indexOf(imageView.getDrawingCache());
+                        Bmp.remove(idx);
+                        BmpCounter.remove(idx);
+                        Bmp.add(imageView.getDrawingCache());
+                        BmpCounter.add(mCounter);
+                    }else {
+                        Bmp.add(imageView.getDrawingCache());
+                        BmpCounter.add(mCounter);
+                    }
+                    imageView.setDrawingCacheEnabled(false);
+                    variable.BmpSetter(Bmp);
+                    variable.BmpCounterSetter(BmpCounter);
                     mImageViewMap.put(view, imageView);
                     mImageViewList.add(imageView);
                     addSelectorView(relativeLayout, imageView, mCounter);
@@ -90,6 +124,7 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         Log.d(TAG, "[SelectorView] addSelectorView, imageView = " + imageView.toString());
         //load image resources
         setSelectorImage(imageView, counter);
+
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(90,90);
         params.leftMargin = 280;
         params.topMargin = 280;
