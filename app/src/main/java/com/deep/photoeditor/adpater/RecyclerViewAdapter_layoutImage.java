@@ -82,6 +82,7 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
                         int idx = Bmp.indexOf(imageView.getDrawingCache());
                         Bmp.remove(idx);
                         BmpCounter.remove(idx);
+                        
                         Bmp.add(imageView.getDrawingCache());
                         BmpCounter.add(mCounter);
                     }else {

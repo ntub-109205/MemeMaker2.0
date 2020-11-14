@@ -100,6 +100,7 @@ public class editSetname extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 post();
+                variable.useMyImageSetter(Boolean.TRUE);
                 Intent edit = new Intent(editSetname.this,EditImageActivity.class);
                 startActivity(edit);
             }

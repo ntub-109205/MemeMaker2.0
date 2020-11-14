@@ -133,12 +133,18 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
 
         imgClose = findViewById(R.id.imgClose);
         imgClose.setOnClickListener(this);
+        if(variable.useMyImageGetter()) {   //用本地端的圖片
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), templateUri);
+                mPhotoEditorView.getSource().setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Log.d("NotUseMyImage","variable.useMyImageGetter()="+variable.useMyImageGetter().toString());
+            Log.d("NotUseMyImage","variable.templateImageGetter()="+variable.templateImageGetter().toString());
 
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), templateUri);
-            mPhotoEditorView.getSource().setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
+            mPhotoEditorView.getSource().setImageBitmap(variable.templateImageGetter());
         }
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -257,12 +263,17 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                     mPhotoEditorView.getSource().setImageBitmap(photo);
                     break;
                 case PICK_REQUEST:
-                    try {
+                    if(variable.useMyImageGetter()) {   //用本地端的圖片
+                        try {
+                            mPhotoEditor.clearAllViews();
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), templateUri);
+                            mPhotoEditorView.getSource().setImageBitmap(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else{                              //用非本地端的圖片
                         mPhotoEditor.clearAllViews();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), templateUri);
-                        mPhotoEditorView.getSource().setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        mPhotoEditorView.getSource().setImageBitmap(variable.templateImageGetter());
                     }
                     break;
             }
