@@ -222,7 +222,7 @@ public class SearchFragment extends Fragment {
                 lstTagHotSearch = new ArrayList<>();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject jsonObject = array.getJSONObject(i);
-                    //String id = jsonObject.getString("id");
+                    String tempId = jsonObject.getString("id");
                     String filelink = jsonObject.getString("filelink");
                     String name = jsonObject.getString("name");
                     String author = jsonObject.getString("author");
@@ -261,7 +261,7 @@ public class SearchFragment extends Fragment {
                             break;
                         default:
                     }
-                    lstTagHotSearch.add(new tagHotSearch(name, filelink, a, author, count));
+                    lstTagHotSearch.add(new tagHotSearch(tempId, name, filelink, a, author, count));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
