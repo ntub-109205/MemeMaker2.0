@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.deep.photoeditor.EditImageActivity;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.api;
 import com.deep.photoeditor.editSetname;
 import com.deep.photoeditor.fragment.MemeInfoFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
@@ -36,11 +37,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class PublicMemeInfoActivity extends AppCompatActivity {
     private static final String TAG = "PublicMemeInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
     private static variable variable = new variable();
+    //api
+    private static api callApi = new api();
     public Button btnDomeme;
 
     Dialog mDialog;
@@ -48,6 +53,9 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
     GoodView mGoodView;
     //給相關梗圖用的tempid
     private static String tempId;
+    private static int thumb; //thumb值 判斷有沒有點過愛心
+    private static int likeSum;
+    private static String memeId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,7 +109,9 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             variable.templateImageSetter(getBitmap(memeUrl));
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
-            int likeSum = getIntent().getIntExtra("like_sum", 0);
+            likeSum = getIntent().getIntExtra("like_sum", 0);
+            thumb = getIntent().getIntExtra("thumb", 0);
+            memeId = getIntent().getStringExtra("memeId");
 
             setInfo(memeUrl, hashTag, userName, likeSum);
             showImageDialog(memeUrl,hashTag);
@@ -124,9 +134,16 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         //設置製作者名
         TextView user = findViewById(R.id.madeByUser);
         user.setText(userName);
-        //設置熱門程度(被使用次數)
-        TextView fireNum = findViewById(R.id.likeNum);
-        fireNum.setText(String.valueOf(likeSum));
+        //設置點讚次數
+        TextView likeNum = findViewById(R.id.likeNum);
+        likeNum.setText(String.valueOf(likeSum));
+        //設置愛心顏色
+        ImageView like = findViewById(R.id.like);
+        if (thumb==0) {
+            like.setImageResource(R.drawable.like_gray);
+        }else {
+            like.setImageResource(R.drawable.like_checked);
+        }
 
 
     }
@@ -164,9 +181,31 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         mGoodView.show(view);
     }
     public void like(View view) {
-        ((ImageView) view).setImageResource(R.drawable.like_checked);
-        mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
-        mGoodView.show(view);
+        TextView likeNum = findViewById(R.id.likeNum);
+        if(thumb == 0){
+            ((ImageView) view).setImageResource(R.drawable.like_checked);
+            mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
+            mGoodView.show(view);
+            //改旁邊的顯示
+            likeNum.setText(String.valueOf(likeSum +1));
+            likeSum += 1;
+            thumb = 1;
+        } else {
+            ((ImageView) view).setImageResource(R.drawable.like_gray);
+            mGoodView. setTextInfo("-1", Color.parseColor("#999da4"), 12);
+            mGoodView.show(view);
+            //改旁邊的顯示
+            likeNum.setText(String.valueOf(likeSum- 1));
+            likeSum -= 1;
+            thumb = 0;
+        }
+
+        try {
+            callApi.post("http://140.131.115.99/api/meme/thumb","meme_id=" + memeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("thumb", callApi.returnString());
     }
 
 
