@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.ContentResolver;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,8 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.fragment.WorMemeTmpFragment;
 import com.deep.photoeditor.fragment.edittab1;
-import com.deep.photoeditor.fragment.edittab2;
 import com.google.android.material.tabs.TabLayout;
 import android.net.Uri;
 import android.widget.Toast;
@@ -52,19 +51,13 @@ public class EditMain extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.editViewPager);
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
         pagerAdapter.AddFragment(new edittab1(),"熱門模板");
-        pagerAdapter.AddFragment(new edittab2(),"我的模板");
+        pagerAdapter.AddFragment(new WorMemeTmpFragment(),"我的模板");
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         btnAddMeme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(intent, 1);
-
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
