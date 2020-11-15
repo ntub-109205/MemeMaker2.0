@@ -1,10 +1,14 @@
 package com.deep.photoeditor.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,18 +17,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.deep.photoeditor.EditImageActivity;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.editSetname;
 import com.deep.photoeditor.fragment.MemeInfoFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.fragment.maintab2;
+import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.wx.goodview.GoodView;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class PublicMemeInfoActivity extends AppCompatActivity {
     private static final String TAG = "PublicMemeInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    private static variable variable = new variable();
+    public Button btnDomeme;
+
     Dialog mDialog;
     //goodview
     GoodView mGoodView;
@@ -56,6 +74,15 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         mDialog.setContentView(R.layout.dialog_gif);
 
         getIncomingIntent();
+        btnDomeme = (Button)findViewById(R.id.domeme);
+        btnDomeme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                variable.useMyImageSetter(Boolean.FALSE);
+                Intent edit = new Intent(PublicMemeInfoActivity.this, EditImageActivity.class);
+                startActivity(edit);
+            }
+        });
     }
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
@@ -65,8 +92,13 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
 
             //模板id給相關梗圖fragment用
             tempId = getIntent().getStringExtra("temp_id");
+            variable.templateIDSetter(tempId);
+
             //下面這些放到cardView
             String memeUrl = getIntent().getStringExtra("meme_url");
+            Log.d("NotUseMyImage","memeUrl="+memeUrl);
+            Log.d("NotUseMyImage","returnBitMap(memeUrl)="+getBitmap(memeUrl).toString());
+            variable.templateImageSetter(getBitmap(memeUrl));
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
             int likeSum = getIntent().getIntExtra("like_sum", 0);
@@ -136,4 +168,29 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
         mGoodView.show(view);
     }
+
+
+    public Bitmap getBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL iconUrl = new URL(url);
+            URLConnection conn = iconUrl.openConnection();
+            HttpURLConnection http = (HttpURLConnection) conn;
+
+            int length = http.getContentLength();
+
+            conn.connect();
+            // 获得图像的字符流
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is, length);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();// 关闭流
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bm;
+    }
+
 }

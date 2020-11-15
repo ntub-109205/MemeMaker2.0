@@ -108,6 +108,7 @@ public class editSetname extends BaseActivity {
             public void onClick(View v){
                 post();
                 hideLoading();
+                variable.useMyImageSetter(Boolean.TRUE);
                 Intent edit = new Intent(editSetname.this,EditImageActivity.class);
                 startActivity(edit);
             }
