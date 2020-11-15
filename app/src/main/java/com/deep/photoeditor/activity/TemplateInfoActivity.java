@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.deep.photoeditor.EditImageActivity;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.api;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
@@ -38,12 +39,15 @@ public class TemplateInfoActivity extends AppCompatActivity {
     public PageAdapter pagerAdapter;
     private static com.deep.photoeditor.variable variable = new variable();
     public Button btnDomeme;
+    //api
+    private static api callApi = new api();
 
     Dialog mDialog;
     //goodview
     GoodView mGoodView;
     //給相關梗圖用的tempid
     private static String tempId;
+    private static int saved; //是否被收藏
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +83,22 @@ public class TemplateInfoActivity extends AppCompatActivity {
                 startActivity(edit);
             }
         });
+
+        String temp="";
+        try {
+            temp = callApi.get("http://140.131.115.99/api/template/saved/"+tempId).trim();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //{"saved":"0"}
+        saved =Integer.parseInt(temp.substring(10,11));
+        //設置收藏顏色
+        ImageView bookMark = findViewById(R.id.bookmark);
+        if (saved==0) {
+            bookMark.setImageResource(R.drawable.bookmark);
+        }else {
+            bookMark.setImageResource(R.drawable.bookmark_checked);
+        }
     }
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
@@ -153,9 +173,22 @@ public class TemplateInfoActivity extends AppCompatActivity {
 
     //onclick判斷在xml
     public void bookmark(View view) {
-        ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
-        mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
-        mGoodView.show(view);
+        if (saved == 0) {
+            ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
+            mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
+            mGoodView.show(view);
+            saved=1;
+        } else {
+            ((ImageView) view).setImageResource(R.drawable.bookmark);
+            mGoodView. setTextInfo("取消收藏", Color.parseColor("#999da4"), 12);
+            mGoodView.show(view);
+            saved=0;
+        }
+        try {
+            callApi.post("http://140.131.115.99/api/template/saved","template_id=" + tempId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Bitmap getBitmap(String url) {
