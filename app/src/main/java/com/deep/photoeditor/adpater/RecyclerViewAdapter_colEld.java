@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
+import com.deep.photoeditor.memeTemplate;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
@@ -28,10 +29,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_colEld extends RecyclerView.Adapter<RecyclerViewAdapter_colEld.MyViewHolder> {
     Context mContext;
-    List<PublicMeme> mData;
+    List<memeTemplate> mData;
 
 
-    public RecyclerViewAdapter_colEld(Context mContext, List<PublicMeme>  mData) {
+    public RecyclerViewAdapter_colEld(Context mContext, List<memeTemplate>  mData) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -53,35 +54,25 @@ public class RecyclerViewAdapter_colEld extends RecyclerView.Adapter<RecyclerVie
                 .placeholder(R.drawable.ic_launcher_background);
         //將image用glide的方式呈現
         Glide.with(mContext)
-                .load(mData.get(position).getMemeImage())
+                .load(mData.get(position).getTempImage())
                 .apply(requestOptions)
-                .into(holder.imgView);
-        holder.hashTag.setText(mData.get(position).getHashTag());
-//        holder.likeNum.setText(String.valueOf(mData.get(position).getLikeSum()));
-        holder.collect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GoodView mGoodView;
-                mGoodView = new GoodView(mContext);
-                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-                ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
-                mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
-                mGoodView.show(view);
-            }
-        });
+                .into(holder.tempImage);
+        holder.tempName.setText(mData.get(position).getTempName());
+        holder.fireNum.setText(String.valueOf(mData.get(position).getUsedSum()));
 
-        holder.item_meme.setOnClickListener(new View.OnClickListener() {
+        holder.item_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
 
-                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
+//
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
-                intent.putExtra("meme_url", mData.get(position).getMemeImage());
-                intent.putExtra("hashTag", mData.get(position).getHashTag());
+                intent.putExtra("temp_id", mData.get(position).getTemp_id());
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
                 intent.putExtra("user_name", mData.get(position).getUserName());
-                intent.putExtra("like_sum", mData.get(position).getLikeSum());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 mContext.startActivity(intent);
             }
         });
@@ -95,20 +86,18 @@ public class RecyclerViewAdapter_colEld extends RecyclerView.Adapter<RecyclerVie
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView hashTag;
-        private ImageView collect;
-        private TextView imgName;
-        private RelativeLayout item_meme;
-        private ImageView imgView;
+        private TextView tempName;
+        private ImageView tempImage;
+        private TextView fireNum;
+        private RelativeLayout item_template;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            item_meme = (RelativeLayout) itemView.findViewById(R.id.template_item_col);
-            //imgName = (TextView) itemView.findViewById(R.id.cardName);
-            imgView = (ImageView) itemView.findViewById(R.id.cardImage);
-            hashTag = (TextView) itemView.findViewById(R.id.cardName);
-            collect = (ImageView) itemView.findViewById(R.id.bookmarkCheck);
+            item_template = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
+            tempName = (TextView) itemView.findViewById(R.id.cardName);
+            tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
+            fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
     }
 }

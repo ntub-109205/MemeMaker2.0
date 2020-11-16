@@ -2,6 +2,7 @@ package com.deep.photoeditor.fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_colEld;
+import com.deep.photoeditor.api;
+import com.deep.photoeditor.memeTemplate;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +34,8 @@ public class ColEldFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<PublicMeme> lstMemeMeme;
-
+    private List<memeTemplate> lstMemeMeme;
+    private static api callApi = new api();
 
     public ColEldFragment() {
         // Required empty public constructor
@@ -51,16 +58,36 @@ public class ColEldFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        lstMemeMeme = new ArrayList<>();
-        lstMemeMeme.add(new PublicMeme("1","1","#Dog #隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg","潔西卡",35,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#反叛的魯路修","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589009676654.jpg","Geo",20,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#三國殺","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589044855818.jpg","跑跑跑的人",19,0));
-        lstMemeMeme.add(new PublicMeme("1","1","#鼠定了你","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589086291871.jpg","好累",18,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#某系列主機遊戲","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041392638.jpg","Anc1233",17,0));
-        lstMemeMeme.add(new PublicMeme("1","1","#PM日常","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041053097.jpg","牙醫09",16,1));
-        lstMemeMeme.add(new PublicMeme("1","1","#歷史","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589034990886.jpg","江戶川先生",14,1));
-
-
-
+        try {
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
+            callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Log.d("wormetemp",callApi.returnString());
+        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved"));
+        //留下array[]，其他切掉
+        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved").trim();
+        temp = temp.substring(13,(temp.length()-1));
+        Log.d("posttoget","cut allready :"+ temp);
+        //把jsonArray塞進cardView的arrayList
+        try {
+            JSONArray array = new JSONArray(temp);
+            lstMemeMeme = new ArrayList<memeTemplate>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String id = jsonObject.getString("id");
+                String filelink = jsonObject.getString("filelink");
+                String name = jsonObject.getString("name");
+                String author = jsonObject.getString("author");
+                int count = Integer.parseInt(jsonObject.getString("count"));
+                Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
+                //產生cardView
+                lstMemeMeme.add(new memeTemplate(id,name,filelink,author,count));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
