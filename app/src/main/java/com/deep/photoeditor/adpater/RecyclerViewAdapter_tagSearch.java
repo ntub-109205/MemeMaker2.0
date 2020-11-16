@@ -3,18 +3,27 @@ package com.deep.photoeditor.adpater;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.TemplateInfoActivity;
+import com.deep.photoeditor.fragment.HomeFragment;
+import com.deep.photoeditor.fragment.PublicFragment;
 import com.deep.photoeditor.tagSearch;
 import com.deep.photoeditor.variable;
 import com.google.android.flexbox.AlignItems;
@@ -22,6 +31,8 @@ import com.google.android.flexbox.AlignSelf;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_tagSearch extends RecyclerView.Adapter<RecyclerViewAdapter_tagSearch.MyViewHolder> {
     Context mContext;
@@ -45,6 +56,31 @@ public class RecyclerViewAdapter_tagSearch extends RecyclerView.Adapter<Recycler
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtTag.setText(mData.get(position).getTag());
+        holder.txtTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+                Toast.makeText(mContext, mData.get(position).getTag(), Toast.LENGTH_SHORT).show();
+//                manager.beginTransaction().replace(R.id.fragment_container,
+//                        new PublicFragment()).commit();
+            }
+        });
+//        holder.tagSearch_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+//                Toast.makeText(mContext, mData.get(position).getTag(), Toast.LENGTH_SHORT).show();
+//
+////                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+////                intent.putExtra("temp_id", mData.get(position).getTempId());
+////                intent.putExtra("temp_url", mData.get(position).getTempImage());
+////                intent.putExtra("temp_name", mData.get(position).getTempName());
+////                intent.putExtra("user_name", mData.get(position).getUserName());
+////                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+////                mContext.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -53,6 +89,7 @@ public class RecyclerViewAdapter_tagSearch extends RecyclerView.Adapter<Recycler
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
+        private LinearLayout tagSearch_item;
         private TextView txtTag;
 
         public MyViewHolder(@NonNull View itemView) {
