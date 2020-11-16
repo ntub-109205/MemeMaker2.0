@@ -27,10 +27,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_worEldTmp extends RecyclerView.Adapter<RecyclerViewAdapter_worEldTmp.MyViewHolder> {
     Context mContext;
-    List<memeTemplate> mData;
+    List<worMemTmp> mData;
 
 
-    public RecyclerViewAdapter_worEldTmp(Context mContext, List<memeTemplate> mData) {
+    public RecyclerViewAdapter_worEldTmp(Context mContext, List<worMemTmp> mData) {
         this.mContext = mContext;
         this.mData = mData;
 

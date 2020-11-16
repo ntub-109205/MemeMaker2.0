@@ -32,7 +32,7 @@ public class RecyclerViewAdapter_colMem extends RecyclerView.Adapter<RecyclerVie
     List<PublicMeme> mData;
     private static api callApi = new api();
 
-    public RecyclerViewAdapter_colMem(Context mContext, List<PublicMeme>  mData) {
+    public RecyclerViewAdapter_colMem(Context mContext, List<PublicMeme> mData) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -43,7 +43,7 @@ public class RecyclerViewAdapter_colMem extends RecyclerView.Adapter<RecyclerVie
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_collect_template,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_meme,parent,false);
         MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }

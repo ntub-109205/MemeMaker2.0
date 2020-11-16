@@ -44,7 +44,7 @@ public class RecyclerViewAdapter_colEldTmp extends RecyclerView.Adapter<Recycler
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_collect_template,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_meme,parent,false);
         MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }

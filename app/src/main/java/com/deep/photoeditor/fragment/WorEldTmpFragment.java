@@ -34,7 +34,7 @@ public class WorEldTmpFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<memeTemplate> lstMemeMemeTemplate;
+    private List<worMemTmp> lstMemeMemeTemplate;
     private static api callApi = new api();
 
     public WorEldTmpFragment() {
@@ -73,7 +73,7 @@ public class WorEldTmpFragment extends Fragment {
         //把jsonArray塞進cardView的arrayList
         try {
             JSONArray array = new JSONArray(temp);
-            lstMemeMemeTemplate = new ArrayList<memeTemplate>();
+            lstMemeMemeTemplate = new ArrayList<worMemTmp>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String id = jsonObject.getString("id");
@@ -83,7 +83,7 @@ public class WorEldTmpFragment extends Fragment {
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
+                lstMemeMemeTemplate.add(new worMemTmp(id,name,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();
