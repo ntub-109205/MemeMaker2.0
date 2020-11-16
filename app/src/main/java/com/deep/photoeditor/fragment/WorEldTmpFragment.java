@@ -60,14 +60,14 @@ public class WorEldTmpFragment extends Fragment {
         try {
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
-            callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1");
+            callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork");
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        Log.d("wormetemp",callApi.returnString());
-        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1"));
+        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1").trim();
+        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork").trim();
         temp = temp.substring(13,(temp.length()-1));
         Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList

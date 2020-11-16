@@ -19,16 +19,25 @@ import com.deep.photoeditor.activity.ColEldTmpActivity;
 import com.deep.photoeditor.activity.ColGifActivity;
 import com.deep.photoeditor.activity.ColMemeActivity;
 import com.deep.photoeditor.activity.ColMemeTmpActivity;
+import com.deep.photoeditor.api;
+import com.deep.photoeditor.memeTemplate;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class PerCollectFragment extends Fragment implements View.OnClickListener {
+    private static api callApi = new api();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.fragment_per_collect, container, false);
         ImageButton btnColMemTmp = (ImageButton) rootView.findViewById(R.id.btnColMemTmp);
         ImageButton btnColMem = (ImageButton) rootView.findViewById(R.id.btnColMem);
@@ -43,6 +52,39 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
         btnColMem.setOnClickListener(this);
         btnColEldTmp.setOnClickListener(this);
         btnColEld.setOnClickListener(this);
+        try {
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
+            callApi.get("http://140.131.115.99/api/profile/show/saved");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Log.d("wormetemp",callApi.returnString());
+        Log.d("collectMem",callApi.get("http://140.131.115.99/api/profile/show/saved"));
+        //留下array[]，其他切掉
+        String temp = callApi.get("http://140.131.115.99/api/profile/show/saved").trim();
+        temp = temp.substring(13,(temp.length()-1));
+        Log.d("collectMem","cut allready :"+ temp);
+        //把jsonArray塞進cardView的arrayList
+        try {
+            JSONArray array = new JSONArray(temp);
+            //lstMemeMemeTemplate = new ArrayList<memeTemplate>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String count = jsonObject.getString("count");
+                String id = jsonObject.getString("id");
+                String filelink = jsonObject.getString("filelink");
+               // String author = jsonObject.getString("author");
+                //int count = Integer.parseInt(jsonObject.getString("count"));
+                Log.d("collectMem", "count:" + count + ", id:" + id + ", filelink:" + filelink );
+                //產生cardView
+                //lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         return rootView;
     }
     private Drawable loadImageFromURL(String url){

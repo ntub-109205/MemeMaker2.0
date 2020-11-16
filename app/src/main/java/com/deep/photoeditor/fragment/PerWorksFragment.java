@@ -20,11 +20,17 @@ import com.deep.photoeditor.activity.WorEldTmpActivity;
 import com.deep.photoeditor.activity.WorGifActivity;
 import com.deep.photoeditor.activity.WorMemeActivity;
 import com.deep.photoeditor.activity.WorMemeTmpActivity;
+import com.deep.photoeditor.api;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.net.URL;
 
 public class PerWorksFragment extends Fragment implements View.OnClickListener {
+    private static api callApi = new api();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +49,40 @@ public class PerWorksFragment extends Fragment implements View.OnClickListener {
         btnWorMem.setOnClickListener(this);
         btnWorEldTmp.setOnClickListener(this);
         btnWorEld.setOnClickListener(this);
+
+        try {
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
+            callApi.get("http://140.131.115.99/api/profile/show/myWork");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Log.d("wormetemp",callApi.returnString());
+        Log.d("workMem",callApi.get("http://140.131.115.99/api/profile/show/myWork"));
+        //留下array[]，其他切掉
+        String temp = callApi.get("http://140.131.115.99/api/profile/show/myWork").trim();
+        //temp = temp.substring(13,(temp.length()-1));
+        Log.d("workMem","cut allready :"+ temp);
+        //把jsonArray塞進cardView的arrayList
+        try {
+            JSONArray array = new JSONArray(temp);
+            //lstMemeMemeTemplate = new ArrayList<memeTemplate>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String count = jsonObject.getString("meme");
+                String meme_id = jsonObject.getString("meme_id");
+                String filelink = jsonObject.getString("filelink");
+                String template_id = jsonObject.getString("template_id");
+                String created_at = jsonObject.getString("created_at");
+                //int count = Integer.parseInt(jsonObject.getString("count"));
+                Log.d("workMem", "count:" + count + ", meme_id:" + meme_id + ", filelink:" + filelink + ", template_id:" + template_id+ ", created_at:" + created_at);
+                //產生cardView
+                //lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return rootView;
     }
     private Drawable loadImageFromURL(String url){
