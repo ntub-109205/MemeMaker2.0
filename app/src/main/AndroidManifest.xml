@@ -42,6 +42,9 @@
             android:name=".activity.WorkMemeInfoActivity"
             android:parentActivityName=".activity.WorkMemeInfoActivity" />
         <activity
+            android:name=".activity.SearchTagInfoActivity"
+            android:parentActivityName=".activity.SearchTagInfoActivity" />
+        <activity
             android:name=".activity.ColMemeTmpActivity"
             android:parentActivityName=".activity.ColMemeTmpActivity" />
         <activity

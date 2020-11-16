@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_public:
+                            variable.tagNameSetter(null);
                             selectedFragment = new PublicFragment();
                             break;
                         case R.id.nav_search:

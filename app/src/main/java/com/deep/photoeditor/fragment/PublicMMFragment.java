@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__meme;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.memeTemplate;
+import com.deep.photoeditor.variable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,9 +36,11 @@ public class PublicMMFragment extends Fragment {
     View v;
     private RecyclerView myrecyclerview;
     private List<PublicMeme> lstMemeMeme;
+    public ImageView imgNomeme;
+    public int isNomeme=1;
     //api
     private static api callApi = new api();
-
+    private static com.deep.photoeditor.variable variable = new variable();
     public PublicMMFragment() {
         // Required empty public constructor
     }
@@ -51,6 +55,8 @@ public class PublicMMFragment extends Fragment {
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
+        imgNomeme = (ImageView) v.findViewById(R.id.nomeme);
+        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.nomeme);
 
         return v;
     }
@@ -58,18 +64,33 @@ public class PublicMMFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String tagName="";
         String temp ="";
-        try {
+
+        tagName = variable.tagNameGetter();
+        if (tagName != null) {
+            try {
+                temp = callApi.get("http://140.131.115.99/api/meme/show/1?tag_name="+tagName).trim();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
 //            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
 //            callApi.get("http://140.131.115.99/api/meme/show/1");
-            temp = callApi.get("http://140.131.115.99/api/meme/show/1").trim();
-        } catch (Exception e) {
-            e.printStackTrace();
+                temp = callApi.get("http://140.131.115.99/api/meme/show/1").trim();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+
 //        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
         //留下array[]，其他切掉
 //        String temp = callApi.get("http://140.131.115.99/api/meme/show/1").trim();
         temp = temp.substring(8,(temp.length()-1));
+        if (temp.length()<10) isNomeme=0;
         Log.d("memeinfo","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {
@@ -102,7 +123,6 @@ public class PublicMMFragment extends Fragment {
                     newtag = newtag + "#" + tag;
                 }
                 //---tag們分完了---//
-
                 //產生cardView
                 lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
             }

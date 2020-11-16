@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.SearchTagInfoActivity;
 import com.deep.photoeditor.activity.TemplateInfoActivity;
 import com.deep.photoeditor.fragment.HomeFragment;
 import com.deep.photoeditor.fragment.PublicFragment;
@@ -35,6 +36,7 @@ import java.util.List;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_tagSearch extends RecyclerView.Adapter<RecyclerViewAdapter_tagSearch.MyViewHolder> {
+    private static com.deep.photoeditor.variable variable = new variable();
     Context mContext;
     List<tagSearch> mData;
 
@@ -59,11 +61,12 @@ public class RecyclerViewAdapter_tagSearch extends RecyclerView.Adapter<Recycler
         holder.txtTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                String tagName = mData.get(position).getTag();
+                variable.tagNameSetter(tagName.substring(1,tagName.length()));
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
                 Toast.makeText(mContext, mData.get(position).getTag(), Toast.LENGTH_SHORT).show();
-//                manager.beginTransaction().replace(R.id.fragment_container,
-//                        new PublicFragment()).commit();
+                Intent intent = new Intent(mContext, SearchTagInfoActivity.class);
+                mContext.startActivity(intent);
             }
         });
 //        holder.tagSearch_item.setOnClickListener(new View.OnClickListener() {
