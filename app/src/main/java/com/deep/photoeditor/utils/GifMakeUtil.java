@@ -35,9 +35,9 @@ public class GifMakeUtil {
             }
             localAnimatedGifEncoder.finish();//finish
 
-            File file = new File(Environment.getExternalStorageDirectory().getPath() + "/LiliNote");
+            File file = new File(Environment.getExternalStorageDirectory().getPath() + "/MeMe Maker");
             if (!file.exists()) file.mkdir();
-            String path = Environment.getExternalStorageDirectory().getPath() + "/LiliNote/" + filename + ".gif";
+            String path = Environment.getExternalStorageDirectory().getPath() + "/MeMe Maker/" + filename + ".gif";
             FileOutputStream fos = new FileOutputStream(path);
             baos.writeTo(fos);
             baos.flush();

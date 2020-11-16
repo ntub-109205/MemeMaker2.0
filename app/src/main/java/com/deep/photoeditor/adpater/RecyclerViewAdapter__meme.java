@@ -108,6 +108,8 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                mData.get(position).setLikeSum(likeSum);
+                mData.get(position).setThumb(thumb);
                 Log.d("thumb", callApi.returnString());
             }
         });
@@ -121,10 +123,12 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
 
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());
+                intent.putExtra("memeId", mData.get(position).getMemeId());
                 intent.putExtra("meme_url", mData.get(position).getMemeImage());
                 intent.putExtra("hashTag", mData.get(position).getHashTag());
                 intent.putExtra("user_name", mData.get(position).getUserName());
                 intent.putExtra("like_sum", mData.get(position).getLikeSum());
+                intent.putExtra("thumb", mData.get(position).getThumb());
                 mContext.startActivity(intent);
             }
         });

@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -29,7 +31,9 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Switch;
 
-public class editSetname extends AppCompatActivity {
+import com.deep.photoeditor.base.BaseActivity;
+
+public class editSetname extends BaseActivity {
     Switch switchTemp;
     public Button btnNext;
     public Button btnFinishtemplate;
@@ -47,6 +51,9 @@ public class editSetname extends AppCompatActivity {
         btnNext = (Button)findViewById(R.id.btnNext);
         btnFinishtemplate = (Button)findViewById(R.id.btnFinishtemplate);
         setName = (EditText)findViewById(R.id.setName);
+
+        btnNext.setEnabled(false);
+        btnNext.setVisibility(View.GONE);
 
         ContentResolver cr = this.getContentResolver();
         try {
@@ -100,6 +107,8 @@ public class editSetname extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 post();
+                hideLoading();
+                variable.useMyImageSetter(Boolean.TRUE);
                 Intent edit = new Intent(editSetname.this,EditImageActivity.class);
                 startActivity(edit);
             }
@@ -110,6 +119,7 @@ public class editSetname extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 post();
+                hideLoading();
                 Intent edit = new Intent(editSetname.this,editShare.class);
                 startActivity(edit);
             }
@@ -127,10 +137,32 @@ public class editSetname extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         init();
-
+        setName.addTextChangedListener(setNameWatcher);
     }
+
+    private final TextWatcher setNameWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if ("".equals(setName.getText().toString().trim())) {
+                btnNext.setEnabled(false);
+                btnNext.setVisibility(View.GONE);
+            }else {
+                btnNext.setEnabled(true);
+                btnNext.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -139,6 +171,7 @@ public class editSetname extends AppCompatActivity {
     public void post() {
         String templateName = setName.getText().toString();
         variable.templateNameSetter(templateName);
+        showLoading("載入中...");
         try {
             callApi.post("http://140.131.115.99/api/txt/store",
                     "category_id="+variable.category_idGetter()+"&name=" + templateName +"&share=" +templateShare );

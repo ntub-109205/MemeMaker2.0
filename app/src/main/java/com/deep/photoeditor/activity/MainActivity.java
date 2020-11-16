@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        variable.category_idSetter("1");
 //        try {
 //            callApi.post("http://140.131.115.99/api/test","str=中文");
 //        } catch (Exception e) {
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this, "You Selected FabExplore!!!!", Toast.LENGTH_LONG).show();
                 /**從MAIN 跳到 SECOND 頁面*/
                 variable.category_idSetter("1");
+
                 Intent intent = new Intent(MainActivity.this, EditMain.class);
                 /** 啟動intent */
                 intent.setClass(MainActivity.this, EditMain.class);

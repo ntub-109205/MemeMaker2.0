@@ -1,9 +1,14 @@
 package com.deep.photoeditor.activity;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,21 +17,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.deep.photoeditor.EditImageActivity;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.api;
 import com.deep.photoeditor.fragment.TempInfoFragment;
+import com.deep.photoeditor.variable;
+import com.felipecsl.gifimageview.library.GifImageView;
 import com.wx.goodview.GoodView;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.cert.PKIXCertPathBuilderResult;
 
 public class TemplateInfoActivity extends AppCompatActivity {
     private static final String TAG = "TemplateInfoActivity";
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    private static com.deep.photoeditor.variable variable = new variable();
+    public Button btnDomeme;
+    //api
+    private static api callApi = new api();
+
+    Dialog mDialog;
     //goodview
     GoodView mGoodView;
     //給相關梗圖用的tempid
     private static String tempId;
+    private static int saved; //是否被收藏
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +69,36 @@ public class TemplateInfoActivity extends AppCompatActivity {
         pagerAdapter.AddFragment(new TempInfoFragment(),"相關梗圖");
         viewPager.setAdapter(pagerAdapter);
 
+        //init Dialog
+        mDialog = new Dialog(this);
+        mDialog.setContentView(R.layout.dialog_gif);
 
         getIncomingIntent();
+        btnDomeme = (Button)findViewById(R.id.domeme);
+        btnDomeme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                variable.useMyImageSetter(Boolean.FALSE);
+                Intent edit = new Intent(TemplateInfoActivity.this, EditImageActivity.class);
+                startActivity(edit);
+            }
+        });
+
+        String temp="";
+        try {
+            temp = callApi.get("http://140.131.115.99/api/template/saved/"+tempId).trim();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //{"saved":"0"}
+        saved =Integer.parseInt(temp.substring(10,11));
+        //設置收藏顏色
+        ImageView bookMark = findViewById(R.id.bookmark);
+        if (saved==0) {
+            bookMark.setImageResource(R.drawable.bookmark);
+        }else {
+            bookMark.setImageResource(R.drawable.bookmark_checked);
+        }
     }
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
@@ -59,13 +108,19 @@ public class TemplateInfoActivity extends AppCompatActivity {
 
             //模板id給相關梗圖fragment用
             tempId = getIntent().getStringExtra("temp_id");
+            variable.templateIDSetter(tempId);
+
             //下面這些放到cardView
             String tempUrl = getIntent().getStringExtra("temp_url");
+            variable.templateImageSetter(getBitmap(tempUrl));
+
             String tempName = getIntent().getStringExtra("temp_name");
             String userName = getIntent().getStringExtra("user_name");
             int usedSum = getIntent().getIntExtra("used_sum", 0);
 
             setInfo(tempUrl, tempName, userName, usedSum);
+            showImageDialog(tempUrl,tempName);
+
             Log.d("temp", "tempid="+returnTempIdString());
         }
     }
@@ -90,14 +145,72 @@ public class TemplateInfoActivity extends AppCompatActivity {
         fireNum.setText(String.valueOf(usedSum));
     }
 
+    private void showImageDialog(String tempUrl,String tempName) {
+        ImageView image = findViewById(R.id.tempImage);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GifImageView dialogImage = (GifImageView) mDialog.findViewById(R.id.gif_view);
+                TextView dialogTag = (TextView) mDialog.findViewById(R.id.gif_tag);
+                ImageView diaglogClose = (ImageView) mDialog.findViewById(R.id.dialog_close);
+                //show GIF by using Glide
+                Glide.with(view).load(tempUrl).into(dialogImage);
+                dialogTag.setText(tempName);
+                diaglogClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mDialog.dismiss();
+                    }
+                });
+                mDialog.show();
+            }
+        });
+    }
+
     public static String returnTempIdString(){
         return tempId;
     }
 
     //onclick判斷在xml
     public void bookmark(View view) {
-        ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
-        mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
-        mGoodView.show(view);
+        if (saved == 0) {
+            ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
+            mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
+            mGoodView.show(view);
+            saved=1;
+        } else {
+            ((ImageView) view).setImageResource(R.drawable.bookmark);
+            mGoodView. setTextInfo("取消收藏", Color.parseColor("#999da4"), 12);
+            mGoodView.show(view);
+            saved=0;
+        }
+        try {
+            callApi.post("http://140.131.115.99/api/template/saved","template_id=" + tempId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Bitmap getBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL iconUrl = new URL(url);
+            URLConnection conn = iconUrl.openConnection();
+            HttpURLConnection http = (HttpURLConnection) conn;
+
+            int length = http.getContentLength();
+
+            conn.connect();
+            // 获得图像的字符流
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is, length);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();// 关闭流
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bm;
     }
 }

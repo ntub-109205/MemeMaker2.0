@@ -1,6 +1,7 @@
 package com.deep.photoeditor.adpater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.TemplateInfoActivity;
 import com.deep.photoeditor.tagHotSearch;
 
 import java.util.List;
@@ -58,6 +60,14 @@ public class RecyclerViewAdapter_tempHotSearch extends RecyclerView.Adapter<Recy
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
                 Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, TemplateInfoActivity.class);
+                intent.putExtra("temp_id", mData.get(position).getTempId());
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("temp_name", mData.get(position).getTempName());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+                mContext.startActivity(intent);
             }
         });
     }
