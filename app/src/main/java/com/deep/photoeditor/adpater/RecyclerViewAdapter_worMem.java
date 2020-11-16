@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.WorPublicMeme;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.activity.WorkMemeInfoActivity;
 import com.deep.photoeditor.activity.WorkMemeTempInfoActivity;
@@ -32,10 +33,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter_worMem extends RecyclerView.Adapter<RecyclerViewAdapter_worMem.MyViewHolder> {
     Context mContext;
-    List<PublicMeme> mData;
+    List<WorPublicMeme> mData;
     private static api callApi = new api();
 
-    public RecyclerViewAdapter_worMem(Context mContext, List<PublicMeme> mData) {
+    public RecyclerViewAdapter_worMem(Context mContext, List<WorPublicMeme> mData) {
         this.mContext = mContext;
         this.mData = mData;
 

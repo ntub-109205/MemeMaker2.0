@@ -17,6 +17,7 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMemTmp;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.memeTemplate;
+import com.deep.photoeditor.worMemTmp;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,7 @@ public class WorMemeTmpFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<memeTemplate> lstMemeMemeTemplate;
+    private List<worMemTmp> lstMemeMemeTemplate;
     private static api callApi = new api();
 
     public WorMemeTmpFragment() {
@@ -71,7 +72,7 @@ public class WorMemeTmpFragment extends Fragment {
         //把jsonArray塞進cardView的arrayList
         try {
             JSONArray array = new JSONArray(temp);
-            lstMemeMemeTemplate = new ArrayList<memeTemplate>();
+            lstMemeMemeTemplate = new ArrayList<worMemTmp>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String id = jsonObject.getString("id");
@@ -81,7 +82,7 @@ public class WorMemeTmpFragment extends Fragment {
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
+                lstMemeMemeTemplate.add(new worMemTmp(id,name,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();

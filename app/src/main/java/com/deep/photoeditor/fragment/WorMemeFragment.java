@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.WorPublicMeme;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMem;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMemTmp;
 import com.deep.photoeditor.api;
@@ -34,7 +35,7 @@ public class WorMemeFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<PublicMeme> lstMemeMeme;
+    private List<WorPublicMeme> lstMemeMeme;
     private static api callApi = new api();
 
     public WorMemeFragment() {
@@ -101,7 +102,7 @@ public class WorMemeFragment extends Fragment {
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstMemeMeme.add(new WorPublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();
