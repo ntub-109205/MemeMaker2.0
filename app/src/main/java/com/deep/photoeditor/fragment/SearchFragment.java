@@ -106,6 +106,7 @@ public class SearchFragment extends Fragment {
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
         flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
 
+
         myrecyclerview.setLayoutManager(flexboxLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
         temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
@@ -138,8 +139,85 @@ public class SearchFragment extends Fragment {
                             Log.d("getTag", tag.get(i).toString());
                         }
                     }
+                    //---------------------------------------------------------------------------
+                    //----------------------------顯示搜尋模板模板----------------------------------
+                    try {
+                        temp = decode(callApi.get("http://140.131.115.99/api/template/show/0?limit=10&name="+searchName)).trim();
+                        Log.d("searchTemp" ,temp);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (temp.length()<13){
+                        //搜尋無結果
+                    }else {
+                        temp = temp.substring(13, (temp.length() - 1));
+                        try {
+                            JSONArray array = new JSONArray(temp);
+                            lstTagHotSearch = new ArrayList<>();
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject jsonObject = array.getJSONObject(i);
+                                String tempId = jsonObject.getString("id");
+                                String filelink = jsonObject.getString("filelink");
+                                String name = jsonObject.getString("name");
+                                String author = jsonObject.getString("author");
+                                int count = Integer.parseInt(jsonObject.getString("count"));
+                                int a = 0;
+                                switch (i){
+                                    case 0:
+                                        a =  R.drawable.one;
+                                        break;
+                                    case 1:
+                                        a =  R.drawable.two;
+                                        break;
+                                    case 2:
+                                        a =  R.drawable.three;
+                                        break;
+                                    case 3:
+                                        a =  R.drawable.four;
+                                        break;
+                                    case 4:
+                                        a =  R.drawable.five;
+                                        break;
+                                    case 5:
+                                        a =  R.drawable.six;
+                                        break;
+                                    case 6:
+                                        a =  R.drawable.seven;
+                                        break;
+                                    case 7:
+                                        a =  R.drawable.eight;
+                                        break;
+                                    case 8:
+                                        a =  R.drawable.nine;
+                                        break;
+                                    case 9:
+                                        a =  R.drawable.ten;
+                                        break;
+                                    default:
+                                }
+                                Log.d("searchTemp", "tempId="+tempId);
+                                Log.d("searchTemp", "name="+name);
+                                Log.d("searchTemp", "filelink="+filelink);
+                                Log.d("searchTemp", "author="+author);
+                                Log.d("searchTemp", "count="+count);
 
+                                lstTagHotSearch.add(new tagHotSearch(tempId, name, filelink, a, author, count));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //---------------------------------------------------------------------------------
                     RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
+                    RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
+
+                    FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
+                    StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
+                    flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+                    flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+
+
                     myrecyclerview.setLayoutManager(flexboxLayoutManager);
                     myrecyclerview.setAdapter(recyclerViewAdapter);
                     temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
@@ -209,8 +287,11 @@ public class SearchFragment extends Fragment {
         //---------------------------------------------------------------------------
         //----------------------------顯示top10 模板----------------------------------
         try {
+           // temp = decode(callApi.get("http://140.131.115.99/api/template/show/0?limit=10")).trim();
             temp = decode(callApi.get("http://140.131.115.99/api/template/show/0?limit=10")).trim();
+
         } catch (Exception e) {
+
             e.printStackTrace();
         }
         if (temp.length()<13){
