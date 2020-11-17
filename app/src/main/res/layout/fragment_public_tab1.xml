@@ -16,13 +16,13 @@
 
     <ImageView
         android:id="@+id/nomeme"
-        android:layout_width="327dp"
-        android:layout_height="250dp"
+        android:layout_width="210dp"
+        android:layout_height="141dp"
         app:layout_constraintBottom_toBottomOf="@+id/publicMeme_recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/publicMeme_recyclerView"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.445" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
