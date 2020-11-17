@@ -1,74 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-<!--    <include layout="@layout/view_toolbar" />-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.4"
-        android:orientation="horizontal"
-        android:elevation="7dp"
-        android:background="@drawable/bgrectangle" >
-
-        <ImageView
-            android:id="@+id/image_gif"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:background="#ffffff"
-            app:srcCompat="@drawable/bg_person" />
-
-    </LinearLayout>
+    tools:context="com.deep.photoeditor.gifmake.VideoToGifActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView6"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:text="標註標籤" />
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:orientation="horizontal"
+            android:elevation="7dp"
+            android:background="@drawable/bgrectangle" >
 
-      <com.hootsuite.nachos.NachoTextView
-            android:id="@+id/memeTag"
-            android:hint="#傻眼貓咪"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            <com.felipecsl.gifimageview.library.GifImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/memeSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:textSize="15sp"
-            android:text="梗圖公開" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:text="標註標籤" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:textSize="11sp"
-            android:text="設定為公開才可在創作分享區看到" />
+            <!--            <EditText-->
+            <!--                android:id="@+id/setName"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginLeft="25dp"-->
+            <!--                android:layout_marginRight="25dp"-->
+            <!--                android:hint="#傻眼貓咪"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
 
+            <com.hootsuite.nachos.NachoTextView
+                android:id="@+id/memeTag"
+                android:hint="#傻眼貓咪"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <Switch
+                android:id="@+id/memeSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:text="動圖公開"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="11sp"
+                android:text="設定為公開才可在創作分享區看到" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -84,28 +102,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_chooseAudio"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        android:gravity="center"-->
-<!--        android:text="选择短视频"-->
-<!--        android:textAllCaps="false" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/tv_dirGif"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="@dimen/_10dp"-->
-<!--        android:textSize="@dimen/_14sp"-->
-<!--        android:textColor="@color/black"/>-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/image_gif"-->
-<!--        android:layout_width="321dp"-->
-<!--        android:layout_height="426dp"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:layout_marginTop="@dimen/_20dp" />-->
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

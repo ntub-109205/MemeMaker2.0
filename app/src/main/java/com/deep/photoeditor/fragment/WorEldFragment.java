@@ -78,7 +78,7 @@ public class WorEldFragment extends Fragment {
                 String filelink = jsonObject.getString("filelink");
                 String author = jsonObject.getString("author");
                 String tempId = jsonObject.getString("template_id");
-                int shared = Integer.parseInt(jsonObject.getString("share"));
+                int shared = Integer.parseInt(jsonObject.getString("meme_share"));
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
                 Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);

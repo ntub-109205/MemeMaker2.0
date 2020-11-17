@@ -19,6 +19,7 @@ import com.deep.photoeditor.adpater.RecyclerViewAdapter_colEldTmp;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_colMemTmp;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.colMemTmp;
+import com.deep.photoeditor.memeTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +35,7 @@ public class ColEldTmpFragment extends Fragment {
 
     View v;
     private RecyclerView myrecyclerview;
-    private List<PublicMeme> lstTempInfo;
+    private List<memeTemplate> lstTempInfo;
     private static api callApi = new api();
 
     public ColEldTmpFragment() {
@@ -59,53 +60,36 @@ public class ColEldTmpFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-//            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
-            callApi.get("http://140.131.115.99/api/meme/show/2?profile=saved&time=1");
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
+//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
+            callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
+//        Log.d("wormetemp",callApi.returnString());
+        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/meme/show/2?profile=saved&time=1").trim();
-        temp = temp.substring(8,(temp.length()-1));
-        Log.d("memeinfo","cut allready :"+ temp);
+        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved").trim();
+        temp = temp.substring(13,(temp.length()-1));
+        Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {
             JSONArray array = new JSONArray(temp);
-            lstTempInfo = new ArrayList<>();
+            lstTempInfo = new ArrayList<memeTemplate>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
-                String memeId = jsonObject.getString("meme_id");
+                String id = jsonObject.getString("id");
                 String filelink = jsonObject.getString("filelink");
+                String name = jsonObject.getString("name");
                 String author = jsonObject.getString("author");
-                String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
-                int thumb = Integer.parseInt(jsonObject.getString("thumb"));
-                Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
-
-                //---把tag們分出來---//
-                String tags = jsonObject.getString("tags");
-                String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
-                Log.d("tags", "tags:" + items);
-                // items.length 是所有項目的個數
-                String[] results = new String[items.length];
-                // 將結果放入 results
-                for (int j = 0; j < items.length; j++) {
-                    results[j] = items[j].trim();
-                }
-                String newtag = "";
-                for (String tag : results) {
-                    tag = tag.replaceAll("\"", "");
-                    Log.d("tags", "tags:" + tag + ", ");
-                    newtag = newtag + "#" + tag;
-                }
-                //---tag們分完了---//
-
+                Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lstTempInfo.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstTempInfo.add(new memeTemplate(id,name,filelink,author,count));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
     }
 }

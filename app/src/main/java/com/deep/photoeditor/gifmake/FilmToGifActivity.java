@@ -53,7 +53,7 @@ public class FilmToGifActivity extends GifBaseActivity implements View.OnClickLi
         titleBar_more_tv.setOnClickListener(v -> startActivity(new Intent(mContext,SaveImageActivity.class)));
         //Button btn_chooseAudio = this.findViewById(R.id.btn_chooseAudio);
         //btn_chooseAudio.setOnClickListener(this);
-        imageView = this.findViewById(R.id.image_gif);
+        imageView = this.findViewById(R.id.imageView);
         //tv_dirGif = this.findViewById(R.id.tv_dirGif);
         ImagePicker.getInstance().imageLoader(new GlideImageLoader());
         String path = "MeMe Maker";

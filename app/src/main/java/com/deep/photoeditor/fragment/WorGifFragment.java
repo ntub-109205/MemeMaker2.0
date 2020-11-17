@@ -80,7 +80,7 @@ public class WorGifFragment extends Fragment {
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
-                int shared = Integer.parseInt(jsonObject.getString("share"));
+                int shared = Integer.parseInt(jsonObject.getString("meme_share"));
                 Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
 
                 //---把tag們分出來---//
