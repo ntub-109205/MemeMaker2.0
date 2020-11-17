@@ -81,6 +81,7 @@
             android:name=".editOnlymaketemp"
             android:parentActivityName=".editOnlymaketemp" />
         <activity android:name=".editShare" />
+        <activity android:name=".activity.GifShareActivity" />
         <activity
             android:name=".editSetname"
             android:parentActivityName=".editSetname" />

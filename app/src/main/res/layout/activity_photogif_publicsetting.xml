@@ -60,7 +60,7 @@
 
             <com.hootsuite.nachos.NachoTextView
                 android:id="@+id/memeTag"
-                android:hint="#傻眼貓咪"
+                android:hint="傻眼貓咪"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_width="match_parent"
