@@ -101,11 +101,11 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
             int likeSum = getIntent().getIntExtra("like_sum", 0);
-
-            setInfo(memeUrl, hashTag, userName, likeSum);
+            int shared = getIntent().getIntExtra("share", 0);
+            setInfo(memeUrl, hashTag, userName, likeSum,shared);
         }
     }
-    private void setInfo(String memeUrl, String hashTag, String userName, int likeSum){
+    private void setInfo(String memeUrl, String hashTag, String userName, int likeSum, int shared){
         Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
 
         //設置模板名

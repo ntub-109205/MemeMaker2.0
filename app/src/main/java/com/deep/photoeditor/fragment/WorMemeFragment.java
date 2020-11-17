@@ -81,6 +81,7 @@ public class WorMemeFragment extends Fragment {
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
+                int shared = Integer.parseInt(jsonObject.getString("share"));
                 Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
 
                 //---把tag們分出來---//
@@ -102,7 +103,7 @@ public class WorMemeFragment extends Fragment {
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new WorPublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstMemeMeme.add(new WorPublicMeme(tempId,memeId,newtag,filelink,author,count,thumb,shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();

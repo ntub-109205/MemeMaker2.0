@@ -8,12 +8,13 @@ public class WorPublicMeme {
     private String userName;
     private int likeSum; //使用者按讚數量
     private int thumb;//使用者是否按讚 1有 0沒有
+    private int shared;
 
     public WorPublicMeme() {
 
     }
 
-    public WorPublicMeme(String tempId, String memeId, String hashTag, String memeImage, String userName, int likeSum, int thumb) {
+    public WorPublicMeme(String tempId, String memeId, String hashTag, String memeImage, String userName, int likeSum, int thumb,int shared) {
         this.tempId = tempId;
         this.memeId = memeId;
         this.hashTag = hashTag;
@@ -21,6 +22,7 @@ public class WorPublicMeme {
         this.userName = userName;
         this.likeSum = likeSum;
         this.thumb = thumb;
+        this.shared = shared;
     }
 
     //getter
@@ -46,6 +48,10 @@ public class WorPublicMeme {
 
     public int getThumb() { return thumb; }
 
+    public int getShared() {
+        return shared;
+    }
+
     //setter
     public void setTempId(String tempId) { this.tempId = tempId; }
 
@@ -62,4 +68,6 @@ public class WorPublicMeme {
     public void setLikeSum(int likeSum) { this.likeSum = likeSum; }
 
     public void setThumb(int thumb) {this.thumb = thumb; }
+
+    public void setShared(int shared) {this.shared = shared; }
 }
