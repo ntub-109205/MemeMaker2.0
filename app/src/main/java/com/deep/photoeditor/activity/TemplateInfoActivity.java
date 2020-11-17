@@ -226,7 +226,13 @@ public class TemplateInfoActivity extends AppCompatActivity {
         }
         return bm;
     }
-    
+
+    public void shareLine(View view) {
+        saveImageToGallery(this,variable.templateImageGetter());
+        String scheme ="line://msg/image"+variable.memePathGetter();
+        this.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(scheme)));
+    }
+
     public void saveImage(View view) {
         showLoading("儲存中...");
         saveImageToGallery(this,variable.templateImageGetter());
@@ -242,6 +248,7 @@ public class TemplateInfoActivity extends AppCompatActivity {
         }
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(appDir, fileName);
+        variable.memePathSetter(file.toString());
 
         try {
             FileOutputStream fos = new FileOutputStream(file);
