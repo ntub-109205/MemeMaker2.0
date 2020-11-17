@@ -25,7 +25,10 @@ import com.deep.photoeditor.adpater.RecyclerViewAdapter;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_layoutImage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class editCombinePicture extends AppCompatActivity {
     private final static String TAG = "editCombinePicture";
@@ -42,6 +45,7 @@ public class editCombinePicture extends AppCompatActivity {
 
     private static variable variable = new variable();
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
+    private static HashMap<Bitmap, Integer> ImageQueue = new HashMap<Bitmap, Integer>();
 
     public void init(){
         layoutFullSingle = (ImageView)findViewById(R.id.layoutFullSingle);
@@ -63,6 +67,8 @@ public class editCombinePicture extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_combine_picture);
+
+
         init();
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
@@ -78,7 +84,7 @@ public class editCombinePicture extends AppCompatActivity {
         layoutFullSingle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap mybitmap = puzzleMerge_vertical_noblank(fixImageSize(templatesBitmap));
+                Bitmap mybitmap = puzzleMerge_vertical_noblank(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
             }
@@ -86,7 +92,7 @@ public class editCombinePicture extends AppCompatActivity {
         layoutFullDouble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap mybitmap = puzzleMerge_left_and_right(fixImageSize(templatesBitmap));
+                Bitmap mybitmap = puzzleMerge_left_and_right(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
             }
@@ -94,7 +100,7 @@ public class editCombinePicture extends AppCompatActivity {
         layoutRightText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap mybitmap = puzzleMerge_vertical(fixImageSize(templatesBitmap));
+                Bitmap mybitmap = puzzleMerge_vertical(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
             }
@@ -102,7 +108,7 @@ public class editCombinePicture extends AppCompatActivity {
         layoutHorizontal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap mybitmap = puzzleMerge_level(fixImageSize(templatesBitmap));
+                Bitmap mybitmap = puzzleMerge_level(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
             }
@@ -114,23 +120,30 @@ public class editCombinePicture extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resourceId);
         return bitmap;
     }
-    /*
+
     public static ArrayList<Bitmap> fixImageQueue() {
+        ImageQueue = variable.ImageQueueGetter();
         ArrayList<Bitmap> templatesBitmap2 = new ArrayList<Bitmap>();
-        variable.BmpGetter();
-        int size = variable.BmpCounterGetter().size();
-        Log.d("imageQueue","size="+size);
-        Log.d("imageQueue","index="+variable.BmpCounterGetter().indexOf(1));
+        int z = 1;
+        int size = templatesBitmap.size();
+        Log.d("fixImageQueue1", "size="+size);
 
-
-//
-//        for (int i = 0; i < size; i++) {
-//           int index = variable.BmpCounterGetter().indexOf(i+1);
-//           templatesBitmap2.add(variable.BmpGetter().get(index));
-//        }
-        return templatesBitmap2;
+        for (int i = 1; i < size+1; i++) {
+            Log.d("fixImageQueue1", "i="+i);
+            Iterator iterator1 = ImageQueue.entrySet().iterator();
+            while (iterator1.hasNext()){
+                Log.d("fixImageQueue1", "進while第"+i+"次");
+                Map.Entry entry = (Map.Entry) iterator1.next();
+                Bitmap key = (Bitmap) entry.getKey();
+                Integer value = (Integer) entry.getValue();
+                if(i==value){
+                    templatesBitmap2.add(key);
+                }
+            }
+        }
+        return fixImageSize(templatesBitmap2);
     }
-    */
+
 
     public static ArrayList<Bitmap> fixImageSize(ArrayList<Bitmap> templatesBitmap1) {
         ArrayList<Bitmap> templatesBitmap2 = new ArrayList<Bitmap>();
