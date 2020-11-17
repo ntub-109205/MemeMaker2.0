@@ -1,5 +1,6 @@
 package com.deep.photoeditor.activity;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ import java.util.Arrays;
 public class GifShareActivity extends AppCompatActivity {
     public Button btnNext;
     public GifImageView gifView;
+    private ProgressDialog mProgressDialog;
     private static com.deep.photoeditor.variable variable = new variable();
 
     public void init() throws FileNotFoundException {

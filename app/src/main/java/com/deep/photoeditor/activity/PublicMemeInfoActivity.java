@@ -1,17 +1,24 @@
 package com.deep.photoeditor.activity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -25,19 +32,27 @@ import com.deep.photoeditor.editSetname;
 import com.deep.photoeditor.fragment.MemeInfoFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.fragment.maintab2;
+import com.deep.photoeditor.gifmake.GifMakeActivity;
 import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
+import com.google.android.material.snackbar.Snackbar;
 import com.wx.goodview.GoodView;
 
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import ja.burhanrashid52.photoeditor.PhotoEditor;
+import ja.burhanrashid52.photoeditor.SaveSettings;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -46,6 +61,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
     private static variable variable = new variable();
+    private ProgressDialog mProgressDialog;
     //api
     private static api callApi = new api();
     public Button btnDomeme;
@@ -151,6 +167,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(memeUrl)
                 .into(image);
+        Log.d(TAG, "set meme url: "+memeUrl);
         //設置製作者名
         TextView user = findViewById(R.id.madeByUser);
         user.setText(userName);
@@ -262,6 +279,78 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return bm;
+    }
+
+    public void saveImage(View view) {
+        showLoading("儲存中...");
+        saveImageToGallery(this,variable.templateImageGetter());
+
+//        String path = "MeMe Maker";
+//        File dirFile = new File(Environment.getExternalStorageDirectory(),path);
+//        if(!dirFile.exists()){//如果資料夾不存在
+//            dirFile.mkdir();//建立資料夾
+//        }
+    }
+    public void saveImageToGallery(Context context, Bitmap bmp) {
+        // 首先儲存圖片
+        String path = "MeMe Maker";
+        File appDir = new File(Environment.getExternalStorageDirectory(), path);
+        Log.d(TAG, "appDir: "+appDir);
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            hideLoading();
+            showSnackbar("儲存成功");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            showSnackbar("儲存失敗");
+            hideLoading();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showSnackbar("儲存失敗");
+            hideLoading();
+        }
+
+        // 其次把檔案插入到系統圖庫
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 最後通知相簿更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
+    }
+
+    protected void showLoading(@NonNull String message) {
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+    }
+
+    protected void hideLoading() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    protected void showSnackbar(@NonNull String message) {
+        View view = findViewById(android.R.id.content);
+        if (view != null) {
+            Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
