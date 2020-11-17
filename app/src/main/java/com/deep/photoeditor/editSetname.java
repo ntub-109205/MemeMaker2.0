@@ -120,6 +120,7 @@ public class editSetname extends BaseActivity {
             public void onClick(View v){
                 post();
                 hideLoading();
+                variable.memeUriSetter(templateUri);
                 Intent edit = new Intent(editSetname.this,editShare.class);
                 startActivity(edit);
             }

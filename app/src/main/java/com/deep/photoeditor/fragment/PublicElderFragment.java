@@ -56,7 +56,7 @@ public class PublicElderFragment extends Fragment {
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
         imgNomeme = (ImageView) v.findViewById(R.id.nomeme);
-        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.nomeme);
+        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.no_meme);
 
         return v;
     }
