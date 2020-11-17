@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class variable {
     private static Boolean useMyImage;
@@ -22,8 +23,7 @@ public class variable {
     private static byte[] gifByteArray;
     private static Bitmap templateImage;
 
-    private static ArrayList<Bitmap> Bmp = new ArrayList<Bitmap>();
-    private static ArrayList<Integer> BmpCounter = new ArrayList<Integer>();
+    private static HashMap<Bitmap, Integer> ImageQueue = new HashMap<Bitmap, Integer>();
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
 
     //是否使用本地圖片
@@ -86,17 +86,11 @@ public class variable {
     }
     public static void templatesBitmapSetter(ArrayList<Bitmap> templatesBitmap1){templatesBitmap = templatesBitmap1;}
 
-    //多圖模板bitmap順序-1
-    public static ArrayList<Bitmap> BmpGetter(){
-        return Bmp;
+    //多圖模板bitmap順序
+    public static HashMap<Bitmap, Integer> ImageQueueGetter(){
+        return ImageQueue;
     }
-    public static void BmpSetter(ArrayList<Bitmap> Bmp1){Bmp = Bmp1;}
-
-    //多圖模板bitmap順序-2
-    public static ArrayList<Integer> BmpCounterGetter(){
-        return BmpCounter;
-    }
-    public static void BmpCounterSetter(ArrayList<Integer> BmpCounter1){BmpCounter = BmpCounter1;}
+    public static void ImageQueueSetter(HashMap<Bitmap, Integer> ImageQueue1){ImageQueue = ImageQueue1;}
 
     //搜尋&熱門tag名稱
     public static String tagNameGetter(){
