@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,10 +13,12 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 
@@ -32,9 +35,15 @@ public class GifShareActivity extends AppCompatActivity {
 //        mImageView.setImageBitmap(bitmap);
         gifView = findViewById(R.id.imageView);
         //顯示gif
-        byte[] fileBytes=variable.getGifByteArray();
-        gifView.setBytes(fileBytes);
-        gifView.startAnimation();
+        if(variable.getGifByteArray()==null){
+            gifView.setImageURI(Uri.parse(variable.getGifPath()));
+        }else{
+            byte[] fileBytes=variable.getGifByteArray();
+            gifView.setBytes(fileBytes);
+            gifView.startAnimation();
+        }
+
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
