@@ -115,6 +115,7 @@ public class RecyclerViewAdapter_colMem extends RecyclerView.Adapter<RecyclerVie
                 intent.putExtra("hashTag", mData.get(position).getHashTag());
                 intent.putExtra("user_name", mData.get(position).getUserName());
                 intent.putExtra("like_sum", mData.get(position).getLikeSum());
+                intent.putExtra("memeId", mData.get(position).getMemeId());
                 mContext.startActivity(intent);
             }
         });

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,10 +114,12 @@ public class RecyclerViewAdapter_worEld extends RecyclerView.Adapter<RecyclerVie
 
                 Intent intent = new Intent(mContext, WorkMemeInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());
+
                 intent.putExtra("meme_url", mData.get(position).getMemeImage());
                 intent.putExtra("hashTag", mData.get(position).getHashTag());
                 intent.putExtra("user_name", mData.get(position).getUserName());
                 intent.putExtra("like_sum", mData.get(position).getLikeSum());
+                intent.putExtra("shared",mData.get(position).getShared());
                 mContext.startActivity(intent);
             }
         });
@@ -136,6 +139,7 @@ public class RecyclerViewAdapter_worEld extends RecyclerView.Adapter<RecyclerVie
         private TextView likeNum;
         private RelativeLayout item_meme;
         private ImageView like;
+        private Switch shared;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +149,7 @@ public class RecyclerViewAdapter_worEld extends RecyclerView.Adapter<RecyclerVie
             memeImage = (ImageView) itemView.findViewById(R.id.cardImage);
             likeNum = (TextView) itemView.findViewById(R.id.likeNum);
             like = (ImageView) itemView.findViewById(R.id.like);
+            shared = (Switch)itemView.findViewById(R.id.tempSwitch);
         }
     }
 }
