@@ -48,18 +48,6 @@
                 android:textColor="#000000"
                 android:text="標註標籤" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/setName"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="25dp"-->
-<!--                android:layout_marginRight="25dp"-->
-<!--                android:hint="#傻眼貓咪"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
-            
             <com.hootsuite.nachos.NachoTextView
                 android:id="@+id/memeTag"
                 android:hint="傻眼貓咪"
