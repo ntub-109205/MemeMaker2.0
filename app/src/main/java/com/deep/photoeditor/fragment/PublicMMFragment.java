@@ -99,12 +99,13 @@ public class PublicMMFragment extends Fragment {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String memeId = jsonObject.getString("meme_id");
-                String filelink = jsonObject.getString("filelink");
+                String memeFilelink = jsonObject.getString("meme_filelink");
+                String tempFilelink = jsonObject.getString("template_filelink");
                 String author = jsonObject.getString("author");
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
-                Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
+                Log.d("memeinfo", "template_id:" + tempId + ", meme filelink:" + memeFilelink + ", temp filelink:" + tempFilelink + ", author:" + author);
 
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");
@@ -124,7 +125,7 @@ public class PublicMMFragment extends Fragment {
                 }
                 //---tag們分完了---//
                 //產生cardView
-                lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,tempFilelink,memeFilelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();
