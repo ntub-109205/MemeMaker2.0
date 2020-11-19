@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.api;
 import com.wx.goodview.GoodView;
 
 import java.io.FileNotFoundException;
@@ -29,6 +30,7 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
     private static final String TAG = "WorkMemeTempInfoActivity";
     //switch button
     Switch switchTemp;
+    private static api callApi = new api();
     //button onClick to next page
     public Button btnEdit;
     Uri uri;
