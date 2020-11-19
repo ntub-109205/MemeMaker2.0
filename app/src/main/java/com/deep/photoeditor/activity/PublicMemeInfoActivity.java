@@ -140,9 +140,11 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
 
             //下面這些放到cardView
             String memeUrl = getIntent().getStringExtra("meme_url");
+            String tempUrl = getIntent().getStringExtra("temp_url");
             Log.d("NotUseMyImage","memeUrl="+memeUrl);
             Log.d("NotUseMyImage","returnBitMap(memeUrl)="+getBitmap(memeUrl).toString());
-            variable.templateImageSetter(getBitmap(memeUrl));
+            variable.memeImageSetter(getBitmap(memeUrl));
+            variable.templateImageSetter(getBitmap(tempUrl));
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
             likeSum = getIntent().getIntExtra("like_sum", 0);
@@ -282,14 +284,14 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
     }
 
     public void shareLine(View view) {
-        saveImageToGallery(this,variable.templateImageGetter());
+        saveImageToGallery(this,variable.memeImageGetter());
         String scheme ="line://msg/image"+variable.memePathGetter();
         this.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(scheme)));
     }
 
     public void saveImage(View view) {
         showLoading("儲存中...");
-        saveImageToGallery(this,variable.templateImageGetter());
+        saveImageToGallery(this,variable.memeImageGetter());
 
 //        String path = "MeMe Maker";
 //        File dirFile = new File(Environment.getExternalStorageDirectory(),path);

@@ -95,12 +95,13 @@ public class PublicElderFragment extends Fragment {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String memeId = jsonObject.getString("meme_id");
-                String filelink = jsonObject.getString("filelink");
+                String memeFilelink = jsonObject.getString("meme_filelink");
+                String tempFilelink = jsonObject.getString("template_filelink");
                 String author = jsonObject.getString("author");
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
-                Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
+                Log.d("memeinfo", "template_id:" + tempId + ", author:" + author);
 
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");
@@ -121,22 +122,10 @@ public class PublicElderFragment extends Fragment {
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstMemeMeme.add(new PublicMeme(tempId,memeId,newtag,tempFilelink,memeFilelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-//        lstMemeMeme = new ArrayList<>();
-//        lstMemeMeme.add(new PublicMeme("1","1","#早安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ30pqBnXi_TeFAw6HRq5Fuj7Gn87UDy5HlMyaor_hbrJwU6c4W&usqp=CAU","jessie",30,1));
-//        lstMemeMeme.add(new PublicMeme("1","1","#午安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdurKHXqRX6Sf7jZ5wA95BtGmF67r4RMrfcyHyyhwUTn9rdnSx&usqp=CAU","Geo",20,1));
-//        lstMemeMeme.add(new PublicMeme("1","1","#沒錢 #努力","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR7pZhRXjwG6fRsLIMKOuvpCVTQ1lkG_ppoEgUTf5PEUCaUokVy&usqp=CAU","跑跑跑的人",19,1));
-//        lstMemeMeme.add(new PublicMeme("1","1","#周末愉快","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ9u3tpzS-PsSYdZ9qJdi_qsnvOCdfzKTy5YfgpgYpkqAT4vOLp&usqp=CAU","好累",18,1));
-//        lstMemeMeme.add(new PublicMeme("1","1","#早安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ31J8IdHmgv-A5K7R1HS6DsRu8juT6uHdPcqLDbgn_NAd58Afa&usqp=CAU","Anc1233",17,0));
-//        lstMemeMeme.add(new PublicMeme("1","1","#晚安","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgTnBFHVPfe260CJsG7UQ6uTopSzsQ47qOmMsVESUmMwPy8Og2&usqp=CAU","牙醫09",16,0));
-//        lstMemeMeme.add(new PublicMeme("1","1","#認同","https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTqJWtzg9D-9omdBRjwYEXHifBGMjcraz7ZwW_AQa29H7eF8pfH&usqp=CAU","江戶川先生",14,0));
-
-
-
     }
 }

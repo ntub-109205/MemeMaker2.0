@@ -112,7 +112,7 @@ public class MemeInfoFragment extends Fragment {
                 //---tag們分完了---//
                 Log.d("temp", "template_id:" + memeId + ", filelink:" + filelink );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,"404",filelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();

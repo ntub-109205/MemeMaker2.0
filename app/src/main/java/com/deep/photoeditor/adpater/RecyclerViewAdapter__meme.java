@@ -125,6 +125,7 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
                 intent.putExtra("temp_id", mData.get(position).getTempId());
                 intent.putExtra("memeId", mData.get(position).getMemeId());
                 intent.putExtra("meme_url", mData.get(position).getMemeImage());
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
                 intent.putExtra("hashTag", mData.get(position).getHashTag());
                 intent.putExtra("user_name", mData.get(position).getUserName());
                 intent.putExtra("like_sum", mData.get(position).getLikeSum());
