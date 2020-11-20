@@ -23,7 +23,7 @@
         android:id="@+id/loginEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:text="kevin0507a@gmail.com"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:hint="電子郵件"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -57,7 +57,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:text="wedxzas12345"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:hint="密碼"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,20 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="8dp"
-        android:textSize="13dp"
+        android:textSize="14dp"
         android:text="記住我"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
-
-    <Button
-        android:id="@+id/forgetPassword"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:text="忘記密碼?"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
     <TextView
@@ -89,7 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/red_color_picker"
-        android:layout_marginLeft="30dp"
+        android:textSize="14dp"
+        android:layout_marginLeft="33dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSignin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Remember" />
@@ -100,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="85dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_default"
         android:text="登入"
