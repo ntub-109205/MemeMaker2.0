@@ -62,17 +62,6 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <CheckBox
-        android:id="@+id/Remember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="8dp"
-        android:textSize="14dp"
-        android:text="記住我"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
-
     <TextView
         android:id="@+id/promptMessage"
         android:layout_width="wrap_content"
@@ -80,9 +69,9 @@
         android:textColor="@color/red_color_picker"
         android:textSize="14dp"
         android:layout_marginLeft="33dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSignin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Remember" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSignin"
@@ -90,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="55dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_default"
         android:text="登入"
