@@ -124,6 +124,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
 
             //下面這些放到cardView
             String memeUrl = getIntent().getStringExtra("meme_url");
+
             Log.d("NotUseMyImage","memeUrl="+memeUrl);
             Log.d("NotUseMyImage","returnBitMap(memeUrl)="+getBitmap(memeUrl).toString());
             variable.templateImageSetter(getBitmap(memeUrl));
