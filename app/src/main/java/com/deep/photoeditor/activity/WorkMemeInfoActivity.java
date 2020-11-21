@@ -19,16 +19,24 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.PageAdapter;
+import com.deep.photoeditor.api;
 import com.wx.goodview.GoodView;
 
 public class WorkMemeInfoActivity extends AppCompatActivity {
     private static final String TAG = "WorkMemeInfoActivity";
+    private static api callApi = new api();
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
+    String memeId="";
+    int meme_id;
+    String table = "meme";
+    String field = "share";
     //switch button
     Switch switchTemp;
     //button onClick to next page
     public Button btnEdit;
+    int share_num;
+    boolean share_bool;
     Uri uri;
     //goodview
     GoodView mGoodView;
@@ -65,20 +73,37 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
 
         //將switch的狀態儲存到shared preferences
         SharedPreferences sharedPreferences = getSharedPreferences("save",MODE_PRIVATE);
+
         //---switchTemp---
         switchTemp.setChecked(sharedPreferences.getBoolean("value",true));
 
         switchTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(share_bool==true){
+                    share_bool=false;
+                    share_num=0;
+                }else{
+                    share_bool=true;
+                    share_num=1;
+                }
+                try {
+                    callApi.post("http://140.131.115.99/api/profile/update",
+                            "table= " + table +"&id=" + meme_id +"&field= " + field + "&value= " + share_num );
+                    Log.d("contextQQ","傳字串=" + callApi.returnString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (switchTemp.isChecked()) {
                     //當switch被觸發
+
                     SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
                     editor.putBoolean("value",true);
                     editor.apply();
                     switchTemp.setChecked(true);
                 }else{
                     //當switch沒被觸發
+
                     SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
                     editor.putBoolean("value",false);
                     editor.apply();
@@ -100,13 +125,16 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             String memeUrl = getIntent().getStringExtra("meme_url");
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
+            memeId = getIntent().getStringExtra("meme_id");
+            meme_id = Integer.parseInt(memeId);
             int likeSum = getIntent().getIntExtra("like_sum", 0);
-            int shared = getIntent().getIntExtra("share", 0);
-            setInfo(memeUrl, hashTag, userName, likeSum,shared);
+            int shared = getIntent().getIntExtra("meme_share", 0);
+            Log.d("memeinfoactivity","shared :"+ shared+"memeid: "+memeId);
+            setInfo(memeUrl, hashTag, userName, likeSum,shared,memeId);
         }
     }
-    private void setInfo(String memeUrl, String hashTag, String userName, int likeSum, int shared){
-        Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
+        private void setInfo(String memeUrl, String hashTag, String userName, int likeSum, int shared, String memeId){
+            Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
 
         //設置模板名
         TextView name = findViewById(R.id.workMemHashtag);
@@ -124,6 +152,15 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
         //設置熱門程度(被使用次數)
         TextView fireNum = findViewById(R.id.fireNum);
         fireNum.setText(String.valueOf(likeSum));
+
+        Switch tempSwitch = findViewById(R.id.tempSwitch);
+        if (shared==1){
+            tempSwitch.setChecked(true);
+            share_bool=true;
+        }else{
+            tempSwitch.setChecked(false);
+            share_bool=false;
+        }
 
 
     }

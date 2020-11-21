@@ -22,6 +22,7 @@ public class variable {
     private static String gifPath;
     private static byte[] gifByteArray;
     private static Bitmap templateImage;
+    private static Bitmap memeImage;
 
     private static HashMap<Bitmap, Integer> ImageQueue = new HashMap<Bitmap, Integer>();
     private static ArrayList<Bitmap> templatesBitmap = new ArrayList<Bitmap>();
@@ -73,6 +74,12 @@ public class variable {
         return templateImage;
     }
     public static void templateImageSetter(Bitmap templateImage1){templateImage = templateImage1;}
+
+    //梗圖圖片
+    public static Bitmap memeImageGetter(){
+        return memeImage;
+    }
+    public static void memeImageSetter(Bitmap memeImage1){memeImage = memeImage1;}
 
     //梗圖path
     public static String memePathGetter(){

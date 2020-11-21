@@ -33,6 +33,7 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/linearLayout9"
         android:layout_width="match_parent"
@@ -43,37 +44,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
-        <TextView
-            android:id="@+id/textView8"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="熱門標籤"
-            android:textColor="@color/red_orange_color_picker"
-            android:textSize="18sp" />
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tagRecyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp" >
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="熱門標籤"
+                android:textColor="@color/red_orange_color_picker"
+                android:textSize="18sp" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <ImageView
+                android:id="@+id/noTagResultImageView"
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/txtMoreTag"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="看更多..."
-            android:textColor="@color/red_color_picker"
-            android:textSize="13sp"
-            android:textAlignment="textEnd"
-            android:layout_marginEnd="20dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tagRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_below="@+id/textView8"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="10dp">
 
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/txtMoreTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:text="看更多..."
+                android:textAlignment="textEnd"
+                android:textColor="@color/red_color_picker"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,13 +119,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tempRecyclerview"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp"
-                android:layout_marginBottom="50dp" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/noTempResultImageView"
+                    android:layout_width="170dp"
+                    android:layout_height="130dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tempRecyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="10dp"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

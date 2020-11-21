@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -53,6 +54,8 @@ public class SearchFragment extends Fragment {
     private TextView mTxtMoreTag;
     private TextView hotTag;
     private TextView hotTemplate;
+    private ImageView noTagSearchImage;
+    private ImageView noTempSearchImage;
     private static variable variable = new variable();
 
     private TextView searchTag;
@@ -70,6 +73,7 @@ public class SearchFragment extends Fragment {
 
     public SearchFragment() {
     }
+
     public static List cutString(String b) {
         int x = 0;
         ArrayList a=new ArrayList();
@@ -97,6 +101,9 @@ public class SearchFragment extends Fragment {
         hotTag = (TextView) v.findViewById(R.id.textView8);
         hotTemplate = (TextView) v.findViewById(R.id.textView9);
 
+        noTagSearchImage = (ImageView) v.findViewById(R.id.noTagResultImageView);
+        noTempSearchImage = (ImageView) v.findViewById(R.id.noTempResultImageView);
+
         RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
         RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
 
@@ -106,12 +113,10 @@ public class SearchFragment extends Fragment {
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
         flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
 
-
         myrecyclerview.setLayoutManager(flexboxLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
         temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
         temprecyclerview.setAdapter(tempRecyclerViewAdapter);
-
 
         searchTag.setImeOptions(EditorInfo.IME_ACTION_SEND);
         searchTag.setOnKeyListener(new View.OnKeyListener() {
@@ -132,7 +137,7 @@ public class SearchFragment extends Fragment {
                     }
                     lstTagSearch = new ArrayList<>();
                     if (tagSize<2){
-                        //搜尋無結果
+                        //無相關梗圖搜尋結果
                     }else {
                         for (int i = 3; i < tagSize; i += 3) {
                             lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
@@ -148,7 +153,7 @@ public class SearchFragment extends Fragment {
                         e.printStackTrace();
                     }
                     if (temp.length()<13){
-                        //搜尋無結果
+                        //無相關模板搜尋結果
                     }else {
                         temp = temp.substring(13, (temp.length() - 1));
                         try {
@@ -217,7 +222,6 @@ public class SearchFragment extends Fragment {
                     flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
                     flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
 
-
                     myrecyclerview.setLayoutManager(flexboxLayoutManager);
                     myrecyclerview.setAdapter(recyclerViewAdapter);
                     temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
@@ -276,7 +280,7 @@ public class SearchFragment extends Fragment {
             e.printStackTrace();
         }
         if (tagSize<2){
-            //搜尋無結果
+            //無相關梗圖搜尋結果
         }else {
             lstTagSearch = new ArrayList<>();
             for (int i = 3; i < tagSize; i += 3) {
@@ -295,7 +299,7 @@ public class SearchFragment extends Fragment {
             e.printStackTrace();
         }
         if (temp.length()<13){
-            //搜尋無結果
+            //無相關模板搜尋結果
         }else {
             temp = temp.substring(13, (temp.length() - 1));
             try {

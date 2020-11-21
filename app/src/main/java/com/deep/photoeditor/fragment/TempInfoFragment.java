@@ -111,19 +111,10 @@ public class TempInfoFragment extends Fragment {
 
                 Log.d("temp", "template_id:" + memeId + ", filelink:" + filelink + "tags："+tags );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,filelink,author,count,thumb));
+                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,"no temp",filelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-//        lstMemeInfo = new ArrayList<>();
-//        lstMemeInfo.add(new PublicMeme("#居家隔離","https://www.urad.com.tw/wp-content/uploads/2015/08/giphy.gif","oUO",30));
-//        lstMemeInfo.add(new PublicMeme("#牽手","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1584282936597.jpg","天才",20));
-//        lstMemeInfo.add(new PublicMeme("#期末考","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1578233253954.jpg","龍澳天本添",9));
-//        lstMemeInfo.add(new PublicMeme("#快去睡","https://memeprod.s3.ap-northeast-1.amazonaws.com/user-wtf/1577726914062.jpg","七彩瑪莉蘇",6));
-//        lstTempInfo.add(new TempInfo("morning flower",R.drawable.meme5));
-//        lstTempInfo.add(new TempInfo("my idol",R.drawable.meme6));
-
     }
 }

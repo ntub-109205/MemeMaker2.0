@@ -3,11 +3,13 @@ package com.deep.photoeditor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,7 +35,7 @@ import android.widget.Switch;
 
 import com.deep.photoeditor.base.BaseActivity;
 
-public class editSetname extends BaseActivity {
+public class editSetname extends AppCompatActivity {
     Switch switchTemp;
     public Button btnNext;
     public Button btnFinishtemplate;
@@ -106,8 +108,9 @@ public class editSetname extends BaseActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                loadingDialog t= new loadingDialog();
+                t.start();
                 post();
-                hideLoading();
                 variable.useMyImageSetter(Boolean.TRUE);
                 Intent edit = new Intent(editSetname.this,EditImageActivity.class);
                 startActivity(edit);
@@ -118,8 +121,9 @@ public class editSetname extends BaseActivity {
         btnFinishtemplate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                loadingDialog t= new loadingDialog();
+                t.start();
                 post();
-                hideLoading();
                 variable.memeUriSetter(templateUri);
                 Intent edit = new Intent(editSetname.this,editShare.class);
                 startActivity(edit);
@@ -140,6 +144,47 @@ public class editSetname extends BaseActivity {
 
         init();
         setName.addTextChangedListener(setNameWatcher);
+    }
+
+    class loadingDialog extends Thread{
+        ProgressDialog progressDialog;
+        Handler handler;
+        loadingDialog(){
+            handler=new Handler();
+            progressDialog = new ProgressDialog(editSetname.this);
+            progressDialog.setMessage("載入中...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.show();
+        }
+
+        @Override
+        public void run(){
+            int count=(int)(Math.random()*10);
+            while(true){
+                final int assign=count;
+                if(count>=100){
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                        }
+                    });
+                    break;
+                }else{
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.setProgress(assign);
+                        }
+                    });
+                }
+                count+=(int)(Math.random()*15);
+                try {
+                    Thread.sleep(1000);
+                }catch (Exception e){e.printStackTrace();}
+            }
+        }
     }
 
     private final TextWatcher setNameWatcher = new TextWatcher() {
@@ -172,7 +217,6 @@ public class editSetname extends BaseActivity {
     public void post() {
         String templateName = setName.getText().toString();
         variable.templateNameSetter(templateName);
-        showLoading("載入中...");
         try {
             callApi.post("http://140.131.115.99/api/txt/store",
                     "category_id="+variable.category_idGetter()+"&name=" + templateName +"&share=" +templateShare );

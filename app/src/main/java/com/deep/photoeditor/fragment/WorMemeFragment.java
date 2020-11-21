@@ -81,8 +81,8 @@ public class WorMemeFragment extends Fragment {
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
-                int shared = Integer.parseInt(jsonObject.getString("share"));
-                Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
+                int shared = Integer.parseInt(jsonObject.getString("meme_share"));
+                Log.d("wormemefragment", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
 
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");

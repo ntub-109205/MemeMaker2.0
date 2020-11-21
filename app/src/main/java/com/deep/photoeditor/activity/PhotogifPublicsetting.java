@@ -119,6 +119,7 @@ public class PhotogifPublicsetting extends AppCompatActivity {
                     tag +="#" + list.get(i).toString().trim();
                 }
                 Log.d("tag1", tag);
+                Log.d("tag1",variable.memeShareGetter());
                 try {
                     callApi.post("http://140.131.115.99/api/txt/store",
                             "&share="+variable.memeShareGetter()+"&tags="+tag);
@@ -126,7 +127,7 @@ public class PhotogifPublicsetting extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.d("contextTest","gif的filepath=" + variable.getGifPath());
+                Log.d("tag1","gif的filepath=" + variable.getGifPath());
 
                 try {
                     Log.d("gifff",callApi.multipartRequest("http://140.131.115.99/api/meme/store","str="

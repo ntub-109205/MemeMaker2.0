@@ -1,9 +1,15 @@
 package com.deep.photoeditor.activity;
 
+
+import android.app.Activity;
+
+import android.app.ProgressDialog;
+
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,17 +18,21 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class GifShareActivity extends AppCompatActivity {
     public Button btnNext;
     public GifImageView gifView;
+    private ProgressDialog mProgressDialog;
     private static com.deep.photoeditor.variable variable = new variable();
+    private Object GifShareActivity;
 
     public void init() throws FileNotFoundException {
         btnNext = (Button)findViewById(R.id.btnNext);
@@ -32,9 +42,18 @@ public class GifShareActivity extends AppCompatActivity {
 //        mImageView.setImageBitmap(bitmap);
         gifView = findViewById(R.id.imageView);
         //顯示gif
-        byte[] fileBytes=variable.getGifByteArray();
-        gifView.setBytes(fileBytes);
-        gifView.startAnimation();
+        Log.d("contextTest1","gif的filepath=" + variable.getGifPath());
+
+        if(variable.getGifPath()!=null){
+            gifView.setImageURI(Uri.parse(variable.getGifPath()));
+            //Glide.with((Activity) GifShareActivity).asGif().load(variable.getGifPath()).into(gifView);
+        }else{
+            byte[] fileBytes=variable.getGifByteArray();
+            gifView.setBytes(fileBytes);
+            gifView.startAnimation();
+        }
+
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
