@@ -162,9 +162,10 @@ public class SearchFragment extends Fragment {
                     if (temp.length()<17){
                         //無相關模板搜尋結果
                         noTempSearchImage.setImageResource(R.drawable.template);
-
-
-
+                        int size = lstTagHotSearch.size();
+                        for (int i = 0; i < size; i++) {
+                            lstTagHotSearch.remove(i);
+                        }
 
                     }else {
                         noTempSearchImage.setImageBitmap(null);
