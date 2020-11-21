@@ -75,13 +75,14 @@ public class WorGifFragment extends Fragment {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String memeId = jsonObject.getString("meme_id");
-                String filelink = jsonObject.getString("filelink");
+                String memeFilelink = jsonObject.getString("meme_filelink");
+                String tempFilelink = jsonObject.getString("template_filelink");
                 String author = jsonObject.getString("author");
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
                 int shared = Integer.parseInt(jsonObject.getString("meme_share"));
-                Log.d("memeinfo", "template_id:" + tempId + ", filelink:" + filelink + ", author:" + author);
+                Log.d("memeinfo", "template_id:" + tempId  + ", author:" + author);
 
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");
@@ -102,7 +103,7 @@ public class WorGifFragment extends Fragment {
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new WorPublicMeme(tempId,memeId,newtag,filelink,author,count,thumb,shared));
+                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, tags, memeFilelink, author, thumb, shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();

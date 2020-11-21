@@ -14,7 +14,7 @@ public class WorPublicMeme {
 
     }
 
-    public WorPublicMeme(String tempId, String memeId, String hashTag, String memeImage, String userName, int likeSum, int thumb,int shared) {
+    public WorPublicMeme(String tempId, String memeId, String hashTag, String memeImage, String userName, int thumb,int shared) {
         this.tempId = tempId;
         this.memeId = memeId;
         this.hashTag = hashTag;
