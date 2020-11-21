@@ -129,10 +129,10 @@
             android:layout_height="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/beforeMadeBy"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.0001"
             app:layout_constraintStart_toStartOf="@+id/tempImage"
             app:layout_constraintTop_toBottomOf="@+id/tempImage"
-            app:layout_constraintVertical_bias="0.23000002"
+            app:layout_constraintVertical_bias="0.40"
             app:srcCompat="@drawable/fire" />
 
         <TextView
@@ -145,7 +145,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/fire"
             app:layout_constraintTop_toBottomOf="@+id/tempImage"
-            app:layout_constraintVertical_bias="0.20999998" />
+            app:layout_constraintVertical_bias="0.40" />
 
         <TextView
             android:id="@+id/beforeMadeBy"
@@ -174,31 +174,6 @@
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/editTablayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/editTab1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/tabTemplate" />-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/editTab2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/tabMineTemplate" />-->
-
-<!--    </com.google.android.material.tabs.TabLayout>-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/tempInfoViewPager"

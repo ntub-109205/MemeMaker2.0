@@ -55,9 +55,9 @@ public class TemplateInfoActivity extends AppCompatActivity {
     //api
     private static api callApi = new api();
 
-    Dialog mDialog;
+    private Dialog mDialog;
     //goodview
-    GoodView mGoodView;
+    private GoodView mGoodView;
     //給相關梗圖用的tempid
     private static String tempId;
     private static int saved; //是否被收藏
