@@ -33,20 +33,23 @@ public class signUp extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                confirmInput();
-                try {
-                    callApi.post("http://140.131.115.99/api/register",
-                            "email=" + email + "&name=" + name +"&password=" +password+"&c_password=" +c_password );
-                    Log.d("postRegister", callApi.returnString());
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                if (confirmInput()){
+                    try {
+                        callApi.post("http://140.131.115.99/api/register",
+                                "email=" + email + "&name=" + name +"&password=" +password+"&c_password=" +c_password );
+                        Log.d("postRegister", callApi.returnString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    callApi.setHeader(callApi.cutString().get(2).toString());
+                    //new一個intent物件，並指定Activity切換的class
+                    Intent edit = new Intent(signUp.this, MainActivity.class);
+                    //切換Activity
+                    startActivity(edit);
                 }
 
-                callApi.setHeader(callApi.cutString().get(2).toString());
-                //new一個intent物件，並指定Activity切換的class
-                Intent edit = new Intent(signUp.this, MainActivity.class);
-                //切換Activity
-                startActivity(edit);
             }
         });
 
@@ -74,6 +77,7 @@ public class signUp extends AppCompatActivity {
         textInputEmail = findViewById(R.id.email);
         textInputPassword = findViewById(R.id.password);
         textInputCheckpass = findViewById(R.id.checkPassword);
+        textInputPassword.setHint("請輸入六位以上密碼");
 
         init();
 
@@ -140,11 +144,12 @@ public class signUp extends AppCompatActivity {
         }
     }
 
-    public void confirmInput(){
+    public boolean confirmInput(){
         if (!validUsername() | !validEmail() | !validPassword() | !checkPassword()) {
-            return;
+            return false;
+        }else{
+            return true;
         }
-        Toast.makeText(this,"正確",Toast.LENGTH_SHORT).show();
     }
 
     //關閉鍵盤

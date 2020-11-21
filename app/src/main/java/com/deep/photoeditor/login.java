@@ -12,11 +12,14 @@ import android.widget.Button;
 
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.TextView;
 
 
 import com.deep.photoeditor.activity.MainActivity;
 import com.deep.photoeditor.base.BaseActivity;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -38,6 +41,8 @@ public class login extends BaseActivity {
     public Button btnToSignup;
     public TextInputLayout txtloginEmail;
     public TextInputLayout txtloginPassword;
+    public TextView promptMessage;
+
     public String loginEmail;
     public String loginPassword;
     private static BufferedReader reader;
@@ -51,6 +56,7 @@ public class login extends BaseActivity {
         btnToSignup = (Button)findViewById(R.id.btnToSignup);
         txtloginEmail = (TextInputLayout) findViewById(R.id.loginEmail);
         txtloginPassword = (TextInputLayout) findViewById(R.id.loginPassword);
+        promptMessage = (TextView) findViewById(R.id.promptMessage);
         //登入
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +77,8 @@ public class login extends BaseActivity {
                     e.printStackTrace();
                 }
                 if (feedback == null) {
+                    promptMessage.setText("登入失敗");
+
 //
 //                    showLoading("登入失敗...");
 //

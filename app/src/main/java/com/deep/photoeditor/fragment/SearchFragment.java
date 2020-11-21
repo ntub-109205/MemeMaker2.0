@@ -1,6 +1,7 @@
 package com.deep.photoeditor.fragment;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -67,6 +68,9 @@ public class SearchFragment extends Fragment {
     private String searchName = "";
     private int tagSize = 0;
     private int tempSize = 0;
+    private int TagSwitch = 0;
+    private int TempSwitch = 0;
+
 
     //api
     private static api callApi = new api();
@@ -137,8 +141,9 @@ public class SearchFragment extends Fragment {
                     }
                     lstTagSearch = new ArrayList<>();
                     if (tagSize<2){
-                        //無相關梗圖搜尋結果
+                        noTagSearchImage.setImageResource(R.drawable.nosearchresult);
                     }else {
+                        noTagSearchImage.setImageBitmap(null);
                         for (int i = 3; i < tagSize; i += 3) {
                             lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
                             Log.d("getTag", tag.get(i).toString());
@@ -152,9 +157,17 @@ public class SearchFragment extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (temp.length()<13){
+                    Log.d("NoSearchResult", "temp.length()="+temp.length());
+
+                    if (temp.length()<17){
                         //無相關模板搜尋結果
+                        noTempSearchImage.setImageResource(R.drawable.template);
+
+
+
+
                     }else {
+                        noTempSearchImage.setImageBitmap(null);
                         temp = temp.substring(13, (temp.length() - 1));
                         try {
                             JSONArray array = new JSONArray(temp);
@@ -207,6 +220,10 @@ public class SearchFragment extends Fragment {
                                 Log.d("searchTemp", "count="+count);
 
                                 lstTagHotSearch.add(new tagHotSearch(tempId, name, filelink, a, author, count));
+                                RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
+                                temprecyclerview.setAdapter(tempRecyclerViewAdapter);
+
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -214,18 +231,16 @@ public class SearchFragment extends Fragment {
                     }
                     //---------------------------------------------------------------------------------
                     RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
-                    RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
 
                     FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
-                    StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                    //StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
                     flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
                     flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
 
                     myrecyclerview.setLayoutManager(flexboxLayoutManager);
                     myrecyclerview.setAdapter(recyclerViewAdapter);
-                    temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
-                    temprecyclerview.setAdapter(tempRecyclerViewAdapter);
+                  //  temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
 
                     return true;
                 }
@@ -280,8 +295,12 @@ public class SearchFragment extends Fragment {
             e.printStackTrace();
         }
         if (tagSize<2){
-            //無相關梗圖搜尋結果
+            noTagSearchImage.setImageResource(R.drawable.nosearchresult);
+            TagSwitch=1;
         }else {
+            if (TagSwitch==1){
+                noTagSearchImage.setImageBitmap(null);
+            }
             lstTagSearch = new ArrayList<>();
             for (int i = 3; i < tagSize; i += 3) {
                 lstTagSearch.add(new tagSearch("#" + tag.get(i).toString()));
@@ -298,9 +317,16 @@ public class SearchFragment extends Fragment {
 
             e.printStackTrace();
         }
-        if (temp.length()<13){
+        if (temp.length()<20){
             //無相關模板搜尋結果
+            noTempSearchImage.setImageResource(R.drawable.template);
+            TempSwitch=1;
+            Log.d("NoSearchResult", "進來了");
+
         }else {
+            if (TempSwitch==1){
+                noTempSearchImage.setImageBitmap(null);
+            }
             temp = temp.substring(13, (temp.length() - 1));
             try {
                 JSONArray array = new JSONArray(temp);
