@@ -77,9 +77,6 @@
         <activity
             android:name=".login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".editOnlymaketemp"
-            android:parentActivityName=".editOnlymaketemp" />
         <activity android:name=".editShare" />
         <activity android:name=".activity.GifShareActivity" />
         <activity
