@@ -18,6 +18,7 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_mineTemp;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.mineTemplate;
+import com.deep.photoeditor.variable;
 import com.deep.photoeditor.worMemTmp;
 
 import org.json.JSONArray;
@@ -37,7 +38,8 @@ public class edittab2 extends Fragment {
     private RecyclerView myrecyclerview;
     private List<worMemTmp> lstMemeMemeTemplate;
     private static api callApi = new api();
-
+    private String st;
+    private static com.deep.photoeditor.variable variable = new variable();
     public edittab2() {
         // Required empty public constructor
     }
@@ -60,13 +62,17 @@ public class edittab2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            callApi.get("http://140.131.115.99/api/template/show/1?time=1&user=1");
+            if(variable.category_idGetter()=="1"){
+                st = callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork");
+            }else{
+                st = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork"));
+       // Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork").trim();
+        String temp = st.trim();
         temp = temp.substring(13,(temp.length()-1));
         Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList

@@ -18,6 +18,7 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.hotTemplate;
+import com.deep.photoeditor.variable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +37,8 @@ public class edittab1 extends Fragment {
     private List<hotTemplate> lsthotTemplate;
     //api
     private static api callApi = new api();
-
+    private String st;
+    private static com.deep.photoeditor.variable variable = new variable();
 
     public edittab1() {
         // Required empty public constructor
@@ -62,12 +64,16 @@ public class edittab1 extends Fragment {
         try {
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
 //            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
-            callApi.get("http://140.131.115.99/api/template/show/1");
+            if(variable.category_idGetter()=="1"){
+                st = callApi.get("http://140.131.115.99/api/template/show/1");
+            }else{
+                st = callApi.get("http://140.131.115.99/api/template/show/2");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/1").trim();
+        String temp = st.trim();
         temp = temp.substring(13,(temp.length()-1));
         Log.d("runrun","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
