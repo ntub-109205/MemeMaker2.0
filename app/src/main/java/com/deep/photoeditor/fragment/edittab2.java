@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_mineTemp;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.mineTemplate;
 import com.deep.photoeditor.variable;
 import com.deep.photoeditor.worMemTmp;
 

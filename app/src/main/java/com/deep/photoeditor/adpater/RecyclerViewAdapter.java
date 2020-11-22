@@ -49,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_hottemplate,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
         MyViewHolder vHolder = new MyViewHolder(v);
         return vHolder;
     }
@@ -103,7 +103,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             tempName = (TextView) itemView.findViewById(R.id.cardName);
             tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
-            hotTemp_item = (RelativeLayout) itemView.findViewById(R.id.hotTemp_item);
+            hotTemp_item = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
             fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
 

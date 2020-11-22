@@ -48,7 +48,7 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
     @Override
     public MyViewHolder_mineTemp onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.item_minetemplate,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
         RecyclerViewAdapter_mineTemp.MyViewHolder_mineTemp vHolder = new RecyclerViewAdapter_mineTemp.MyViewHolder_mineTemp(v);
         return vHolder;
     }
@@ -97,9 +97,9 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
         public MyViewHolder_mineTemp(@NonNull View itemView) {
             super(itemView);
 
-            mineTempName = (TextView) itemView.findViewById(R.id.mineCardName);
-            mineTempImage = (ImageView) itemView.findViewById(R.id.mineCardImage);
-            mineTemp_item = (RelativeLayout) itemView.findViewById(R.id.mineTemp_item);
+            mineTempName = (TextView) itemView.findViewById(R.id.cardName);
+            mineTempImage = (ImageView) itemView.findViewById(R.id.cardImage);
+            mineTemp_item = (RelativeLayout) itemView.findViewById(R.id.template_item_id);
             fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
     }
