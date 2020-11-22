@@ -145,7 +145,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             String tempUrl = getIntent().getStringExtra("temp_url");
             Log.d("NotUseMyImage","memeUrl="+tempUrl);
             //Log.d("NotUseMyImage","getBitmap(tempUrl)="+getBitmap(tempUrl).toString());
-            //variable.memeImageSetter(getBitmap(memeUrl));
+            variable.memeImageSetter(getBitmap(memeUrl));
 
             variable.templateImageSetter(getBitmap(tempUrl));
             String hashTag = getIntent().getStringExtra("hashTag");
