@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__gif;
+import com.deep.photoeditor.adpater.RecyclerViewAdapter__gifShowDialog;
+import com.deep.photoeditor.adpater.RecyclerViewAdapter__meme;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.variable;
 
@@ -50,7 +52,7 @@ public class PublicGifFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter__gif recyclerViewAdapter = new RecyclerViewAdapter__gif(getContext(), lstMemeMeme);
+        RecyclerViewAdapter__gifShowDialog recyclerViewAdapter = new RecyclerViewAdapter__gifShowDialog(getContext(), lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);

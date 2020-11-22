@@ -21,6 +21,7 @@ import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.api;
+import com.deep.photoeditor.variable;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
     List<PublicMeme> mData;
     //api
     private static api callApi = new api();
+    private static com.deep.photoeditor.variable variable = new variable();
 
 
     public RecyclerViewAdapter__meme(Context mContext, List<PublicMeme> mData) {
@@ -120,6 +122,7 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
 
                 Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
+                variable.category_idSetter(null);
 
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());

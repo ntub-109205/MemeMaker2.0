@@ -30,6 +30,7 @@ import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.editSetname;
 import com.deep.photoeditor.fragment.MemeInfoFragment;
+import com.deep.photoeditor.fragment.PublicGifFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.fragment.maintab2;
 import com.deep.photoeditor.gifmake.GifMakeActivity;
@@ -93,8 +94,14 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new MemeInfoFragment(),"相關梗圖");
-        viewPager.setAdapter(pagerAdapter);
+        if (variable.category_idGetter() == "3") {
+            pagerAdapter.AddFragment(new PublicGifFragment(),"相關梗圖");
+            viewPager.setAdapter(pagerAdapter);
+        }else {
+            pagerAdapter.AddFragment(new MemeInfoFragment(),"相關梗圖");
+            viewPager.setAdapter(pagerAdapter);
+        }
+
 
         //init Dialog
         mDialog = new Dialog(this);
@@ -169,7 +176,6 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         //設置模板圖片
         ImageView image = findViewById(R.id.memeImage);
         Glide.with(this)
-                .asBitmap()
                 .load(memeUrl)
                 .into(image);
         Log.d(TAG, "set meme url: "+memeUrl);
