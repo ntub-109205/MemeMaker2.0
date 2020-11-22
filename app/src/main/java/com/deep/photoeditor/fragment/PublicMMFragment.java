@@ -49,12 +49,12 @@ public class PublicMMFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.publicMeme_recyclerView);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter__meme recyclerViewAdapter = new RecyclerViewAdapter__meme(getContext(), lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
-        imgNomeme = (ImageView) v.findViewById(R.id.nomeme);
+        imgNomeme = (ImageView) v.findViewById(R.id.noResultImageView);
         if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.no_meme);
 
         return v;
@@ -76,18 +76,11 @@ public class PublicMMFragment extends Fragment {
             }
         }else {
             try {
-//            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
-//            callApi.get("http://140.131.115.99/api/meme/show/1");
                 temp = callApi.get("http://140.131.115.99/api/meme/show/1").trim();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-
-//        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
-        //留下array[]，其他切掉
-//        String temp = callApi.get("http://140.131.115.99/api/meme/show/1").trim();
         temp = temp.substring(8,(temp.length()-1));
         if (temp.length()<10) isNomeme=0;
         Log.d("memeinfo","cut allready :"+ temp);
@@ -129,16 +122,6 @@ public class PublicMMFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-//        lstMemeMeme = new ArrayList<>();
-//        lstMemeMeme.add(new PublicMeme("#Dog #隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg","潔西卡",35));
-//        lstMemeMeme.add(new PublicMeme("#反叛的魯路修","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589009676654.jpg","Geo",20));
-//        lstMemeMeme.add(new PublicMeme("#三國殺","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589044855818.jpg","跑跑跑的人",19));
-//        lstMemeMeme.add(new PublicMeme("#鼠定了你","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589086291871.jpg","好累",18));
-//        lstMemeMeme.add(new PublicMeme("#某系列主機遊戲","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041392638.jpg","Anc1233",17));
-//        lstMemeMeme.add(new PublicMeme("#PM日常","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589041053097.jpg","牙醫09",16));
-//        lstMemeMeme.add(new PublicMeme("#歷史","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589034990886.jpg","江戶川先生",14));
-
 
     }
 }
