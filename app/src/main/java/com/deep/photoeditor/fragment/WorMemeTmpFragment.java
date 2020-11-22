@@ -57,13 +57,10 @@ public class WorMemeTmpFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
             callApi.get("http://140.131.115.99/api/template/show/1?time=1&user=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Log.d("wormetemp",callApi.returnString());
         Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork"));
         //留下array[]，其他切掉
         String temp = callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork").trim();

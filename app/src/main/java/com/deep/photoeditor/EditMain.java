@@ -20,6 +20,7 @@ import android.widget.Button;
 import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.fragment.WorMemeTmpFragment;
 import com.deep.photoeditor.fragment.edittab1;
+import com.deep.photoeditor.fragment.edittab2;
 import com.google.android.material.tabs.TabLayout;
 import android.net.Uri;
 import android.widget.Toast;
@@ -51,7 +52,7 @@ public class EditMain extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.editViewPager);
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
         pagerAdapter.AddFragment(new edittab1(),"熱門模板");
-        pagerAdapter.AddFragment(new WorMemeTmpFragment(),"我的模板");
+        pagerAdapter.AddFragment(new edittab2(),"我的模板");
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

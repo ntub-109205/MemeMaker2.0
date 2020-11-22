@@ -29,7 +29,7 @@ public class ColMemeInfoActivity extends AppCompatActivity {
     //goodview
     GoodView mGoodView;
     public void init(){
-        btnEdit = (Button)findViewById(R.id.btnEditWorkMemTmpShare);
+//        btnEdit = (Button)findViewById(R.id.btnEditWorkMemTmpShare);
 //
 //        btnEdit.setOnClickListener(new View.OnClickListener() {
 //            @Override

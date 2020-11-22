@@ -18,7 +18,6 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.hotTemplate;
-import com.deep.photoeditor.memeTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,8 +46,8 @@ public class edittab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_edittab1, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.hotTemplate_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_adapter, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),lsthotTemplate);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);

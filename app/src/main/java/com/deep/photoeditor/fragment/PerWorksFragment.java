@@ -42,8 +42,6 @@ public class PerWorksFragment extends Fragment implements View.OnClickListener {
         ImageButton btnWorEldTmp = (ImageButton)rootView.findViewById(R.id.btnWorEldTmp);
         ImageButton btnWorEld = (ImageButton)rootView.findViewById(R.id.btnWorEld);
 
-        btnWorGif.setImageDrawable(loadImageFromURL("https://5b0988e595225.cdn.sohucs.com/images/20191020/0e9badc14cf342de81a4b61e61e85a26.gif"));
-
         btnWorGif.setOnClickListener(this);
         btnWorMemTmp.setOnClickListener(this);
         btnWorMem.setOnClickListener(this);

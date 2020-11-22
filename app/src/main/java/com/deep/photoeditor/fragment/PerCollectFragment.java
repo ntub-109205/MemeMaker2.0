@@ -50,8 +50,7 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
         ImageButton btnColGif = (ImageButton) rootView.findViewById(R.id.btnColGif);
         ImageButton btnColEldTmp = (ImageButton) rootView.findViewById(R.id.btnColEldTmp);
         ImageButton btnColEld = (ImageButton) rootView.findViewById(R.id.btnColEld);
-        TextView item_template = (TextView)rootView.findViewById(R.id.item_template);
-        btnColGif.setImageDrawable(loadImageFromURL("https://www.urad.com.tw/wp-content/uploads/2015/08/giphy.gif"));
+//        TextView item_template = (TextView)rootView.findViewById(R.id.item_template);
 
         btnColGif.setOnClickListener(this);
         btnColMemTmp.setOnClickListener(this);
@@ -94,7 +93,7 @@ public class PerCollectFragment extends Fragment implements View.OnClickListener
                 //lstMemeMemeTemplate.add(new memeTemplate(id,name,filelink,author,count));
                 if (id=="1"){
                     btnColMem.setImageURI(Uri.parse(filelink));
-                    item_template.setText("("+count+")");
+//                    item_template.setText("("+count+")");
                 }
 
             }
