@@ -66,6 +66,7 @@ public class TemplateInfoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template_info);
+        getIncomingIntent();
         Log.d(TAG, "onCreate: started.");
 
         //goodview
@@ -86,7 +87,7 @@ public class TemplateInfoActivity extends AppCompatActivity {
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.dialog_gif);
 
-        getIncomingIntent();
+
         btnDomeme = (Button)findViewById(R.id.domeme);
         btnDomeme.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -29,7 +29,7 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
     private static api callApi = new api();
     private ViewPager viewPager;
     public PageAdapter pagerAdapter;
-    String memeId="";
+    private static String memeId;
     int meme_id;
     String table = "meme";
     String field = "share";
@@ -42,25 +42,15 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
     Uri uri;
     //goodview
     GoodView mGoodView;
+    private static int saved; //是否被收藏
     public void init(){
-//        btnEdit = (Button)findViewById(R.id.btnEditWorkMemTmpShare);
-//
-//        btnEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v){
-//                //new一個intent物件，並指定Activity切換的class
-//                Intent edit = new Intent(WorkMemeTempInfoActivity.this,editShare.class);
-//                edit.setData(uri);
-//                //切換Activity
-//                startActivity(edit);
-//            }
-//        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_meme_info);
+        getIncomingIntent();
 
         //goodview
         mGoodView = new GoodView(this);
@@ -114,9 +104,28 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             }
         });
 
+        String temp="";
+        Log.d("printMemeId up",""+memeId);
+        try {
+            temp = callApi.get("http://140.131.115.99/api/meme/saved/"+memeId).trim();
+            Log.d("savedMemetemp",""+temp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("savedMeme",(callApi.get("http://140.131.115.99/api/meme/saved/"+memeId)));
+        //{"saved":"0"}
+        saved =Integer.parseInt(temp.substring(10,11));
+        Log.d("saved====", ""+saved);
+        //設置收藏顏色
+        ImageView bookMark = findViewById(R.id.bookmark);
+        if (saved==0) {
+            bookMark.setImageResource(R.drawable.bookmark);
+        }else {
+            bookMark.setImageResource(R.drawable.bookmark_checked);
+        }
 
         init();
-        getIncomingIntent();
+
     }
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
@@ -128,6 +137,7 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             String hashTag = getIntent().getStringExtra("hashTag");
             String userName = getIntent().getStringExtra("user_name");
             memeId = getIntent().getStringExtra("meme_id");
+            Log.d("printMemeId down",memeId);
             meme_id = Integer.parseInt(memeId);
             int likeSum = getIntent().getIntExtra("like_sum", 0);
             int shared = getIntent().getIntExtra("meme_share", 0);
@@ -164,20 +174,39 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             tempSwitch.setChecked(false);
             share_bool=false;
         }
-
-
     }
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
     }
-    //onclick判斷在xml
-//    public void bookmark(View view) {
-//        ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
-//        mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
-//        mGoodView.show(view);
+
+//    public static String returnTempIdString(){
+//        return tempId;
 //    }
+    public static String returnMemeIdString(){
+        return memeId;
+    }
+
+    //onclick判斷在xml
+    public void bookmark(View view) {
+        if (saved == 0) {
+            ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
+            mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
+            mGoodView.show(view);
+            saved=1;
+        } else {
+            ((ImageView) view).setImageResource(R.drawable.bookmark);
+            mGoodView. setTextInfo("取消收藏", Color.parseColor("#999da4"), 12);
+            mGoodView.show(view);
+            saved=0;
+        }
+        try {
+            callApi.post("http://140.131.115.99/api/meme/saved","meme_id=" + memeId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void like(View view) {
         ((ImageView) view).setImageResource(R.drawable.like_checked);
         mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
