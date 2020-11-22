@@ -129,8 +129,9 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
             String userName = getIntent().getStringExtra("user_name");
             int usedSum = getIntent().getIntExtra("used_sum", 0);
             int shared = getIntent().getIntExtra("share", 0);
-            setInfo(tempUrl, tempName, userName, usedSum,shared);
-        }
+            Log.d("memetempshared",""+shared);
+            setInfo(tempUrl, tempName, userName, shared,usedSum);
+    }
     }
     private void setInfo(String tempUrl, String tempName, String userName, int shared, int usedSum){
         Log.d("YY", "setInfo: set tempUrl tempName userName usedSum");

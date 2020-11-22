@@ -36,7 +36,7 @@ public class WorEldTmpActivity extends AppCompatActivity {
         mGoodView = new GoodView(this);
 
         //新增回到前一頁的箭頭
-        getSupportActionBar().setTitle("我的長輩圖模板"+"("+cnt+")");
+        getSupportActionBar().setTitle("我的長輩圖模板");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = (ViewPager)findViewById(R.id.worEldTmpViewPager);

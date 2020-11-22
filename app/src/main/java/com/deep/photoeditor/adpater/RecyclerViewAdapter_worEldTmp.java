@@ -74,7 +74,9 @@ public class RecyclerViewAdapter_worEldTmp extends RecyclerView.Adapter<Recycler
                 intent.putExtra("temp_url", mData.get(position).getTempImage());
                 intent.putExtra("temp_name", mData.get(position).getTempName());
                 intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("used_sum", mData.get(position).getUsedSum());
                 intent.putExtra("share", mData.get(position).getShared());
+                Log.d("sharedddddd"," " + mData.get(position).getShared());
                 mContext.startActivity(intent);
             }
         });

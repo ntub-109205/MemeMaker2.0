@@ -57,10 +57,12 @@ public class ColGifFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
+//            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
             callApi.get("http://140.131.115.99/api/meme/show/3?profile=saved&time=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
         //留下array[]，其他切掉
         String temp = callApi.get("http://140.131.115.99/api/meme/show/3?profile=saved&time=1").trim();
         temp = temp.substring(8,(temp.length()-1));
@@ -78,7 +80,7 @@ public class ColGifFragment extends Fragment {
                 String tempId = jsonObject.getString("template_id");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
-                Log.d("memeinfo", "template_id:" + tempId + ", author:" + author);
+                Log.d("memeinfo", "template_id:" + tempId  + ", author:" + author);
 
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");

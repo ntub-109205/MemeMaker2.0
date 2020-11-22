@@ -36,7 +36,7 @@ public class ColGifActivity extends AppCompatActivity {
         mGoodView = new GoodView(this);
 
         //新增回到前一頁的箭頭
-        getSupportActionBar().setTitle("收藏動圖"+"("+cnt+")");
+        getSupportActionBar().setTitle("收藏動圖");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = (ViewPager)findViewById(R.id.colGifViewPager);
