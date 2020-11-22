@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deep.photoeditor.image_selector.multi_image_selector.bean.Image;
-import com.deep.photoeditor.layoutImage;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.variable;
 

@@ -83,7 +83,7 @@ public class edittab1 extends Fragment {
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 Log.d("runrun", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lsthotTemplate.add(new hotTemplate(name,filelink,author,count));
+                lsthotTemplate.add(new hotTemplate(name,filelink,author,count,id));
             }
         } catch (JSONException e) {
             e.printStackTrace();
