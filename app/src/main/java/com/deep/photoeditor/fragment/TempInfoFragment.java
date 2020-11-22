@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +38,8 @@ public class TempInfoFragment extends Fragment {
     View v;
     private RecyclerView myrecyclerview;
     private List<PublicMeme> lstMemeInfo;
+    public ImageView imgNomeme;
+    public int isNomeme=1;
     //api
     private static api callApi = new api();
     //temp id
@@ -51,12 +54,14 @@ public class TempInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_tempinfo, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.tempInfo_recyclerView);
+        v = inflater.inflate(R.layout.fragment_public_tab1, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.publicMeme_recyclerView);
         RecyclerViewAdapter__meme recyclerViewAdapter = new RecyclerViewAdapter__meme(getContext(),lstMemeInfo);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
+        imgNomeme = (ImageView) v.findViewById(R.id.nomeme);
+        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.no_meme);
         return v;
     }
 
@@ -77,10 +82,12 @@ public class TempInfoFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         Log.d("temp",callApi.get("http://140.131.115.99/api/template/meme/" +tempId));
         //留下array[]，其他切掉
         String temp = callApi.get("http://140.131.115.99/api/template/meme/" +tempId).trim();
         temp = temp.substring(8,(temp.length()-1));
+        if (temp.length()<10) isNomeme=0;
         Log.d("temp","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {
@@ -89,7 +96,8 @@ public class TempInfoFragment extends Fragment {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject jsonObject = array.getJSONObject(i);
                 String memeId = jsonObject.getString("id");
-                String filelink = jsonObject.getString("filelink");
+                String memeFilelink = jsonObject.getString("meme_filelink");
+                String tempFilelink = jsonObject.getString("template_filelink");
                 String author = jsonObject.getString("author");
                 int count = Integer.parseInt(jsonObject.getString("count"));
                 int thumb = Integer.parseInt(jsonObject.getString("thumb"));
@@ -109,9 +117,9 @@ public class TempInfoFragment extends Fragment {
                     newtag = newtag + "#" + tag;
                 }
 
-                Log.d("temp", "template_id:" + memeId + ", filelink:" + filelink + "tags："+tags );
+                Log.d("temp", "template_id:" + memeId + ", memefilelink:" + memeFilelink + "tags："+tags );
                 //產生cardView
-                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,"no temp",filelink,author,count,thumb));
+                lstMemeInfo.add(new PublicMeme(tempId,memeId,newtag,tempFilelink,memeFilelink,author,count,thumb));
             }
         } catch (JSONException e) {
             e.printStackTrace();
