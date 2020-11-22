@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.WorPublicMeme;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_worGif;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMem;
 import com.deep.photoeditor.api;
 
@@ -47,7 +46,7 @@ public class WorGifFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter_worGif recyclerViewAdapter = new RecyclerViewAdapter_worGif(getContext(),lstMemeMeme);
+        RecyclerViewAdapter_worMem recyclerViewAdapter = new RecyclerViewAdapter_worMem(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
