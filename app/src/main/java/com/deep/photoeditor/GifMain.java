@@ -3,8 +3,10 @@ package com.deep.photoeditor;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,10 @@ import com.deep.photoeditor.adpater.RecyclerViewAdapter__gif;
 import com.deep.photoeditor.gifmake.GifMakeActivity;
 import com.deep.photoeditor.gifmake.VideoToGifActivity;
 import com.felipecsl.gifimageview.library.GifImageView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +34,11 @@ public class GifMain extends AppCompatActivity {
     RecyclerViewAdapter__gif recyclerViewAdapter_myGif;
     private View.OnClickListener mMyGifListener;
     private View.OnClickListener mPublicGifListener;
-
+    private List<WorPublicMeme> lstMemeMeme;
+    private static api callApi = new api();
+    private String st;
+    public ImageView imgNomeme;
+    public int isNomeme=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +49,67 @@ public class GifMain extends AppCompatActivity {
 
         initListener();
 
-        lstMineGif = new ArrayList<>();
-        lstMineGif.add(new PublicMeme("1","1","#我真可愛","no","https://lh3.googleusercontent.com/proxy/_aOVP7bqrBMjyM8izkVPTgzgmueVtmxlD71EBLbFbHI_E6jISa_hl9rsUri0KemCClp3GjuUWeZulFDVyfz50B_s9PerMAX9TXBCpSm_WG0uQ8BSHCmdFd2C","jessie",30,1));
-        lstMineGif.add(new PublicMeme("1","1","#誰怕誰","no","https://4.bp.blogspot.com/-cvLAyXhtB3c/XQrc0yQCQ2I/AAAAAAAMlPE/wNN_5eU1Xe0SYainh1NefU-sBIYj8ZksACLcBGAs/s1600/AS0005411_03.gif","Geo",20,1));
-        lstMineGif.add(new PublicMeme("1","1","#太好了","no","https://media1.tenor.com/images/200bec2e1191d7e08ee5e7832fd0a1bf/tenor.gif?itemid=11841779","跑跑跑的人",19,0));
-        lstMineGif.add(new PublicMeme("1","1","#骷顱頭 #CUTE","no","https://helpx.adobe.com/content/dam/help/en/photoshop/how-to/create-animated-gif/jcr_content/main-pars/image_4389415/create-animated-gif_3a-v2.gif","好累",18,0));
-        lstMineGif.add(new PublicMeme("1","1","#鬼滅之刃","no","https://imgur.com/CV5zi8A.gif","Anc1233",17,0));
-        lstMineGif.add(new PublicMeme("1","1","#迪麗熱巴","no","https://lh3.googleusercontent.com/proxy/NaWfGS8M9D2omQntntF0HrGgdeUi7j_YHABKgxocY5Nx8mfhXsQC3yxt-36dTyGmD3UwONW0JvcE5Pr6t2Bys6V61u6FF-ZrwK4","牙醫09",16,1));
-        lstMineGif.add(new PublicMeme("1","1","#Happy Birthday","no","https://i.pinimg.com/originals/11/2c/79/112c79099635f40073d579cd237a9ad8.gif","江戶川先生",14,0));
+        try {
+//            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
+            st = callApi.get("http://140.131.115.99/api/meme/show/3?profile=myWork&time=1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
+        //留下array[]，其他切掉
+        String temp = st.trim();
+        temp = temp.substring(8,(temp.length()-1));
+        if (temp.length()<10) isNomeme=0;
+        Log.d("memeinfo","cut allready :"+ temp);
+        //把jsonArray塞進cardView的arrayList
+        try {
+            JSONArray array = new JSONArray(temp);
+            lstMineGif = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                String memeId = jsonObject.getString("meme_id");
+                String memeFilelink = jsonObject.getString("meme_filelink");
+                String tempFilelink = jsonObject.getString("template_filelink");
+                String author = jsonObject.getString("author");
+                String tempId = jsonObject.getString("template_id");
+                int count = Integer.parseInt(jsonObject.getString("count"));
+                int thumb = Integer.parseInt(jsonObject.getString("thumb"));
+                int shared = Integer.parseInt(jsonObject.getString("meme_share"));
+                Log.d("memeinfo", "template_id:" + tempId  + ", author:" + author);
 
+                //---把tag們分出來---//
+                String tags = jsonObject.getString("tags");
+                String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+
+//                Log.d("tags", "tags:" + items);
+                // items.length 是所有項目的個數
+                String[] results = new String[items.length];
+                // 將結果放入 results
+                for (int j = 0; j < items.length; j++) {
+                    results[j] = items[j].trim();
+                }
+                String newtag = "";
+                for (String tag : results) {
+                    tag = tag.replaceAll("\"", "");
+                    Log.d("tags", "tags:" + tag);
+                    newtag = "#" + tag;
+                }
+                //---tag們分完了---//
+
+                //產生cardView
+                lstMineGif.add(new PublicMeme(tempId, memeId, newtag, tempFilelink,memeFilelink, author, count, thumb));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         recyclerView = findViewById(R.id.myGifRecyclerview);
         recyclerViewAdapter_myGif = new RecyclerViewAdapter__gif(this, lstMineGif);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter_myGif);
+
+
     }
 
     //由圖片做Gif

@@ -45,8 +45,9 @@ public class GifShareActivity extends AppCompatActivity {
         Log.d("contextTest1","gif的filepath=" + variable.getGifPath());
 
         if(variable.getGifPath()!=null){
-            gifView.setImageURI(Uri.parse(variable.getGifPath()));
-            //Glide.with((Activity) GifShareActivity).asGif().load(variable.getGifPath()).into(gifView);
+            //gifView.setImageURI(Uri.parse(variable.getGifPath()));
+
+            Glide.with((Activity) GifShareActivity).asGif().load(variable.getGifPath()).into(gifView);
         }else{
             byte[] fileBytes=variable.getGifByteArray();
             gifView.setBytes(fileBytes);

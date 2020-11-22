@@ -155,7 +155,6 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
         //設置模板圖片
         ImageView image = findViewById(R.id.imageView);
         Glide.with(this)
-                .asBitmap()
                 .load(memeUrl)
                 .into(image);
 //        //設置製作者名
