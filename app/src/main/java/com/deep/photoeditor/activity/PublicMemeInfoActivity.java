@@ -124,8 +124,10 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d("savedMeme",(callApi.get("http://140.131.115.99/api/meme/saved/"+memeId)));
         //{"saved":"0"}
         saved =Integer.parseInt(temp.substring(10,11));
+        Log.d("saved====", ""+saved);
         //設置收藏顏色
         ImageView bookMark = findViewById(R.id.bookmark);
         if (saved==0) {
@@ -333,11 +335,11 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             showSnackbar("儲存成功");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            showSnackbar("儲存失敗");
+            showSnackbar("儲存失敗1");
             hideLoading();
         } catch (IOException e) {
             e.printStackTrace();
-            showSnackbar("儲存失敗");
+            showSnackbar("儲存失敗2");
             hideLoading();
         }
 

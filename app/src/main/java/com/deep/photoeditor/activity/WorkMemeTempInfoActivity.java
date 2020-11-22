@@ -32,6 +32,7 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
     String field = "share";
     String tempId="";
     int temp_id;
+
     //switch button
     Switch switchTemp;
     private static api callApi = new api();
@@ -42,6 +43,7 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
     Uri uri;
     //goodview
     GoodView mGoodView;
+    private static int saved; //是否被收藏
     public void init(){
 //        btnEdit = (Button)findViewById(R.id.btnEditWorkMemTmpShare);
 //
@@ -61,7 +63,7 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_meme_tmp_info);
-
+        getIncomingIntent();
         //goodview
         mGoodView = new GoodView(this);
 
@@ -113,9 +115,24 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
             }
         });
 
-
+        String temp="";
+        Log.d("printTmpId up",""+tempId);
+        try {
+            temp = callApi.get("http://140.131.115.99/api/template/saved/"+tempId).trim();
+            Log.d("savedMemeTmptemp",""+temp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //{"saved":"0"}
+        saved =Integer.parseInt(temp.substring(10,11));
+        //設置收藏顏色
+        ImageView bookMark = findViewById(R.id.bookmark);
+        if (saved==0) {
+            bookMark.setImageResource(R.drawable.bookmark);
+        }else {
+            bookMark.setImageResource(R.drawable.bookmark_checked);
+        }
         init();
-        getIncomingIntent();
     }
     private void getIncomingIntent(){
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
@@ -169,8 +186,24 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
     }
     //onclick判斷在xml
     public void bookmark(View view) {
-        ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
-        mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
-        mGoodView.show(view);
+//        ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
+//        mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
+//        mGoodView.show(view);
+        if (saved == 0) {
+            ((ImageView) view).setImageResource(R.drawable.bookmark_checked);
+            mGoodView. setTextInfo("收藏成功", Color.parseColor("#f66467"), 12);
+            mGoodView.show(view);
+            saved=1;
+        } else {
+            ((ImageView) view).setImageResource(R.drawable.bookmark);
+            mGoodView. setTextInfo("取消收藏", Color.parseColor("#999da4"), 12);
+            mGoodView.show(view);
+            saved=0;
+        }
+        try {
+            callApi.post("http://140.131.115.99/api/template/saved","template_id=" + tempId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

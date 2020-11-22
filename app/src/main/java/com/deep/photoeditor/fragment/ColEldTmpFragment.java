@@ -37,7 +37,7 @@ public class ColEldTmpFragment extends Fragment {
     private RecyclerView myrecyclerview;
     private List<memeTemplate> lstTempInfo;
     private static api callApi = new api();
-
+    private String st;
     public ColEldTmpFragment() {
         // Required empty public constructor
     }
@@ -60,14 +60,14 @@ public class ColEldTmpFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-            callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1");
+            st =callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        Log.d("wormetemp",callApi.returnString());
         Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved").trim();
+        String temp = st.trim();
         temp = temp.substring(13,(temp.length()-1));
         Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList

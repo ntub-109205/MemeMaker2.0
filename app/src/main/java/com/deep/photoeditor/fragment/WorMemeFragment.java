@@ -37,7 +37,7 @@ public class WorMemeFragment extends Fragment {
     private RecyclerView myrecyclerview;
     private List<WorPublicMeme> lstMemeMeme;
     private static api callApi = new api();
-
+    private String st;
     public WorMemeFragment() {
         // Required empty public constructor
     }
@@ -60,13 +60,13 @@ public class WorMemeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         try {
 //            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
-            callApi.get("http://140.131.115.99/api/meme/show/1?profile=myWork&time=1");
+            st=callApi.get("http://140.131.115.99/api/meme/show/1?profile=myWork&time=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/meme/show/1?profile=myWork&time=1").trim();
+        String temp = st.trim();
         temp = temp.substring(8,(temp.length()-1));
         Log.d("memeinfo","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
@@ -88,7 +88,8 @@ public class WorMemeFragment extends Fragment {
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");
                 String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
-                Log.d("tags", "tags:" + items);
+
+//                Log.d("tags", "tags:" + items);
                 // items.length 是所有項目的個數
                 String[] results = new String[items.length];
                 // 將結果放入 results
@@ -98,17 +99,18 @@ public class WorMemeFragment extends Fragment {
                 String newtag = "";
                 for (String tag : results) {
                     tag = tag.replaceAll("\"", "");
-                    Log.d("tags", "tags:" + tag + ", ");
-                    newtag = newtag + "#" + tag;
+                    Log.d("tags", "tags:" + tag);
+                    newtag = "#" + tag;
                 }
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, tags, memeFilelink, author, thumb, shared));
+                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, newtag, memeFilelink, author, thumb, shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 //        lstMemeMeme = new ArrayList<>();
 //        lstMemeMeme.add(new PublicMeme("1","1","#Dog #隔離","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1585196981888.jpg","潔西卡",35,1));
 //        lstMemeMeme.add(new PublicMeme("1","1","#反叛的魯路修","https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1589009676654.jpg","Geo",20,1));

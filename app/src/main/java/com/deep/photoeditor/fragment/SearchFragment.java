@@ -74,6 +74,7 @@ public class SearchFragment extends Fragment {
     private int tempSize = 0;
     private int TagSwitch = 0;
     private int TempSwitch = 0;
+    private int TempSearchSwitch = 0;
 
 
     //api
@@ -166,12 +167,25 @@ public class SearchFragment extends Fragment {
                     if (temp.length()<17){
                         //無相關模板搜尋結果
                         noTempSearchImage.setImageResource(R.drawable.template);
-                        int size = lstTagHotSearch.size();
-                        for (int i = 0; i < size; i++) {
-                            lstTagHotSearch.remove(i);
-                        }
+//                        if ( TempSearchSwitch == 1) {
+                            int size = lstTagHotSearch.size();
+                            for (int i = 0; i < size; i++) {
+                                lstTagHotSearch.remove(0);
+                            }
+//                        }else{
+//                            int size = lstTagHotSearch.size();
+//                            Log.d("GGGGGGGGGGGGGGG", "temp.length()="+size);
+//
+//                            for (int i = 0; i < size-2; i++) {
+//                                Log.d("GGGGGGGGGGGGGGG", "i="+i);
+//
+//                                lstTagHotSearch.remove(i);
+//                            }
+//
+//                        }
 
                     }else {
+                        TempSearchSwitch = 1;
                         noTempSearchImage.setImageBitmap(null);
                         temp = temp.substring(13, (temp.length() - 1));
                         try {
@@ -225,8 +239,8 @@ public class SearchFragment extends Fragment {
                                 Log.d("searchTemp", "count="+count);
 
                                 lstTagHotSearch.add(new tagHotSearch(tempId, name, filelink, a, author, count));
-                                RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
-                                temprecyclerview.setAdapter(tempRecyclerViewAdapter);
+//                                RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
+//                                temprecyclerview.setAdapter(tempRecyclerViewAdapter);
 
 
                             }
@@ -235,6 +249,9 @@ public class SearchFragment extends Fragment {
                         }
                     }
                     //---------------------------------------------------------------------------------
+                    RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
+                    temprecyclerview.setAdapter(tempRecyclerViewAdapter);
+
                     RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
 
                     FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
