@@ -2,6 +2,8 @@ package com.deep.photoeditor.adpater;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +18,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.deep.photoeditor.EditImageActivity;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.TemplateInfoActivity;
 import com.deep.photoeditor.hotTemplate;
+import com.deep.photoeditor.variable;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -27,6 +36,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
     Context mContext;
     List<hotTemplate> mData;
+    private static com.deep.photoeditor.variable variable = new variable();
 
     public RecyclerViewAdapter(Context mContext, List<hotTemplate> mData) {
         this.mContext = mContext;
@@ -64,6 +74,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+                Log.d("imageUrl", "imageUrl=" + mData.get(position).getTempImage());
+                variable.templateImageSetter(getBitmap(mData.get(position).getTempImage()));
+//                mData.get(position).g
+                variable.templateIDSetter(mData.get(position).getTemp_id());
+                variable.useMyImageSetter(Boolean.FALSE);
+                Intent edit = new Intent(mContext, EditImageActivity.class);
+                mContext.startActivity(edit);
 
                 Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
             }
@@ -90,5 +107,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             hotTemp_item = (RelativeLayout) itemView.findViewById(R.id.hotTemp_item);
             fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
         }
+
+
+    }
+    public Bitmap getBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL iconUrl = new URL(url);
+            URLConnection conn = iconUrl.openConnection();
+            HttpURLConnection http = (HttpURLConnection) conn;
+
+            int length = http.getContentLength();
+
+            conn.connect();
+            // 获得图像的字符流
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is, length);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();// 关闭流
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bm;
     }
 }

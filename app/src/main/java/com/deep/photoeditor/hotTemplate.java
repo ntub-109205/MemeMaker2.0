@@ -5,16 +5,19 @@ public class hotTemplate {
     private String tempImage;
     private String userName;
     private int usedSum;
+    private String Temp_id;
 
     public hotTemplate() {
 
     }
 
-    public hotTemplate(String tempName, String tempImage, String userName, int usedSum) {
+    public hotTemplate(String tempName, String tempImage, String userName, int usedSum,String Temp_id) {
         this.tempName = tempName;
         this.tempImage = tempImage;
         this.userName = userName;
         this.usedSum = usedSum;
+        this.Temp_id = Temp_id;
+
     }
 
     //getter
@@ -32,6 +35,10 @@ public class hotTemplate {
 
     public int getUsedSum() {
         return usedSum;
+    }
+
+    public String getTemp_id() {
+        return Temp_id;
     }
 
     //setter

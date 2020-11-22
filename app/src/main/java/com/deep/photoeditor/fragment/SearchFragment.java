@@ -1,5 +1,6 @@
 package com.deep.photoeditor.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +47,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class SearchFragment extends Fragment {
     private static final String TAG = "searchFragment";
@@ -381,4 +385,6 @@ public class SearchFragment extends Fragment {
         }
             //---------------------------------------------------------------------------------
     }
+
+
 }
