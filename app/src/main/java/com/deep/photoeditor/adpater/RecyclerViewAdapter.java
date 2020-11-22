@@ -76,7 +76,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
                 Log.d("imageUrl", "imageUrl=" + mData.get(position).getTempImage());
                 variable.templateImageSetter(getBitmap(mData.get(position).getTempImage()));
-//                mData.get(position).g
                 variable.templateIDSetter(mData.get(position).getTemp_id());
                 variable.useMyImageSetter(Boolean.FALSE);
                 Intent edit = new Intent(mContext, EditImageActivity.class);
