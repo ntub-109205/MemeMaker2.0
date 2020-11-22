@@ -27,7 +27,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginBottom="168dp"
-                android:background="@drawable/shadow"
+                android:background="@drawable/work_meme"
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="5dp"
@@ -37,7 +37,6 @@
                 app:layout_constraintStart_toStartOf="@+id/linearLayout4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
                 app:layout_constraintVertical_bias="0.1">
-                <!--  android:elevation="10dp"-->
 
                 <ImageButton
                     android:id="@+id/btnWorMem"
@@ -45,8 +44,7 @@
                     android:layout_height="110dp"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/meme3" />
+                    android:scaleType="fitCenter" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -59,14 +57,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:textStyle="bold"
                         android:text="梗圖" />
 
-                    <TextView
-                        android:id="@+id/txtColMemCnt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="(7)" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -79,7 +73,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginEnd="9dp"
                 android:layout_marginRight="9dp"
-                android:background="@drawable/shadow"
+                android:background="@drawable/work_elder"
                 android:elevation="2dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
@@ -88,7 +82,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout7"
                 app:layout_constraintStart_toEndOf="@+id/linearLayout5"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout5">
-                <!--  android:elevation="10dp"-->
 
                 <ImageButton
                     android:id="@+id/btnWorEld"
@@ -96,8 +89,7 @@
                     android:layout_height="110dp"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/elder4" />
+                    android:scaleType="fitCenter"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -110,14 +102,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:textStyle="bold"
                         android:text="長輩圖" />
 
-                    <TextView
-                        android:id="@+id/txtColEldCnt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="(7)" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -126,7 +114,7 @@
                 android:id="@+id/linearLayout7"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:background="@drawable/shadow"
+                android:background="@drawable/work_gif"
                 android:elevation="2dp"
                 android:orientation="vertical"
                 android:padding="5dp"
@@ -136,7 +124,6 @@
                 app:layout_constraintStart_toEndOf="@+id/linearLayout5"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout5"
                 app:layout_constraintVertical_bias="0.0">
-                <!--  android:elevation="10dp"-->
 
                 <ImageButton
                     android:id="@+id/btnWorGif"
@@ -157,14 +144,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:textStyle="bold"
                         android:text="動圖" />
 
-                    <TextView
-                        android:id="@+id/txtColGifCnt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|center_horizontal"
-                        android:text="(7)" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -192,7 +175,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shadow"
+        android:background="@drawable/work_meme_temp"
         android:elevation="2dp"
         android:orientation="vertical"
         android:padding="5dp"
@@ -202,7 +185,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0">
-        <!--  android:elevation="10dp"-->
 
         <ImageButton
             android:id="@+id/btnWorMemTmp"
@@ -210,8 +192,7 @@
             android:layout_height="110dp"
             android:layout_gravity="center"
             android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/person_test_pic" />
+            android:scaleType="fitCenter" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -224,14 +205,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
+                android:textStyle="bold"
                 android:text="梗圖模板" />
 
-            <TextView
-                android:id="@+id/txtColMemTmpCnt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="(4)" />
         </LinearLayout>
 
     </LinearLayout>
@@ -242,7 +219,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shadow"
+        android:background="@drawable/work_elder_temp"
         android:elevation="2dp"
         android:orientation="vertical"
         android:padding="5dp"
@@ -252,7 +229,6 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout4"
         app:layout_constraintTop_toTopOf="@+id/linearLayout4"
         app:layout_constraintVertical_bias="0.0">
-        <!--  android:elevation="10dp"-->
 
         <ImageButton
             android:id="@+id/btnWorEldTmp"
@@ -260,8 +236,7 @@
             android:layout_height="110dp"
             android:layout_gravity="center"
             android:background="@null"
-            android:scaleType="fitCenter"
-            android:src="@drawable/elder2" />
+            android:scaleType="fitCenter" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -274,14 +249,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
+                android:textStyle="bold"
                 android:text="長輩圖模板" />
 
-            <TextView
-                android:id="@+id/txtColEldTmpCnt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="(4)" />
         </LinearLayout>
 
     </LinearLayout>
