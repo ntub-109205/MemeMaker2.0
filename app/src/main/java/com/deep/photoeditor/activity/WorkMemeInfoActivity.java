@@ -22,6 +22,8 @@ import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.api;
 import com.wx.goodview.GoodView;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class WorkMemeInfoActivity extends AppCompatActivity {
     private static final String TAG = "WorkMemeInfoActivity";
     private static api callApi = new api();
@@ -154,6 +156,7 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
         fireNum.setText(String.valueOf(likeSum));
 
         Switch tempSwitch = findViewById(R.id.tempSwitch);
+        Log.d(TAG, "memeTempShared " + shared);
         if (shared==1){
             tempSwitch.setChecked(true);
             share_bool=true;

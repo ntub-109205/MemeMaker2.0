@@ -81,9 +81,10 @@ public class WorEldTmpFragment extends Fragment {
                 String name = jsonObject.getString("name");
                 String author = jsonObject.getString("author");
                 int count = Integer.parseInt(jsonObject.getString("count"));
+                int shared = Integer.parseInt(jsonObject.getString("meme_share"));
                 Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lstMemeMemeTemplate.add(new worMemTmp(id,name,filelink,author,count));
+                lstMemeMemeTemplate.add(new worMemTmp(id,name,filelink,author,count,shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +74,7 @@ public class RecyclerViewAdapter_worEldTmp extends RecyclerView.Adapter<Recycler
                 intent.putExtra("temp_url", mData.get(position).getTempImage());
                 intent.putExtra("temp_name", mData.get(position).getTempName());
                 intent.putExtra("user_name", mData.get(position).getUserName());
-                intent.putExtra("used_sum", mData.get(position).getUsedSum());
+                intent.putExtra("share", mData.get(position).getShared());
                 mContext.startActivity(intent);
             }
         });
@@ -91,6 +92,7 @@ public class RecyclerViewAdapter_worEldTmp extends RecyclerView.Adapter<Recycler
         private ImageView tempImage;
         private TextView fireNum;
         private RelativeLayout item_template;
+        private Switch share;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,6 +101,7 @@ public class RecyclerViewAdapter_worEldTmp extends RecyclerView.Adapter<Recycler
             tempName = (TextView) itemView.findViewById(R.id.cardName);
             tempImage = (ImageView) itemView.findViewById(R.id.cardImage);
             fireNum = (TextView) itemView.findViewById(R.id.itemFireNum);
+            share = (Switch) itemView.findViewById(R.id.tempSwitch);
         }
     }
 }

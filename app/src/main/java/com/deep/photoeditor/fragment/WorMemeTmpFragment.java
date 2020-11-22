@@ -57,7 +57,7 @@ public class WorMemeTmpFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            callApi.get("http://140.131.115.99/api/template/show/1?time=1&user=1");
+            callApi.get("http://140.131.115.99/api/template/show/1?time=1&profile=myWork");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,9 +77,10 @@ public class WorMemeTmpFragment extends Fragment {
                 String name = jsonObject.getString("name");
                 String author = jsonObject.getString("author");
                 int count = Integer.parseInt(jsonObject.getString("count"));
+                int shared = Integer.parseInt(jsonObject.getString("share"));
                 Log.d("wormemtemp", "template_id:" + id + ", filelink:" + filelink + ", name:" + name + ", count:" + count);
                 //產生cardView
-                lstMemeMemeTemplate.add(new worMemTmp(id,name,filelink,author,count));
+                lstMemeMemeTemplate.add(new worMemTmp(id,name,filelink,author,count,shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();

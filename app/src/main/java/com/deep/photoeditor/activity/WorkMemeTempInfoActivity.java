@@ -28,11 +28,17 @@ import java.io.FileNotFoundException;
 
 public class WorkMemeTempInfoActivity extends AppCompatActivity {
     private static final String TAG = "WorkMemeTempInfoActivity";
+    String table = "templates";
+    String field = "share";
+    String tempId="";
+    int temp_id;
     //switch button
     Switch switchTemp;
     private static api callApi = new api();
     //button onClick to next page
     public Button btnEdit;
+    int share_num;
+    boolean share_bool;
     Uri uri;
     //goodview
     GoodView mGoodView;
@@ -75,14 +81,30 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
         switchTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(share_bool==true){
+                    share_bool=false;
+                    share_num=0;
+                }else{
+                    share_bool=true;
+                    share_num=1;
+                }
+                try {
+                    callApi.post("http://140.131.115.99/api/profile/update",
+                            "table= " + table +"&id=" + temp_id +"&field= " + field + "&value= " + share_num );
+                    Log.d("contextQQ","傳字串=" + callApi.returnString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (switchTemp.isChecked()) {
                     //當switch被觸發
+
                     SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
                     editor.putBoolean("value",true);
                     editor.apply();
                     switchTemp.setChecked(true);
                 }else{
                     //當switch沒被觸發
+
                     SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
                     editor.putBoolean("value",false);
                     editor.apply();
@@ -100,16 +122,17 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
 
         if(getIntent().hasExtra("temp_url") && getIntent().hasExtra("temp_name") && getIntent().hasExtra("user_name") && getIntent().hasExtra("used_sum")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
-
+            tempId = getIntent().getStringExtra("temp_id");
+            temp_id = Integer.parseInt(tempId);
             String tempUrl = getIntent().getStringExtra("temp_url");
             String tempName = getIntent().getStringExtra("temp_name");
             String userName = getIntent().getStringExtra("user_name");
             int usedSum = getIntent().getIntExtra("used_sum", 0);
-
-            setInfo(tempUrl, tempName, userName, usedSum);
+            int shared = getIntent().getIntExtra("share", 0);
+            setInfo(tempUrl, tempName, userName, usedSum,shared);
         }
     }
-    private void setInfo(String tempUrl, String tempName, String userName, int usedSum){
+    private void setInfo(String tempUrl, String tempName, String userName, int shared, int usedSum){
         Log.d("YY", "setInfo: set tempUrl tempName userName usedSum");
 
         //設置模板名
@@ -128,8 +151,15 @@ public class WorkMemeTempInfoActivity extends AppCompatActivity {
         //設置熱門程度(被使用次數)
         TextView fireNum = findViewById(R.id.fireNum);
         fireNum.setText(String.valueOf(usedSum));
-
-
+        Switch tempSwitch = findViewById(R.id.tempSwitch);
+        Log.d("memetempshared",""+shared);
+        if (shared==1){
+            tempSwitch.setChecked(true);
+            share_bool=true;
+        }else{
+            tempSwitch.setChecked(false);
+            share_bool=false;
+        }
     }
 
     public void hideKeyboard(View view) {
