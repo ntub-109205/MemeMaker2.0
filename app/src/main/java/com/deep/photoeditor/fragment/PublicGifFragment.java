@@ -48,7 +48,7 @@ public class PublicGifFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_public_tab1, container, false);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.publicMeme_recyclerView);
         RecyclerViewAdapter__gif recyclerViewAdapter = new RecyclerViewAdapter__gif(getContext(), lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);

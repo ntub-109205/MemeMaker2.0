@@ -17,7 +17,6 @@ import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__meme;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.memeTemplate;
 import com.deep.photoeditor.variable;
 
 import org.json.JSONArray;
@@ -49,7 +48,7 @@ public class PublicMMFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_public_tab1, container, false);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.publicMeme_recyclerView);
         RecyclerViewAdapter__meme recyclerViewAdapter = new RecyclerViewAdapter__meme(getContext(), lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
