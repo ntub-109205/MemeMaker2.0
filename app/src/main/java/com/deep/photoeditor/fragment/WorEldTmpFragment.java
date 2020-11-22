@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_worEldTmp;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMemTmp;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.memeTemplate;
 import com.deep.photoeditor.worMemTmp;
 
 import org.json.JSONArray;
@@ -47,7 +45,7 @@ public class WorEldTmpFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter_worEldTmp recyclerViewAdapter = new RecyclerViewAdapter_worEldTmp(getContext(),lstMemeMemeTemplate);
+        RecyclerViewAdapter_worMemTmp recyclerViewAdapter = new RecyclerViewAdapter_worMemTmp(getContext(),lstMemeMemeTemplate);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);

@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_colEld;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_colGif;
+import com.deep.photoeditor.adpater.RecyclerViewAdapter_colMem;
 import com.deep.photoeditor.api;
 
 import org.json.JSONArray;
@@ -46,7 +45,7 @@ public class ColGifFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter_colGif recyclerViewAdapter = new RecyclerViewAdapter_colGif(getContext(),lstMemeMeme);
+        RecyclerViewAdapter_colMem recyclerViewAdapter = new RecyclerViewAdapter_colMem(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
