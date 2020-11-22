@@ -44,8 +44,8 @@ public class ColMemeTmpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_col_meme_tmp, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.col_mem_tmp_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter_colMemTmp recyclerViewAdapter = new RecyclerViewAdapter_colMemTmp(getContext(),lstTempInfo);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);

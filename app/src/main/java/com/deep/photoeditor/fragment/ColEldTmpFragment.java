@@ -46,8 +46,8 @@ public class ColEldTmpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_col_eld_tmp, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.col_eld_tmp_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter_colEldTmp recyclerViewAdapter = new RecyclerViewAdapter_colEldTmp(getContext(),lstTempInfo);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
@@ -60,8 +60,6 @@ public class ColEldTmpFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
             callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1");
         } catch (Exception e) {
             e.printStackTrace();
