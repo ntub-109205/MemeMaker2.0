@@ -20,8 +20,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.deep.photoeditor.adpater.RecyclerViewAdapter;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_layoutImage;
 
 import java.util.ArrayList;
