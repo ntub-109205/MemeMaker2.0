@@ -136,6 +136,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
 
             //模板id給相關梗圖fragment用
             tempId = getIntent().getStringExtra("temp_id");
+            memeId = getIntent().getStringExtra("memeId");
             variable.templateIDSetter(tempId);
 
             //下面這些放到cardView
@@ -212,6 +213,9 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
 
     public static String returnTempIdString(){
         return tempId;
+    }
+    public static String returnMemeIdString(){
+        return memeId;
     }
 
     //onclick判斷在xml
