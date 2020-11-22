@@ -45,8 +45,8 @@ public class ColEldFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_col_elder, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.col_eld_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter_colEld recyclerViewAdapter = new RecyclerViewAdapter_colEld(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
@@ -59,13 +59,10 @@ public class ColEldFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
             callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved");
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Log.d("wormetemp",callApi.returnString());
         Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved"));
         //留下array[]，其他切掉
         String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved").trim();

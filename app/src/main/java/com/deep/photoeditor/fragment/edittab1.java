@@ -62,8 +62,6 @@ public class edittab1 extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1&time=1");
-//            callApi.post("http://140.131.115.99/api/template/show","category_id=1");
             if(variable.category_idGetter()=="1"){
                 st = callApi.get("http://140.131.115.99/api/template/show/1");
             }else{

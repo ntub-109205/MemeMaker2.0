@@ -46,8 +46,8 @@ public class WorMemeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_wor_meme, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.wor_mem_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter_worMem recyclerViewAdapter = new RecyclerViewAdapter_worMem(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);

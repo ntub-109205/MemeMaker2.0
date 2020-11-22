@@ -37,9 +37,6 @@ public class HomeFragment extends Fragment {
         tabLayout = myFragment.findViewById(R.id.mainTablayout);
         viewPager = myFragment.findViewById(R.id.mainViewPager);
 
-//        tabLayout.setupWithViewPager(viewPager);
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
         return myFragment;
     }
 

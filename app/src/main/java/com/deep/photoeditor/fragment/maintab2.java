@@ -49,8 +49,8 @@ public class maintab2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_maintab2, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.elderTemplate_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter__memeTemp recyclerViewAdapter_elderTemp = new RecyclerViewAdapter__memeTemp(getContext(), lstelderTemplate);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
@@ -90,18 +90,6 @@ public class maintab2 extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-//        lstelderTemplate = new ArrayList<>();
-//        lstelderTemplate.add(new elderTemplate("百合花",R.drawable.elder1));
-//        lstelderTemplate.add(new elderTemplate("一支百合花",R.drawable.elder2));
-//        lstelderTemplate.add(new elderTemplate("海浪與夕陽",R.drawable.elder9));
-//        lstelderTemplate.add(new elderTemplate("海岸",R.drawable.elder10));
-//        lstelderTemplate.add(new elderTemplate("盛開的百合花",R.drawable.elder3));
-//        lstelderTemplate.add(new elderTemplate("白色百合花",R.drawable.elder4));
-//        lstelderTemplate.add(new elderTemplate("書與玫瑰",R.drawable.elder5));
-//        lstelderTemplate.add(new elderTemplate("綠樹遮天",R.drawable.elder6));
-//        lstelderTemplate.add(new elderTemplate("秋天瓢蟲",R.drawable.elder7));
-//        lstelderTemplate.add(new elderTemplate("露珠_湖面",R.drawable.elder8));
 
     }
 

@@ -44,8 +44,8 @@ public class ColGifFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_col_gif, container, false);
-        myrecyclerview = (RecyclerView) v.findViewById(R.id.col_gif_recyclerView);
+        v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
+        myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         RecyclerViewAdapter_colGif recyclerViewAdapter = new RecyclerViewAdapter_colGif(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
@@ -57,12 +57,10 @@ public class ColGifFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-//            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
             callApi.get("http://140.131.115.99/api/meme/show/3?profile=saved&time=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
         //留下array[]，其他切掉
         String temp = callApi.get("http://140.131.115.99/api/meme/show/3?profile=saved&time=1").trim();
         temp = temp.substring(8,(temp.length()-1));
