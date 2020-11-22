@@ -327,11 +327,11 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             showSnackbar("儲存成功");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            showSnackbar("儲存失敗");
+            showSnackbar("儲存失敗1");
             hideLoading();
         } catch (IOException e) {
             e.printStackTrace();
-            showSnackbar("儲存失敗");
+            showSnackbar("儲存失敗2");
             hideLoading();
         }
 
