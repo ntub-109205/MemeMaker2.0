@@ -170,12 +170,12 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             thumb = getIntent().getIntExtra("thumb", 0);
             memeId = getIntent().getStringExtra("memeId");
 
-            setInfo(memeUrl, hashTag, userName, likeSum);
+            setInfo(memeUrl, hashTag, userName, thumb);
             showImageDialog(memeUrl,hashTag);
             Log.d("pubmeme", "tempid="+returnTempIdString());
         }
     }
-    private void setInfo(String memeUrl, String hashTag, String userName, int likeSum){
+    private void setInfo(String memeUrl, String hashTag, String userName, int thumb){
         Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
 
         //設置模板名
@@ -193,7 +193,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         user.setText(userName);
         //設置點讚次數
         TextView likeNum = findViewById(R.id.likeNum);
-        likeNum.setText(String.valueOf(likeSum));
+        likeNum.setText(String.valueOf(thumb));
         //設置愛心顏色
         ImageView like = findViewById(R.id.like);
         if (thumb==0) {
