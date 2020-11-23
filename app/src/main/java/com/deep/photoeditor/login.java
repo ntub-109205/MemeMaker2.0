@@ -1,5 +1,6 @@
 package com.deep.photoeditor;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.Button;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+
 import com.deep.photoeditor.activity.MainActivity;
 import com.deep.photoeditor.base.BaseActivity;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,6 +36,20 @@ public class login extends BaseActivity {
         txtloginEmail = (TextInputLayout) findViewById(R.id.loginEmail);
         txtloginPassword = (TextInputLayout) findViewById(R.id.loginPassword);
         promptMessage = (TextView) findViewById(R.id.promptMessage);
+        new AlertDialog.Builder(this)
+                .setTitle("免責聲明")
+                .setMessage("歡迎您使用「MemeMaker」(以下簡稱本應用)，任何瀏覽的人士，須自行承擔一切風險，本應用不會負責任何因瀏覽或使用本應用而引致之損失。本應用不會作出任何默示的擔保。\n" +
+                        "本應用承諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本應用不會承擔任何賠償責任，所有本應用內容，將會隨時更改，而不作另行通知。\n"+
+                        "本應用不會對使用或連結本應用而引致任何損害(包括但不限於系統固障、資料損失)、誹謗、侵犯版權或知識產權所造成的損失，包括但不限於利潤、商譽、使用、資料損失或其他無形損失，本應用不承擔任何直接、間接、附帶、特別、衍生性或懲罰性賠償。\n"+
+                        "是否使用本應用之服務下載或取得任何資料應由用戶自行考慮且自負風險，因前開任何資料之下載而導致用戶設備系統之任何損壞或資料流失，本應用不承擔任何責任。")
+                .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //你可以在這裡加入事件
+                    }
+                })
+                .setCancelable(false)
+                .show();
         //登入
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
