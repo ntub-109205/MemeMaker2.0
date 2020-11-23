@@ -1,9 +1,11 @@
 package com.deep.photoeditor.activity;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
@@ -298,21 +301,38 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
     }
 
     public void shareLine(View view) {
-        saveImageToGallery(this,variable.memeImageGetter());
-        String scheme ="line://msg/image"+variable.memePathGetter();
-        this.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(scheme)));
+        if (getPermission()) {
+            //確認權限
+        }else {
+            showLoading("儲存中...");
+            saveImageToGallery(this,variable.templateImageGetter());
+            String scheme ="line://msg/image"+variable.memePathGetter();
+            this.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(scheme)));
+        }
     }
 
     public void saveImage(View view) {
-        showLoading("儲存中...");
-        saveImageToGallery(this,variable.memeImageGetter());
-
-//        String path = "MeMe Maker";
-//        File dirFile = new File(Environment.getExternalStorageDirectory(),path);
-//        if(!dirFile.exists()){//如果資料夾不存在
-//            dirFile.mkdir();//建立資料夾
-//        }
+        if (getPermission()) {
+            //確認權限
+        }else {
+            showLoading("儲存中...");
+            saveImageToGallery(this,variable.templateImageGetter());
+        }
     }
+
+    public boolean getPermission() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            return true;
+        }
+//        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(this,new String[]{},1);
+//        }
+        return false;
+    }
+
     public void saveImageToGallery(Context context, Bitmap bmp) {
         // 首先儲存圖片
         String path = "MeMe Maker";
