@@ -75,16 +75,18 @@
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
                 android:background="#95d57c"
+                android:onClick="shareLine"
                 app:srcCompat="@drawable/share_line" />
 
             <ImageButton
                 android:id="@+id/downloadButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
                 android:background="#000000"
+                android:onClick="saveImage"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/share_download" />
         </LinearLayout>
 
