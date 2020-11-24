@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,10 +16,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_colEldTmp;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_colMemTmp;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.colMemTmp;
 import com.deep.photoeditor.memeTemplate;
 
 import org.json.JSONArray;
@@ -37,7 +36,9 @@ public class ColEldTmpFragment extends Fragment {
     private RecyclerView myrecyclerview;
     private List<memeTemplate> lstTempInfo;
     private static api callApi = new api();
-
+    private String st;
+    public ImageView imgNomeme;
+    public int isNomeme=1;
     public ColEldTmpFragment() {
         // Required empty public constructor
     }
@@ -48,10 +49,12 @@ public class ColEldTmpFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter_colEldTmp recyclerViewAdapter = new RecyclerViewAdapter_colEldTmp(getContext(),lstTempInfo);
+        RecyclerViewAdapter_colMemTmp recyclerViewAdapter = new RecyclerViewAdapter_colMemTmp(getContext(),lstTempInfo);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
+        imgNomeme = (ImageView) v.findViewById(R.id.noResultImageView);
+        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.no_saved);
         return v;
     }
 
@@ -60,15 +63,16 @@ public class ColEldTmpFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try {
-            callApi.get("http://140.131.115.99/api/template/show/2?time=1&user=1");
+            st =callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved");
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        Log.d("wormetemp",callApi.returnString());
-        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved"));
+//        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=saved").trim();
+        String temp = st.trim();
         temp = temp.substring(13,(temp.length()-1));
+        if (temp.length()<10) isNomeme=0;
         Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {

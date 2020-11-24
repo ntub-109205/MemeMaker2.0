@@ -21,6 +21,7 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__meme;
 import com.deep.photoeditor.api;
+import com.deep.photoeditor.variable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,9 +42,11 @@ public class MemeInfoFragment extends Fragment {
     public int isNomeme=1;
     //api
     private static api callApi = new api();
+    private static com.deep.photoeditor.variable variable = new variable();
     //temp id
     private String tempId;
     private String memeId;
+    private String st;
 
 
     public MemeInfoFragment() {
@@ -77,20 +80,30 @@ public class MemeInfoFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        if (memeUrl.substring(-3,3).equals("gif")) {
+//            try {
+//                st = callApi.get("http://140.131.115.99/api/meme/show/3?tag_name=宮崎駿");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }else {
+//            try {
+//                st = callApi.get("http://140.131.115.99/api/template/meme/" +tempId+"?exclude="+memeId);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
         try {
-//            callApi.post("http://140.131.115.99/api/template/meme","template_id="+tempId);
-            //少一個memeid
-            callApi.get("http://140.131.115.99/api/template/meme/" +tempId+"?exclude="+memeId);
+            st = callApi.get("http://140.131.115.99/api/template/meme/" +tempId+"?exclude="+memeId);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Log.d("tempGoGo",callApi.get("http://140.131.115.99/api/template/meme/" +tempId));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/meme/" +tempId+"?exclude="+memeId).trim();
+        String temp = st.trim();
         temp = temp.substring(8,(temp.length()-1));
         if (temp.length()<10) isNomeme=0;
-        Log.d("temp","cut allready :"+ temp);
+        Log.d("tempQQQQ","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {
             JSONArray array = new JSONArray(temp);

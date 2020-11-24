@@ -33,6 +33,7 @@ import com.deep.photoeditor.adpater.PageAdapter;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.editSetname;
 import com.deep.photoeditor.fragment.MemeInfoFragment;
+import com.deep.photoeditor.fragment.PublicGifFragment;
 import com.deep.photoeditor.fragment.TempInfoFragment;
 import com.deep.photoeditor.fragment.maintab2;
 import com.deep.photoeditor.gifmake.GifMakeActivity;
@@ -97,15 +98,27 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
 
         //Add Fragment here
-        pagerAdapter.AddFragment(new MemeInfoFragment(), "相關梗圖");
-        viewPager.setAdapter(pagerAdapter);
+
+        if (variable.category_idGetter() == "3") {
+            pagerAdapter.AddFragment(new PublicGifFragment(),"相關梗圖");
+            viewPager.setAdapter(pagerAdapter);
+        }else {
+            pagerAdapter.AddFragment(new MemeInfoFragment(),"相關梗圖");
+            viewPager.setAdapter(pagerAdapter);
+        }
+
 
         //init Dialog
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.dialog_gif);
 
         getIncomingIntent();
-        btnDomeme = (Button) findViewById(R.id.domeme);
+
+        btnDomeme = (Button)findViewById(R.id.domeme);
+        if (variable.category_idGetter() == "3") {
+            btnDomeme.setVisibility(View.INVISIBLE);
+        }
+        btnDomeme.setVisibility(View.INVISIBLE);
         btnDomeme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,8 +134,11 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.d("savedMeme",(callApi.get("http://140.131.115.99/api/meme/saved/"+memeId)));
         //{"saved":"0"}
-        saved = Integer.parseInt(temp.substring(10, 11));
+
+        saved =Integer.parseInt(temp.substring(10,11));
+        Log.d("saved====", ""+saved);
         //設置收藏顏色
         ImageView bookMark = findViewById(R.id.bookmark);
         if (saved == 0) {
@@ -159,13 +175,15 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             thumb = getIntent().getIntExtra("thumb", 0);
             memeId = getIntent().getStringExtra("memeId");
 
-            setInfo(memeUrl, hashTag, userName, likeSum);
+
+            setInfo(memeUrl, hashTag, userName, thumb);
             showImageDialog(memeUrl, hashTag);
             Log.d("pubmeme", "tempid=" + returnTempIdString());
         }
     }
 
-    private void setInfo(String memeUrl, String hashTag, String userName, int likeSum) {
+
+    private void setInfo(String memeUrl, String hashTag, String userName, int thumb){
         Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
 
         //設置模板名
@@ -175,7 +193,6 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         //設置模板圖片
         ImageView image = findViewById(R.id.memeImage);
         Glide.with(this)
-                .asBitmap()
                 .load(memeUrl)
                 .into(image);
         Log.d(TAG, "set meme url: " + memeUrl);
@@ -184,7 +201,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         user.setText(userName);
         //設置點讚次數
         TextView likeNum = findViewById(R.id.likeNum);
-        likeNum.setText(String.valueOf(likeSum));
+        likeNum.setText(String.valueOf(thumb));
         //設置愛心顏色
         ImageView like = findViewById(R.id.like);
         if (thumb == 0) {
@@ -296,26 +313,44 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         return bm;
     }
 
-    public void shareLine(View view) throws IOException {
-        saveImageToGallery(this, variable.memeImageGetter());
-        String scheme = "line://msg/image" + variable.memePathGetter();
-        this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(scheme)));
+
+    public void shareLine(View view) {
+        if (getPermission()) {
+            //確認權限
+        }else {
+            showLoading("儲存中...");
+            saveImageToGallery(this,variable.templateImageGetter());
+            String scheme ="line://msg/image"+variable.memePathGetter();
+            this.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(scheme)));
+        }
     }
 
-    public void saveImage(View view) throws IOException {
-        showLoading("儲存中...");
-        saveImageToGallery(this, variable.memeImageGetter());
+    public void saveImage(View view) {
+        if (getPermission()) {
+            //確認權限
+        }else {
+            showLoading("儲存中...");
+            saveImageToGallery(this,variable.templateImageGetter());
+        }
+    }
 
-//        String path = "MeMe Maker";
-//        File dirFile = new File(Environment.getExternalStorageDirectory(),path);
-//        if(!dirFile.exists()){//如果資料夾不存在
-//            dirFile.mkdir();//建立資料夾
+
+    public boolean getPermission() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            return true;
+        }
+//        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(this,new String[]{},1);
 //        }
+        return false;
     }
 
 
-    public void saveImageToGallery(Context context, Bitmap bmp) throws IOException {
-       // showLoading("儲存中...");
+    public void saveImageToGallery(Context context, Bitmap bmp) {
+        // 首先儲存圖片
         String path = "MeMe Maker";
         File dirFile = new File(Environment.getExternalStorageDirectory(), path);
         if (!dirFile.exists()) {//如果資料夾不存在

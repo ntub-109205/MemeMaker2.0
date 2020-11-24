@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.WorPublicMeme;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_worGif;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMem;
 import com.deep.photoeditor.api;
 
@@ -36,7 +36,9 @@ public class WorGifFragment extends Fragment {
     private RecyclerView myrecyclerview;
     private List<WorPublicMeme> lstMemeMeme;
     private static api callApi = new api();
-
+    private String st;
+    public ImageView imgNomeme;
+    public int isNomeme=1;
     public WorGifFragment() {
         // Required empty public constructor
     }
@@ -47,10 +49,12 @@ public class WorGifFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter_worGif recyclerViewAdapter = new RecyclerViewAdapter_worGif(getContext(),lstMemeMeme);
+        RecyclerViewAdapter_worMem recyclerViewAdapter = new RecyclerViewAdapter_worMem(getContext(),lstMemeMeme);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
+        imgNomeme = (ImageView) v.findViewById(R.id.noResultImageView);
+        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.no_work);
         return v;
     }
 
@@ -59,14 +63,15 @@ public class WorGifFragment extends Fragment {
         super.onCreate(savedInstanceState);
         try {
 //            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
-            callApi.get("http://140.131.115.99/api/meme/show/3?profile=myWork&time=1");
+            st = callApi.get("http://140.131.115.99/api/meme/show/3?profile=myWork&time=1");
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        Log.d("memeinfo",callApi.get("http://140.131.115.99/api/meme/show/1"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/meme/show/3?profile=myWork&time=1").trim();
+        String temp = st.trim();
         temp = temp.substring(8,(temp.length()-1));
+        if (temp.length()<10) isNomeme=0;
         Log.d("memeinfo","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {
@@ -87,7 +92,8 @@ public class WorGifFragment extends Fragment {
                 //---把tag們分出來---//
                 String tags = jsonObject.getString("tags");
                 String[] items = tags.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
-                Log.d("tags", "tags:" + items);
+
+//                Log.d("tags", "tags:" + items);
                 // items.length 是所有項目的個數
                 String[] results = new String[items.length];
                 // 將結果放入 results
@@ -97,13 +103,13 @@ public class WorGifFragment extends Fragment {
                 String newtag = "";
                 for (String tag : results) {
                     tag = tag.replaceAll("\"", "");
-                    Log.d("tags", "tags:" + tag + ", ");
-                    newtag = newtag + "#" + tag;
+                    Log.d("tags", "tags:" + tag);
+                    newtag = "#" + tag;
                 }
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, tags, memeFilelink, author, thumb, shared));
+                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, newtag, memeFilelink, author, thumb, shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -61,7 +61,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_default"
         android:padding="10dp"
-        android:text="生成GIF图"
+        android:text="生成GIF圖"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -75,6 +75,7 @@
         android:padding="10dp"
         android:text="預覽"
         android:textColor="#ffffff"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/clear"
         app:layout_constraintStart_toEndOf="@+id/clear"
         app:layout_constraintTop_toTopOf="@+id/clear" />

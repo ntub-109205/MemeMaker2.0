@@ -2,6 +2,7 @@ package com.deep.photoeditor.adpater;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +20,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
+import com.deep.photoeditor.activity.PublicMemeInfoActivity;
+import com.deep.photoeditor.api;
+import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 //import me.drakeet.materialdialog.MaterialDialog;
 
@@ -32,6 +39,9 @@ public class RecyclerViewAdapter__gifShowDialog extends RecyclerView.Adapter<Rec
     Dialog mDialog;
     private MyViewHolder mViewHolder;;
     private static final String TAG = "RecyclerViewAdapter__gif";
+    //api
+    private static api callApi = new api();
+    private static com.deep.photoeditor.variable variable = new variable();
 
     public RecyclerViewAdapter__gifShowDialog(Context mContext, List<PublicMeme> mData) {
         this.mContext = mContext;
@@ -63,15 +73,45 @@ public class RecyclerViewAdapter__gifShowDialog extends RecyclerView.Adapter<Rec
                 .into(holder.memeImage);
         holder.hashTag.setText(mData.get(position).getHashTag());
         holder.likeNum.setText(String.valueOf(mData.get(position).getLikeSum()));
+        if(Integer.parseInt(String.valueOf(mData.get(position).getThumb())) == 0) {
+            holder.like.setImageResource(R.drawable.like_gray);
+        } else {
+            holder.like.setImageResource(R.drawable.like_checked);
+        }
         holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
+            int thumb = Integer.parseInt(String.valueOf(mData.get(position).getThumb()));
+            int likeSum = Integer.parseInt(String.valueOf(mData.get(position).getLikeSum()));
             public void onClick(View view) {
                 GoodView mGoodView;
                 mGoodView = new GoodView(mContext);
-                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-                ((ImageView) view).setImageResource(R.drawable.like_checked);
-                mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
-                mGoodView.show(view);
+                Log.d("click like", "onClick: clicked on: " + mData.get(position));
+                if(thumb == 0){
+                    ((ImageView) view).setImageResource(R.drawable.like_checked);
+                    mGoodView. setTextInfo("+1", Color.parseColor("#f66467"), 12);
+                    mGoodView.show(view);
+                    //改旁邊的顯示
+                    holder.likeNum.setText(String.valueOf(likeSum +1));
+                    likeSum += 1;
+                    thumb = 1;
+                } else {
+                    ((ImageView) view).setImageResource(R.drawable.like_gray);
+                    mGoodView. setTextInfo("-1", Color.parseColor("#999da4"), 12);
+                    mGoodView.show(view);
+                    //改旁邊的顯示
+                    holder.likeNum.setText(String.valueOf(likeSum- 1));
+                    likeSum -= 1;
+                    thumb = 0;
+                }
+
+                try {
+                    callApi.post("http://140.131.115.99/api/meme/thumb","meme_id=" + Integer.parseInt(String.valueOf(mData.get(position).getMemeId())));
+//                    callApi.get("http://140.131.115.99/api/meme/show/1");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mData.get(position).setLikeSum(likeSum);
+                mData.get(position).setThumb(thumb);
+                Log.d("thumb", callApi.returnString());
             }
         });
 
@@ -79,29 +119,19 @@ public class RecyclerViewAdapter__gifShowDialog extends RecyclerView.Adapter<Rec
         holder.item_meme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-//                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
+                variable.category_idSetter("3");
 
-                GifImageView dialogImage = (GifImageView) mDialog.findViewById(R.id.gif_view);
-                TextView dialogTag = (TextView) mDialog.findViewById(R.id.gif_tag);
-                ImageView diaglogClose = (ImageView) mDialog.findViewById(R.id.dialog_close);
-                //show GIF by using Glide
-                dialogTag.setText(mData.get(position).getHashTag());
-                diaglogClose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mDialog.dismiss();
-                    }
-                });
-                Glide.with(mContext).load(mData.get(position).getMemeImage()).into(dialogImage);
-                mDialog.show();
-
-//                Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
-//                intent.putExtra("meme_url", mData.get(position).getMemeImage());
-//                intent.putExtra("hashTag", mData.get(position).getHashTag());
-//                intent.putExtra("user_name", mData.get(position).getUserName());
-//                intent.putExtra("like_sum", mData.get(position).getLikeSum());
-//                mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
+                intent.putExtra("temp_id", mData.get(position).getTempId());
+                intent.putExtra("memeId", mData.get(position).getMemeId());
+                intent.putExtra("meme_url", mData.get(position).getMemeImage());
+                intent.putExtra("temp_url", mData.get(position).getTempImage());
+                intent.putExtra("hashTag", mData.get(position).getHashTag());
+                intent.putExtra("user_name", mData.get(position).getUserName());
+                intent.putExtra("like_sum", mData.get(position).getLikeSum());
+                intent.putExtra("thumb", mData.get(position).getThumb());
+                mContext.startActivity(intent);
             }
         });
 

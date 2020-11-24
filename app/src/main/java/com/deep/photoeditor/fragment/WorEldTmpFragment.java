@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter_worEldTmp;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter_worMemTmp;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.memeTemplate;
 import com.deep.photoeditor.worMemTmp;
 
 import org.json.JSONArray;
@@ -36,7 +35,9 @@ public class WorEldTmpFragment extends Fragment {
     private RecyclerView myrecyclerview;
     private List<worMemTmp> lstMemeMemeTemplate;
     private static api callApi = new api();
-
+    private String st;
+    public ImageView imgNomeme;
+    public int isNomeme=1;
     public WorEldTmpFragment() {
         // Required empty public constructor
     }
@@ -47,10 +48,12 @@ public class WorEldTmpFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recyclerview_with_image, container, false);
         myrecyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        RecyclerViewAdapter_worEldTmp recyclerViewAdapter = new RecyclerViewAdapter_worEldTmp(getContext(),lstMemeMemeTemplate);
+        RecyclerViewAdapter_worMemTmp recyclerViewAdapter = new RecyclerViewAdapter_worMemTmp(getContext(),lstMemeMemeTemplate);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL);
         myrecyclerview.setLayoutManager(staggeredGridLayoutManager);
         myrecyclerview.setAdapter(recyclerViewAdapter);
+        imgNomeme = (ImageView) v.findViewById(R.id.noResultImageView);
+        if (isNomeme == 0) imgNomeme.setImageResource(R.drawable.no_work);
         return v;
     }
 
@@ -58,14 +61,15 @@ public class WorEldTmpFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork");
+            st =callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork"));
+//        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork"));
         //留下array[]，其他切掉
-        String temp = callApi.get("http://140.131.115.99/api/template/show/2?time=1&profile=myWork").trim();
+        String temp = st.trim();
         temp = temp.substring(13,(temp.length()-1));
+        if (temp.length()<10) isNomeme=0;
         Log.d("posttoget","cut allready :"+ temp);
         //把jsonArray塞進cardView的arrayList
         try {
