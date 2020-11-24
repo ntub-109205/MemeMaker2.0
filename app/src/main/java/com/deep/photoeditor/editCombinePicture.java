@@ -82,6 +82,10 @@ public class editCombinePicture extends AppCompatActivity {
         layoutFullSingle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                layoutFullSingle.setImageResource(R.drawable.layout3);
+                layoutFullDouble.setImageResource(R.drawable.layout2_grey);
+                layoutRightText.setImageResource(R.drawable.layout1_grey);
+                layoutHorizontal.setImageResource(R.drawable.layout4_grey);
                 Bitmap mybitmap = puzzleMerge_vertical_noblank(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
@@ -90,6 +94,10 @@ public class editCombinePicture extends AppCompatActivity {
         layoutFullDouble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                layoutFullDouble.setImageResource(R.drawable.layout2);
+                layoutFullSingle.setImageResource(R.drawable.layout3_grey);
+                layoutRightText.setImageResource(R.drawable.layout1_grey);
+                layoutHorizontal.setImageResource(R.drawable.layout4_grey);
                 Bitmap mybitmap = puzzleMerge_left_and_right(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
@@ -98,6 +106,10 @@ public class editCombinePicture extends AppCompatActivity {
         layoutRightText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                layoutRightText.setImageResource(R.drawable.layout1);
+                layoutFullSingle.setImageResource(R.drawable.layout3_grey);
+                layoutFullDouble.setImageResource(R.drawable.layout2_grey);
+                layoutHorizontal.setImageResource(R.drawable.layout4_grey);
                 Bitmap mybitmap = puzzleMerge_vertical(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 
@@ -106,6 +118,10 @@ public class editCombinePicture extends AppCompatActivity {
         layoutHorizontal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                layoutHorizontal.setImageResource(R.drawable.layout4);
+                layoutFullSingle.setImageResource(R.drawable.layout3_grey);
+                layoutFullDouble.setImageResource(R.drawable.layout2_grey);
+                layoutRightText.setImageResource(R.drawable.layout1_grey);
                 Bitmap mybitmap = puzzleMerge_level(fixImageQueue());
                 TemplateUri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mybitmap, null,null));
 

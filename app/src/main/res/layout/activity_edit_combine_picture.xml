@@ -37,7 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -50,28 +49,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/layout3" />
+                app:srcCompat="@drawable/layout3_grey" />
 
             <ImageView
                 android:id="@+id/layoutFullDouble"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/layout2" />
+                app:srcCompat="@drawable/layout2_grey" />
 
             <ImageView
                 android:id="@+id/layoutRightText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/layout1" />
+                app:srcCompat="@drawable/layout1_grey" />
 
             <ImageView
                 android:id="@+id/layoutHorizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/layout4" />
+                app:srcCompat="@drawable/layout4_grey" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,15 +129,5 @@
         android:background="@drawable/button_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/eye" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
