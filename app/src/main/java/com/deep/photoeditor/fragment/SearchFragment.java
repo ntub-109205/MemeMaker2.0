@@ -167,25 +167,11 @@ public class SearchFragment extends Fragment {
                     if (temp.length()<17){
                         //無相關模板搜尋結果
                         noTempSearchImage.setImageResource(R.drawable.template);
-//                        if ( TempSearchSwitch == 1) {
-                            int size = lstTagHotSearch.size();
-                            for (int i = 0; i < size; i++) {
-                                lstTagHotSearch.remove(0);
-                            }
-//                        }else{
-//                            int size = lstTagHotSearch.size();
-//                            Log.d("GGGGGGGGGGGGGGG", "temp.length()="+size);
-//
-//                            for (int i = 0; i < size-2; i++) {
-//                                Log.d("GGGGGGGGGGGGGGG", "i="+i);
-//
-//                                lstTagHotSearch.remove(i);
-//                            }
-//
-//                        }
-
+                        int size = lstTagHotSearch.size();
+                        for (int i = 0; i < size; i++) {
+                            lstTagHotSearch.remove(0);
+                        }
                     }else {
-                        TempSearchSwitch = 1;
                         noTempSearchImage.setImageBitmap(null);
                         temp = temp.substring(13, (temp.length() - 1));
                         try {
@@ -239,10 +225,8 @@ public class SearchFragment extends Fragment {
                                 Log.d("searchTemp", "count="+count);
 
                                 lstTagHotSearch.add(new tagHotSearch(tempId, name, filelink, a, author, count));
-//                                RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
-//                                temprecyclerview.setAdapter(tempRecyclerViewAdapter);
-
-
+                                RecyclerViewAdapter_tempHotSearch tempRecyclerViewAdapter = new RecyclerViewAdapter_tempHotSearch(getContext(),lstTagHotSearch);
+                                temprecyclerview.setAdapter(tempRecyclerViewAdapter);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -255,14 +239,14 @@ public class SearchFragment extends Fragment {
                     RecyclerViewAdapter_tagSearch recyclerViewAdapter = new RecyclerViewAdapter_tagSearch(getContext(),lstTagSearch);
 
                     FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
-                    //StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                    StaggeredGridLayoutManager tempStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
                     flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
                     flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
 
                     myrecyclerview.setLayoutManager(flexboxLayoutManager);
                     myrecyclerview.setAdapter(recyclerViewAdapter);
-                  //  temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
+                    temprecyclerview.setLayoutManager(tempStaggeredGridLayoutManager);
 
                     return true;
                 }

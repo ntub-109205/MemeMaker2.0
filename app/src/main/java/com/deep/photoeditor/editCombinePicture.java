@@ -114,11 +114,6 @@ public class editCombinePicture extends AppCompatActivity {
 
     }
 
-    private Bitmap createBitmap(int resourceId) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resourceId);
-        return bitmap;
-    }
-
     public static ArrayList<Bitmap> fixImageQueue() {
         ImageQueue = variable.ImageQueueGetter();
         ArrayList<Bitmap> templatesBitmap2 = new ArrayList<Bitmap>();
