@@ -118,7 +118,6 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         if (variable.category_idGetter() == "3") {
             btnDomeme.setVisibility(View.INVISIBLE);
         }
-        btnDomeme.setVisibility(View.INVISIBLE);
         btnDomeme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
