@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,9 +177,13 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         //load image resources
         setSelectorImage(imageView, counter);
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(90,90);
-        params.leftMargin = 280;
-        params.topMargin = 280;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
+//        params.rightMargin = 180;
+//        params.topMargin = 180;
+//        params.alignWithParent = true;
+//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.setMarginEnd(0);
         try {
             relativeLayout.addView(imageView, params);
         } catch (Exception e) {
