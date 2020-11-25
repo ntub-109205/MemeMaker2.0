@@ -174,11 +174,6 @@ public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<Recycl
         setSelectorImage(imageView, counter);
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
-//        params.rightMargin = 180;
-//        params.topMargin = 180;
-//        params.alignWithParent = true;
-//        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-//        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         params.setMarginEnd(0);
         try {
             relativeLayout.addView(imageView, params);
