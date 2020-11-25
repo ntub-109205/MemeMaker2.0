@@ -18,7 +18,6 @@ import java.util.List;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.TemplateInfoActivity;
@@ -45,21 +44,12 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
         v = LayoutInflater.from(mContext).inflate(R.layout.item_template,parent,false);
         final MyViewHolder vHolder = new MyViewHolder(v);
 
-//        vHolder.item_template.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mContext, "test click"+String.valueOf(vHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         return vHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-//        holder.tempName.setText(mData.get(position).getTempName());
-//        holder.tempImage.setImageResource(mData.get(position).getTempImage());
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
         //將image用glide的方式呈現
@@ -74,13 +64,6 @@ public class RecyclerViewAdapter__memeTemp extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-
-                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
-//                Intent edit = new Intent();
-//
-//                edit.putExtra("temp_name", mData.get(position).getTempName());
-//                edit.setClass(mContext, TemplateInfoActivity.class);
-//                mContext.startActivity(edit);
                 Intent intent = new Intent(mContext, TemplateInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTemp_id());
                 intent.putExtra("temp_url", mData.get(position).getTempImage());

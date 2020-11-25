@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +58,6 @@ public class RecyclerViewAdapter_tempHotSearch extends RecyclerView.Adapter<Recy
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, TemplateInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());

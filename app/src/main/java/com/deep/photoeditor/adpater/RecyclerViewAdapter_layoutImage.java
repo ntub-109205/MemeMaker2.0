@@ -17,19 +17,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.deep.photoeditor.image_selector.multi_image_selector.bean.Image;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.variable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 public class RecyclerViewAdapter_layoutImage extends RecyclerView.Adapter<RecyclerViewAdapter_layoutImage.ImageViewHolder> {
     private Context mContext;

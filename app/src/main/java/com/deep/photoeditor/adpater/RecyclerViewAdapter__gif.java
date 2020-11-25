@@ -1,9 +1,7 @@
 package com.deep.photoeditor.adpater;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,24 +18,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.gifmake.GifMakePresenter;
-import com.deep.photoeditor.utils.FileUtil;
 import com.deep.photoeditor.variable;
 import com.felipecsl.gifimageview.library.GifImageView;
-import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
-
-//import me.drakeet.materialdialog.MaterialDialog;
-import com.shreyaspatil.MaterialDialog.MaterialDialog;
-import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
-
-import org.w3c.dom.Text;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewAdapter__gif.MyViewHolder> {
     Context mContext;
@@ -127,7 +112,6 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
             @Override
             public void onClick(View view) {
                 Log.d("click meme item", "onClick: clicked on: " + mData.get(position));
-//                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
 
                 GifImageView dialogImage = (GifImageView) mDialog.findViewById(R.id.gif_view);
                 TextView dialogTag = (TextView) mDialog.findViewById(R.id.gif_tag);
@@ -143,12 +127,6 @@ public class RecyclerViewAdapter__gif extends RecyclerView.Adapter<RecyclerViewA
                 Glide.with(mContext).load(mData.get(position).getMemeImage()).into(dialogImage);
                 mDialog.show();
 
-//                Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
-//                intent.putExtra("meme_url", mData.get(position).getMemeImage());
-//                intent.putExtra("hashTag", mData.get(position).getHashTag());
-//                intent.putExtra("user_name", mData.get(position).getUserName());
-//                intent.putExtra("like_sum", mData.get(position).getLikeSum());
-//                mContext.startActivity(intent);
             }
         });
 

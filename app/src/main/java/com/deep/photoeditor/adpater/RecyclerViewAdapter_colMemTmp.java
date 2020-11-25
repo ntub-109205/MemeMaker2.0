@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.TemplateInfoActivity;
-import com.deep.photoeditor.colMemTmp;
 import com.deep.photoeditor.memeTemplate;
 
 import java.util.List;
@@ -50,8 +48,6 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
 
-//        holder.tempName.setText(mData.get(position).getTempName());
-//        holder.tempImage.setImageResource(mData.get(position).getTempImage());
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
         //將image用glide的方式呈現
@@ -67,12 +63,6 @@ public class RecyclerViewAdapter_colMemTmp extends RecyclerView.Adapter<Recycler
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
 
-                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
-//                Intent edit = new Intent();
-//
-//                edit.putExtra("temp_name", mData.get(position).getTempName());
-//                edit.setClass(mContext, TemplateInfoActivity.class);
-//                mContext.startActivity(edit);
                 Intent intent = new Intent(mContext, TemplateInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTemp_id());
                 intent.putExtra("temp_url", mData.get(position).getTempImage());

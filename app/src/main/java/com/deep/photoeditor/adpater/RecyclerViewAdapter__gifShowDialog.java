@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,14 +22,10 @@ import com.deep.photoeditor.R;
 import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.api;
 import com.deep.photoeditor.variable;
-import com.felipecsl.gifimageview.library.GifImageView;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
-//import me.drakeet.materialdialog.MaterialDialog;
 
 
 public class RecyclerViewAdapter__gifShowDialog extends RecyclerView.Adapter<RecyclerViewAdapter__gifShowDialog.MyViewHolder> {
@@ -119,7 +114,6 @@ public class RecyclerViewAdapter__gifShowDialog extends RecyclerView.Adapter<Rec
         holder.item_meme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
                 variable.category_idSetter("3");
 
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);

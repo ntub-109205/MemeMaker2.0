@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,8 +19,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.deep.photoeditor.EditImageActivity;
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.activity.TemplateInfoActivity;
-import com.deep.photoeditor.mineTemplate;
 import com.deep.photoeditor.variable;
 import com.deep.photoeditor.worMemTmp;
 
@@ -75,9 +72,6 @@ public class RecyclerViewAdapter_mineTemp extends RecyclerView.Adapter<RecyclerV
                 variable.useMyImageSetter(Boolean.FALSE);
                 Intent edit = new Intent(mContext, EditImageActivity.class);
                 mContext.startActivity(edit);
-
-
-                Toast.makeText(mContext, mData.get(position).getTempName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
