@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,13 +53,6 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-//        try {
-////            callApi.post("http://140.131.115.99/api/meme/info","category_id=1");
-//            callApi.get("http://140.131.115.99/api/meme/show/1");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
@@ -106,7 +98,6 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
 
                 try {
                     callApi.post("http://140.131.115.99/api/meme/thumb","meme_id=" + Integer.parseInt(String.valueOf(mData.get(position).getMemeId())));
-//                    callApi.get("http://140.131.115.99/api/meme/show/1");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -120,8 +111,6 @@ public class RecyclerViewAdapter__meme extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-
-                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
                 variable.category_idSetter(null);
 
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);

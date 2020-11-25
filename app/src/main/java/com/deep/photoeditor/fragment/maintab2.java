@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.deep.photoeditor.R;
-import com.deep.photoeditor.adpater.RecyclerViewAdapter__elderTemp;
 import com.deep.photoeditor.adpater.RecyclerViewAdapter__memeTemp;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.elderTemplate;
 import com.deep.photoeditor.memeTemplate;
 
 import org.json.JSONArray;
@@ -67,8 +65,6 @@ public class maintab2 extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Log.d("runrun",callApi.returnString());
-//        Log.d("posttoget",callApi.get("http://140.131.115.99/api/template/show/1"));
         //留下array[]，其他切掉
         temp = temp.substring(13,(temp.length()-1));
         Log.d("posttoget","cut allready :"+ temp);

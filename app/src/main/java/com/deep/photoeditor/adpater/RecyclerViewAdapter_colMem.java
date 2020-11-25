@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -106,8 +105,6 @@ public class RecyclerViewAdapter_colMem extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-
-                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, PublicMemeInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());

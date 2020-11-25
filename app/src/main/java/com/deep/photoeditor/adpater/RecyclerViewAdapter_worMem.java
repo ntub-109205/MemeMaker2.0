@@ -11,21 +11,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.deep.photoeditor.PublicMeme;
 import com.deep.photoeditor.R;
 import com.deep.photoeditor.WorPublicMeme;
-import com.deep.photoeditor.activity.PublicMemeInfoActivity;
 import com.deep.photoeditor.activity.WorkMemeInfoActivity;
-import com.deep.photoeditor.activity.WorkMemeTempInfoActivity;
 import com.deep.photoeditor.api;
-import com.deep.photoeditor.worMemTmp;
 import com.wx.goodview.GoodView;
 
 import java.util.List;
@@ -111,8 +106,6 @@ public class RecyclerViewAdapter_worMem extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
-
-                Toast.makeText(mContext, mData.get(position).getHashTag(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, WorkMemeInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());
