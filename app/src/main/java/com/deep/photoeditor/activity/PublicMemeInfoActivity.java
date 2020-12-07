@@ -318,7 +318,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             //確認權限
         }else {
             showLoading("儲存中...");
-            saveImageToGallery(this,variable.templateImageGetter());
+            saveImageToGallery(this,variable.memeImageGetter());
             String scheme ="line://msg/image"+variable.memePathGetter();
             this.startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(scheme)));
         }
@@ -329,7 +329,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
             //確認權限
         }else {
             showLoading("儲存中...");
-            saveImageToGallery(this,variable.templateImageGetter());
+            saveImageToGallery(this,variable.memeImageGetter());
         }
     }
 
