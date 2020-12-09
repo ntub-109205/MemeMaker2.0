@@ -203,7 +203,7 @@ public class PublicMemeInfoActivity extends AppCompatActivity {
         user.setText(userName);
         //設置點讚次數
         TextView likeNum = findViewById(R.id.likeNum);
-        likeNum.setText(String.valueOf(thumb));
+        likeNum.setText(String.valueOf(likeSum));
         //設置愛心顏色
         ImageView like = findViewById(R.id.like);
         if (thumb == 0) {
