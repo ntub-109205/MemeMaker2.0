@@ -27,20 +27,14 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class WorkMemeInfoActivity extends AppCompatActivity {
     private static final String TAG = "WorkMemeInfoActivity";
     private static api callApi = new api();
-    private ViewPager viewPager;
     public PageAdapter pagerAdapter;
     private static String memeId;
     int meme_id;
+    int meme_share;
     String table = "meme";
     String field = "share";
-    //switch button
     Switch switchTemp;
-    //button onClick to next page
-    public Button btnEdit;
     int share_num;
-    boolean share_bool;
-    Uri uri;
-    //goodview
     GoodView mGoodView;
     private static int saved; //是否被收藏
     public void init(){
@@ -50,34 +44,41 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_meme_info);
+        //取得資訊
         getIncomingIntent();
-
-        //goodview
-        mGoodView = new GoodView(this);
-
         //新增回到前一頁的箭頭
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //goodview
+        mGoodView = new GoodView(this);
 
-        //switch
+        //---switchTemp預設---
         switchTemp = findViewById(R.id.tempSwitch);
-      //  switchMeme = findViewById(R.id.memeSwitch);
-
-        //將switch的狀態儲存到shared preferences
-        SharedPreferences sharedPreferences = getSharedPreferences("save",MODE_PRIVATE);
-
-        //---switchTemp---
-        switchTemp.setChecked(sharedPreferences.getBoolean("value",true));
-
+        if (meme_share==0){
+            switchTemp.setChecked(false);
+        }else{
+            switchTemp.setChecked(true);
+        }
         switchTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(share_bool==true){
-                    share_bool=false;
-                    share_num=0;
-                }else{
-                    share_bool=true;
+                if (switchTemp.isChecked()) {
+                    //當switch被觸發
+                    SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
+                    editor.putBoolean("value",true);
+                    editor.apply();
+                    switchTemp.setChecked(true);
                     share_num=1;
+                    Log.d("memeinfoactivity1","公開");
+
+                }else{
+                    //當switch沒被觸發
+                    SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
+                    editor.putBoolean("value",false);
+                    editor.apply();
+                    share_num=0;
+                    Log.d("memeinfoactivity1","不公開");
+                    switchTemp.setChecked(false);
                 }
                 try {
                     callApi.post("http://140.131.115.99/api/profile/update",
@@ -85,21 +86,6 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
                     Log.d("contextQQ","傳字串=" + callApi.returnString());
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
-                if (switchTemp.isChecked()) {
-                    //當switch被觸發
-
-                    SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
-                    editor.putBoolean("value",true);
-                    editor.apply();
-                    switchTemp.setChecked(true);
-                }else{
-                    //當switch沒被觸發
-
-                    SharedPreferences.Editor editor = getSharedPreferences("save",MODE_PRIVATE).edit();
-                    editor.putBoolean("value",false);
-                    editor.apply();
-                    switchTemp.setChecked(false);
                 }
             }
         });
@@ -113,7 +99,6 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("savedMeme",(callApi.get("http://140.131.115.99/api/meme/saved/"+memeId)));
-        //{"saved":"0"}
         saved =Integer.parseInt(temp.substring(10,11));
         Log.d("saved====", ""+saved);
         //設置收藏顏色
@@ -141,12 +126,12 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
             meme_id = Integer.parseInt(memeId);
             int likeSum = getIntent().getIntExtra("like_sum", 0);
             int shared = getIntent().getIntExtra("meme_share", 0);
-            Log.d("memeinfoactivity","shared :"+ shared+"memeid: "+memeId);
+            Log.d("memeinfoactivity1","shared :"+ shared+"memeid: "+memeId);
             setInfo(memeUrl, hashTag, userName, likeSum,shared,memeId);
         }
     }
-        private void setInfo(String memeUrl, String hashTag, String userName, int likeSum, int shared, String memeId){
-            Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
+    private void setInfo(String memeUrl, String hashTag, String userName, int likeSum, int shared, String memeId){
+        Log.d(TAG, "setInfo: set memeUrl hashTag userName likeSum");
 
         //設置模板名
         TextView name = findViewById(R.id.workMemHashtag);
@@ -157,34 +142,17 @@ public class WorkMemeInfoActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(memeUrl)
                 .into(image);
-//        //設置製作者名
-//        TextView user = findViewById(R.id.madeByUser);
-//        user.setText(userName);
+
         //設置熱門程度(被使用次數)
         TextView fireNum = findViewById(R.id.fireNum);
         fireNum.setText(String.valueOf(likeSum));
-
-        Switch tempSwitch = findViewById(R.id.tempSwitch);
-        Log.d(TAG, "memeTempShared " + shared);
-        if (shared==1){
-            tempSwitch.setChecked(true);
-            share_bool=true;
-        }else{
-            tempSwitch.setChecked(false);
-            share_bool=false;
-        }
+        Log.d("memeinfoactivity1", "memeinfoactivity1 " + shared);
+        meme_share = shared;
     }
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
-    }
-
-//    public static String returnTempIdString(){
-//        return tempId;
-//    }
-    public static String returnMemeIdString(){
-        return memeId;
     }
 
     //onclick判斷在xml

@@ -106,6 +106,7 @@ public class RecyclerViewAdapter_worMem extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mData.get(position));
+                Log.d("memeinfoactivity1","position"+position);
 
                 Intent intent = new Intent(mContext, WorkMemeInfoActivity.class);
                 intent.putExtra("temp_id", mData.get(position).getTempId());

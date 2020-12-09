@@ -54,6 +54,10 @@ public class login extends BaseActivity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
                 //new一個intent物件，並指定Activity切換的class
                 loginEmail = txtloginEmail.getEditText().getText().toString();
                 loginPassword = txtloginPassword.getEditText().getText().toString();
@@ -109,6 +113,7 @@ public class login extends BaseActivity {
         super.onCreate(savedInstanceState);
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
         setContentView(R.layout.activity_login);
+
         init();
     }
 
