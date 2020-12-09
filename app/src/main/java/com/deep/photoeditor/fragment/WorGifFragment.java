@@ -109,7 +109,7 @@ public class WorGifFragment extends Fragment {
                 //---tag們分完了---//
 
                 //產生cardView
-                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, newtag, memeFilelink, author, thumb, shared));
+                lstMemeMeme.add(new WorPublicMeme(tempId, memeId, newtag, memeFilelink, author, count, thumb, shared));
             }
         } catch (JSONException e) {
             e.printStackTrace();
